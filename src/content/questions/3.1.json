@@ -3,16 +3,44 @@
     "id": "3.1-001",
     "taskId": "3.1",
     "kind": "multi",
-    "objectives": ["3.1.4"],
-    "services": ["opensearch", "aurora", "dynamodb", "s3-glacier", "polly"],
+    "objectives": [
+      "3.1.4"
+    ],
+    "services": [
+      "opensearch",
+      "aurora",
+      "dynamodb",
+      "s3-glacier",
+      "polly"
+    ],
     "stem": "Cairnway Outfitters is building a RAG assistant that answers questions from its product manuals. The team needs a place to store the embeddings and run similarity searches over them. Which AWS services can serve as the vector store? (Select TWO.)",
     "select": 2,
     "options": [
-      { "text": "Amazon S3 Glacier", "correct": false, "rationale": "Glacier storage classes are for low-cost, long-term archives. They don't run similarity searches." },
-      { "text": "Amazon OpenSearch Service", "correct": true, "rationale": "OpenSearch Service supports vector search (k-nearest-neighbor) and is a common vector store for RAG, including for Amazon Bedrock Knowledge Bases." },
-      { "text": "Amazon Polly", "correct": false, "rationale": "Polly converts text to speech. It doesn't store data." },
-      { "text": "Amazon Aurora PostgreSQL-Compatible Edition with the pgvector extension", "correct": true, "rationale": "With pgvector, Aurora PostgreSQL stores embeddings in a table and runs similarity searches with SQL." },
-      { "text": "AWS Budgets", "correct": false, "rationale": "Budgets tracks costs and sends alerts. It isn't a database." }
+      {
+        "text": "Amazon S3 Glacier",
+        "correct": false,
+        "rationale": "Glacier storage classes are for low-cost, long-term archives. They don't run similarity searches."
+      },
+      {
+        "text": "Amazon OpenSearch Service",
+        "correct": true,
+        "rationale": "OpenSearch Service supports vector search (k-nearest-neighbor) and is a common vector store for RAG, including for Amazon Bedrock Knowledge Bases."
+      },
+      {
+        "text": "Amazon Polly",
+        "correct": false,
+        "rationale": "Polly converts text to speech. It doesn't store data."
+      },
+      {
+        "text": "Amazon Aurora PostgreSQL-Compatible Edition with the pgvector extension",
+        "correct": true,
+        "rationale": "With pgvector, Aurora PostgreSQL stores embeddings in a table and runs similarity searches with SQL."
+      },
+      {
+        "text": "AWS Budgets",
+        "correct": false,
+        "rationale": "Budgets tracks costs and sends alerts. It isn't a database."
+      }
     ],
     "explanation": "A vector store must store embeddings and find the ones closest to a query embedding. OpenSearch Service and Aurora PostgreSQL with pgvector both do this; other options named in the exam guide include Amazon Neptune and Amazon RDS for PostgreSQL."
   },
@@ -20,8 +48,12 @@
     "id": "3.1-002",
     "taskId": "3.1",
     "kind": "order",
-    "objectives": ["3.1.3"],
-    "services": ["bedrock-knowledge-bases"],
+    "objectives": [
+      "3.1.3"
+    ],
+    "services": [
+      "bedrock-knowledge-bases"
+    ],
     "stem": "Cairnway Outfitters is preparing its return-policy documents so a chatbot can answer from them with Retrieval Augmented Generation (RAG). Put the steps that run before any customer asks a question in the correct order.",
     "steps": [
       "Collect the return-policy documents in one place, such as an S3 bucket",
@@ -30,5 +62,2108 @@
       "Store the embeddings in a vector database"
     ],
     "explanation": "This is the ingestion half of RAG. The documents are gathered, chunked so each piece is small and focused, turned into embeddings (vectors that capture meaning), and stored so they can be searched by similarity. At question time, the question is embedded the same way, the closest chunks are retrieved, and they are added to the prompt. Amazon Bedrock Knowledge Bases can run this whole pipeline for you."
+  },
+  {
+    "id": "3.1-003",
+    "taskId": "3.1",
+    "kind": "single",
+    "objectives": [
+      "3.1.1"
+    ],
+    "services": [
+      "bedrock"
+    ],
+    "stem": "Cairnway Outfitters wants its Trailmate chat assistant to reply to simple order-status questions within about one second. Answer quality needs to be acceptable but does not need to be perfect. Which approach to choosing a foundation model meets these requirements?",
+    "options": [
+      {
+        "text": "Choose the largest, most complex model available",
+        "correct": false,
+        "rationale": "Larger models are often more capable, but they are usually slower and more expensive. That works against the one-second requirement."
+      },
+      {
+        "text": "Choose the model with the longest context window",
+        "correct": false,
+        "rationale": "A long context window helps with big documents. It does nothing for the speed of short order-status replies."
+      },
+      {
+        "text": "Choose a model only because it supports images as input",
+        "correct": false,
+        "rationale": "Image input is a modality feature. The questions are text, so it doesn't address response time."
+      },
+      {
+        "text": "Choose a smaller, faster model that is accurate enough",
+        "correct": true,
+        "rationale": "Smaller models usually respond faster and cost less per token. For simple questions they are accurate enough, and low latency is the stated priority."
+      }
+    ],
+    "explanation": "The deciding clue is the one-second reply time with only acceptable quality. Latency and model size are linked: a smaller model is usually faster and cheaper. A bigger model buys capability the task doesn't need."
+  },
+  {
+    "id": "3.1-004",
+    "taskId": "3.1",
+    "kind": "single",
+    "objectives": [
+      "3.1.1"
+    ],
+    "services": [
+      "bedrock"
+    ],
+    "stem": "Cairnway Outfitters wants customers to upload a photo of a damaged tent and type a short description, and receive a suggested next step. Which model characteristic must the team prioritize when choosing a foundation model?",
+    "options": [
+      {
+        "text": "A very large output length limit",
+        "correct": false,
+        "rationale": "Output length controls how long answers can be. It doesn't let a text-only model look at a photo."
+      },
+      {
+        "text": "Support for prompt caching",
+        "correct": false,
+        "rationale": "Prompt caching saves cost on repeated prompt text. It doesn't add the ability to read images."
+      },
+      {
+        "text": "Multi-modal input support",
+        "correct": true,
+        "rationale": "A multi-modal model can take more than one kind of input, such as a photo plus text, in a single request."
+      },
+      {
+        "text": "The lowest possible price per token",
+        "correct": false,
+        "rationale": "Price matters, but a cheap text-only model can't interpret the photo, so it fails the main requirement."
+      }
+    ],
+    "explanation": "The clue is that the input includes a photo and text. Modality describes what kinds of data a model can take in and produce. Only a multi-modal model can handle both inputs."
+  },
+  {
+    "id": "3.1-005",
+    "taskId": "3.1",
+    "kind": "single",
+    "objectives": [
+      "3.1.1"
+    ],
+    "services": [
+      "bedrock"
+    ],
+    "stem": "Cairnway Outfitters sells to customers in Germany, Spain and France and wants Trailmate to answer in each customer's own language. Which model selection criterion is the MOST important to check?",
+    "options": [
+      {
+        "text": "Model customization options only",
+        "correct": false,
+        "rationale": "Being customizable is useful later, but a model that doesn't handle the languages well won't be fixed by this alone."
+      },
+      {
+        "text": "Multi-lingual capability",
+        "correct": true,
+        "rationale": "A multi-lingual model understands and writes several languages, which is exactly what customers in three countries need."
+      },
+      {
+        "text": "Prompt caching support",
+        "correct": false,
+        "rationale": "Caching lowers cost and latency for repeated prompt text. It says nothing about language ability."
+      },
+      {
+        "text": "Image generation quality",
+        "correct": false,
+        "rationale": "Image quality is about a different modality. Trailmate only exchanges text."
+      }
+    ],
+    "explanation": "The stem names three languages, so multi-lingual capability is the deciding criterion. Cost, speed and caching matter too, but none of them makes a model understand German or Spanish."
+  },
+  {
+    "id": "3.1-006",
+    "taskId": "3.1",
+    "kind": "single",
+    "objectives": [
+      "3.1.1"
+    ],
+    "services": [
+      "bedrock"
+    ],
+    "stem": "Cairnway Outfitters wants to summarize 200-page supplier contracts in a single request. Which model characteristic is MOST important for this task?",
+    "options": [
+      {
+        "text": "A large context window",
+        "correct": true,
+        "rationale": "The context window is how much text a model can read at once. A 200-page contract needs a model that can take very long input."
+      },
+      {
+        "text": "A low temperature setting",
+        "correct": false,
+        "rationale": "Temperature changes how random the answer is. It doesn't change how much text the model can read."
+      },
+      {
+        "text": "Support for audio output",
+        "correct": false,
+        "rationale": "Audio output isn't needed for a written summary of a contract."
+      },
+      {
+        "text": "A small model size",
+        "correct": false,
+        "rationale": "Small models are fast and cheap, but they often have shorter input limits and less capability for long documents."
+      }
+    ],
+    "explanation": "The clue is the very long input. Input and output length limits are a selection criterion: if the contract does not fit in the model's context window, the model can't read all of it."
+  },
+  {
+    "id": "3.1-007",
+    "taskId": "3.1",
+    "kind": "single",
+    "objectives": [
+      "3.1.1"
+    ],
+    "services": [
+      "bedrock"
+    ],
+    "sourceLinks": [
+      "https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-caching.html"
+    ],
+    "stem": "Every Trailmate request begins with the same 3,000-token block of tone guidelines and policies, followed by a short customer question. Cairnway Outfitters wants to reduce input token cost and response time. Which solution is MOST cost-effective?",
+    "options": [
+      {
+        "text": "Fine-tune the model on the guidelines",
+        "correct": false,
+        "rationale": "Fine-tuning needs a training job and Provisioned Throughput to host the custom model. That costs far more than caching a prompt prefix."
+      },
+      {
+        "text": "Move the guidelines into a vector database",
+        "correct": false,
+        "rationale": "A vector database helps retrieve different documents per question. The block is identical every time, so it doesn't reduce the repeated input."
+      },
+      {
+        "text": "Raise the temperature",
+        "correct": false,
+        "rationale": "Temperature affects randomness, not the number of input tokens or the response time."
+      },
+      {
+        "text": "Use prompt caching for the repeated block",
+        "correct": true,
+        "rationale": "Prompt caching stores the repeated part of the prompt so later requests reuse it, which reduces latency and input token costs."
+      }
+    ],
+    "explanation": "The deciding clue is the identical, long prefix sent with every request. Prompt caching reuses that part to reduce input cost and latency. Savings come from reusing the cached part many times."
+  },
+  {
+    "id": "3.1-008",
+    "taskId": "3.1",
+    "kind": "single",
+    "objectives": [
+      "3.1.1"
+    ],
+    "services": [
+      "bedrock-evaluations"
+    ],
+    "sourceLinks": [
+      "https://docs.aws.amazon.com/bedrock/latest/userguide/evaluation.html"
+    ],
+    "stem": "Cairnway Outfitters has shortlisted three foundation models for Trailmate. The team wants to compare them on 200 real support questions with the LEAST operational overhead. Which solution meets these requirements?",
+    "options": [
+      {
+        "text": "Fine-tune each model and keep the fastest",
+        "correct": false,
+        "rationale": "Fine-tuning changes a model and is expensive. It isn't a way to compare candidates."
+      },
+      {
+        "text": "Build a custom test harness on Amazon EC2 instances",
+        "correct": false,
+        "rationale": "This could work but means building and running infrastructure, which is the opposite of least overhead."
+      },
+      {
+        "text": "Run a Bedrock Model Evaluation job",
+        "correct": true,
+        "rationale": "Amazon Bedrock Model Evaluation compares models on your own data inside Bedrock, with little to set up."
+      },
+      {
+        "text": "Create three Amazon Bedrock Knowledge Bases",
+        "correct": false,
+        "rationale": "Knowledge bases connect models to documents for RAG. They don't compare models."
+      }
+    ],
+    "explanation": "The clue is comparing candidate models on the team's own questions with minimal effort. Amazon Bedrock Model Evaluation is the managed feature for that."
+  },
+  {
+    "id": "3.1-009",
+    "taskId": "3.1",
+    "kind": "single",
+    "objectives": [
+      "3.1.2"
+    ],
+    "services": [
+      "bedrock"
+    ],
+    "stem": "Cairnway Outfitters wants Trailmate to give consistent, factual answers about return rules, with little variation between runs. Which inference parameter change meets this requirement?",
+    "options": [
+      {
+        "text": "Lower the temperature",
+        "correct": true,
+        "rationale": "A low temperature favours the most likely next token, so answers are more consistent and predictable."
+      },
+      {
+        "text": "Raise the temperature",
+        "correct": false,
+        "rationale": "A higher temperature makes less likely tokens more probable, so answers vary more. That is the opposite of consistent."
+      },
+      {
+        "text": "Increase the maximum response length",
+        "correct": false,
+        "rationale": "This allows longer answers but doesn't make them more predictable."
+      },
+      {
+        "text": "Add a longer system prompt",
+        "correct": false,
+        "rationale": "A longer prompt adds cost, and it does not directly control randomness the way an inference parameter does."
+      }
+    ],
+    "explanation": "The clue is consistency with little variation. Temperature controls randomness: turn it down for factual, repeatable output, up for creative variety."
+  },
+  {
+    "id": "3.1-010",
+    "taskId": "3.1",
+    "kind": "single",
+    "objectives": [
+      "3.1.2"
+    ],
+    "services": [
+      "bedrock"
+    ],
+    "stem": "The Cairnway Outfitters marketing team wants a foundation model to brainstorm many different, imaginative slogans for a spring campaign. Which inference parameter adjustment is MOST appropriate?",
+    "options": [
+      {
+        "text": "Lower the temperature to near zero",
+        "correct": false,
+        "rationale": "This makes the model repeat the most likely wording, so slogans would look alike."
+      },
+      {
+        "text": "Raise the temperature",
+        "correct": true,
+        "rationale": "A higher temperature gives less likely tokens more chance, so outputs are more varied and creative."
+      },
+      {
+        "text": "Lower the maximum response length",
+        "correct": false,
+        "rationale": "This shortens answers. It doesn't make them more imaginative."
+      },
+      {
+        "text": "Add a stop sequence after each slogan",
+        "correct": false,
+        "rationale": "A stop sequence ends output at a known point. It doesn't increase variety."
+      }
+    ],
+    "explanation": "Brainstorming wants variety, which is more randomness. A higher temperature produces it; a low temperature is for factual, consistent tasks."
+  },
+  {
+    "id": "3.1-011",
+    "taskId": "3.1",
+    "kind": "single",
+    "objectives": [
+      "3.1.2"
+    ],
+    "services": [
+      "bedrock"
+    ],
+    "stem": "Cairnway Outfitters pays per token and wants to keep Trailmate's replies short and its monthly bill predictable. Which setting should the team use?",
+    "options": [
+      {
+        "text": "Raise Top K to widen the choices",
+        "correct": false,
+        "rationale": "Top K controls how many candidate tokens are considered at each step. It doesn't cap the length of the answer."
+      },
+      {
+        "text": "Lower the maximum response length",
+        "correct": true,
+        "rationale": "This caps how many tokens an answer can have, which limits output length and output cost."
+      },
+      {
+        "text": "Lower the temperature to near zero",
+        "correct": false,
+        "rationale": "Temperature affects randomness and doesn't limit how long an answer is."
+      },
+      {
+        "text": "Enable fine-tuning of the model",
+        "correct": false,
+        "rationale": "Fine-tuning needs training and hosting. It isn't a way to cap response length."
+      }
+    ],
+    "explanation": "The clues are short replies and predictable cost. The response length parameter caps the number of output tokens. The model does not plan for the cap, it just stops."
+  },
+  {
+    "id": "3.1-012",
+    "taskId": "3.1",
+    "kind": "single",
+    "objectives": [
+      "3.1.2"
+    ],
+    "services": [
+      "bedrock"
+    ],
+    "stem": "Trailmate's answers sometimes end in the middle of a sentence. Cairnway Outfitters wants complete sentences without changing the model. What is the MOST likely cause and fix?",
+    "options": [
+      {
+        "text": "The temperature is too high, so lower it",
+        "correct": false,
+        "rationale": "High temperature makes answers more random but doesn't make them stop early."
+      },
+      {
+        "text": "The model has no context window, so add a vector database",
+        "correct": false,
+        "rationale": "Every model has a context window, and a vector database doesn't affect where an answer stops."
+      },
+      {
+        "text": "The maximum response length is set too low, so raise it",
+        "correct": true,
+        "rationale": "When the cap is reached, the model simply stops, even mid-sentence. A higher limit lets it finish."
+      },
+      {
+        "text": "The Top P value is too low, so raise it to 1",
+        "correct": false,
+        "rationale": "Top P narrows which tokens are chosen. It doesn't cut off the answer."
+      }
+    ],
+    "explanation": "Answers that stop mid-sentence point to a response length cap. The model doesn't plan for the cap, so it can stop at any token."
+  },
+  {
+    "id": "3.1-013",
+    "taskId": "3.1",
+    "kind": "single",
+    "objectives": [
+      "3.1.2"
+    ],
+    "services": [
+      "bedrock"
+    ],
+    "stem": "Cairnway Outfitters generates a numbered list of three packing tips and wants the model to stop writing as soon as the list ends. Which inference parameter should the team use?",
+    "options": [
+      {
+        "text": "Temperature",
+        "correct": false,
+        "rationale": "Temperature controls randomness, not where the output ends."
+      },
+      {
+        "text": "Top K",
+        "correct": false,
+        "rationale": "Top K limits the candidate tokens at each step. It doesn't mark the end of the output."
+      },
+      {
+        "text": "Prompt caching",
+        "correct": false,
+        "rationale": "Prompt caching reuses repeated input to save cost. It doesn't end the output."
+      },
+      {
+        "text": "Stop sequences",
+        "correct": true,
+        "rationale": "A stop sequence is a set of characters that makes the model stop generating when it appears."
+      }
+    ],
+    "explanation": "The clue is stopping at a known point. Stop sequences are the parameter for that."
+  },
+  {
+    "id": "3.1-014",
+    "taskId": "3.1",
+    "kind": "single",
+    "objectives": [
+      "3.1.2"
+    ],
+    "services": [
+      "bedrock"
+    ],
+    "stem": "Which statement describes the Top P inference parameter?",
+    "options": [
+      {
+        "text": "It limits choices to the likeliest tokens adding up to P",
+        "correct": true,
+        "rationale": "Top P sets a probability threshold. Lowering it keeps the answers focused on the likeliest tokens."
+      },
+      {
+        "text": "It sets the maximum number of tokens allowed in the response",
+        "correct": false,
+        "rationale": "That describes the response length (maximum tokens) setting."
+      },
+      {
+        "text": "It lists characters at which the model stops writing",
+        "correct": false,
+        "rationale": "That describes stop sequences."
+      },
+      {
+        "text": "It reserves model capacity at a fixed hourly price",
+        "correct": false,
+        "rationale": "That describes Provisioned Throughput, which is a pricing option, not an inference parameter."
+      }
+    ],
+    "explanation": "Top P is one of the settings that shapes which token the model picks next. It keeps only the likeliest tokens whose probabilities total P, while Top K keeps a fixed number of them."
+  },
+  {
+    "id": "3.1-015",
+    "taskId": "3.1",
+    "kind": "single",
+    "objectives": [
+      "3.1.3"
+    ],
+    "services": [
+      "bedrock-knowledge-bases"
+    ],
+    "stem": "Cairnway Outfitters changes its return policy every season and wants Trailmate to always answer from the latest version, without retraining a model each time. Which solution meets these requirements?",
+    "options": [
+      {
+        "text": "Fine-tune a foundation model on each new policy",
+        "correct": false,
+        "rationale": "Fine-tuning changes the model's behavior and would need a training job after every change. It doesn't keep facts current."
+      },
+      {
+        "text": "Use RAG over the policy documents",
+        "correct": true,
+        "rationale": "RAG retrieves the current policy text at question time, so updating the document is enough to update the answers."
+      },
+      {
+        "text": "Raise the model's temperature",
+        "correct": false,
+        "rationale": "Temperature changes randomness. It doesn't give the model any new facts."
+      },
+      {
+        "text": "Pre-train a new foundation model",
+        "correct": false,
+        "rationale": "Pre-training from scratch is extremely expensive and still wouldn't track weekly policy changes."
+      }
+    ],
+    "explanation": "The clue is up-to-date, company-specific facts without retraining. RAG reads the documents when each question arrives, so answers stay current by simply re-ingesting an updated document."
+  },
+  {
+    "id": "3.1-016",
+    "taskId": "3.1",
+    "kind": "single",
+    "objectives": [
+      "3.1.3"
+    ],
+    "services": [
+      "bedrock-knowledge-bases"
+    ],
+    "stem": "Trailmate sometimes invents shipping rules that Cairnway Outfitters doesn't have. The team wants answers grounded in its own shipping documents with the LEAST operational overhead. Which solution meets these requirements?",
+    "options": [
+      {
+        "text": "Amazon Bedrock Knowledge Bases connected to the shipping documents",
+        "correct": true,
+        "rationale": "Knowledge Bases runs the whole RAG pipeline for you, which grounds answers in the documents with little effort."
+      },
+      {
+        "text": "A self-built pipeline that chunks, embeds and stores the documents",
+        "correct": false,
+        "rationale": "This works but means building and maintaining every step yourself, which is higher overhead."
+      },
+      {
+        "text": "Fine-tune a model on the shipping documents",
+        "correct": false,
+        "rationale": "Fine-tuning needs a training job and hosting, and it wouldn't keep rules current."
+      },
+      {
+        "text": "Increase the maximum response length",
+        "correct": false,
+        "rationale": "A longer answer gives the model more room to make things up, not less."
+      }
+    ],
+    "explanation": "The clues are invented answers (hallucinations), grounding in own documents, and least overhead. Amazon Bedrock Knowledge Bases is the managed RAG option."
+  },
+  {
+    "id": "3.1-017",
+    "taskId": "3.1",
+    "kind": "single",
+    "objectives": [
+      "3.1.3"
+    ],
+    "services": [
+      "bedrock-knowledge-bases"
+    ],
+    "stem": "Which statement correctly describes the augmentation step in Retrieval Augmented Generation?",
+    "options": [
+      {
+        "text": "The model's weights are updated with the retrieved text",
+        "correct": false,
+        "rationale": "RAG never changes the model. Updating weights is what training and fine-tuning do."
+      },
+      {
+        "text": "The question is split into smaller chunks",
+        "correct": false,
+        "rationale": "Chunking applies to the documents during ingestion, not to the question."
+      },
+      {
+        "text": "The documents are deleted after the answer is generated",
+        "correct": false,
+        "rationale": "Nothing is deleted. The documents stay in the data source for the next question."
+      },
+      {
+        "text": "Retrieved chunks are added to the prompt",
+        "correct": true,
+        "rationale": "Augmenting the prompt means giving the model the relevant text so it can base its answer on it."
+      }
+    ],
+    "explanation": "RAG has three verbs: retrieve the closest chunks, augment the prompt with them, and generate the answer. The model itself stays unchanged."
+  },
+  {
+    "id": "3.1-018",
+    "taskId": "3.1",
+    "kind": "single",
+    "objectives": [
+      "3.1.3"
+    ],
+    "services": [
+      "bedrock-knowledge-bases"
+    ],
+    "stem": "Which Cairnway Outfitters use case is the BEST fit for Retrieval Augmented Generation?",
+    "options": [
+      {
+        "text": "Generating random trail names for a game",
+        "correct": false,
+        "rationale": "This is creative generation and needs no company documents."
+      },
+      {
+        "text": "Translating a short slogan from English to German",
+        "correct": false,
+        "rationale": "Translation relies on the model's language skills and needs no retrieval."
+      },
+      {
+        "text": "Staff Q&A from the company's HR handbook",
+        "correct": true,
+        "rationale": "RAG fits question answering over a body of company documents that the model has never seen."
+      },
+      {
+        "text": "Converting speech in a call recording to text",
+        "correct": false,
+        "rationale": "That is a speech-to-text task for a service such as Amazon Transcribe, not RAG."
+      }
+    ],
+    "explanation": "RAG's business value is answering from your own documents, such as handbooks, policies and manuals. The other tasks need no company-specific knowledge."
+  },
+  {
+    "id": "3.1-019",
+    "taskId": "3.1",
+    "kind": "single",
+    "objectives": [
+      "3.1.3"
+    ],
+    "services": [
+      "bedrock-knowledge-bases"
+    ],
+    "stem": "After Cairnway Outfitters adds a RAG system, a customer asks about a policy and Trailmate shows which document its answer came from. What benefit of RAG does this illustrate?",
+    "options": [
+      {
+        "text": "The model has been permanently trained on the policy",
+        "correct": false,
+        "rationale": "RAG doesn't change the model. The policy is read at question time."
+      },
+      {
+        "text": "The model no longer needs any input prompt",
+        "correct": false,
+        "rationale": "RAG adds text to the prompt, so the prompt is still essential."
+      },
+      {
+        "text": "The model can cite the sources it used",
+        "correct": true,
+        "rationale": "Because the answer is based on retrieved text, the application can point to the source documents."
+      },
+      {
+        "text": "The model runs without a vector database",
+        "correct": false,
+        "rationale": "RAG normally relies on a vector database to find the closest chunks."
+      }
+    ],
+    "explanation": "The clue is the visible source. Since RAG retrieves text and hands it to the model, answers can show where they came from."
+  },
+  {
+    "id": "3.1-020",
+    "taskId": "3.1",
+    "kind": "single",
+    "objectives": [
+      "3.1.4"
+    ],
+    "services": [
+      "neptune"
+    ],
+    "stem": "Cairnway Outfitters wants its recommendation assistant to combine relationships between products, customers and brands with similarity search over product descriptions. Which AWS service helps store the embeddings for this approach?",
+    "options": [
+      {
+        "text": "Amazon Neptune Analytics",
+        "correct": true,
+        "rationale": "Neptune is a graph database, and Neptune Analytics can store vectors and supports GraphRAG, which combines relationships with similarity search."
+      },
+      {
+        "text": "Amazon S3 Glacier storage classes",
+        "correct": false,
+        "rationale": "Glacier is for low-cost archival storage and can't run similarity searches."
+      },
+      {
+        "text": "Amazon Polly text-to-speech",
+        "correct": false,
+        "rationale": "Polly turns text into speech. It isn't a database."
+      },
+      {
+        "text": "AWS Budgets spending alerts",
+        "correct": false,
+        "rationale": "Budgets tracks spending and doesn't store embeddings."
+      }
+    ],
+    "explanation": "The clue is relationships plus similarity search, which is what GraphRAG does. Amazon Neptune, a graph database, can store vectors for it."
+  },
+  {
+    "id": "3.1-021",
+    "taskId": "3.1",
+    "kind": "single",
+    "objectives": [
+      "3.1.4"
+    ],
+    "services": [
+      "rds"
+    ],
+    "stem": "Cairnway Outfitters already runs its product catalog on Amazon RDS for PostgreSQL and wants to store embeddings there with the LEAST change to its setup. What should the team use?",
+    "options": [
+      {
+        "text": "A new Amazon S3 Glacier archive",
+        "correct": false,
+        "rationale": "Glacier archives data cheaply but doesn't search it by meaning."
+      },
+      {
+        "text": "Amazon Polly",
+        "correct": false,
+        "rationale": "Polly synthesizes speech and stores nothing."
+      },
+      {
+        "text": "AWS Config",
+        "correct": false,
+        "rationale": "Config records resource configuration. It isn't a vector store."
+      },
+      {
+        "text": "The pgvector extension on RDS",
+        "correct": true,
+        "rationale": "pgvector adds vector storage and similarity search to PostgreSQL, so the team can stay on its current database."
+      }
+    ],
+    "explanation": "The clue is an existing PostgreSQL database. Both Amazon RDS for PostgreSQL and Aurora PostgreSQL support the pgvector extension, so embeddings can live next to the catalog data."
+  },
+  {
+    "id": "3.1-022",
+    "taskId": "3.1",
+    "kind": "single",
+    "objectives": [
+      "3.1.4"
+    ],
+    "services": [
+      "opensearch"
+    ],
+    "stem": "Cairnway Outfitters wants a managed search service with built-in vector search to use as the knowledge store for a RAG assistant, without running its own servers. Which service meets these requirements?",
+    "options": [
+      {
+        "text": "Amazon Transcribe speech-to-text",
+        "correct": false,
+        "rationale": "Transcribe converts speech to text and isn't a data store."
+      },
+      {
+        "text": "Amazon OpenSearch Service",
+        "correct": true,
+        "rationale": "OpenSearch Service has built-in vector search and a serverless option, so there is no cluster to manage."
+      },
+      {
+        "text": "Amazon Rekognition image analysis",
+        "correct": false,
+        "rationale": "Rekognition analyses images and videos and doesn't store embeddings for search."
+      },
+      {
+        "text": "AWS CloudTrail activity logging",
+        "correct": false,
+        "rationale": "CloudTrail logs account activity. It can't search by meaning."
+      }
+    ],
+    "explanation": "The requirement is a managed store that supports vector search. OpenSearch Service does and is a common choice for RAG, including with Bedrock Knowledge Bases."
+  },
+  {
+    "id": "3.1-023",
+    "taskId": "3.1",
+    "kind": "single",
+    "objectives": [
+      "3.1.4"
+    ],
+    "services": [
+      "opensearch"
+    ],
+    "stem": "What is the main job of a vector database in a RAG application?",
+    "options": [
+      {
+        "text": "Finding stored embeddings nearest the question",
+        "correct": true,
+        "rationale": "This is a similarity search. A vector database is built to run it quickly."
+      },
+      {
+        "text": "Generating the final answer text for the customer",
+        "correct": false,
+        "rationale": "The foundation model generates the answer. The vector database only retrieves."
+      },
+      {
+        "text": "Training the foundation model on the company's data",
+        "correct": false,
+        "rationale": "RAG doesn't train the model. The database just stores and searches embeddings."
+      },
+      {
+        "text": "Translating the question into another language first",
+        "correct": false,
+        "rationale": "Translation is a task for a language model or Amazon Translate, not a vector database."
+      }
+    ],
+    "explanation": "A vector database stores embeddings, which are lists of numbers that capture meaning, and answers the question: which stored vectors are nearest to this one?"
+  },
+  {
+    "id": "3.1-024",
+    "taskId": "3.1",
+    "kind": "single",
+    "objectives": [
+      "3.1.5"
+    ],
+    "services": [
+      "bedrock"
+    ],
+    "stem": "Cairnway Outfitters wants product descriptions in a friendlier tone. The team has no training data and wants the cheapest approach that could work. What should it try FIRST?",
+    "options": [
+      {
+        "text": "Fine-tune a model on the new tone",
+        "correct": false,
+        "rationale": "Fine-tuning requires a labeled dataset and a training job, and the team has neither."
+      },
+      {
+        "text": "Pre-train a new foundation model",
+        "correct": false,
+        "rationale": "This is the most expensive option by far and is almost never right for a business."
+      },
+      {
+        "text": "Rewrite the prompt with tone instructions",
+        "correct": true,
+        "rationale": "In-context learning adds no training cost. It only costs a few extra tokens per request."
+      },
+      {
+        "text": "Distill a larger model into a smaller one",
+        "correct": false,
+        "rationale": "Distillation needs a training job and is meant for cost and speed, not for a quick tone change."
+      }
+    ],
+    "explanation": "The clues are cheapest and no training data. The customization ladder starts with prompt engineering and in-context learning: try it before spending on anything that trains a model."
+  },
+  {
+    "id": "3.1-025",
+    "taskId": "3.1",
+    "kind": "single",
+    "objectives": [
+      "3.1.5"
+    ],
+    "services": [
+      "bedrock",
+      "bedrock-provisioned-throughput"
+    ],
+    "sourceLinks": [
+      "https://docs.aws.amazon.com/bedrock/latest/userguide/prov-throughput.html"
+    ],
+    "stem": "Cairnway Outfitters fine-tuned a foundation model in Amazon Bedrock with its own labeled examples. What must the team set up to run the custom model for Trailmate?",
+    "options": [
+      {
+        "text": "Nothing, because custom models use on-demand pricing",
+        "correct": false,
+        "rationale": "On-demand per-token pricing is for base models. Custom models need Provisioned Throughput."
+      },
+      {
+        "text": "Purchase Provisioned Throughput for the custom model",
+        "correct": true,
+        "rationale": "A custom model on Amazon Bedrock is used through Provisioned Throughput, billed at a fixed hourly price."
+      },
+      {
+        "text": "Create a second Bedrock Knowledge Base",
+        "correct": false,
+        "rationale": "Knowledge Bases add documents for RAG and don't host a custom model."
+      },
+      {
+        "text": "Enable batch inference only",
+        "correct": false,
+        "rationale": "Batch inference is for non-urgent bulk work and is not the way to serve a live chat assistant."
+      }
+    ],
+    "explanation": "A cost trade-off of fine-tuning is hosting. To use a customized model on Amazon Bedrock you buy Provisioned Throughput, which is reserved capacity at an hourly rate."
+  },
+  {
+    "id": "3.1-026",
+    "taskId": "3.1",
+    "kind": "single",
+    "objectives": [
+      "3.1.5"
+    ],
+    "services": [
+      "bedrock"
+    ],
+    "stem": "Cairnway Outfitters has a large model that classifies support tickets very well but is slow and costly per request. The team wants near-equal quality on this one task at lower cost and faster speed. Which approach meets these requirements?",
+    "options": [
+      {
+        "text": "Pre-training a new foundation model from scratch",
+        "correct": false,
+        "rationale": "This costs enormous amounts of data and compute and isn't needed for one task."
+      },
+      {
+        "text": "Retrieval Augmented Generation with a vector store",
+        "correct": false,
+        "rationale": "RAG adds documents to prompts. It doesn't make a model cheaper or faster."
+      },
+      {
+        "text": "Raising the temperature",
+        "correct": false,
+        "rationale": "Temperature changes randomness, not cost or speed."
+      },
+      {
+        "text": "Model distillation with a large teacher model",
+        "correct": true,
+        "rationale": "Distillation transfers knowledge from a large teacher model to a smaller, faster, cheaper student for a specific task."
+      }
+    ],
+    "explanation": "The clue is keeping quality while lowering cost and latency on one task. That is the purpose of model distillation (teacher and student)."
+  },
+  {
+    "id": "3.1-027",
+    "taskId": "3.1",
+    "kind": "single",
+    "objectives": [
+      "3.1.5"
+    ],
+    "services": [
+      "bedrock-batch-inference"
+    ],
+    "sourceLinks": [
+      "https://aws.amazon.com/bedrock/pricing/"
+    ],
+    "stem": "Each night Cairnway Outfitters generates summaries of 500,000 product reviews. No one needs the results until morning. Which option is MOST cost-effective?",
+    "options": [
+      {
+        "text": "On-demand inference with one request at a time",
+        "correct": false,
+        "rationale": "On-demand is priced per token at the standard rate, which costs more than batch for work that can wait."
+      },
+      {
+        "text": "Provisioned Throughput reserved around the clock",
+        "correct": false,
+        "rationale": "This is a fixed hourly price and pays for idle time when the job only runs at night."
+      },
+      {
+        "text": "Fine-tuning the model on the reviews",
+        "correct": false,
+        "rationale": "A training job adds cost and doesn't change how the summaries are priced."
+      },
+      {
+        "text": "Bedrock batch inference on a supported model",
+        "correct": true,
+        "rationale": "Batch inference processes many requests together instead of in real time, and AWS offers select models at a 50% lower price than on-demand."
+      }
+    ],
+    "explanation": "The deciding clues are large volume and no urgency. Batch inference trades speed for a lower price, so it fits non-real-time bulk work."
+  },
+  {
+    "id": "3.1-028",
+    "taskId": "3.1",
+    "kind": "single",
+    "objectives": [
+      "3.1.5"
+    ],
+    "services": [
+      "bedrock"
+    ],
+    "stem": "Cairnway Outfitters needs every Trailmate answer to follow a very specific brand voice and fixed output format. Careful prompting and examples haven't produced consistent results, and the team has 5,000 labeled examples. Which approach is the MOST appropriate next step?",
+    "options": [
+      {
+        "text": "Add a vector database for RAG",
+        "correct": false,
+        "rationale": "RAG supplies facts at question time. It doesn't teach a consistent voice."
+      },
+      {
+        "text": "Pre-train a foundation model from scratch",
+        "correct": false,
+        "rationale": "This is vastly more expensive than needed for a voice and format problem."
+      },
+      {
+        "text": "Fine-tune a model on the labeled examples",
+        "correct": true,
+        "rationale": "Fine-tuning trains a model on prompt and ideal-answer pairs, which teaches consistent style and format that prompting couldn't achieve."
+      },
+      {
+        "text": "Lower the maximum response length",
+        "correct": false,
+        "rationale": "This only shortens answers. It doesn't enforce a brand voice."
+      }
+    ],
+    "explanation": "The clues are prompting already tried, labeled examples available, and a style or format goal. Fine-tuning is the next rung on the cost ladder, after prompting and RAG."
+  },
+  {
+    "id": "3.1-029",
+    "taskId": "3.1",
+    "kind": "single",
+    "objectives": [
+      "3.1.5"
+    ],
+    "services": [
+      "bedrock"
+    ],
+    "stem": "Which approach to customizing a foundation model has the HIGHEST cost?",
+    "options": [
+      {
+        "text": "Pre-training a foundation model",
+        "correct": true,
+        "rationale": "It needs huge datasets, large amounts of compute and deep expertise."
+      },
+      {
+        "text": "Writing better prompts",
+        "correct": false,
+        "rationale": "This only costs the extra tokens in each request."
+      },
+      {
+        "text": "Retrieval Augmented Generation",
+        "correct": false,
+        "rationale": "This costs a vector store and retrieval, far less than training a model."
+      },
+      {
+        "text": "In-context learning with a few examples",
+        "correct": false,
+        "rationale": "Examples only add tokens to the prompt and need no training."
+      }
+    ],
+    "explanation": "The customization ladder rises in cost: prompt engineering and in-context learning, then RAG, then fine-tuning or distillation, then continued pre-training, then pre-training from scratch."
+  },
+  {
+    "id": "3.1-030",
+    "taskId": "3.1",
+    "kind": "single",
+    "objectives": [
+      "3.1.6"
+    ],
+    "services": [
+      "bedrock-agentcore"
+    ],
+    "stem": "Cairnway Outfitters wants Trailmate to handle \"I want to return my tent\" end to end: find the customer's order, check the return policy, create the return and send a label. Which solution meets these requirements?",
+    "options": [
+      {
+        "text": "Use RAG only, with the return policy documents",
+        "correct": false,
+        "rationale": "RAG can explain the policy but can't look up an order or create a return."
+      },
+      {
+        "text": "An agent with order tools on Bedrock AgentCore",
+        "correct": true,
+        "rationale": "An agent breaks a goal into steps and acts by calling tools. AgentCore is AWS's platform for running agents in production."
+      },
+      {
+        "text": "Raise the temperature so the model is more flexible",
+        "correct": false,
+        "rationale": "Randomness doesn't give the model the ability to take actions."
+      },
+      {
+        "text": "Fine-tune a model on past return conversations",
+        "correct": false,
+        "rationale": "Fine-tuning changes style and behavior but doesn't connect the model to order systems."
+      }
+    ],
+    "explanation": "The clue is that the assistant must act, not just answer. Agents plan multi-step tasks and use tools such as APIs. If the need is only answering from documents, RAG is enough."
+  },
+  {
+    "id": "3.1-031",
+    "taskId": "3.1",
+    "kind": "single",
+    "objectives": [
+      "3.1.6"
+    ],
+    "stem": "Which statement describes the role of an AI agent?",
+    "options": [
+      {
+        "text": "It plans steps and calls tools to do them",
+        "correct": true,
+        "rationale": "Tools can be APIs, databases, knowledge bases or other agents. That is what separates an agent from a plain chatbot."
+      },
+      {
+        "text": "It stores embeddings for similarity search",
+        "correct": false,
+        "rationale": "That describes a vector database."
+      },
+      {
+        "text": "It measures how accurate a model's summaries are",
+        "correct": false,
+        "rationale": "That describes model evaluation."
+      },
+      {
+        "text": "It reserves model capacity at a fixed hourly price",
+        "correct": false,
+        "rationale": "That describes Provisioned Throughput."
+      }
+    ],
+    "explanation": "An agent works out what to do, breaks a goal into steps and acts. A chatbot only answers."
+  },
+  {
+    "id": "3.1-032",
+    "taskId": "3.1",
+    "kind": "single",
+    "objectives": [
+      "3.1.6"
+    ],
+    "services": [
+      "bedrock-agentcore"
+    ],
+    "stem": "Cairnway Outfitters' returns agent can issue refunds. The company wants to limit the risk of costly mistakes. Which design is the MOST appropriate?",
+    "options": [
+      {
+        "text": "Give the agent administrator access so it never gets blocked",
+        "correct": false,
+        "rationale": "Broad permissions let a mistake do far more damage."
+      },
+      {
+        "text": "Let the agent approve every refund automatically to save time",
+        "correct": false,
+        "rationale": "Automatic approval removes the safety check on the riskiest action."
+      },
+      {
+        "text": "Give it minimal permissions and a human approval step",
+        "correct": true,
+        "rationale": "Least privilege and human approval of risky steps keep an agent that takes real actions under control."
+      },
+      {
+        "text": "Remove the refund tool and ask customers to email support",
+        "correct": false,
+        "rationale": "This avoids the risk but gives up the business benefit the agent was meant to bring."
+      }
+    ],
+    "explanation": "The clue is an agent that takes real actions. Give it minimal permissions and a human approval step for risky actions, such as refunds above a set amount."
+  },
+  {
+    "id": "3.1-033",
+    "taskId": "3.1",
+    "kind": "multi",
+    "objectives": [
+      "3.1.1"
+    ],
+    "services": [
+      "bedrock"
+    ],
+    "stem": "Cairnway Outfitters wants to summarize long supplier contracts written in French and German. Which TWO model characteristics matter MOST for choosing a foundation model? (Select TWO.)",
+    "select": 2,
+    "options": [
+      {
+        "text": "Multi-lingual capability",
+        "correct": true,
+        "rationale": "The contracts are in French and German, so the model must understand and write those languages."
+      },
+      {
+        "text": "A large context window",
+        "correct": true,
+        "rationale": "Long contracts need a model that can read a lot of text in one request."
+      },
+      {
+        "text": "Support for image generation",
+        "correct": false,
+        "rationale": "Image output isn't needed for text summaries."
+      },
+      {
+        "text": "Support for audio input",
+        "correct": false,
+        "rationale": "There is no audio in this task."
+      },
+      {
+        "text": "The smallest possible model size",
+        "correct": false,
+        "rationale": "A small model may be cheap, but it may not handle long documents or two languages well enough."
+      }
+    ],
+    "explanation": "The clues are two languages and long documents. Multi-lingual ability and input length are selection criteria that match them directly."
+  },
+  {
+    "id": "3.1-034",
+    "taskId": "3.1",
+    "kind": "multi",
+    "objectives": [
+      "3.1.1"
+    ],
+    "services": [
+      "bedrock"
+    ],
+    "stem": "Cairnway Outfitters is evaluating prompt caching for Trailmate, whose requests all start with the same long set of instructions. Which TWO statements about prompt caching are correct? (Select TWO.)",
+    "select": 2,
+    "options": [
+      {
+        "text": "It can reduce response latency",
+        "correct": true,
+        "rationale": "Reusing the cached prompt part saves processing time."
+      },
+      {
+        "text": "It can reduce input token costs when the cached part is reused many times",
+        "correct": true,
+        "rationale": "The savings come from reuse. Writing to the cache can cost more than normal input."
+      },
+      {
+        "text": "It is available on every foundation model",
+        "correct": false,
+        "rationale": "Only supported models offer prompt caching."
+      },
+      {
+        "text": "It lowers the cost of output tokens",
+        "correct": false,
+        "rationale": "It applies to repeated input, not to the generated answer."
+      },
+      {
+        "text": "It permanently changes the model",
+        "correct": false,
+        "rationale": "Caching doesn't change the model. It only reuses part of the prompt."
+      }
+    ],
+    "explanation": "Prompt caching stores a repeated part of the prompt for reuse. It helps latency and input cost on supported models, and only when the cached part is used repeatedly."
+  },
+  {
+    "id": "3.1-035",
+    "taskId": "3.1",
+    "kind": "multi",
+    "objectives": [
+      "3.1.2"
+    ],
+    "services": [
+      "bedrock"
+    ],
+    "stem": "Cairnway Outfitters wants Trailmate's answers to stay focused on the most likely wording. Which TWO inference parameter changes help? (Select TWO.)",
+    "select": 2,
+    "options": [
+      {
+        "text": "Lower the temperature",
+        "correct": true,
+        "rationale": "A lower temperature favours the most likely tokens."
+      },
+      {
+        "text": "Lower Top P",
+        "correct": true,
+        "rationale": "A lower Top P keeps only the most likely tokens in the running."
+      },
+      {
+        "text": "Raise the temperature",
+        "correct": false,
+        "rationale": "This increases randomness."
+      },
+      {
+        "text": "Raise the maximum response length",
+        "correct": false,
+        "rationale": "This allows longer answers but doesn't make them more focused."
+      },
+      {
+        "text": "Add a stop sequence",
+        "correct": false,
+        "rationale": "This ends the output at a known point. It doesn't narrow the word choice."
+      }
+    ],
+    "explanation": "Temperature, Top P and Top K all shape which token is chosen next. Turning temperature and Top P down narrows the choice."
+  },
+  {
+    "id": "3.1-036",
+    "taskId": "3.1",
+    "kind": "multi",
+    "objectives": [
+      "3.1.2"
+    ],
+    "services": [
+      "bedrock"
+    ],
+    "stem": "Cairnway Outfitters pays per token and wants to lower the cost of each Trailmate request. Which TWO actions reduce cost? (Select TWO.)",
+    "select": 2,
+    "options": [
+      {
+        "text": "Set a lower maximum response length",
+        "correct": true,
+        "rationale": "Fewer output tokens means a lower output cost."
+      },
+      {
+        "text": "Shorten the prompt by removing unneeded text",
+        "correct": true,
+        "rationale": "Everything sent counts toward input tokens and the bill."
+      },
+      {
+        "text": "Raise the temperature",
+        "correct": false,
+        "rationale": "Temperature doesn't change token counts."
+      },
+      {
+        "text": "Add several long examples to every prompt",
+        "correct": false,
+        "rationale": "More input tokens cost more on every request."
+      },
+      {
+        "text": "Raise Top K",
+        "correct": false,
+        "rationale": "Top K changes which tokens are considered, not how many are billed."
+      }
+    ],
+    "explanation": "Cost depends on input tokens and output tokens. The response cap limits output, and a shorter prompt limits input."
+  },
+  {
+    "id": "3.1-037",
+    "taskId": "3.1",
+    "kind": "multi",
+    "objectives": [
+      "3.1.3"
+    ],
+    "services": [
+      "bedrock-knowledge-bases"
+    ],
+    "stem": "Which TWO statements describe benefits of Retrieval Augmented Generation for Cairnway Outfitters? (Select TWO.)",
+    "select": 2,
+    "options": [
+      {
+        "text": "Answers can use updated documents without retraining the model",
+        "correct": true,
+        "rationale": "The documents are read at question time, so updating and re-ingesting them is enough."
+      },
+      {
+        "text": "Answers can be grounded in company data, which helps reduce hallucinations",
+        "correct": true,
+        "rationale": "The model answers from retrieved text instead of guessing."
+      },
+      {
+        "text": "The model's weights change to hold the company's facts",
+        "correct": false,
+        "rationale": "That is what fine-tuning does. RAG leaves the model unchanged."
+      },
+      {
+        "text": "A vector database is no longer needed",
+        "correct": false,
+        "rationale": "RAG relies on a vector store to find relevant chunks."
+      },
+      {
+        "text": "Hallucinations are completely eliminated",
+        "correct": false,
+        "rationale": "RAG reduces them but can't promise they never happen."
+      }
+    ],
+    "explanation": "RAG retrieves relevant text and adds it to the prompt. That keeps answers current and grounded, but it doesn't alter the model or guarantee perfection."
+  },
+  {
+    "id": "3.1-038",
+    "taskId": "3.1",
+    "kind": "multi",
+    "objectives": [
+      "3.1.3"
+    ],
+    "services": [
+      "bedrock-knowledge-bases"
+    ],
+    "stem": "When a customer asks Trailmate a question, which TWO steps does a RAG application perform at question time? (Select TWO.)",
+    "select": 2,
+    "options": [
+      {
+        "text": "Turn the question into an embedding",
+        "correct": true,
+        "rationale": "The question is embedded the same way as the documents were, so they can be compared."
+      },
+      {
+        "text": "Search the vector database for the closest chunks",
+        "correct": true,
+        "rationale": "The nearest chunks are retrieved and then added to the prompt."
+      },
+      {
+        "text": "Split every document into chunks",
+        "correct": false,
+        "rationale": "Chunking happens ahead of time, during ingestion."
+      },
+      {
+        "text": "Fine-tune the model on the chosen chunks",
+        "correct": false,
+        "rationale": "RAG never trains the model."
+      },
+      {
+        "text": "Store the new embeddings in the vector database",
+        "correct": false,
+        "rationale": "Storing embeddings is part of ingestion and not repeated for each question."
+      }
+    ],
+    "explanation": "RAG has two phases: ingestion (collect, chunk, embed, store) done in advance, and question answering (embed the question, search, augment the prompt, generate) done every time."
+  },
+  {
+    "id": "3.1-039",
+    "taskId": "3.1",
+    "kind": "multi",
+    "objectives": [
+      "3.1.3"
+    ],
+    "services": [
+      "bedrock-knowledge-bases"
+    ],
+    "stem": "Which TWO Cairnway Outfitters use cases are good business applications of RAG? (Select TWO.)",
+    "select": 2,
+    "options": [
+      {
+        "text": "A support assistant that answers from return policies and manuals",
+        "correct": true,
+        "rationale": "The answers come from company documents that change over time."
+      },
+      {
+        "text": "Internal search that answers staff questions from a company wiki",
+        "correct": true,
+        "rationale": "RAG finds the relevant pages and lets the model summarize them."
+      },
+      {
+        "text": "Creating abstract artwork for a banner",
+        "correct": false,
+        "rationale": "This is creative generation and needs no company documents."
+      },
+      {
+        "text": "Translating short text into Spanish",
+        "correct": false,
+        "rationale": "This uses the model's language skills and needs no retrieval."
+      },
+      {
+        "text": "Predicting next quarter's sales from numbers",
+        "correct": false,
+        "rationale": "This is a forecasting task for machine learning, not document question answering."
+      }
+    ],
+    "explanation": "RAG fits question answering and search over your own documents. Tasks that don't depend on company-specific text don't need it."
+  },
+  {
+    "id": "3.1-040",
+    "taskId": "3.1",
+    "kind": "multi",
+    "objectives": [
+      "3.1.4"
+    ],
+    "services": [
+      "opensearch",
+      "neptune"
+    ],
+    "stem": "Cairnway Outfitters wants to store embeddings for a RAG assistant. Which TWO AWS services can store them? (Select TWO.)",
+    "select": 2,
+    "options": [
+      {
+        "text": "Amazon OpenSearch Service",
+        "correct": true,
+        "rationale": "It has built-in vector search and is a common RAG vector store."
+      },
+      {
+        "text": "Amazon Neptune",
+        "correct": true,
+        "rationale": "Neptune Analytics can store vectors and supports GraphRAG."
+      },
+      {
+        "text": "Amazon S3 Glacier",
+        "correct": false,
+        "rationale": "It is archival storage and can't run similarity searches."
+      },
+      {
+        "text": "Amazon Polly",
+        "correct": false,
+        "rationale": "Polly converts text to speech."
+      },
+      {
+        "text": "AWS CloudTrail",
+        "correct": false,
+        "rationale": "CloudTrail records account activity and isn't a vector store."
+      }
+    ],
+    "explanation": "A vector store must hold embeddings and find the nearest ones. OpenSearch Service and Neptune (Analytics) both do. Storage and logging services can't search by meaning."
+  },
+  {
+    "id": "3.1-041",
+    "taskId": "3.1",
+    "kind": "multi",
+    "objectives": [
+      "3.1.4"
+    ],
+    "services": [
+      "aurora",
+      "rds"
+    ],
+    "stem": "Cairnway Outfitters' team knows PostgreSQL well and wants to store embeddings in a database it already understands. Which TWO services can do this with the pgvector extension? (Select TWO.)",
+    "select": 2,
+    "options": [
+      {
+        "text": "Amazon Aurora PostgreSQL-Compatible Edition",
+        "correct": true,
+        "rationale": "With pgvector it stores vectors in tables and searches them with SQL."
+      },
+      {
+        "text": "Amazon RDS for PostgreSQL",
+        "correct": true,
+        "rationale": "RDS for PostgreSQL also supports pgvector."
+      },
+      {
+        "text": "Amazon Transcribe",
+        "correct": false,
+        "rationale": "Transcribe turns speech into text."
+      },
+      {
+        "text": "Amazon Rekognition",
+        "correct": false,
+        "rationale": "Rekognition analyses images and video."
+      },
+      {
+        "text": "AWS Budgets",
+        "correct": false,
+        "rationale": "Budgets tracks cost and isn't a database."
+      }
+    ],
+    "explanation": "pgvector is a PostgreSQL extension, so it works on PostgreSQL-based AWS databases: Aurora PostgreSQL and RDS for PostgreSQL."
+  },
+  {
+    "id": "3.1-042",
+    "taskId": "3.1",
+    "kind": "multi",
+    "objectives": [
+      "3.1.5"
+    ],
+    "services": [
+      "bedrock"
+    ],
+    "stem": "Which TWO costs does Cairnway Outfitters take on when it fine-tunes a model in Amazon Bedrock? (Select TWO.)",
+    "select": 2,
+    "options": [
+      {
+        "text": "A training job on a curated, labeled dataset",
+        "correct": true,
+        "rationale": "Fine-tuning needs prepared examples and compute to train."
+      },
+      {
+        "text": "Provisioned Throughput to run the custom model",
+        "correct": true,
+        "rationale": "Custom models on Bedrock are used through Provisioned Throughput at an hourly rate."
+      },
+      {
+        "text": "A vector database for retrieval",
+        "correct": false,
+        "rationale": "A vector store is a cost of RAG, not of fine-tuning."
+      },
+      {
+        "text": "Extra tokens for examples in every prompt",
+        "correct": false,
+        "rationale": "This is a cost of in-context learning."
+      },
+      {
+        "text": "Building a new foundation model",
+        "correct": false,
+        "rationale": "That would be pre-training from scratch, a different and far larger undertaking."
+      }
+    ],
+    "explanation": "Fine-tuning changes the model's weights, so it needs data preparation, training and hosting. It doesn't need a vector store."
+  },
+  {
+    "id": "3.1-043",
+    "taskId": "3.1",
+    "kind": "multi",
+    "objectives": [
+      "3.1.5"
+    ],
+    "services": [
+      "bedrock-knowledge-bases"
+    ],
+    "stem": "Which TWO approaches improve a foundation model's answers without changing the model itself? (Select TWO.)",
+    "select": 2,
+    "options": [
+      {
+        "text": "In-context learning with examples in the prompt",
+        "correct": true,
+        "rationale": "The examples guide the answer, but the model's weights stay the same."
+      },
+      {
+        "text": "Retrieval Augmented Generation",
+        "correct": true,
+        "rationale": "RAG adds retrieved text to the prompt and doesn't alter the model."
+      },
+      {
+        "text": "Fine-tuning",
+        "correct": false,
+        "rationale": "Fine-tuning trains the model and updates its weights."
+      },
+      {
+        "text": "Model distillation",
+        "correct": false,
+        "rationale": "Distillation trains a new, smaller student model."
+      },
+      {
+        "text": "Continued pre-training",
+        "correct": false,
+        "rationale": "This trains the model further on large unlabeled text."
+      }
+    ],
+    "explanation": "Prompt engineering, in-context learning and RAG all work on the input. Fine-tuning, distillation and pre-training change or create a model."
+  },
+  {
+    "id": "3.1-044",
+    "taskId": "3.1",
+    "kind": "multi",
+    "objectives": [
+      "3.1.5"
+    ],
+    "services": [
+      "bedrock"
+    ],
+    "sourceLinks": [
+      "https://docs.aws.amazon.com/bedrock/latest/userguide/custom-models.html"
+    ],
+    "stem": "Which TWO statements about Amazon Bedrock customization are correct? (Select TWO.)",
+    "select": 2,
+    "options": [
+      {
+        "text": "Its customization methods include supervised fine-tuning and distillation",
+        "correct": true,
+        "rationale": "These are among Bedrock's current customization methods, together with reinforcement fine-tuning."
+      },
+      {
+        "text": "A customized model is used through Provisioned Throughput",
+        "correct": true,
+        "rationale": "A custom model needs reserved capacity at a fixed hourly price."
+      },
+      {
+        "text": "Custom models are billed per token on demand like base models",
+        "correct": false,
+        "rationale": "On-demand per-token pricing applies to base models."
+      },
+      {
+        "text": "Customization is free of charge",
+        "correct": false,
+        "rationale": "Training jobs and hosting cost money."
+      },
+      {
+        "text": "Customization removes the need to write any prompts",
+        "correct": false,
+        "rationale": "A customized model still receives prompts."
+      }
+    ],
+    "explanation": "Remember two facts: Bedrock's methods are supervised fine-tuning, reinforcement fine-tuning and distillation, and a custom model must run on Provisioned Throughput."
+  },
+  {
+    "id": "3.1-045",
+    "taskId": "3.1",
+    "kind": "multi",
+    "objectives": [
+      "3.1.5"
+    ],
+    "services": [
+      "bedrock"
+    ],
+    "stem": "Cairnway Outfitters is comparing ways to adapt a foundation model. Which THREE approaches involve training a model? (Select THREE.)",
+    "select": 3,
+    "options": [
+      {
+        "text": "Fine-tuning",
+        "correct": true,
+        "rationale": "It trains an existing model further on labeled examples."
+      },
+      {
+        "text": "Model distillation",
+        "correct": true,
+        "rationale": "It trains a smaller student model on a larger teacher's answers."
+      },
+      {
+        "text": "Continued pre-training",
+        "correct": true,
+        "rationale": "It trains an existing model further on large amounts of unlabeled text."
+      },
+      {
+        "text": "Retrieval Augmented Generation",
+        "correct": false,
+        "rationale": "RAG adds retrieved text to prompts and trains nothing."
+      },
+      {
+        "text": "Prompt engineering",
+        "correct": false,
+        "rationale": "It only changes the input text."
+      },
+      {
+        "text": "Switching to a different base model",
+        "correct": false,
+        "rationale": "Choosing another model doesn't train anything."
+      }
+    ],
+    "explanation": "Training approaches change model weights or create a new model. Prompt-side approaches, RAG and model selection don't."
+  },
+  {
+    "id": "3.1-046",
+    "taskId": "3.1",
+    "kind": "multi",
+    "objectives": [
+      "3.1.6"
+    ],
+    "services": [
+      "bedrock-agentcore",
+      "strands-agents"
+    ],
+    "stem": "Which TWO capabilities set an AI agent apart from a simple question-answering chatbot? (Select TWO.)",
+    "select": 2,
+    "options": [
+      {
+        "text": "It breaks a goal into steps",
+        "correct": true,
+        "rationale": "An agent plans the actions needed to reach a goal."
+      },
+      {
+        "text": "It calls tools such as APIs and databases",
+        "correct": true,
+        "rationale": "Tool use lets an agent look up an order or create a return."
+      },
+      {
+        "text": "It only repeats text from the prompt",
+        "correct": false,
+        "rationale": "An agent generates and decides, it doesn't just echo."
+      },
+      {
+        "text": "It needs no foundation model",
+        "correct": false,
+        "rationale": "An agent uses a foundation model to work out what to do."
+      },
+      {
+        "text": "It stores embeddings",
+        "correct": false,
+        "rationale": "Embedding storage is a vector database's job."
+      }
+    ],
+    "explanation": "A chatbot answers, an agent acts. It plans steps and uses tools to carry them out."
+  },
+  {
+    "id": "3.1-047",
+    "taskId": "3.1",
+    "kind": "multi",
+    "objectives": [
+      "3.1.6"
+    ],
+    "services": [
+      "bedrock-agentcore"
+    ],
+    "stem": "Cairnway Outfitters is rolling out an agent that can update customer orders. Which TWO practices reduce the risk of unwanted actions? (Select TWO.)",
+    "select": 2,
+    "options": [
+      {
+        "text": "Give the agent only the permissions it needs",
+        "correct": true,
+        "rationale": "Least privilege limits what a mistake can affect."
+      },
+      {
+        "text": "Require human approval for risky steps",
+        "correct": true,
+        "rationale": "A person checks high-impact actions before they happen."
+      },
+      {
+        "text": "Give the agent full administrator access",
+        "correct": false,
+        "rationale": "This increases the damage a mistake can cause."
+      },
+      {
+        "text": "Disable logging so the agent runs faster",
+        "correct": false,
+        "rationale": "Logs help the team review what the agent did."
+      },
+      {
+        "text": "Raise the temperature",
+        "correct": false,
+        "rationale": "More randomness makes actions less predictable."
+      }
+    ],
+    "explanation": "Because an agent takes real actions, control what it may do and keep a person in the loop for risky steps."
+  },
+  {
+    "id": "3.1-048",
+    "taskId": "3.1",
+    "kind": "order",
+    "objectives": [
+      "3.1.3"
+    ],
+    "services": [
+      "bedrock-knowledge-bases"
+    ],
+    "stem": "A customer asks Trailmate a question about the return policy, and the application uses Retrieval Augmented Generation (RAG). Put the steps that run at question time in the correct order.",
+    "steps": [
+      "Convert the customer's question into an embedding",
+      "Search the vector database for the chunks closest in meaning",
+      "Add the retrieved chunks to the prompt",
+      "The foundation model generates an answer from that text"
+    ],
+    "explanation": "The question is embedded the same way as the documents, so the vector database can find the nearest chunks. Those chunks augment the prompt, and the model answers from them."
+  },
+  {
+    "id": "3.1-049",
+    "taskId": "3.1",
+    "kind": "order",
+    "objectives": [
+      "3.1.5"
+    ],
+    "services": [
+      "bedrock"
+    ],
+    "stem": "Put these ways of customizing a foundation model in order from the LOWEST typical cost to the HIGHEST.",
+    "steps": [
+      "Prompt engineering with examples in the prompt",
+      "Retrieval Augmented Generation",
+      "Fine-tuning on labeled examples",
+      "Pre-training a new model from scratch"
+    ],
+    "explanation": "Cost rises with the effort involved. Prompting only adds tokens, RAG adds a vector store, fine-tuning adds training and hosting, and pre-training needs huge data and compute."
+  },
+  {
+    "id": "3.1-050",
+    "taskId": "3.1",
+    "kind": "order",
+    "objectives": [
+      "3.1.6"
+    ],
+    "services": [
+      "bedrock-agentcore"
+    ],
+    "stem": "A customer tells the Cairnway Outfitters agent, \"Return the tent from my last order.\" Put the steps the agent takes in the most logical order.",
+    "steps": [
+      "Look up the customer's last order",
+      "Check the order against the return policy",
+      "Create the return",
+      "Confirm the return label to the customer"
+    ],
+    "explanation": "An agent plans a multi-step task and calls tools in a sensible sequence. It must find the order before it can check the policy, and the return is created only once the policy allows it."
+  },
+  {
+    "id": "3.1-051",
+    "taskId": "3.1",
+    "kind": "order",
+    "objectives": [
+      "3.1.5"
+    ],
+    "services": [
+      "bedrock"
+    ],
+    "stem": "Cairnway Outfitters wants a smaller, cheaper model for ticket classification by using Amazon Bedrock model distillation. Put the steps in the correct order.",
+    "steps": [
+      "Choose a larger teacher model and a smaller student model",
+      "The teacher model generates answers to example prompts",
+      "Train the student model on those answers",
+      "Buy Provisioned Throughput to use the distilled model"
+    ],
+    "explanation": "Distillation transfers knowledge from a teacher to a student. The teacher's answers become the training data. Because the result is a custom model on Bedrock, it runs on Provisioned Throughput."
+  },
+  {
+    "id": "3.1-052",
+    "taskId": "3.1",
+    "kind": "match",
+    "objectives": [
+      "3.1.2"
+    ],
+    "services": [
+      "bedrock"
+    ],
+    "stem": "Match each inference parameter to what it does.",
+    "pairs": [
+      {
+        "prompt": "Temperature",
+        "answer": "Controls how random the model's word choices are"
+      },
+      {
+        "prompt": "Maximum response length",
+        "answer": "Caps how many tokens an answer can contain"
+      },
+      {
+        "prompt": "Stop sequences",
+        "answer": "Make the model stop writing at a known point"
+      },
+      {
+        "prompt": "Top K",
+        "answer": "Limits the choice to the K most likely tokens"
+      }
+    ],
+    "explanation": "These are the standard inference parameters from the lesson. Reserving capacity at an hourly price describes Provisioned Throughput, which is a pricing option and not an inference parameter.",
+    "distractors": [
+      "Reserves capacity at a fixed hourly price"
+    ]
+  },
+  {
+    "id": "3.1-053",
+    "taskId": "3.1",
+    "kind": "match",
+    "objectives": [
+      "3.1.4"
+    ],
+    "services": [
+      "opensearch",
+      "aurora",
+      "neptune"
+    ],
+    "stem": "Match each Cairnway Outfitters need to the AWS service that fits it for storing embeddings.",
+    "pairs": [
+      {
+        "prompt": "A managed search service with built-in vector search",
+        "answer": "Amazon OpenSearch Service"
+      },
+      {
+        "prompt": "A relational database queried with SQL, extended with pgvector",
+        "answer": "Amazon Aurora PostgreSQL-Compatible Edition"
+      },
+      {
+        "prompt": "A graph database that supports GraphRAG",
+        "answer": "Amazon Neptune Analytics"
+      }
+    ],
+    "explanation": "OpenSearch has native vector search, Aurora PostgreSQL gains it through pgvector, and Neptune Analytics adds it to a graph database. Glacier archives data and Polly produces speech, so neither stores embeddings for search.",
+    "distractors": [
+      "Amazon S3 Glacier",
+      "Amazon Polly"
+    ]
+  },
+  {
+    "id": "3.1-054",
+    "taskId": "3.1",
+    "kind": "match",
+    "objectives": [
+      "3.1.5"
+    ],
+    "services": [
+      "bedrock",
+      "bedrock-knowledge-bases"
+    ],
+    "stem": "Match each Cairnway Outfitters situation to the customization approach that fits it best.",
+    "pairs": [
+      {
+        "prompt": "Try a quick fix first with no training and no extra systems",
+        "answer": "Prompt engineering"
+      },
+      {
+        "prompt": "Answers must use documents that change every season",
+        "answer": "Retrieval Augmented Generation"
+      },
+      {
+        "prompt": "A smaller, cheaper model must match a larger one on one task",
+        "answer": "Model distillation"
+      },
+      {
+        "prompt": "A consistent brand voice that prompting can't achieve, with labeled examples",
+        "answer": "Fine-tuning"
+      }
+    ],
+    "explanation": "Each approach has a typical use. Pre-training from scratch is almost never the right business answer because of its huge cost.",
+    "distractors": [
+      "Pre-training from scratch"
+    ]
+  },
+  {
+    "id": "3.1-055",
+    "taskId": "3.1",
+    "kind": "match",
+    "objectives": [
+      "3.1.1"
+    ],
+    "services": [
+      "bedrock"
+    ],
+    "stem": "Match each Cairnway Outfitters requirement to the model selection criterion it relates to.",
+    "pairs": [
+      {
+        "prompt": "The assistant must reply within one second",
+        "answer": "Latency"
+      },
+      {
+        "prompt": "The assistant must accept photos as well as text",
+        "answer": "Modality"
+      },
+      {
+        "prompt": "Whole contracts must fit in one request",
+        "answer": "Input length"
+      },
+      {
+        "prompt": "The bill depends on the tokens sent and received",
+        "answer": "Cost"
+      }
+    ],
+    "explanation": "Each requirement points to one criterion from the exam guide. Customization is about adapting the model, which none of these requirements mention.",
+    "distractors": [
+      "Customization"
+    ]
+  },
+  {
+    "id": "3.1-056",
+    "taskId": "3.1",
+    "kind": "case",
+    "services": [
+      "bedrock",
+      "bedrock-knowledge-bases",
+      "aurora"
+    ],
+    "scenario": "Cairnway Outfitters is building Trailmate, a support assistant for its online shop. Customers write in English, German and Spanish and expect replies within seconds. Answers must follow return policies and size guides that change every season. The data team already runs Amazon Aurora PostgreSQL-Compatible Edition for the product catalog and wants to avoid adding new database technology. The team has a limited budget and wants the simplest solution that works.",
+    "parts": [
+      {
+        "kind": "single",
+        "objectives": [
+          "3.1.1"
+        ],
+        "stem": "Which model selection criteria should the team weigh MOST heavily for Trailmate?",
+        "options": [
+          {
+            "text": "Image generation quality and output length",
+            "correct": false,
+            "rationale": "Trailmate answers questions in text, so image generation isn't a requirement."
+          },
+          {
+            "text": "Audio output and prompt caching only",
+            "correct": false,
+            "rationale": "Spoken output isn't needed, and caching alone doesn't give language ability."
+          },
+          {
+            "text": "The largest model size regardless of cost",
+            "correct": false,
+            "rationale": "Largest isn't required, and it would be slower and more expensive than needed."
+          },
+          {
+            "text": "Multi-lingual capability and latency",
+            "correct": true,
+            "rationale": "Customers use three languages and expect fast replies, so the model must handle the languages and respond quickly."
+          }
+        ],
+        "explanation": "The scenario names three languages and replies within seconds. Those map to the multi-lingual and latency criteria."
+      },
+      {
+        "kind": "single",
+        "objectives": [
+          "3.1.3"
+        ],
+        "stem": "How should Cairnway make sure Trailmate answers from the current policies and size guides?",
+        "options": [
+          {
+            "text": "Fine-tune a foundation model every season",
+            "correct": false,
+            "rationale": "This would repeat an expensive training job each season and still wouldn't guarantee current facts."
+          },
+          {
+            "text": "RAG with Amazon Bedrock Knowledge Bases",
+            "correct": true,
+            "rationale": "RAG reads the current documents at question time, and Knowledge Bases runs the pipeline for little effort."
+          },
+          {
+            "text": "Pre-train a new model on the documents",
+            "correct": false,
+            "rationale": "This is far too costly for a limited budget."
+          },
+          {
+            "text": "Lower the temperature to zero",
+            "correct": false,
+            "rationale": "Low temperature makes answers consistent but doesn't supply the policies."
+          }
+        ],
+        "explanation": "The clues are changing documents and a limited budget. RAG keeps facts current without retraining, and Knowledge Bases is the managed way to do it."
+      },
+      {
+        "kind": "single",
+        "objectives": [
+          "3.1.4"
+        ],
+        "stem": "Where can Cairnway store the embeddings so it avoids adding new database technology?",
+        "options": [
+          {
+            "text": "In Aurora PostgreSQL via pgvector",
+            "correct": true,
+            "rationale": "pgvector adds vector storage and similarity search to the PostgreSQL database the team already runs."
+          },
+          {
+            "text": "In Amazon S3 Glacier cold storage",
+            "correct": false,
+            "rationale": "Glacier archives data and can't search by meaning."
+          },
+          {
+            "text": "In Amazon Polly speech synthesis",
+            "correct": false,
+            "rationale": "Polly synthesizes speech and isn't a data store."
+          },
+          {
+            "text": "In AWS Config resource tracking",
+            "correct": false,
+            "rationale": "Config tracks resource configuration and isn't a vector store."
+          }
+        ],
+        "explanation": "The clue is the existing Aurora PostgreSQL database. With the pgvector extension it can hold embeddings and run similarity searches."
+      }
+    ]
+  },
+  {
+    "id": "3.1-057",
+    "taskId": "3.1",
+    "kind": "case",
+    "services": [
+      "bedrock-agentcore",
+      "bedrock"
+    ],
+    "scenario": "In phase two, Cairnway Outfitters wants Trailmate to do more than answer questions. It should check order status, start returns and send return labels by calling Cairnway's order API. Refunds above 200 euros must remain under human control. Trailmate's answers about policy should stay consistent from one conversation to the next. The marketing team also wants to use the same model to brainstorm product names.",
+    "parts": [
+      {
+        "kind": "single",
+        "objectives": [
+          "3.1.6"
+        ],
+        "stem": "Which design fits the new requirement that Trailmate takes actions?",
+        "options": [
+          {
+            "text": "A RAG assistant that only reads documents",
+            "correct": false,
+            "rationale": "RAG answers from documents but can't call an order API to start a return."
+          },
+          {
+            "text": "A larger context window on the current model",
+            "correct": false,
+            "rationale": "More input length doesn't let the model take actions."
+          },
+          {
+            "text": "A vector database holding the order history",
+            "correct": false,
+            "rationale": "This helps search but doesn't create returns or send labels."
+          },
+          {
+            "text": "An agent calling the order API on AgentCore",
+            "correct": true,
+            "rationale": "Agents plan steps and use tools. AgentCore is the AWS platform for running agents in production."
+          }
+        ],
+        "explanation": "The clue is calling an API to start returns. That is an agent's job: plan steps and use tools."
+      },
+      {
+        "kind": "single",
+        "objectives": [
+          "3.1.6"
+        ],
+        "stem": "How should Cairnway handle refunds above 200 euros?",
+        "options": [
+          {
+            "text": "Let the agent approve all refunds to improve speed",
+            "correct": false,
+            "rationale": "This removes the safety check where it matters most."
+          },
+          {
+            "text": "Give the agent no tools at all",
+            "correct": false,
+            "rationale": "The agent couldn't then do its job of checking orders or starting returns."
+          },
+          {
+            "text": "Require human approval before the agent acts",
+            "correct": true,
+            "rationale": "Risky, high-value actions should have a person in the loop."
+          },
+          {
+            "text": "Fine-tune the model to never refund",
+            "correct": false,
+            "rationale": "This changes the model's behavior in a way that is hard to control and doesn't give a human approval step."
+          }
+        ],
+        "explanation": "The clue is that refunds above 200 euros stay under human control. Agents take real actions, so keep humans in the approval loop for risky ones."
+      },
+      {
+        "kind": "single",
+        "objectives": [
+          "3.1.2"
+        ],
+        "stem": "Which inference setting should the support team and the marketing team use?",
+        "options": [
+          {
+            "text": "A high temperature for both teams",
+            "correct": false,
+            "rationale": "Policy answers would become inconsistent."
+          },
+          {
+            "text": "Low for policy answers, higher for brainstorming",
+            "correct": true,
+            "rationale": "Low temperature gives consistent, factual output. A higher one gives the variety brainstorming needs."
+          },
+          {
+            "text": "A low temperature for both teams",
+            "correct": false,
+            "rationale": "Brainstorming would produce similar names."
+          },
+          {
+            "text": "A very short maximum response length for both teams",
+            "correct": false,
+            "rationale": "A length cap controls size, not consistency or creativity."
+          }
+        ],
+        "explanation": "Temperature controls randomness. Consistent policy answers need it low, and creative brainstorming needs it higher."
+      }
+    ]
   }
 ]
