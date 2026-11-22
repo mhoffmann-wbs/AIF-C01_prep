@@ -156,7 +156,7 @@ Tooling:
 ## 8. Phases
 
 0. **Scaffold** (done 2026-11-23): set up the tooling and the Pages deploy workflow, and add the non-affiliation footer. Write `blueprint.ts` (verbatim from guide v1.2: 14 tasks, 69 objectives), `services.ts` (51 in-scope and 93 out-of-scope services, plus 6 objective-named features), the schema with all 5 kinds, the content tests, and the three content scripts. The certification page confirms 65 questions in 90 minutes. It doesn't list question formats, and it links the Skill Builder prep plan, which is now in `GUIDE.prepPlanUrl`.
-1. **Quiz engine**: render and grade all kinds; practice, the question bank and the mock exam with the extended-kinds toggles; the scaled-score report by domain and task.
+1. **Quiz engine** (done 2026-11-23): render and grade all kinds; practice, the question bank and the mock exam with the extended-kinds toggles; the scaled-score report by domain and task; the progress store and page. 6 seed items, at least one of each kind.
 2. **Lessons**: 14 lessons, heaviest domains first (3, 2, 1, 4, 5).
 3. **Question bank**: about 650 items, written in parallel per task file. MC and MR first, then the extended kinds.
 4. **Explore I**: service catalog drills and sorters, then flashcards.

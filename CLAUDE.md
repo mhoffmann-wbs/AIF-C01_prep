@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project status
 
-Phase 0 (scaffold) is done: tooling, Pages deploy, the blueprint, the service catalog, the item schema, the content tests and scripts, and a home page that shows the blueprint. The question bank, lessons, quiz engine, progress store and Explore pillar don't exist yet. **`PLAN.md` is the build plan and sets the order of work.** It records the decisions made, the blueprint → content map, the item kinds, the Explore pillar and the phases. As parts get built, describe them here (commands, file layout, gotchas), and mark phases done in `PLAN.md` §8 with the date.
+Phases 0 (scaffold) and 1 (quiz engine) are done: tooling, Pages deploy, the blueprint, the service catalog, the item schema, the content tests and scripts, practice, the question bank browser, the mock exam, the progress store and the progress page. The question bank has only 6 seed items, one or more of each kind. Lessons, the full bank and the Explore pillar don't exist yet. **`PLAN.md` is the build plan and sets the order of work.** It records the decisions made, the blueprint → content map, the item kinds, the Explore pillar and the phases. As parts get built, describe them here (commands, file layout, gotchas), and mark phases done in `PLAN.md` §8 with the date.
 
 ## Purpose
 
@@ -55,11 +55,32 @@ Every scenario uses one invented company, **Cairnway Outfitters**, an online out
   - the key is the longest option at most 40% of the time
   - no duplicate stems or scenarios
   - no option letters in explanations or rationales, so options can be reordered
+- **Quiz engine** (`src/quiz/`):
+  - `grade.ts`: a `Response` per kind. `gradeParts()` returns one result per scored question (one per case part, otherwise one). `grade()` is all-or-nothing over the parts, and practice stats and streaks use it. The mock score counts the parts. `isAnswered()` treats an ordering item as always answered, so the mock runner tracks "touched" itself. `answer.ts` `freshResponse()` starts ordering items scrambled.
+  - `pools.ts`: `practicePool(bank, extended)` applies the extended-kinds toggle. `taskWeights()` splits each domain's weight among its tasks by objective count.
+  - `sampler.ts`, with `seededRng(n)` from `random.ts` in tests:
+    - `buildMockExam` fills each domain's quota of scored questions (13 · 16 · 18 · 9 · 9) and prefers unseen items. With the extended kinds on, about `MOCK_EXTENDED_QUESTIONS` (8) of the questions come from at most one case set plus ordering and matching items, spread by domain weight. Core items fill any slots the bank can't cover, and when the bank is short the time scales to the real pace.
+    - `buildMixedSet` samples by task weight.
+    - `buildFocusSet` and `orderLeastMastered` put the lowest streak first.
+  - `results.ts` `scoreMock`: percent, the scaled estimate, pass at 700, and rows by domain and task.
+  - `ItemView`: renders all five kinds. Options are never shuffled and are lettered A–F. Match responses are listed alphabetically, each with a labelled dropdown. Case parts are `region`s named "Question n of m". The `keyboard` prop binds 1–6 and A–F; enable it on one ItemView per screen, and not for case items, since their parts would share the keys. `revealed` shows the key, every rationale and the explanations.
+  - `shortcuts.ts` and `ShortcutHint` handle keyboard shortcuts. `SessionReview` is the end-of-practice review, misses first. `ScoreTable` shows result rows.
+- **Pages** (all lazy):
+  - `/`: the blueprint.
+  - `/practice`: `?task=3.2`, `?domain=3` or `?mix=25`, each optionally with `&focus=1` for least mastered, or `?weak=1`.
+  - `/questions`: the bank browser, filtered by `?task=`/`?domain=`, `?kind=` and `?mastery=`. `/questions/:itemId` shows one item to answer, recorded like a practice answer.
+  - `/mock`.
+  - `/progress`: readiness by domain, the weakest tasks, both toggles, and export/import.
+  - The extended-kinds toggles live in `components/ExtendedKindsToggle.tsx`.
+- **Progress** (`src/progress/store.ts`, key `aifc01:progress`, version 1):
+  - Per-item stats with a `streak` (consecutive correct answers, reset by a wrong one), mock results (with `scaled` and domain rows), `lessonsRead`, and the toggles `extendedInPractice` and `extendedInMock`, both on by default.
+  - Components read it with `useProgress()`.
+  - `readiness.ts`: task readiness (coverage × accuracy, weighted by task weight), the weak-spot drill and `masteryOf()`.
 - **Tests**:
   - Tests run in Node. Component tests start with `// @vitest-environment jsdom`.
   - Vitest runs without globals, so `src/test/setup.ts` registers `cleanup` itself.
   - `src/test/fixtures.ts` has one valid item per kind.
-  - `src/pages/pages.test.tsx` renders the real routes with `createMemoryRouter` and an async `renderAt()` that waits for the lazy page.
+  - `src/pages/pages.test.tsx` renders the real routes with `createMemoryRouter` and an async `renderAt()` that waits for the lazy page's `h1`, so every page needs an `h1` (a `sr-only` one is fine). These tests run over the real bank, so keep them independent of item order and pool size.
 
 ## Rules that span the codebase
 
@@ -67,7 +88,8 @@ Every scenario uses one invented company, **Cairnway Outfitters**, an online out
 - **AWS facts are never written from memory.** Service capabilities, quotas, prices and model names change often, and the newer services (Amazon Quick, Kiro, Strands Agents, Bedrock AgentCore, AWS Transform, Nova) especially. Check them against AWS pages, cite the source, and run `npm run content:links` afterwards. Simulator prices are illustrative and labelled as such.
 - Write every question for this app. Never reproduce live exam content (candidates are under NDA) or third-party question dumps. Explanations say why the key fits the stated constraint and why each distractor misses it, without option letters.
 - The app is static: no backend, no AWS calls, no credentials, no live model calls (simulator outputs are precomputed). Console walkthroughs run in the learner's own account, are optional, state their cost and end with teardown steps.
-- `src/progress/store.ts` (phase 1) is meant to be the only module that touches `localStorage`. It is versioned: bump `VERSION`, add a migration and keep the Zod `ProgressSchema` in step when the shape changes.
+- `src/progress/store.ts` is the only module that touches `localStorage`. On an unknown version it discards stored data, so when the shape changes, bump `VERSION`, add a migration in `load()` and `importProgress()`, and keep the Zod `ProgressSchema` in step.
+- Question ids are stored in progress, so never renumber or reuse an item id.
 
 ## Commands
 

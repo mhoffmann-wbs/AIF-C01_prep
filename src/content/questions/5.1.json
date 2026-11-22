@@ -1,0 +1,37 @@
+[
+  {
+    "id": "5.1-001",
+    "taskId": "5.1",
+    "kind": "case",
+    "services": ["macie", "bedrock-guardrails", "inspector", "config", "artifact"],
+    "scenario": "Cairnway Outfitters is launching a customer-support chatbot built on Amazon Bedrock. To answer questions about orders, the chatbot uses order records that are exported nightly to an Amazon S3 bucket. The security team is worried about two things: customer personal data ending up where it shouldn't, and customers tricking the chatbot into ignoring its instructions.",
+    "parts": [
+      {
+        "kind": "single",
+        "objectives": ["5.1.1"],
+        "stem": "The security team wants to know whether the nightly exports in the S3 bucket contain personally identifiable information (PII), such as names, addresses and credit card numbers. Which AWS service should they use?",
+        "options": [
+          { "text": "Amazon Inspector", "correct": false, "rationale": "Inspector scans EC2 instances, container images and Lambda functions for software vulnerabilities. It doesn't look inside data in S3 for PII." },
+          { "text": "AWS Config", "correct": false, "rationale": "Config records and checks resource configurations, for example whether a bucket is encrypted, but not what the files in the bucket contain." },
+          { "text": "AWS Artifact", "correct": false, "rationale": "Artifact provides AWS's own compliance reports and agreements. It doesn't scan your data." },
+          { "text": "Amazon Macie", "correct": true, "rationale": "Macie uses machine learning and pattern matching to discover sensitive data such as PII in Amazon S3 and reports where it found it." }
+        ],
+        "explanation": "Discovering sensitive data inside S3 objects is Amazon Macie's job. The distractors are all security or compliance services, but they look at vulnerabilities, configurations or AWS's own reports, not at the content of your data."
+      },
+      {
+        "kind": "multi",
+        "objectives": ["5.1.4", "5.1.1"],
+        "select": 2,
+        "stem": "Which measures help protect the chatbot against prompt injection, where a user's message tries to override the chatbot's instructions? (Select TWO.)",
+        "options": [
+          { "text": "Raise the temperature inference parameter", "correct": false, "rationale": "Temperature controls how random the output is. It has no effect on whether the model follows injected instructions, and higher randomness doesn't make the model safer." },
+          { "text": "Turn on the prompt attack filter in Amazon Bedrock Guardrails", "correct": true, "rationale": "Guardrails can detect and block prompt attacks, such as jailbreaks and prompt injection, before the input reaches the model." },
+          { "text": "Validate and filter the model's output before it is shown to the customer or used by other systems", "correct": true, "rationale": "Output validation is a second line of defense: even if an injected instruction gets through, harmful or out-of-policy output is caught before it does damage." },
+          { "text": "Switch to a larger foundation model", "correct": false, "rationale": "A larger model may follow instructions better in general, but model size is not a security control against injection." },
+          { "text": "Store the order exports in S3 Glacier instead of S3 Standard", "correct": false, "rationale": "The storage class changes cost and retrieval time. It has nothing to do with the prompts users send." }
+        ],
+        "explanation": "Defending against prompt injection works in layers: filter what goes into the model (Guardrails' prompt attack filter) and check what comes out (output validation and filtering). Inference parameters, model size and storage class don't address the attack."
+      }
+    ]
+  }
+]

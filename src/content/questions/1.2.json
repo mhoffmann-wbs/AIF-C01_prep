@@ -1,0 +1,32 @@
+[
+  {
+    "id": "1.2-001",
+    "taskId": "1.2",
+    "kind": "single",
+    "objectives": ["1.2.5"],
+    "services": ["textract", "comprehend", "rekognition", "transcribe"],
+    "stem": "Cairnway Outfitters receives hundreds of scanned supplier invoices every week. The finance team wants to pull the invoice number, the totals and the table of line items out of each scan automatically. Which AWS service meets this requirement with the LEAST development effort?",
+    "options": [
+      { "text": "Amazon Comprehend", "correct": false, "rationale": "Comprehend analyzes text that is already digital (sentiment, entities, key phrases). It can't read text out of a scanned image, and it doesn't understand tables." },
+      { "text": "Amazon Rekognition", "correct": false, "rationale": "Rekognition can detect short pieces of text in images and video, such as signs, but it isn't built to extract forms and tables from documents." },
+      { "text": "Amazon Textract", "correct": true, "rationale": "Textract is built for documents: it extracts printed and handwritten text, key-value pairs from forms, and tables from scans, with no ML model to build." },
+      { "text": "Amazon Transcribe", "correct": false, "rationale": "Transcribe turns speech in audio into text. Invoices are images, not audio." }
+    ],
+    "explanation": "The key words are scanned documents, fields and tables. That is document extraction, which is exactly what Amazon Textract does as a managed service. The other services work on other inputs: digital text, general images, or audio."
+  },
+  {
+    "id": "1.2-002",
+    "taskId": "1.2",
+    "kind": "match",
+    "objectives": ["1.2.5"],
+    "services": ["transcribe", "polly", "translate", "lex"],
+    "stem": "Cairnway Outfitters plans several language features. Match each requirement to the AWS service that provides it.",
+    "pairs": [
+      { "prompt": "Turn recorded customer-support calls into searchable text", "answer": "Amazon Transcribe" },
+      { "prompt": "Read product descriptions aloud on the mobile app", "answer": "Amazon Polly" },
+      { "prompt": "Offer the help center in Spanish and German", "answer": "Amazon Translate" }
+    ],
+    "distractors": ["Amazon Lex"],
+    "explanation": "Transcribe is speech-to-text, Polly is text-to-speech, and Translate translates text between languages. Lex builds conversational bots; it uses speech and text, but none of these requirements asks for a chatbot."
+  }
+]

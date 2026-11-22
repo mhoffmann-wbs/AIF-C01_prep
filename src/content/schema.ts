@@ -132,3 +132,6 @@ export const itemObjectives = (item: Item): string[] =>
 
 /** Scored questions an item counts as: one per case part, otherwise one. */
 export const scoredCount = (item: Item) => (item.kind === 'case' ? item.parts.length : 1)
+
+/** The text that identifies an item in lists: its stem, or a case study's scenario. */
+export const itemSummary = (item: Item) => (item.kind === 'case' ? item.scenario : item.stem)

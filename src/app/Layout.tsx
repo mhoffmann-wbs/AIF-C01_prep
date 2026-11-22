@@ -2,7 +2,12 @@ import { Suspense, useState } from 'react'
 import { Link, NavLink, Outlet } from 'react-router'
 
 // Pillar pages are added here as they get built (PLAN.md §8).
-const NAV: { to: string; label: string }[] = []
+const NAV = [
+  { to: '/practice', label: 'Practice' },
+  { to: '/questions', label: 'Questions' },
+  { to: '/mock', label: 'Mock exam' },
+  { to: '/progress', label: 'Progress' },
+]
 
 export function Layout() {
   const [menuOpen, setMenuOpen] = useState(false)
@@ -14,18 +19,16 @@ export function Layout() {
             <Link to="/" onClick={() => setMenuOpen(false)} className="text-lg font-bold tracking-tight">
               AIF-C01 <span className="text-accent">Prep</span>
             </Link>
-            {NAV.length > 0 && (
-              // Phones get a menu button instead of rows of links.
-              <button
+            {/* Phones get a menu button instead of rows of links. */}
+            <button
                 type="button"
                 aria-expanded={menuOpen}
                 aria-controls="main-links"
                 onClick={() => setMenuOpen((open) => !open)}
                 className="rounded border border-chalk/40 px-3 py-1 text-sm sm:hidden"
               >
-                {menuOpen ? 'Close' : 'Menu'}
-              </button>
-            )}
+              {menuOpen ? 'Close' : 'Menu'}
+            </button>
           </div>
           <ul id="main-links" className={`${menuOpen ? 'mt-3 grid grid-cols-2 gap-2' : 'hidden'} sm:contents`}>
             {NAV.map(({ to, label }) => (
