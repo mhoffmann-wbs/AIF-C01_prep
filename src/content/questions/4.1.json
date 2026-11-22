@@ -1,0 +1,2260 @@
+[
+  {
+    "id": "4.1-001",
+    "taskId": "4.1",
+    "kind": "single",
+    "services": [
+      "sagemaker-ai"
+    ],
+    "objectives": [
+      "4.1.6"
+    ],
+    "stem": "A Cairnway model that predicts jacket buyers scores 99% on its training data but only 71% on new customers. What is the most likely problem?",
+    "options": [
+      {
+        "text": "Underfitting, because the model is too simple to capture patterns",
+        "correct": false,
+        "rationale": "An underfit model is poor on both training and new data, but this one is excellent on training data."
+      },
+      {
+        "text": "Insufficient inclusivity in the user interface",
+        "correct": false,
+        "rationale": "The clue is a performance gap, not interface design."
+      },
+      {
+        "text": "Overfitting, because the model memorized its training data",
+        "correct": true,
+        "rationale": "A big gap between training and new-data performance points to overfitting, also called high variance."
+      },
+      {
+        "text": "A lack of denied topics in the guardrail",
+        "correct": false,
+        "rationale": "Denied topics control subjects in a GenAI app and have nothing to do with training scores."
+      }
+    ],
+    "explanation": "Excellent training performance with poor results on new data is the classic sign of overfitting (high variance)."
+  },
+  {
+    "id": "4.1-002",
+    "taskId": "4.1",
+    "kind": "multi",
+    "services": [
+      "bedrock-evaluations",
+      "sagemaker-clarify",
+      "inspector",
+      "artifact",
+      "macie"
+    ],
+    "objectives": [
+      "4.1.2",
+      "4.1.7"
+    ],
+    "stem": "Cairnway wants AWS tools that help find bias or harmful behaviour before a model goes live. (Select TWO.)",
+    "select": 2,
+    "options": [
+      {
+        "text": "Amazon Macie",
+        "correct": false,
+        "rationale": "Macie discovers sensitive data in S3. It does not test a model for bias."
+      },
+      {
+        "text": "Amazon Inspector",
+        "correct": false,
+        "rationale": "Inspector scans for software vulnerabilities. It does not measure bias or toxicity."
+      },
+      {
+        "text": "Amazon Bedrock Model Evaluation",
+        "correct": true,
+        "rationale": "It scores models on measures such as robustness and toxicity, before you choose one."
+      },
+      {
+        "text": "Amazon SageMaker Clarify",
+        "correct": true,
+        "rationale": "It detects bias in data and in a trained model's predictions."
+      },
+      {
+        "text": "AWS Artifact",
+        "correct": false,
+        "rationale": "Artifact provides compliance reports and agreements. It does not test a model."
+      }
+    ],
+    "explanation": "Model Evaluation measures behaviour such as toxicity and robustness, while Clarify measures bias. Inspector, Artifact and Macie are security and compliance services."
+  },
+  {
+    "id": "4.1-003",
+    "taskId": "4.1",
+    "kind": "single",
+    "services": [
+      "bedrock"
+    ],
+    "objectives": [
+      "4.1.4"
+    ],
+    "stem": "Cairnway's marketing team uses a generative model to write product descriptions. Legal is worried that some text may closely copy a competitor's copyrighted copy. Which legal risk is this?",
+    "options": [
+      {
+        "text": "End user risk to the people reading the descriptions",
+        "correct": false,
+        "rationale": "End user risk is harm to people who act on wrong or unsafe output. The worry here is copying, not harm to users."
+      },
+      {
+        "text": "Loss of customer trust",
+        "correct": false,
+        "rationale": "Loss of trust is brand damage from bad outputs. The stem names a legal claim over copied work."
+      },
+      {
+        "text": "Biased model outputs",
+        "correct": false,
+        "rationale": "Biased outputs treat groups unfairly. The stem is about copyright."
+      },
+      {
+        "text": "Intellectual property (IP) infringement claims",
+        "correct": true,
+        "rationale": "Output that resembles protected text can lead to claims that the company copied someone's work."
+      }
+    ],
+    "explanation": "Copying someone else's protected text is the clue, which is an IP infringement claim."
+  },
+  {
+    "id": "4.1-004",
+    "taskId": "4.1",
+    "kind": "single",
+    "services": [
+      "bedrock-guardrails"
+    ],
+    "objectives": [
+      "4.1.4"
+    ],
+    "stem": "A customer shows a screenshot of Trailmate promising a refund policy that Cairnway never had, and demands it. Which legal risk does this illustrate?",
+    "options": [
+      {
+        "text": "IP infringement, because the policy text was copied from a competitor's website",
+        "correct": false,
+        "rationale": "Nothing in the stem suggests copied text. The model invented the policy."
+      },
+      {
+        "text": "Biased output, because the policy favours one group",
+        "correct": false,
+        "rationale": "The stem does not describe unequal treatment of groups."
+      },
+      {
+        "text": "Hallucination, as a company may be held to its chatbot's promises",
+        "correct": true,
+        "rationale": "A confident invented statement can create a claim, because customers may expect the company to honour it."
+      },
+      {
+        "text": "Hardware failure, because the model host went down",
+        "correct": false,
+        "rationale": "The stem describes wrong content, not an outage."
+      }
+    ],
+    "explanation": "An invented policy that a customer relies on is a hallucination risk, and the company may be held to it."
+  },
+  {
+    "id": "4.1-005",
+    "taskId": "4.1",
+    "kind": "single",
+    "services": [
+      "bedrock"
+    ],
+    "objectives": [
+      "4.1.3"
+    ],
+    "stem": "A smaller and a much larger foundation model both pass Cairnway's accuracy test for classifying review sentiment. Cairnway wants the more environmentally responsible choice that still meets the requirement. Which should it pick?",
+    "options": [
+      {
+        "text": "The smaller model, since it needs less computing and energy",
+        "correct": true,
+        "rationale": "Using the smallest model that meets the need reduces energy use and carbon emissions."
+      },
+      {
+        "text": "The larger model, because bigger models are always safer and more reliable",
+        "correct": false,
+        "rationale": "Size does not guarantee safety, and a bigger model uses more energy than this task requires."
+      },
+      {
+        "text": "The larger model, to avoid retraining later",
+        "correct": false,
+        "rationale": "Retraining is not implied by the stem. The extra energy of a larger model is not justified when the smaller one passes."
+      },
+      {
+        "text": "Neither; build a new model from scratch",
+        "correct": false,
+        "rationale": "Training from scratch uses far more energy than reusing an existing model that already meets the need."
+      }
+    ],
+    "explanation": "Both models meet the requirement, so the sustainability clue decides: choose the smallest model that does the job."
+  },
+  {
+    "id": "4.1-006",
+    "taskId": "4.1",
+    "kind": "multi",
+    "objectives": [
+      "4.1.7"
+    ],
+    "stem": "Overall accuracy is high, but Cairnway fears some customers are treated unfairly. Which methods can reveal it? (Select TWO.)",
+    "select": 2,
+    "options": [
+      {
+        "text": "Subgroup analysis",
+        "correct": true,
+        "rationale": "Comparing accuracy and error rates across groups shows hidden gaps."
+      },
+      {
+        "text": "Human audits of sampled outputs",
+        "correct": true,
+        "rationale": "People can spot unfair or odd outputs that metrics miss."
+      },
+      {
+        "text": "Lower the temperature",
+        "correct": false,
+        "rationale": "Temperature affects randomness, not fairness measurement."
+      },
+      {
+        "text": "Report only the average accuracy",
+        "correct": false,
+        "rationale": "The average is what hides the problem."
+      },
+      {
+        "text": "Use a bigger model and skip testing",
+        "correct": false,
+        "rationale": "Size does not reveal unfairness."
+      }
+    ],
+    "explanation": "Subgroup analysis and human audits look past the average. A bigger model, average-only reports or temperature changes do not."
+  },
+  {
+    "id": "4.1-007",
+    "taskId": "4.1",
+    "kind": "single",
+    "services": [
+      "bedrock"
+    ],
+    "objectives": [
+      "4.1.3"
+    ],
+    "stem": "Cairnway needs a product-description generator and wants to keep energy use and carbon emissions low. Which approach is MOST sustainable?",
+    "options": [
+      {
+        "text": "Train a new large model from scratch on Cairnway's whole product catalogue",
+        "correct": false,
+        "rationale": "Training a large model from scratch consumes a lot of electricity. Reuse is the lower-impact choice."
+      },
+      {
+        "text": "Retrain the model every night whether or not data has changed",
+        "correct": false,
+        "rationale": "Unnecessary retraining wastes energy and works against sustainability."
+      },
+      {
+        "text": "Always use the largest available model",
+        "correct": false,
+        "rationale": "The largest model is not needed by default, and it uses more energy."
+      },
+      {
+        "text": "Start from an existing foundation model and adapt it with prompts",
+        "correct": true,
+        "rationale": "Reusing an existing model avoids the energy cost of training a new one."
+      }
+    ],
+    "explanation": "Reusing a model rather than training a new one reduces energy and emissions, which is the sustainability practice the stem asks for."
+  },
+  {
+    "id": "4.1-008",
+    "taskId": "4.1",
+    "kind": "single",
+    "services": [
+      "sagemaker-clarify"
+    ],
+    "objectives": [
+      "4.1.4"
+    ],
+    "stem": "A Cairnway hiring tool ranks equally qualified applicants lower when they come from backgrounds that were rare among past hires. Which risk should legal raise first?",
+    "options": [
+      {
+        "text": "IP infringement, because past hires' data is protected by copyright",
+        "correct": false,
+        "rationale": "The clue is unequal ranking of groups, not copied content."
+      },
+      {
+        "text": "A slow response time that frustrates recruiters",
+        "correct": false,
+        "rationale": "Latency is a performance issue, not a legal risk."
+      },
+      {
+        "text": "Biased model outputs, which can break anti-discrimination law",
+        "correct": true,
+        "rationale": "Unequal outcomes for groups in hiring can break anti-discrimination law, so biased outputs are the key legal risk."
+      },
+      {
+        "text": "A larger cloud bill from storing resumes",
+        "correct": false,
+        "rationale": "Cost is a business issue and not the legal risk in the stem."
+      }
+    ],
+    "explanation": "Lower rankings for certain backgrounds is bias in outputs. Hiring is an area where anti-discrimination law applies."
+  },
+  {
+    "id": "4.1-009",
+    "taskId": "4.1",
+    "kind": "multi",
+    "objectives": [
+      "4.1.6"
+    ],
+    "stem": "A model is trained mostly on data from one customer group. Which effects can this have? (Select TWO.)",
+    "select": 2,
+    "options": [
+      {
+        "text": "It will always be underfit on the majority group",
+        "correct": false,
+        "rationale": "The majority group is usually served best."
+      },
+      {
+        "text": "It may be less accurate for other demographic groups",
+        "correct": true,
+        "rationale": "Groups that are scarce in the data are served worse."
+      },
+      {
+        "text": "It will automatically be fair because the data is consistent",
+        "correct": false,
+        "rationale": "Consistency of one group does not make results fair to others."
+      },
+      {
+        "text": "Overall accuracy can still look good while one group is treated poorly",
+        "correct": true,
+        "rationale": "The average hides group-level differences."
+      },
+      {
+        "text": "It removes the need to test on separate data",
+        "correct": false,
+        "rationale": "Separate test data is still needed to measure performance."
+      }
+    ],
+    "explanation": "Skewed data can mean poorer accuracy for other groups, hidden behind a good average."
+  },
+  {
+    "id": "4.1-010",
+    "taskId": "4.1",
+    "kind": "single",
+    "services": [
+      "sagemaker-clarify"
+    ],
+    "objectives": [
+      "4.1.7"
+    ],
+    "stem": "Cairnway's approval model has 94% overall accuracy. The team wants to know whether any age band or region is getting noticeably worse results. Which method should it use?",
+    "options": [
+      {
+        "text": "Subgroup analysis by age band and region",
+        "correct": true,
+        "rationale": "Comparing results group by group is how hidden unfairness behind a good average is found."
+      },
+      {
+        "text": "Report overall accuracy alone",
+        "correct": false,
+        "rationale": "The overall number is what hides group differences, so it cannot reveal them."
+      },
+      {
+        "text": "Increase the model's size",
+        "correct": false,
+        "rationale": "A bigger model does not show whether groups are treated differently."
+      },
+      {
+        "text": "Lower the temperature inference parameter",
+        "correct": false,
+        "rationale": "Temperature controls randomness in generation and has no bearing on group-level results."
+      }
+    ],
+    "explanation": "A good average that may hide group differences is the clue, and subgroup analysis is the method that exposes them."
+  },
+  {
+    "id": "4.1-011",
+    "taskId": "4.1",
+    "kind": "multi",
+    "services": [
+      "bedrock"
+    ],
+    "objectives": [
+      "4.1.4"
+    ],
+    "stem": "Cairnway publishes AI-written product copy. Which actions reduce the risk of intellectual property infringement claims? (Select TWO.)",
+    "select": 2,
+    "options": [
+      {
+        "text": "Tell the model in the prompt to avoid copyright",
+        "correct": false,
+        "rationale": "A prompt instruction alone does not guarantee output free of protected material."
+      },
+      {
+        "text": "Increase the temperature setting",
+        "correct": false,
+        "rationale": "Randomness does not prevent resemblance to protected work."
+      },
+      {
+        "text": "Publish copy unchecked to save time",
+        "correct": false,
+        "rationale": "Skipping review raises IP risk."
+      },
+      {
+        "text": "Check the licence terms and data sources of the model",
+        "correct": true,
+        "rationale": "Knowing the terms and sources helps show the company may use the output."
+      },
+      {
+        "text": "Have staff review copy before it is published",
+        "correct": true,
+        "rationale": "Reviewers can catch text that resembles protected work."
+      }
+    ],
+    "explanation": "Licence and source checks plus human review are practical defences. Speed, randomness or a prompt instruction alone are not."
+  },
+  {
+    "id": "4.1-012",
+    "taskId": "4.1",
+    "kind": "case",
+    "services": [
+      "sagemaker-ai",
+      "sagemaker-clarify",
+      "sagemaker-model-monitor"
+    ],
+    "scenario": "Cairnway Outfitters' data science team is building a model that decides which customers are offered buy now, pay later. The training data holds three years of past decisions, and applicants from one region make up only a small share of it. The first version scores 99% on training data but much lower on new data. Because the decision affects customers' money, leadership wants evidence the model is fair before and after launch.",
+    "parts": [
+      {
+        "kind": "single",
+        "objectives": [
+          "4.1.5"
+        ],
+        "stem": "Applicants from one region are only a small share of the training data. What should the team do first?",
+        "options": [
+          {
+            "text": "Collect more representative examples from that region",
+            "correct": true,
+            "rationale": "More examples of the under-represented group let the model learn it properly."
+          },
+          {
+            "text": "Remove that region from the data",
+            "correct": false,
+            "rationale": "Removing the region hides the problem and excludes those customers."
+          },
+          {
+            "text": "Copy the few existing examples many times",
+            "correct": false,
+            "rationale": "Duplicates add no real diversity."
+          },
+          {
+            "text": "Train a much bigger model on the same imbalanced data",
+            "correct": false,
+            "rationale": "A bigger model learns the same imbalance."
+          }
+        ],
+        "explanation": "The clue is a small share for one region, an imbalance. The remedy is more representative data."
+      },
+      {
+        "kind": "single",
+        "objectives": [
+          "4.1.6"
+        ],
+        "stem": "The model scores 99% on training data but much lower on new data. What does this suggest?",
+        "options": [
+          {
+            "text": "Underfitting, because the model is too simple to capture patterns",
+            "correct": false,
+            "rationale": "Underfit models do poorly on both sets."
+          },
+          {
+            "text": "Overfitting, as it memorized the training data",
+            "correct": true,
+            "rationale": "A big gap between training and new-data performance indicates overfitting."
+          },
+          {
+            "text": "A good fit that needs no change",
+            "correct": false,
+            "rationale": "A good fit performs well on both."
+          },
+          {
+            "text": "An inclusive dataset",
+            "correct": false,
+            "rationale": "Dataset diversity does not explain a performance gap."
+          }
+        ],
+        "explanation": "Excellent training scores with weaker results on new data are the classic sign of overfitting."
+      },
+      {
+        "kind": "single",
+        "objectives": [
+          "4.1.7"
+        ],
+        "stem": "Leadership wants to know whether the model's accuracy differs between regions. Which method should the team use?",
+        "options": [
+          {
+            "text": "Compare overall accuracy to last year's",
+            "correct": false,
+            "rationale": "Overall accuracy cannot show group differences."
+          },
+          {
+            "text": "Check the model's training time",
+            "correct": false,
+            "rationale": "Training time says nothing about fairness."
+          },
+          {
+            "text": "Ask the model to explain itself in a free-text answer",
+            "correct": false,
+            "rationale": "A generated explanation is not a measurement of group accuracy."
+          },
+          {
+            "text": "Subgroup analysis, comparing each region's accuracy",
+            "correct": true,
+            "rationale": "Measuring results per group reveals gaps the overall average hides."
+          }
+        ],
+        "explanation": "Region-by-region comparison is subgroup analysis."
+      },
+      {
+        "kind": "single",
+        "objectives": [
+          "4.1.7"
+        ],
+        "stem": "After launch, the team wants to be alerted if bias creeps in as customer data changes. Which AWS capability fits?",
+        "options": [
+          {
+            "text": "SageMaker Model Monitor with Clarify, to watch for bias drift",
+            "correct": true,
+            "rationale": "Model Monitor compares production behaviour with a baseline, and with Clarify it can monitor bias drift."
+          },
+          {
+            "text": "Amazon Bedrock Guardrails denied topics and sensitive information filters",
+            "correct": false,
+            "rationale": "Denied topics block subjects in a generative AI app, not bias drift in a prediction model."
+          },
+          {
+            "text": "Amazon Bedrock Model Evaluation, run once",
+            "correct": false,
+            "rationale": "A single pre-launch evaluation does not monitor production."
+          },
+          {
+            "text": "Amazon SageMaker Model Cards",
+            "correct": false,
+            "rationale": "Cards document a model and do not monitor it."
+          }
+        ],
+        "explanation": "Bias creeping in after launch is bias drift, monitored by Model Monitor with Clarify."
+      }
+    ]
+  },
+  {
+    "id": "4.1-013",
+    "taskId": "4.1",
+    "kind": "multi",
+    "objectives": [
+      "4.1.6"
+    ],
+    "stem": "Which results suggest a Cairnway model is overfit? (Select TWO.)",
+    "select": 2,
+    "options": [
+      {
+        "text": "Poor scores on both training and test data",
+        "correct": false,
+        "rationale": "This points to underfitting, not overfitting."
+      },
+      {
+        "text": "Much worse scores on data it has not seen",
+        "correct": true,
+        "rationale": "The gap between training and new data shows it does not generalize."
+      },
+      {
+        "text": "Near-perfect scores on the training data",
+        "correct": true,
+        "rationale": "An overfit model has memorized its training data."
+      },
+      {
+        "text": "Every prediction is the same regardless of input",
+        "correct": false,
+        "rationale": "This suggests an extremely underfit model."
+      },
+      {
+        "text": "Similar scores on training and test data",
+        "correct": false,
+        "rationale": "Similar scores suggest a good fit."
+      }
+    ],
+    "explanation": "Strong training performance with weak results on new data is overfitting. Poor on both is underfitting; similar on both is a good fit."
+  },
+  {
+    "id": "4.1-014",
+    "taskId": "4.1",
+    "kind": "multi",
+    "objectives": [
+      "4.1.1"
+    ],
+    "stem": "Which of the following are core dimensions of responsible AI as described by AWS? (Select THREE.)",
+    "select": 3,
+    "options": [
+      {
+        "text": "Scalability",
+        "correct": false,
+        "rationale": "Scalability is an architecture trait, not a responsible-AI dimension."
+      },
+      {
+        "text": "Latency",
+        "correct": false,
+        "rationale": "Latency is a performance measure, not a responsible-AI dimension."
+      },
+      {
+        "text": "Transparency",
+        "correct": true,
+        "rationale": "Transparency, enabling stakeholders to make informed choices about engaging with an AI system, is a core dimension."
+      },
+      {
+        "text": "Fairness",
+        "correct": true,
+        "rationale": "Fairness, considering impacts on different groups of stakeholders, is one of AWS's core dimensions."
+      },
+      {
+        "text": "Throughput",
+        "correct": false,
+        "rationale": "Throughput describes how much work a system handles, not a responsible-AI dimension."
+      },
+      {
+        "text": "Safety",
+        "correct": true,
+        "rationale": "Safety, preventing harmful output and misuse, is a core dimension."
+      }
+    ],
+    "explanation": "Fairness, safety and transparency are among AWS's eight core dimensions. Latency, throughput and scalability describe performance."
+  },
+  {
+    "id": "4.1-015",
+    "taskId": "4.1",
+    "kind": "single",
+    "services": [
+      "sagemaker-model-monitor",
+      "augmented-ai",
+      "bedrock-guardrails"
+    ],
+    "objectives": [
+      "4.1.2"
+    ],
+    "stem": "A Cairnway team wants to read what AWS says about the intended uses, limitations and responsible AI design choices of an AWS AI service before adopting it. Which resource should they use?",
+    "options": [
+      {
+        "text": "Amazon SageMaker Model Monitor",
+        "correct": false,
+        "rationale": "Model Monitor watches deployed models in production. It is not documentation about a service."
+      },
+      {
+        "text": "AWS AI Service Cards",
+        "correct": true,
+        "rationale": "AI Service Cards are AWS's documentation of a service's intended uses, limitations and responsible AI design choices."
+      },
+      {
+        "text": "Amazon Augmented AI (Amazon A2I)",
+        "correct": false,
+        "rationale": "A2I adds human review of predictions. It does not describe a service's limitations."
+      },
+      {
+        "text": "Amazon Bedrock Guardrails",
+        "correct": false,
+        "rationale": "Guardrails put safeguards around a generative AI application. They do not document an AWS service."
+      }
+    ],
+    "explanation": "Reading AWS's own account of a service's intended uses and limits is what AI Service Cards are for."
+  },
+  {
+    "id": "4.1-016",
+    "taskId": "4.1",
+    "kind": "order",
+    "services": [
+      "sagemaker-ai"
+    ],
+    "objectives": [
+      "4.1.6"
+    ],
+    "stem": "Put the steps for checking whether a Cairnway model is overfit in the correct order.",
+    "steps": [
+      "Split the data into training data and separate test data",
+      "Train the model on the training data only",
+      "Measure performance on both the training and the test data",
+      "Compare the two results and look for a large gap",
+      "Conclude overfitting if training is much better than test"
+    ],
+    "explanation": "The test data must be set aside before training so the model never sees it. Performance is measured on both sets, and only then can the gap be compared."
+  },
+  {
+    "id": "4.1-017",
+    "taskId": "4.1",
+    "kind": "single",
+    "services": [
+      "sagemaker-clarify"
+    ],
+    "objectives": [
+      "4.1.1"
+    ],
+    "stem": "Cairnway Outfitters tests a model that decides who is offered buy now, pay later. Applicants from one region with the same finances as others are approved far less often. Which feature of responsible AI is most directly at risk?",
+    "options": [
+      {
+        "text": "Veracity",
+        "correct": false,
+        "rationale": "Veracity is about truthful, correct output. The issue here is unequal treatment of groups, not false statements."
+      },
+      {
+        "text": "Robustness",
+        "correct": false,
+        "rationale": "Robustness is about dependable results with unusual or adversarial input. The inputs here are ordinary applications."
+      },
+      {
+        "text": "Fairness",
+        "correct": true,
+        "rationale": "Fairness means results do not create unjustified differences between groups. Similar applicants being treated differently by region is a fairness problem."
+      },
+      {
+        "text": "Controllability",
+        "correct": false,
+        "rationale": "Controllability is about being able to monitor and steer system behaviour. It does not describe unequal outcomes between groups."
+      }
+    ],
+    "explanation": "The deciding clue is that equally qualified applicants get different results depending on their region. Fairness is the responsible-AI feature that covers impacts on different groups; bias in the data or model is what threatens it."
+  },
+  {
+    "id": "4.1-018",
+    "taskId": "4.1",
+    "kind": "single",
+    "services": [
+      "bedrock"
+    ],
+    "objectives": [
+      "4.1.5"
+    ],
+    "stem": "A Cairnway analyst wants to fine-tune a model using review text copied from forums of unknown origin. Which concern fits a responsible dataset best?",
+    "options": [
+      {
+        "text": "Any public text is fine as long as there is plenty of it",
+        "correct": false,
+        "rationale": "Volume does not make data reliable, and unknown origin raises quality and legal concerns."
+      },
+      {
+        "text": "Data only needs to be curated for images, not text",
+        "correct": false,
+        "rationale": "Curation matters for every kind of data."
+      },
+      {
+        "text": "The model should be trained first, and the sources checked after training",
+        "correct": false,
+        "rationale": "Checking sources after training is too late. Problems are already built into the model."
+      },
+      {
+        "text": "Data should come from curated sources whose origin is known",
+        "correct": true,
+        "rationale": "Responsible datasets are chosen, cleaned and documented, and the company knows where the data came from and that it may use it."
+      }
+    ],
+    "explanation": "Unknown origin is the clue. Curated sources, with known origin and permission to use, are a characteristic of a responsible dataset."
+  },
+  {
+    "id": "4.1-019",
+    "taskId": "4.1",
+    "kind": "single",
+    "services": [
+      "sagemaker-clarify"
+    ],
+    "objectives": [
+      "4.1.5"
+    ],
+    "stem": "In Cairnway's training data for an approval model, 95% of examples come from one customer group. What is the most important problem with this dataset?",
+    "options": [
+      {
+        "text": "The dataset is too curated to be useful",
+        "correct": false,
+        "rationale": "Curation (choosing and documenting sources) is a strength. The stem is about group proportions."
+      },
+      {
+        "text": "The dataset is not balanced across customer groups",
+        "correct": true,
+        "rationale": "When one group is heavily over-represented, the model learns it best and serves other groups worse."
+      },
+      {
+        "text": "The dataset has too many labels per example",
+        "correct": false,
+        "rationale": "The number of labels is not the problem described."
+      },
+      {
+        "text": "The dataset is stored in the wrong AWS Region for the model",
+        "correct": false,
+        "rationale": "Where data is stored does not affect how balanced it is."
+      }
+    ],
+    "explanation": "A 95% share for one group is a balance problem. Balanced datasets avoid badly over- or under-represented groups."
+  },
+  {
+    "id": "4.1-020",
+    "taskId": "4.1",
+    "kind": "order",
+    "services": [
+      "bedrock-evaluations"
+    ],
+    "objectives": [
+      "4.1.3"
+    ],
+    "stem": "Put the steps of responsibly selecting a foundation model for a Cairnway use case in order.",
+    "steps": [
+      "Define the use case and how risky its decisions are",
+      "Shortlist models and read their documentation",
+      "Evaluate the shortlist on prompts that resemble Cairnway's own",
+      "Choose the smallest model that meets the requirements",
+      "Keep monitoring the model after launch"
+    ],
+    "explanation": "The risk level sets how careful the later steps must be. Documentation narrows the list, evaluation tests it, the final choice is the smallest model that passes, and monitoring continues after launch."
+  },
+  {
+    "id": "4.1-021",
+    "taskId": "4.1",
+    "kind": "match",
+    "services": [
+      "sagemaker-ai"
+    ],
+    "objectives": [
+      "4.1.6"
+    ],
+    "stem": "Match each model symptom to the term that describes it.",
+    "pairs": [
+      {
+        "prompt": "Excellent on training data, poor on new data",
+        "answer": "Overfitting"
+      },
+      {
+        "prompt": "Poor on both training data and new data",
+        "answer": "Underfitting"
+      },
+      {
+        "prompt": "Good on both training data and new data",
+        "answer": "A good fit"
+      }
+    ],
+    "distractors": [
+      "Hallucination"
+    ],
+    "explanation": "Compare training results with results on new data. Overfitting memorizes the training data, so it shines there and fails on new data; this is high variance. Underfitting is too simple to learn the real patterns, so it is poor everywhere; this is high bias. A good fit does well on both. Hallucination is a generative AI problem, not a fit problem."
+  },
+  {
+    "id": "4.1-022",
+    "taskId": "4.1",
+    "kind": "single",
+    "services": [
+      "sagemaker-model-cards"
+    ],
+    "objectives": [
+      "4.1.3"
+    ],
+    "stem": "Before adopting a third-party foundation model, a Cairnway reviewer wants to learn its intended uses, known limits, training-data description and licence terms. What should the reviewer look for?",
+    "options": [
+      {
+        "text": "The model's price per request only",
+        "correct": false,
+        "rationale": "Price matters, but it does not tell the reviewer about intended uses, limits or licence terms."
+      },
+      {
+        "text": "Its documentation, such as a model card",
+        "correct": true,
+        "rationale": "Model documentation describes intended uses, limits, training data, evaluation results and terms, all of which support a responsible selection."
+      },
+      {
+        "text": "The model's position on a public speed ranking",
+        "correct": false,
+        "rationale": "Speed is a performance factor, not a statement of intended use or licence."
+      },
+      {
+        "text": "The number of customers using the model",
+        "correct": false,
+        "rationale": "Popularity does not describe limits, training data or terms of use."
+      }
+    ],
+    "explanation": "Intended uses, limits, training data and licence terms are the contents of model documentation, so that is what a responsible selection starts from."
+  },
+  {
+    "id": "4.1-023",
+    "taskId": "4.1",
+    "kind": "single",
+    "services": [
+      "sagemaker-clarify"
+    ],
+    "objectives": [
+      "4.1.6"
+    ],
+    "stem": "An approval model has high accuracy overall but is much less accurate for applicants in one age group, because few such examples were in the training data. Which effect of bias does this show?",
+    "options": [
+      {
+        "text": "The model is overfit to the test data only, not the training data",
+        "correct": false,
+        "rationale": "The stem is about one group's accuracy, not about test-data memorization."
+      },
+      {
+        "text": "The model has too little randomness",
+        "correct": false,
+        "rationale": "Randomness is controlled by inference parameters and is not the issue."
+      },
+      {
+        "text": "The model is too expensive to run",
+        "correct": false,
+        "rationale": "Cost is not an effect of bias described here."
+      },
+      {
+        "text": "It is less accurate for one demographic group",
+        "correct": true,
+        "rationale": "Models trained mainly on some groups can perform poorly for others, and overall accuracy can hide it."
+      }
+    ],
+    "explanation": "One group served worse while the average looks fine is an effect of bias on demographic groups."
+  },
+  {
+    "id": "4.1-024",
+    "taskId": "4.1",
+    "kind": "match",
+    "services": [
+      "bedrock-evaluations",
+      "sagemaker-clarify",
+      "sagemaker-model-monitor",
+      "augmented-ai",
+      "bedrock-guardrails",
+      "sagemaker-ground-truth"
+    ],
+    "objectives": [
+      "4.1.2",
+      "4.1.7"
+    ],
+    "stem": "Match each Cairnway need to the AWS tool built for it.",
+    "pairs": [
+      {
+        "prompt": "Compare candidate models for toxicity and robustness before choosing",
+        "answer": "Amazon Bedrock Model Evaluation"
+      },
+      {
+        "prompt": "Detect bias in training data and in predictions",
+        "answer": "Amazon SageMaker Clarify"
+      },
+      {
+        "prompt": "Watch a deployed model for bias drift",
+        "answer": "Amazon SageMaker Model Monitor"
+      },
+      {
+        "prompt": "Send low-confidence predictions to human reviewers",
+        "answer": "Amazon Augmented AI (Amazon A2I)"
+      },
+      {
+        "prompt": "Block harmful content in a live GenAI app",
+        "answer": "Amazon Bedrock Guardrails"
+      }
+    ],
+    "distractors": [
+      "Amazon SageMaker Ground Truth"
+    ],
+    "explanation": "Choose the tool by stage: evaluation before selection, Clarify for bias, Model Monitor in production, A2I for human review and Guardrails for runtime safety."
+  },
+  {
+    "id": "4.1-025",
+    "taskId": "4.1",
+    "kind": "multi",
+    "services": [
+      "bedrock-knowledge-bases",
+      "bedrock-guardrails"
+    ],
+    "objectives": [
+      "4.1.4"
+    ],
+    "stem": "Trailmate sometimes states refund rules that Cairnway never set. Which measures reduce the legal risk from hallucinations? (Select TWO.)",
+    "select": 2,
+    "options": [
+      {
+        "text": "Raise the temperature so replies feel more creative",
+        "correct": false,
+        "rationale": "Higher temperature increases randomness, which makes invented statements more likely."
+      },
+      {
+        "text": "Let the model answer from memory only",
+        "correct": false,
+        "rationale": "Without source documents the model has nothing to ground its answers."
+      },
+      {
+        "text": "Have staff review outputs on sensitive topics such as refunds",
+        "correct": true,
+        "rationale": "Human review catches wrong answers before customers rely on them."
+      },
+      {
+        "text": "Hide the fact that customers are talking to an AI",
+        "correct": false,
+        "rationale": "Hiding AI use reduces transparency and does not reduce hallucination risk."
+      },
+      {
+        "text": "Ground answers in Cairnway's policy documents with retrieval-augmented generation",
+        "correct": true,
+        "rationale": "Grounding answers in real documents makes invented policies less likely."
+      }
+    ],
+    "explanation": "RAG grounding and human review are the defences against hallucination. More randomness and less disclosure make matters worse."
+  },
+  {
+    "id": "4.1-026",
+    "taskId": "4.1",
+    "kind": "multi",
+    "services": [
+      "bedrock-guardrails",
+      "bedrock-automated-reasoning"
+    ],
+    "objectives": [
+      "4.1.7",
+      "4.1.2"
+    ],
+    "stem": "Cairnway wants to monitor the truthfulness of Trailmate's answers over time. Which practices help? (Select THREE.)",
+    "select": 3,
+    "options": [
+      {
+        "text": "Stop logging conversations",
+        "correct": false,
+        "rationale": "Without records the team cannot review problems."
+      },
+      {
+        "text": "Use contextual grounding checks to flag unsupported answers",
+        "correct": true,
+        "rationale": "These flag responses not grounded in the source documents."
+      },
+      {
+        "text": "Use Automated Reasoning checks against policy rules",
+        "correct": true,
+        "rationale": "They validate response accuracy against logical rules."
+      },
+      {
+        "text": "Review customer feedback and complaints as an early warning",
+        "correct": true,
+        "rationale": "Feedback shows real-world errors quickly."
+      },
+      {
+        "text": "Add more word filters",
+        "correct": false,
+        "rationale": "Word filters block words and don't test accuracy."
+      },
+      {
+        "text": "Raise the temperature",
+        "correct": false,
+        "rationale": "Higher temperature makes false statements more likely."
+      }
+    ],
+    "explanation": "Grounding checks, Automated Reasoning checks and feedback review help catch false answers. Word filters, higher temperature and no logging do not."
+  },
+  {
+    "id": "4.1-027",
+    "taskId": "4.1",
+    "kind": "single",
+    "services": [
+      "augmented-ai"
+    ],
+    "objectives": [
+      "4.1.7"
+    ],
+    "stem": "Before launch, Cairnway asks a group of staff to try to trick Trailmate with tricky and hostile prompts, then reviews the answers. Which method is this?",
+    "options": [
+      {
+        "text": "Subgroup analysis",
+        "correct": false,
+        "rationale": "Subgroup analysis compares metrics across groups. It does not involve staff probing the system."
+      },
+      {
+        "text": "A human audit, including red teaming",
+        "correct": true,
+        "rationale": "People review outputs and may deliberately probe the system with hostile prompts, called red teaming."
+      },
+      {
+        "text": "Feature engineering of the input columns",
+        "correct": false,
+        "rationale": "Feature engineering prepares model inputs. It is not a way to test for safety."
+      },
+      {
+        "text": "Data labelling",
+        "correct": false,
+        "rationale": "Labelling attaches answers to training data. It is not a test of output safety."
+      }
+    ],
+    "explanation": "People deliberately testing with hostile prompts is a human audit, often called red teaming."
+  },
+  {
+    "id": "4.1-028",
+    "taskId": "4.1",
+    "kind": "multi",
+    "services": [
+      "bedrock"
+    ],
+    "objectives": [
+      "4.1.3"
+    ],
+    "stem": "Which choices are consistent with sustainable AI model selection? (Select TWO.)",
+    "select": 2,
+    "options": [
+      {
+        "text": "Retrain from scratch every week",
+        "correct": false,
+        "rationale": "Frequent from-scratch training uses a lot of electricity."
+      },
+      {
+        "text": "Choose the largest model by default",
+        "correct": false,
+        "rationale": "A larger model than needed wastes energy."
+      },
+      {
+        "text": "Run every request through several models at once",
+        "correct": false,
+        "rationale": "Duplicating work multiplies compute and energy use."
+      },
+      {
+        "text": "Choose the smallest model that meets the requirement",
+        "correct": true,
+        "rationale": "A smaller model uses less energy for the same business result."
+      },
+      {
+        "text": "Avoid retraining unless the data has meaningfully changed",
+        "correct": true,
+        "rationale": "Skipping unnecessary retraining saves energy and emissions."
+      }
+    ],
+    "explanation": "Right-sizing the model and avoiding needless retraining reduce energy use. The other choices add compute with no extra benefit."
+  },
+  {
+    "id": "4.1-029",
+    "taskId": "4.1",
+    "kind": "single",
+    "services": [
+      "sagemaker-ai"
+    ],
+    "objectives": [
+      "4.1.5"
+    ],
+    "stem": "Trailmate was trained only on English support questions, and it answers German customers poorly. Which dataset characteristic is missing?",
+    "options": [
+      {
+        "text": "Larger file size, so the model processes many more bytes of the same data",
+        "correct": false,
+        "rationale": "More bytes of the same English data would not fix missing German examples."
+      },
+      {
+        "text": "Inclusivity and diversity of the languages and people served",
+        "correct": true,
+        "rationale": "A responsible dataset covers the range of languages, regions and people the system will meet."
+      },
+      {
+        "text": "A faster storage tier for the training files",
+        "correct": false,
+        "rationale": "Storage speed does not change which languages the data covers."
+      },
+      {
+        "text": "Shorter questions, so training finishes sooner",
+        "correct": false,
+        "rationale": "Question length is unrelated to the missing language coverage."
+      }
+    ],
+    "explanation": "The clue is that one customer group is missing from the data. Inclusive, diverse data covers all the groups the system serves."
+  },
+  {
+    "id": "4.1-030",
+    "taskId": "4.1",
+    "kind": "order",
+    "services": [
+      "sagemaker-clarify",
+      "sagemaker-model-monitor"
+    ],
+    "objectives": [
+      "4.1.7",
+      "4.1.5"
+    ],
+    "stem": "Put the steps of Cairnway's responsible-AI checks for its buy now, pay later model in the order they would normally happen.",
+    "steps": [
+      "Check the training data for balance and label quality",
+      "Train the model",
+      "Run subgroup analysis on held-out test data",
+      "Launch with human review for borderline cases",
+      "Monitor production behaviour for bias drift"
+    ],
+    "explanation": "Problems are cheapest to fix at the start, so data checks come before training. Subgroup analysis needs a trained model and test data. Launch comes after testing, and monitoring continues once the model is live."
+  },
+  {
+    "id": "4.1-031",
+    "taskId": "4.1",
+    "kind": "single",
+    "services": [
+      "bedrock-guardrails"
+    ],
+    "objectives": [
+      "4.1.1"
+    ],
+    "stem": "Trailmate tells a customer that Cairnway offers a 90-day return window for worn boots. No such policy exists. Which responsible-AI feature has the assistant failed to meet?",
+    "options": [
+      {
+        "text": "Inclusivity",
+        "correct": false,
+        "rationale": "Inclusivity is about designing for the full range of people who will use the system. The reply was wrong for everyone, not exclusive."
+      },
+      {
+        "text": "Veracity",
+        "correct": true,
+        "rationale": "Veracity means output is correct and not invented. A confident statement of a policy that does not exist is a veracity failure (a hallucination)."
+      },
+      {
+        "text": "Fairness",
+        "correct": false,
+        "rationale": "Fairness is about equal treatment of groups. Nothing in the stem says one group was treated differently."
+      },
+      {
+        "text": "Controllability",
+        "correct": false,
+        "rationale": "Controllability is about mechanisms to monitor and steer the system. It does not describe a false statement."
+      }
+    ],
+    "explanation": "The clue is a confident statement that is simply not true. That is a veracity problem, the dimension that covers correct, non-invented output."
+  },
+  {
+    "id": "4.1-032",
+    "taskId": "4.1",
+    "kind": "single",
+    "services": [
+      "sagemaker-clarify",
+      "sagemaker-ground-truth",
+      "augmented-ai",
+      "bedrock-guardrails"
+    ],
+    "objectives": [
+      "4.1.7",
+      "4.1.2"
+    ],
+    "stem": "Cairnway wants to check its training data for bias before training a model, and check the trained model's predictions afterwards. Which AWS service is designed for this?",
+    "options": [
+      {
+        "text": "Amazon SageMaker Ground Truth",
+        "correct": false,
+        "rationale": "Ground Truth labels training data with human workforces. It does not measure bias metrics."
+      },
+      {
+        "text": "Amazon Augmented AI (Amazon A2I)",
+        "correct": false,
+        "rationale": "A2I adds human review of predictions. It is not a bias-measurement service."
+      },
+      {
+        "text": "Amazon Bedrock Guardrails",
+        "correct": false,
+        "rationale": "Guardrails safeguard a live generative AI application. They do not analyze training data for bias."
+      },
+      {
+        "text": "Amazon SageMaker Clarify",
+        "correct": true,
+        "rationale": "Clarify detects bias in data before training and in a trained model's predictions afterwards."
+      }
+    ],
+    "explanation": "Bias in data before training and in predictions afterwards is what SageMaker Clarify detects."
+  },
+  {
+    "id": "4.1-033",
+    "taskId": "4.1",
+    "kind": "single",
+    "services": [
+      "bedrock-guardrails"
+    ],
+    "objectives": [
+      "4.1.4"
+    ],
+    "stem": "A customer follows unsafe advice about avalanche gear given by a Cairnway chatbot and is hurt. Which GenAI risk best describes this?",
+    "options": [
+      {
+        "text": "IP infringement",
+        "correct": false,
+        "rationale": "IP infringement is about copied protected material. No copying is described."
+      },
+      {
+        "text": "Underfitting",
+        "correct": false,
+        "rationale": "Underfitting is a model training problem, not a legal risk in itself."
+      },
+      {
+        "text": "Data drift",
+        "correct": false,
+        "rationale": "Data drift is a change in input data over time. It does not describe harm to a person."
+      },
+      {
+        "text": "End user risk",
+        "correct": true,
+        "rationale": "End user risk is harm to people who act on wrong or unsafe model output."
+      }
+    ],
+    "explanation": "A person was harmed by acting on unsafe output, which is end user risk."
+  },
+  {
+    "id": "4.1-034",
+    "taskId": "4.1",
+    "kind": "single",
+    "services": [
+      "sagemaker-model-monitor",
+      "sagemaker-clarify"
+    ],
+    "objectives": [
+      "4.1.7"
+    ],
+    "stem": "A deployed Cairnway model passed bias checks at launch, but the team worries bias may creep in as customer data changes. Which AWS capability watches for this in production?",
+    "options": [
+      {
+        "text": "SageMaker Model Monitor with Clarify, to watch for bias drift",
+        "correct": true,
+        "rationale": "Model Monitor compares production behaviour with a baseline, and together with Clarify it can monitor bias drift."
+      },
+      {
+        "text": "Amazon Bedrock Model Evaluation run only once before the launch",
+        "correct": false,
+        "rationale": "Evaluation tests models before choosing them. It is not a continuous production monitor."
+      },
+      {
+        "text": "Amazon SageMaker Model Cards",
+        "correct": false,
+        "rationale": "Model cards document a model. They do not watch behaviour over time."
+      },
+      {
+        "text": "Amazon Bedrock Guardrails word filters",
+        "correct": false,
+        "rationale": "Word filters block specific words. They do not measure bias drift."
+      }
+    ],
+    "explanation": "Bias creeping in after launch is bias drift. Model Monitor, used with Clarify, watches production behaviour against a baseline."
+  },
+  {
+    "id": "4.1-035",
+    "taskId": "4.1",
+    "kind": "single",
+    "services": [
+      "bedrock-guardrails"
+    ],
+    "objectives": [
+      "4.1.2"
+    ],
+    "stem": "Cairnway does not want Trailmate to ever mention the names of two competing retailers. Which Amazon Bedrock Guardrails safeguard is the simplest fit?",
+    "options": [
+      {
+        "text": "Denied topics",
+        "correct": false,
+        "rationale": "Denied topics define broad subjects. Blocking two specific names is simpler with a word filter."
+      },
+      {
+        "text": "Contextual grounding checks",
+        "correct": false,
+        "rationale": "These detect answers unsupported by source documents. They do not block named words."
+      },
+      {
+        "text": "Word filters",
+        "correct": true,
+        "rationale": "Word filters block custom words or phrases, such as competitor names, matching whole words and ignoring case."
+      },
+      {
+        "text": "Automated Reasoning checks",
+        "correct": false,
+        "rationale": "These validate answers against logical rules to catch hallucinations. They are not designed to block names."
+      }
+    ],
+    "explanation": "Specific words to block are the clue. Word filters are the safeguard for custom words and phrases such as competitor names."
+  },
+  {
+    "id": "4.1-036",
+    "taskId": "4.1",
+    "kind": "multi",
+    "services": [
+      "bedrock-guardrails",
+      "bedrock-automated-reasoning"
+    ],
+    "objectives": [
+      "4.1.2"
+    ],
+    "stem": "Cairnway's Trailmate answers questions using return-policy documents. Which Amazon Bedrock Guardrails safeguards help detect hallucinated answers? (Select TWO.)",
+    "select": 2,
+    "options": [
+      {
+        "text": "Sensitive information filters",
+        "correct": false,
+        "rationale": "These mask or block personal data and do not test truthfulness."
+      },
+      {
+        "text": "Denied topics",
+        "correct": false,
+        "rationale": "Denied topics block subjects. They do not check accuracy."
+      },
+      {
+        "text": "Word filters",
+        "correct": false,
+        "rationale": "Word filters block specific words. They do not judge whether an answer is true."
+      },
+      {
+        "text": "Contextual grounding checks",
+        "correct": true,
+        "rationale": "These detect responses that are not grounded in the source text or are irrelevant to the question."
+      },
+      {
+        "text": "Automated Reasoning checks",
+        "correct": true,
+        "rationale": "These validate the accuracy of a response against a set of logical rules, to detect hallucinations."
+      }
+    ],
+    "explanation": "Only grounding checks and Automated Reasoning checks look at whether an answer is supported or logically correct. The other safeguards control words, topics and personal data."
+  },
+  {
+    "id": "4.1-037",
+    "taskId": "4.1",
+    "kind": "multi",
+    "objectives": [
+      "4.1.4"
+    ],
+    "stem": "Which are legal or business risks of working with generative AI? (Select THREE.)",
+    "select": 3,
+    "options": [
+      {
+        "text": "Loss of customer trust",
+        "correct": true,
+        "rationale": "One offensive or wrong answer can damage a brand quickly."
+      },
+      {
+        "text": "Faster inference",
+        "correct": false,
+        "rationale": "Speed is a performance benefit, not a risk."
+      },
+      {
+        "text": "Shorter prompts",
+        "correct": false,
+        "rationale": "Prompt length is a design detail, not a legal risk."
+      },
+      {
+        "text": "Biased model outputs",
+        "correct": true,
+        "rationale": "Outputs that treat groups unfairly can break anti-discrimination law."
+      },
+      {
+        "text": "IP infringement claims",
+        "correct": true,
+        "rationale": "Outputs or training data may involve protected material."
+      },
+      {
+        "text": "Lower token usage",
+        "correct": false,
+        "rationale": "Token usage affects cost, not legal exposure."
+      }
+    ],
+    "explanation": "IP claims, biased outputs and loss of trust are named GenAI risks. The other options are performance or cost traits."
+  },
+  {
+    "id": "4.1-038",
+    "taskId": "4.1",
+    "kind": "match",
+    "services": [
+      "bedrock-guardrails"
+    ],
+    "objectives": [
+      "4.1.2"
+    ],
+    "stem": "Match each Cairnway need to the Amazon Bedrock Guardrails safeguard that meets it.",
+    "pairs": [
+      {
+        "prompt": "Trailmate must never discuss treating injuries",
+        "answer": "Denied topics"
+      },
+      {
+        "prompt": "Replies must never mention two named competitors",
+        "answer": "Word filters"
+      },
+      {
+        "prompt": "Card numbers in replies must be masked",
+        "answer": "Sensitive information filters"
+      },
+      {
+        "prompt": "Flag answers not supported by the return-policy documents",
+        "answer": "Contextual grounding checks"
+      }
+    ],
+    "distractors": [
+      "Automated Reasoning checks"
+    ],
+    "explanation": "Each safeguard handles one kind of problem: subjects (denied topics), specific words (word filters), personal data (sensitive information filters) and unsupported answers (contextual grounding checks)."
+  },
+  {
+    "id": "4.1-039",
+    "taskId": "4.1",
+    "kind": "single",
+    "services": [
+      "sagemaker-ground-truth"
+    ],
+    "objectives": [
+      "4.1.7"
+    ],
+    "stem": "To check a labelled fraud dataset, Cairnway asks several reviewers to label the same sample and compares their answers for agreement and stereotypes. Which method is this?",
+    "options": [
+      {
+        "text": "Analyzing label quality",
+        "correct": true,
+        "rationale": "Reviewing a sample of labels with several people checks that labels agree and are free of stereotypes."
+      },
+      {
+        "text": "Contextual grounding checking",
+        "correct": false,
+        "rationale": "Grounding checks compare generated answers with source text. They do not review labels."
+      },
+      {
+        "text": "Automated reasoning",
+        "correct": false,
+        "rationale": "Automated Reasoning checks validate answers against logical rules. They do not review labels."
+      },
+      {
+        "text": "Provisioned Throughput",
+        "correct": false,
+        "rationale": "Provisioned Throughput reserves capacity for model use. It is unrelated to checking labels."
+      }
+    ],
+    "explanation": "Several reviewers re-labelling a sample to compare answers is a label quality analysis."
+  },
+  {
+    "id": "4.1-040",
+    "taskId": "4.1",
+    "kind": "single",
+    "services": [
+      "bedrock-guardrails"
+    ],
+    "objectives": [
+      "4.1.2"
+    ],
+    "stem": "Cairnway wants Trailmate to politely refuse any question about treating injuries, even when the customer words it in different ways. Which Amazon Bedrock Guardrails safeguard meets this requirement?",
+    "options": [
+      {
+        "text": "Denied topics",
+        "correct": true,
+        "rationale": "Denied topics let you define subjects that are off limits so the guardrail helps block them in questions and answers."
+      },
+      {
+        "text": "Word filters",
+        "correct": false,
+        "rationale": "Word filters block specific words or phrases. An injury question can be worded in many ways without a banned word."
+      },
+      {
+        "text": "Sensitive information filters",
+        "correct": false,
+        "rationale": "These block or mask personal data such as card numbers. They do not control subject matter."
+      },
+      {
+        "text": "Contextual grounding checks",
+        "correct": false,
+        "rationale": "These flag answers not supported by source text. They do not stop a topic from being discussed."
+      }
+    ],
+    "explanation": "A whole subject that must be refused is the clue. Denied topics define subjects the application must not discuss."
+  },
+  {
+    "id": "4.1-041",
+    "taskId": "4.1",
+    "kind": "single",
+    "services": [
+      "bedrock"
+    ],
+    "objectives": [
+      "4.1.1"
+    ],
+    "stem": "Cairnway wants Trailmate to keep giving sensible answers even when customers make heavy typos, use slang or deliberately try to confuse it. Which responsible-AI feature does this describe?",
+    "options": [
+      {
+        "text": "Robustness",
+        "correct": true,
+        "rationale": "Robustness is dependable output even when inputs are unusual, noisy or adversarial, which is what typos, slang and deliberate confusion are."
+      },
+      {
+        "text": "Transparency",
+        "correct": false,
+        "rationale": "Transparency is about telling stakeholders that AI is involved and how it works. It does not describe handling messy input."
+      },
+      {
+        "text": "Governance",
+        "correct": false,
+        "rationale": "Governance is about best practices across the AI supply chain. It is not about how the model handles odd input."
+      },
+      {
+        "text": "Fairness",
+        "correct": false,
+        "rationale": "Fairness is about unjustified differences between groups. The stem is about input quality, not group impact."
+      }
+    ],
+    "explanation": "Noisy or adversarial input is the clue. Robustness means getting dependable results despite it."
+  },
+  {
+    "id": "4.1-042",
+    "taskId": "4.1",
+    "kind": "single",
+    "services": [
+      "bedrock-evaluations"
+    ],
+    "objectives": [
+      "4.1.3"
+    ],
+    "stem": "Cairnway is choosing a model for a decision that affects customers' money. Which practice is the MOST responsible approach to selecting it?",
+    "options": [
+      {
+        "text": "Choose the cheapest model available since the decision is fully automated",
+        "correct": false,
+        "rationale": "Cost alone ignores the risk of harm. Decisions about money need more care, not less."
+      },
+      {
+        "text": "Use a heavily tested model with human oversight for these decisions",
+        "correct": true,
+        "rationale": "The higher the potential harm to people, the more testing and human oversight a responsible selection requires."
+      },
+      {
+        "text": "Choose whichever model responds fastest",
+        "correct": false,
+        "rationale": "Speed is a performance trait and says nothing about risk to customers."
+      },
+      {
+        "text": "Choose the newest model to get the most features",
+        "correct": false,
+        "rationale": "Being new does not mean being well tested for a high-risk decision."
+      }
+    ],
+    "explanation": "Decisions affecting money are high risk. Responsible selection matches the risk with heavier testing and human oversight."
+  },
+  {
+    "id": "4.1-043",
+    "taskId": "4.1",
+    "kind": "multi",
+    "objectives": [
+      "4.1.1"
+    ],
+    "stem": "Which situations test the robustness of Cairnway's support assistant? (Select TWO.)",
+    "select": 2,
+    "options": [
+      {
+        "text": "Reading AWS's documentation of a service's limits",
+        "correct": false,
+        "rationale": "Reading documentation supports selection and transparency, and it does not test robustness."
+      },
+      {
+        "text": "Comparing approval rates between two regions",
+        "correct": false,
+        "rationale": "This tests fairness across groups, not robustness."
+      },
+      {
+        "text": "A user deliberately words requests to trick the model",
+        "correct": true,
+        "rationale": "Adversarial input tests whether the assistant keeps giving dependable, safe output."
+      },
+      {
+        "text": "Customers write with heavy typos and slang",
+        "correct": true,
+        "rationale": "Noisy input checks whether results stay dependable, which is robustness."
+      },
+      {
+        "text": "Telling customers they are chatting with an AI",
+        "correct": false,
+        "rationale": "This is transparency, not a test of how the model handles input."
+      }
+    ],
+    "explanation": "Robustness means dependable results despite unusual, noisy or adversarial input. Comparing groups and disclosing AI use cover other dimensions."
+  },
+  {
+    "id": "4.1-044",
+    "taskId": "4.1",
+    "kind": "multi",
+    "objectives": [
+      "4.1.5"
+    ],
+    "stem": "Cairnway's hiring dataset is dominated by a few backgrounds. Which actions improve it? (Select THREE.)",
+    "select": 3,
+    "options": [
+      {
+        "text": "Collect more examples from underrepresented groups",
+        "correct": true,
+        "rationale": "More representative data lets the model learn all groups."
+      },
+      {
+        "text": "Document where each data source came from",
+        "correct": true,
+        "rationale": "Curated, documented sources are a mark of a responsible dataset."
+      },
+      {
+        "text": "Use the dataset unchanged and add a bigger model",
+        "correct": false,
+        "rationale": "A bigger model learns the same imbalance."
+      },
+      {
+        "text": "Delete all examples from underrepresented groups",
+        "correct": false,
+        "rationale": "This makes the imbalance worse."
+      },
+      {
+        "text": "Copy the majority group's examples until counts match",
+        "correct": false,
+        "rationale": "Duplicating examples does not add real diversity."
+      },
+      {
+        "text": "Have several reviewers check label quality",
+        "correct": true,
+        "rationale": "Checked labels stop reviewer mistakes becoming model mistakes."
+      }
+    ],
+    "explanation": "Add representative data, check labels and document sources. Deleting, duplicating or scaling the model does not fix the imbalance."
+  },
+  {
+    "id": "4.1-045",
+    "taskId": "4.1",
+    "kind": "case",
+    "services": [
+      "bedrock",
+      "bedrock-guardrails",
+      "bedrock-knowledge-bases"
+    ],
+    "scenario": "Cairnway Outfitters is launching Trailmate, a support assistant built on Amazon Bedrock that answers questions from the company's return-policy documents. Before launch, the review team lists its worries. Trailmate sometimes quotes return windows that are not in the documents. Marketing also wants to reuse the same safeguards on draft email text written by a separate system, and legal wants to understand the exposure if customers rely on wrong answers.",
+    "parts": [
+      {
+        "kind": "single",
+        "objectives": [
+          "4.1.2"
+        ],
+        "stem": "Marketing wants to check draft email text against the same guardrail without calling a foundation model. What should it use?",
+        "options": [
+          {
+            "text": "The ApplyGuardrail API",
+            "correct": true,
+            "rationale": "ApplyGuardrail checks text against a guardrail on its own, without calling a model."
+          },
+          {
+            "text": "An Amazon Bedrock Model Evaluation job",
+            "correct": false,
+            "rationale": "Evaluation scores models on datasets before use. It does not check individual drafts against a guardrail."
+          },
+          {
+            "text": "An Amazon SageMaker Model Card",
+            "correct": false,
+            "rationale": "A model card documents a model. It does not check text."
+          },
+          {
+            "text": "Provisioned Throughput for the model",
+            "correct": false,
+            "rationale": "Provisioned Throughput reserves model capacity. It does not apply a guardrail."
+          }
+        ],
+        "explanation": "The clue is checking text against a guardrail with no model call. The ApplyGuardrail API does exactly that."
+      },
+      {
+        "kind": "single",
+        "objectives": [
+          "4.1.1"
+        ],
+        "stem": "Trailmate quotes return windows that are not in the documents. Which responsible-AI feature does this undermine?",
+        "options": [
+          {
+            "text": "Inclusivity",
+            "correct": false,
+            "rationale": "Inclusivity is about designing for different users, not correctness."
+          },
+          {
+            "text": "Veracity",
+            "correct": true,
+            "rationale": "Veracity means correct, non-invented output. Quoting policy that is not in the documents breaks it."
+          },
+          {
+            "text": "Controllability",
+            "correct": false,
+            "rationale": "Controllability is about steering and monitoring a system, not factual correctness."
+          },
+          {
+            "text": "Governance",
+            "correct": false,
+            "rationale": "Governance is about best practices across the AI supply chain, not about invented answers."
+          }
+        ],
+        "explanation": "Invented return windows are a veracity problem, also called hallucination."
+      },
+      {
+        "kind": "multi",
+        "objectives": [
+          "4.1.4"
+        ],
+        "select": 2,
+        "stem": "Which are legal or business risks if customers rely on Trailmate's wrong answers? (Select TWO.)",
+        "options": [
+          {
+            "text": "Higher storage costs for policy documents",
+            "correct": false,
+            "rationale": "Storage cost is not the legal exposure described."
+          },
+          {
+            "text": "Underfitting of the foundation model",
+            "correct": false,
+            "rationale": "Underfitting is a training issue, not a legal risk."
+          },
+          {
+            "text": "Hallucinations, since the company can be held to what its chatbot promises",
+            "correct": true,
+            "rationale": "A promise made by the assistant may be expected to be honoured."
+          },
+          {
+            "text": "Slower page load times",
+            "correct": false,
+            "rationale": "Page speed is a performance issue."
+          },
+          {
+            "text": "End user risk, since people can be harmed when they act on wrong output",
+            "correct": true,
+            "rationale": "Customers who rely on wrong advice may suffer loss or harm."
+          }
+        ],
+        "explanation": "Invented promises and harm from acting on wrong output are named risks of generative AI."
+      }
+    ]
+  },
+  {
+    "id": "4.1-046",
+    "taskId": "4.1",
+    "kind": "multi",
+    "services": [
+      "bedrock-evaluations",
+      "sagemaker-model-cards"
+    ],
+    "objectives": [
+      "4.1.3"
+    ],
+    "stem": "Which steps are part of selecting a foundation model responsibly? (Select THREE.)",
+    "select": 3,
+    "options": [
+      {
+        "text": "Evaluate the model on prompts that resemble Cairnway's own",
+        "correct": true,
+        "rationale": "Testing on realistic prompts shows how the model behaves on your data."
+      },
+      {
+        "text": "Read the model's documentation for intended uses, limits and licence terms",
+        "correct": true,
+        "rationale": "Documentation shows what the model is meant for and under what terms it can be used."
+      },
+      {
+        "text": "Pick the model released most recently",
+        "correct": false,
+        "rationale": "Release date is not evidence of testing or suitability."
+      },
+      {
+        "text": "Match the level of testing and human oversight to the risk of the use case",
+        "correct": true,
+        "rationale": "Higher-risk uses need heavier testing and more human oversight."
+      },
+      {
+        "text": "Pick the model with the most parameters",
+        "correct": false,
+        "rationale": "More parameters means more energy, not more responsibility."
+      },
+      {
+        "text": "Pick the model with the highest public ranking only",
+        "correct": false,
+        "rationale": "A ranking says nothing about your data, risk or licence."
+      }
+    ],
+    "explanation": "Documentation review, evaluation on your own prompts and risk-matched oversight are responsible practices. Rankings, size and release date are not."
+  },
+  {
+    "id": "4.1-047",
+    "taskId": "4.1",
+    "kind": "single",
+    "services": [
+      "sagemaker-ai"
+    ],
+    "objectives": [
+      "4.1.6"
+    ],
+    "stem": "A model for Cairnway's demand forecast is poor on its training data and equally poor on new data. It only uses the day of the week as input. What does this describe?",
+    "options": [
+      {
+        "text": "Overfitting, caused by memorizing noise",
+        "correct": false,
+        "rationale": "Overfit models do well on training data. This one does not."
+      },
+      {
+        "text": "Underfitting, from a model that is too simple",
+        "correct": true,
+        "rationale": "A model that misses real patterns and is poor on both training and new data is underfit, which is high bias."
+      },
+      {
+        "text": "A good fit that needs no change",
+        "correct": false,
+        "rationale": "A good fit performs well on both sets. This one is poor on both."
+      },
+      {
+        "text": "High variance caused by far too much model complexity",
+        "correct": false,
+        "rationale": "High variance goes with overfitting and a complex model. This model is too simple."
+      }
+    ],
+    "explanation": "Poor performance on both sets, with too few inputs, is underfitting. It reflects high bias, a model too simple for the pattern."
+  },
+  {
+    "id": "4.1-048",
+    "taskId": "4.1",
+    "kind": "single",
+    "services": [
+      "bedrock-guardrails",
+      "bedrock-evaluations"
+    ],
+    "objectives": [
+      "4.1.2"
+    ],
+    "stem": "Trailmate replies sometimes repeat customers' card numbers and home addresses. Cairnway wants those masked in replies with the LEAST development effort. What should it do?",
+    "options": [
+      {
+        "text": "Add a denied topic for payment questions",
+        "correct": false,
+        "rationale": "Denied topics block a subject. Customers still need help with orders, and the filter would not mask data inside allowed replies."
+      },
+      {
+        "text": "Run an Amazon Bedrock Model Evaluation job each week",
+        "correct": false,
+        "rationale": "Evaluation scores a model on test datasets before use. It does not change live replies."
+      },
+      {
+        "text": "Write a custom program to scan every reply for digit strings",
+        "correct": false,
+        "rationale": "This can work but takes far more development effort than a managed safeguard built for the purpose."
+      },
+      {
+        "text": "Use sensitive information filters in a Guardrails guardrail",
+        "correct": true,
+        "rationale": "Sensitive information filters detect personally identifiable information and block or mask it, with no custom code."
+      }
+    ],
+    "explanation": "Masking personally identifiable information in replies is the job of sensitive information filters, a configuration option in Guardrails. The alternatives block topics, test models offline or need custom development."
+  },
+  {
+    "id": "4.1-049",
+    "taskId": "4.1",
+    "kind": "multi",
+    "services": [
+      "bedrock-guardrails"
+    ],
+    "objectives": [
+      "4.1.2"
+    ],
+    "stem": "Which two kinds of text can an Amazon Bedrock Guardrails guardrail evaluate for a generative AI application? (Select TWO.)",
+    "select": 2,
+    "options": [
+      {
+        "text": "The cloud provider's network logs",
+        "correct": false,
+        "rationale": "Network logs are not part of what a guardrail evaluates."
+      },
+      {
+        "text": "What the model sends back",
+        "correct": true,
+        "rationale": "A guardrail also checks the model's responses before the user sees them."
+      },
+      {
+        "text": "The model's training dataset",
+        "correct": false,
+        "rationale": "Guardrails do not scan the foundation model's training data."
+      },
+      {
+        "text": "What users send to the model",
+        "correct": true,
+        "rationale": "A guardrail checks user inputs before they reach the model."
+      },
+      {
+        "text": "The model's internal weights",
+        "correct": false,
+        "rationale": "Guardrails work on text and images in and out, not model internals."
+      }
+    ],
+    "explanation": "A guardrail checks both prompts and responses. It does not examine training data, model weights or network logs."
+  },
+  {
+    "id": "4.1-050",
+    "taskId": "4.1",
+    "kind": "match",
+    "services": [
+      "sagemaker-ground-truth"
+    ],
+    "objectives": [
+      "4.1.5"
+    ],
+    "stem": "Match each example to the dataset characteristic it shows.",
+    "pairs": [
+      {
+        "prompt": "Support questions in several languages are included",
+        "answer": "Inclusive and diverse"
+      },
+      {
+        "prompt": "No group has far fewer examples than the others",
+        "answer": "Balanced"
+      },
+      {
+        "prompt": "Every source is known and Cairnway may use it",
+        "answer": "Curated from reliable sources"
+      },
+      {
+        "prompt": "Several reviewers agree on each label",
+        "answer": "Accurately labelled"
+      }
+    ],
+    "distractors": [
+      "Fast to download"
+    ],
+    "explanation": "Diversity covers the people served, balance covers proportions, curation covers origin and permission, and accurate labelling covers the quality of the labels."
+  },
+  {
+    "id": "4.1-051",
+    "taskId": "4.1",
+    "kind": "order",
+    "services": [
+      "bedrock-guardrails"
+    ],
+    "objectives": [
+      "4.1.2"
+    ],
+    "stem": "Put in order what happens when a customer sends a message to Trailmate and a guardrail is attached.",
+    "steps": [
+      "The customer sends a message",
+      "The guardrail checks the message",
+      "The model generates a response",
+      "The guardrail checks the response",
+      "The customer sees the response, or a blocked message"
+    ],
+    "explanation": "A guardrail checks both what goes into the model and what comes out. The input check happens before the model runs, and the output check happens before the customer sees anything."
+  },
+  {
+    "id": "4.1-052",
+    "taskId": "4.1",
+    "kind": "single",
+    "objectives": [
+      "4.1.1"
+    ],
+    "stem": "Which statement correctly describes the difference between explainability and transparency in responsible AI?",
+    "options": [
+      {
+        "text": "Explainability means keeping a model's weights private so nobody can copy them; transparency means publishing those weights.",
+        "correct": false,
+        "rationale": "Neither term is about weights. Explainability is understanding results, and transparency is openness about AI use."
+      },
+      {
+        "text": "Explainability applies only to images; transparency applies only to text.",
+        "correct": false,
+        "rationale": "The terms are not tied to data types. Both apply to any AI system."
+      },
+      {
+        "text": "Explainability is understanding why a model gave a result; transparency is openness that AI is used and how it works.",
+        "correct": true,
+        "rationale": "These are the two definitions. Explainability is about reasons for an output, while transparency is about openness toward stakeholders."
+      },
+      {
+        "text": "The two terms mean the same thing and can be used interchangeably.",
+        "correct": false,
+        "rationale": "They are related but distinct dimensions in AWS's list of responsible AI dimensions."
+      }
+    ],
+    "explanation": "AWS lists explainability and transparency as separate dimensions. Explainability concerns understanding and evaluating outputs; transparency concerns letting people make informed choices about engaging with the system."
+  },
+  {
+    "id": "4.1-053",
+    "taskId": "4.1",
+    "kind": "single",
+    "objectives": [
+      "4.1.1"
+    ],
+    "stem": "Cairnway wants its multilingual support assistant to work well for customers with different languages and accessibility needs, and plans to involve those customers while designing it. Which responsible-AI feature is this?",
+    "options": [
+      {
+        "text": "Inclusivity",
+        "correct": true,
+        "rationale": "Inclusivity means designing for the full range of people who will use the system, including different languages and abilities, and involving them in the design."
+      },
+      {
+        "text": "Explainability",
+        "correct": false,
+        "rationale": "Explainability is about understanding why a model produced a result. It does not cover designing for different users."
+      },
+      {
+        "text": "Safety",
+        "correct": false,
+        "rationale": "Safety is about preventing harmful output and misuse. The goal here is serving a wide range of people."
+      },
+      {
+        "text": "Robustness",
+        "correct": false,
+        "rationale": "Robustness is about dependable results with unusual input. Serving different groups of users is a different goal."
+      }
+    ],
+    "explanation": "Designing for people with different languages and abilities, with their involvement, is the definition of inclusivity."
+  },
+  {
+    "id": "4.1-054",
+    "taskId": "4.1",
+    "kind": "multi",
+    "services": [
+      "sagemaker-clarify"
+    ],
+    "objectives": [
+      "4.1.5"
+    ],
+    "stem": "Which characteristics describe a responsible dataset for training a model? (Select TWO.)",
+    "select": 2,
+    "options": [
+      {
+        "text": "Balanced, with no group badly over- or under-represented",
+        "correct": true,
+        "rationale": "A balanced dataset avoids teaching the model one group best."
+      },
+      {
+        "text": "Diverse and inclusive of the people and languages it will serve",
+        "correct": true,
+        "rationale": "The data should cover the range of users the system will meet."
+      },
+      {
+        "text": "As large as possible, whatever its sources",
+        "correct": false,
+        "rationale": "Size without reliable sources adds risk."
+      },
+      {
+        "text": "Drawn only from Cairnway's best customers",
+        "correct": false,
+        "rationale": "A narrow sample does not represent real users."
+      },
+      {
+        "text": "Labelled quickly without review",
+        "correct": false,
+        "rationale": "Unchecked labels teach the model mistakes."
+      }
+    ],
+    "explanation": "Responsible datasets are diverse and balanced. Size alone, a narrow sample or unreviewed labels are not."
+  },
+  {
+    "id": "4.1-055",
+    "taskId": "4.1",
+    "kind": "single",
+    "services": [
+      "sagemaker-ai"
+    ],
+    "objectives": [
+      "4.1.6"
+    ],
+    "stem": "Which statement best describes a model with high variance?",
+    "options": [
+      {
+        "text": "It is too simple and misses real patterns in the data",
+        "correct": false,
+        "rationale": "This describes high bias and underfitting."
+      },
+      {
+        "text": "It always gives the same answer regardless of input",
+        "correct": false,
+        "rationale": "A model that ignores input is extreme underfitting, not high variance."
+      },
+      {
+        "text": "It is too sensitive to the training data it saw",
+        "correct": true,
+        "rationale": "High variance means over-sensitivity to the training data, which leads to overfitting."
+      },
+      {
+        "text": "It performs equally well on training and test data",
+        "correct": false,
+        "rationale": "Equal performance on both suggests a good fit."
+      }
+    ],
+    "explanation": "High variance is over-sensitivity to the training data. High bias is the opposite: a model too simple to capture the pattern."
+  },
+  {
+    "id": "4.1-056",
+    "taskId": "4.1",
+    "kind": "match",
+    "objectives": [
+      "4.1.4"
+    ],
+    "stem": "Match each Cairnway situation to the generative AI legal risk it illustrates.",
+    "pairs": [
+      {
+        "prompt": "Ad copy closely resembles a competitor's copyrighted text",
+        "answer": "IP infringement claim"
+      },
+      {
+        "prompt": "A hiring tool ranks equally qualified applicants lower by background",
+        "answer": "Biased model output"
+      },
+      {
+        "prompt": "A screenshot of an offensive chatbot reply spreads online",
+        "answer": "Loss of customer trust"
+      },
+      {
+        "prompt": "A chatbot promises a refund policy that does not exist",
+        "answer": "Hallucination"
+      },
+      {
+        "prompt": "A customer is hurt after following unsafe gear advice",
+        "answer": "End user risk"
+      }
+    ],
+    "explanation": "Copied protected text is an IP risk, unequal treatment is bias, a viral offensive reply damages trust, an invented promise is a hallucination and harm from acting on advice is end user risk."
+  },
+  {
+    "id": "4.1-057",
+    "taskId": "4.1",
+    "kind": "single",
+    "services": [
+      "bedrock-evaluations",
+      "bedrock-guardrails",
+      "sagemaker-model-monitor"
+    ],
+    "objectives": [
+      "4.1.2",
+      "4.1.3"
+    ],
+    "stem": "Cairnway is comparing three foundation models for Trailmate. Before choosing, it wants accuracy, robustness and toxicity scores from its own sample prompts, with the LEAST operational overhead. Which solution meets these requirements?",
+    "options": [
+      {
+        "text": "Deploy each model and have staff read replies at random",
+        "correct": false,
+        "rationale": "Human review is useful but slow and not systematic. It has more overhead than an automatic job."
+      },
+      {
+        "text": "Attach an Amazon Bedrock Guardrails guardrail to each candidate model and compare",
+        "correct": false,
+        "rationale": "Guardrails filter live traffic. They do not produce comparison scores for choosing a model."
+      },
+      {
+        "text": "Use Amazon SageMaker Model Monitor on each model",
+        "correct": false,
+        "rationale": "Model Monitor watches deployed models over time, and it is not the tool for comparing candidate models."
+      },
+      {
+        "text": "Run an automatic Bedrock Model Evaluation job on Cairnway's own prompts",
+        "correct": true,
+        "rationale": "Automatic evaluations compute metrics such as accuracy, robustness and toxicity on built-in or your own datasets, without building test tooling."
+      }
+    ],
+    "explanation": "Choosing between models before launch calls for Bedrock Model Evaluation, which scores accuracy, robustness and toxicity automatically on your own data."
+  },
+  {
+    "id": "4.1-058",
+    "taskId": "4.1",
+    "kind": "single",
+    "services": [
+      "sagemaker-ground-truth"
+    ],
+    "objectives": [
+      "4.1.5"
+    ],
+    "stem": "Cairnway's fraud labels were attached by contractors who were rushed and sometimes disagreed. Which step would MOST directly improve the dataset?",
+    "options": [
+      {
+        "text": "Add more unlabelled rows from the same sources as before",
+        "correct": false,
+        "rationale": "Unlabelled rows do not fix wrong labels, and the model would still learn the labelling mistakes."
+      },
+      {
+        "text": "Increase the model's size",
+        "correct": false,
+        "rationale": "A bigger model would learn the label errors as well, and it does not repair the data."
+      },
+      {
+        "text": "Have several reviewers re-check a sample of labels",
+        "correct": true,
+        "rationale": "Labels are what supervised models learn from, so checking that they are accurate and consistent is part of preparing a responsible dataset."
+      },
+      {
+        "text": "Delete the test data",
+        "correct": false,
+        "rationale": "Test data helps detect problems. Removing it would hide them."
+      }
+    ],
+    "explanation": "Inconsistent labels are the clue. If labellers are careless or biased the model learns their mistakes, so check label quality."
+  }
+]
