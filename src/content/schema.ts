@@ -135,3 +135,20 @@ export const scoredCount = (item: Item) => (item.kind === 'case' ? item.parts.le
 
 /** The text that identifies an item in lists: its stem, or a case study's scenario. */
 export const itemSummary = (item: Item) => (item.kind === 'case' ? item.scenario : item.stem)
+
+/** Domains lessons may link to: AWS documentation and product pages, and the sites of AWS-built tools. */
+const LESSON_LINK = /^https:\/\/(docs\.aws\.amazon\.com|aws\.amazon\.com|kiro\.dev|strandsagents\.com|modelcontextprotocol\.io)\//
+
+export const lessonMetaSchema = z.object({
+  taskId: z.string().regex(TASK_ID),
+  /** Date the lesson's AWS facts were last checked. */
+  updated: z.iso.date(),
+  /** One or two sentences: what the learner must take away. */
+  tldr: nonEmpty,
+  /** Objective ids the lesson teaches; a content test requires all of the task's. */
+  objectivesCovered: z.array(z.string()).min(1),
+  /** Sources for the lesson's AWS facts. */
+  links: z.array(z.object({ title: nonEmpty, url: z.url().regex(LESSON_LINK) })).min(1),
+})
+
+export type LessonMeta = z.infer<typeof lessonMetaSchema>

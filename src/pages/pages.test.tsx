@@ -31,6 +31,21 @@ describe('pages', () => {
     expect(await renderAt('/nope')).toHaveTextContent('Page not found')
   })
 
+  it('renders a lesson with its service cards and marks it read', async () => {
+    const user = userEvent.setup()
+    expect(await renderAt('/learn/3.1')).toHaveTextContent('3.1')
+    expect(screen.getByRole('heading', { name: 'Exam traps' })).toBeInTheDocument()
+    expect(screen.getByText(/Managed RAG: connects foundation models/)).toBeInTheDocument()
+    await user.click(screen.getByRole('button', { name: 'Mark as read' }))
+    expect(getProgress().lessonsRead).toEqual(['3.1'])
+  })
+
+  it('lists every task on the Learn index, linking those with lessons', async () => {
+    expect(await renderAt('/learn')).toHaveTextContent('Learn')
+    expect(screen.getByRole('link', { name: /3\.1 Describe design considerations/ })).toBeInTheDocument()
+    expect(screen.getAllByText(/coming soon/).length).toBeGreaterThan(0)
+  })
+
   it('lists every domain on the practice picker', async () => {
     expect(await renderAt('/practice')).toHaveTextContent('Practice')
     expect(screen.getAllByText(/^Domain \d:/)).toHaveLength(5)

@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project status
 
-Phases 0 (scaffold) and 1 (quiz engine) are done: tooling, Pages deploy, the blueprint, the service catalog, the item schema, the content tests and scripts, practice, the question bank browser, the mock exam, the progress store and the progress page. The question bank has only 6 seed items, one or more of each kind. Lessons, the full bank and the Explore pillar don't exist yet. **`PLAN.md` is the build plan and sets the order of work.** It records the decisions made, the blueprint → content map, the item kinds, the Explore pillar and the phases. As parts get built, describe them here (commands, file layout, gotchas), and mark phases done in `PLAN.md` §8 with the date.
+Phases 0 (scaffold) and 1 (quiz engine) are done: tooling, Pages deploy, the blueprint, the service catalog, the item schema, the content tests and scripts, practice, the question bank browser, the mock exam, the progress store and the progress page. Phase 2 (lessons) has started: the lesson pipeline and the reference lesson `3.1.mdx` exist. The question bank has only 6 seed items, one or more of each kind. The other 13 lessons, the full bank and the Explore pillar don't exist yet. **`PLAN.md` is the build plan and sets the order of work.** It records the decisions made, the blueprint → content map, the item kinds, the Explore pillar and the phases. As parts get built, describe them here (commands, file layout, gotchas), and mark phases done in `PLAN.md` §8 with the date.
 
 ## Purpose
 
@@ -55,6 +55,12 @@ Every scenario uses one invented company, **Cairnway Outfitters**, an online out
   - the key is the longest option at most 40% of the time
   - no duplicate stems or scenarios
   - no option letters in explanations or rationales, so options can be reordered
+- **Lessons** (`src/content/lessons/<taskId>.mdx`; `3.1.mdx` is the reference template):
+  - Each file exports `meta`, validated by `lessonMetaSchema`: `taskId`, `updated` (the date its AWS facts were checked), `tldr`, `objectivesCovered` (all of the task's objective ids), and `links` to AWS pages that back the lesson's facts.
+  - The body has these sections, in order: `## Big idea`, `## Key concepts` (at least one `###` per objective), `## At Cairnway`, `## AWS services` (a `<Services ids={['…']} />` list from the catalog) and `## Exam traps` (`<Callout title="…">` boxes).
+  - `lessons.test.ts` enforces this. `Services`, `Callout` and router-aware links come from `src/lessons/components.tsx`.
+  - MDX is compiled with `remark-gfm`, so tables work, but a bare `{` or `<` in prose breaks the build.
+  - `/learn` lists tasks by domain. `/learn/:taskId` shows the lesson, the guide's objectives, the sources, Mark as read, practice links, and previous/next navigation.
 - **Quiz engine** (`src/quiz/`):
   - `grade.ts`: a `Response` per kind. `gradeParts()` returns one result per scored question (one per case part, otherwise one). `grade()` is all-or-nothing over the parts, and practice stats and streaks use it. The mock score counts the parts. `isAnswered()` treats an ordering item as always answered, so the mock runner tracks "touched" itself. `answer.ts` `freshResponse()` starts ordering items scrambled.
   - `pools.ts`: `practicePool(bank, extended)` applies the extended-kinds toggle. `taskWeights()` splits each domain's weight among its tasks by objective count.

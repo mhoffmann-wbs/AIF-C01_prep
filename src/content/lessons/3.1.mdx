@@ -1,0 +1,189 @@
+export const meta = {
+  taskId: '3.1',
+  updated: '2026-11-23',
+  tldr: 'Building on a foundation model means making six choices: which model, how to tune its answers with inference parameters, how to give it your own data (RAG, with a vector database), how far to customize it, and whether it should act on its own as an agent. The cheapest option that meets the requirement usually wins on the exam.',
+  objectivesCovered: ['3.1.1', '3.1.2', '3.1.3', '3.1.4', '3.1.5', '3.1.6'],
+  links: [
+    { title: 'Amazon Bedrock: inference parameters', url: 'https://docs.aws.amazon.com/bedrock/latest/userguide/inference-parameters.html' },
+    { title: 'Amazon Bedrock: prompt caching', url: 'https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-caching.html' },
+    { title: 'Amazon Bedrock Knowledge Bases', url: 'https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base.html' },
+    { title: 'Knowledge Bases: supported vector stores', url: 'https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup.html' },
+    { title: 'Amazon Bedrock: customizing models', url: 'https://docs.aws.amazon.com/bedrock/latest/userguide/custom-models.html' },
+    { title: 'Amazon Bedrock Model Distillation', url: 'https://docs.aws.amazon.com/bedrock/latest/userguide/model-distillation.html' },
+    { title: 'Amazon Bedrock: Provisioned Throughput', url: 'https://docs.aws.amazon.com/bedrock/latest/userguide/prov-throughput.html' },
+    { title: 'Amazon Bedrock pricing (batch inference)', url: 'https://aws.amazon.com/bedrock/pricing/' },
+    { title: 'Amazon Bedrock Agents (Classic)', url: 'https://docs.aws.amazon.com/bedrock/latest/userguide/agents.html' },
+    { title: 'Amazon Bedrock AgentCore', url: 'https://aws.amazon.com/bedrock/agentcore/' },
+  ],
+}
+
+## Big idea
+
+A **foundation model** (FM) is a large model trained on huge amounts of general data, such as a large language model that writes text. You rarely build one yourself. Instead you *use* one, usually through a managed service such as **Amazon Bedrock**, and build your application around it.
+
+That still leaves you with design decisions, and this task is about exactly those:
+
+1. **Which model?** Models differ in what they can do, how fast they are and what they cost.
+2. **How should it answer?** Settings called *inference parameters* make answers more predictable or more creative, shorter or longer.
+3. **How does it learn about *your* business?** A model knows nothing about your products or policies. *Retrieval Augmented Generation* (RAG) hands it the right documents at question time.
+4. **Where do those documents live?** RAG needs a *vector database* that can find text by meaning.
+5. **How far should you customize?** From writing better prompts (cheap) to training a new model (very expensive).
+6. **Should it act?** An *agent* doesn't just answer: it plans steps and uses tools, such as looking up an order.
+
+A good rule for the whole exam: **pick the simplest, cheapest option that meets the stated requirement.**
+
+## Key concepts
+
+### Choosing a foundation model
+
+There is no single best model. You pick the one that fits the job. These are the criteria the exam guide names:
+
+| Criterion | The question to ask |
+|---|---|
+| **Cost** | What do we pay per request? Most models charge per *token* (a token is a piece of a word), for both input and output. |
+| **Modality** | What goes in and what comes out: text, images, audio, video? A *multi-modal* model handles more than one. |
+| **Latency** | How fast must the answer arrive? A live chat needs speed; an overnight report doesn't. |
+| **Multi-lingual** | Does it need to understand and write other languages? |
+| **Model size and complexity** | Bigger models are often more capable but slower and more expensive. A small model may be enough for a simple task. |
+| **Customization** | Can we fine-tune or otherwise adapt this model if we need to? |
+| **Input/output length** | How much text can it read at once (its *context window*) and how long can its answers be? Long contracts need a big context window. |
+| **Prompt caching** | Does it support caching a long, repeated part of the prompt to save time and money? |
+
+**Prompt caching** deserves a closer look. Many applications send the same long instructions or the same document with every request. With prompt caching on Amazon Bedrock, that repeated part can be stored and reused. AWS says it helps "reduce inference response latency and input token costs". Two details: only supported models offer it, and writing to the cache can cost more than normal input, so the savings come from *reusing* the cached part many times.
+
+Amazon Bedrock offers models from many providers (including Amazon's own Nova models) behind one API, so you can compare them and switch without rebuilding your application. **Amazon Bedrock Model Evaluation** helps you compare candidates on your own data.
+
+### Inference parameters
+
+**Inference** is the moment the model produces an answer. *Inference parameters* are settings you send with each request. A language model writes one token at a time, each time choosing from a list of likely next tokens. The parameters shape that choice:
+
+| Parameter | What it does | Turn it… |
+|---|---|---|
+| **Temperature** | Controls randomness. Low temperature favours the most likely token; high temperature gives less likely tokens more chance. | **down** for consistent, factual answers (support, data extraction); **up** for creative variety (slogans, story ideas). |
+| **Top P** | The model only considers the most likely tokens whose probabilities add up to P (for example, the top 90%). | down to keep answers focused. |
+| **Top K** | The model only considers the K most likely tokens. | down to keep answers focused. |
+| **Response length** (maximum tokens) | Caps how many tokens the answer may have. | down to limit cost and length. The model doesn't plan for the cap: it simply stops, sometimes mid-sentence. |
+| **Stop sequences** | Characters that make the model stop writing, such as the end of a list item. | use when the output must end at a known point. |
+
+Exact names and ranges differ from model to model, but the ideas are the same.
+
+**Input length** matters too: everything you send counts toward the context window and toward your bill. Longer prompts mean higher cost and usually slower answers.
+
+### Retrieval Augmented Generation (RAG)
+
+A foundation model only knows what was in its training data. It doesn't know Cairnway's return policy, yesterday's price change or a customer's order. Asked anyway, it may **hallucinate**: give a confident answer that is wrong.
+
+**RAG** fixes this without retraining the model. When a question arrives, the application first *retrieves* the most relevant pieces of your own documents, then *augments* the prompt with them, and the model *generates* an answer based on that text. AWS describes RAG as a technique that "uses information from data sources to improve the relevancy and accuracy of generated responses."
+
+RAG works in two phases:
+
+1. **Preparing the data (ingestion)**, done ahead of time and repeated when documents change:
+   1. Collect the documents, for example in Amazon S3.
+   2. Split them into small **chunks**.
+   3. Turn each chunk into an **embedding**: a list of numbers (a *vector*) that captures its meaning. Texts with similar meaning get similar vectors.
+   4. Store the embeddings in a **vector database**.
+2. **Answering a question**, every time:
+   1. Turn the question into an embedding the same way.
+   2. Search the vector database for the chunks closest in meaning.
+   3. Add those chunks to the prompt.
+   4. The model answers from them and can cite its sources.
+
+**Business applications:** customer-support assistants that answer from policies and manuals, internal search over company wikis, product Q&A on a website, and assistants for staff who need answers from long regulations or contracts. Because the documents are read at question time, the answers stay **up to date** without retraining: update the document and re-ingest it.
+
+**Amazon Bedrock Knowledge Bases** runs this whole pipeline for you: it connects foundation models and agents to your company's data sources. AWS offers a fully managed knowledge base, where Bedrock runs the storage and retrieval, or a customer-managed one, where you choose and run the vector store yourself.
+
+### Vector databases on AWS
+
+A vector database stores embeddings and answers one kind of question very fast: *which stored vectors are closest to this one?* That is called a **similarity search** (or *k-nearest-neighbour* search). A normal key-value lookup can't do it.
+
+The exam guide names these AWS services for storing embeddings:
+
+| Service | In plain words |
+|---|---|
+| **Amazon OpenSearch Service** | A search and analytics service with built-in vector search. A common choice for RAG, also available serverless. |
+| **Amazon Aurora** (PostgreSQL-compatible) | A relational database. With the **pgvector** extension it stores vectors in tables and searches them with SQL. |
+| **Amazon RDS for PostgreSQL** | Also supports **pgvector**, for teams already running PostgreSQL on RDS. |
+| **Amazon Neptune** | A graph database. **Neptune Analytics** can store vectors and supports *GraphRAG*, which combines relationships between things with similarity search. |
+
+Knowledge Bases can also use other stores, including Amazon S3 Vectors and some third-party databases. For the exam, remember the four above and the idea: **embeddings go into a vector store that supports similarity search**.
+
+### Customization approaches and their cost
+
+If a model doesn't do what you need out of the box, you can adapt it. The options form a ladder: each step costs more time, data and money than the one before.
+
+| Approach | What happens | Main costs | Use it when… |
+|---|---|---|---|
+| **In-context learning** (prompt engineering) | You put instructions and examples into the prompt. The model itself doesn't change. | No training. Longer prompts cost more tokens on every request. | Always try this first. |
+| **RAG** | Relevant documents are retrieved and added to each prompt. The model doesn't change. | Running a vector store, creating embeddings, retrieval on each request. | The model needs your facts, especially facts that change. |
+| **Fine-tuning** | You train an existing model further on your own *labeled* examples (prompt and ideal answer). The model's weights change. | A training job, a curated dataset, and hosting the custom model. | You need a consistent style, format or specialised task behaviour that prompting can't achieve. |
+| **Model distillation** | A large "teacher" model generates answers that are used to train a smaller "student" model. | A training job, but the result is cheaper and faster to run. | You want near-large-model quality at small-model speed and cost for a specific task. |
+| **Continued pre-training** | You train an existing model further on large amounts of *unlabeled* text from your domain. | Large datasets and long training jobs. | The model must learn a whole field's language, such as specialised legal or medical vocabulary. |
+| **Pre-training from scratch** | You build a new foundation model. | Enormous: huge datasets, compute and expertise. | Almost never the right answer for a business, and almost never the right exam answer. |
+
+Two facts to remember about Amazon Bedrock:
+
+- Its customization methods currently include **supervised fine-tuning**, **reinforcement fine-tuning** and **distillation**. AWS describes distillation as transferring knowledge "from a larger more intelligent model (known as teacher) to a smaller, faster, cost-efficient model (known as student)."
+- To use a model you customized, you must buy **Provisioned Throughput**: a fixed hourly price for reserved capacity. On-demand pricing per token is for the base models.
+
+Pricing also depends on *how* you call a model. **On-demand** charges per token. **Batch inference** processes many requests together, not in real time; AWS offers select models in batch at a 50% lower price than on-demand. **Provisioned Throughput** gives reserved capacity at a fixed hourly cost.
+
+### AI agents
+
+A chatbot answers. An **agent** acts. It uses a foundation model to work out *what to do*, breaks a goal into steps, and carries them out by calling **tools**: APIs, databases, knowledge bases, even other agents. It can remember earlier steps of the conversation.
+
+A request like "I want to return the tent from my last order" is a good example. An agent can look up the customer's last order, check it against the return policy, create the return, and confirm the label. A plain chatbot could only explain the policy.
+
+**Business applications:** customer-service agents that resolve cases end to end, booking and scheduling, IT help desks that run diagnostics, back-office automation such as processing claims or invoices, and research assistants that search, compare and summarise.
+
+On AWS:
+
+- **Amazon Bedrock AgentCore** is the platform for running agents in production, securely and at scale, with any framework and any model.
+- **Strands Agents** is an open-source toolkit from AWS for building agents in code.
+- The original **Amazon Bedrock Agents** feature is now called *Agents Classic* and no longer accepts new sign-ups. You may still see it in study material.
+
+Because an agent takes real actions, give it only the permissions it needs, and require a human to approve risky steps such as refunds above a limit.
+
+## At Cairnway
+
+Cairnway Outfitters wants a support assistant, "Trailmate", for its online shop. Here is how the team works through the six decisions:
+
+- **Model.** Customers write in English, German and Spanish, and expect answers within seconds. The team compares three multi-lingual models on 200 real support questions with Amazon Bedrock Model Evaluation, and picks a mid-sized model: accurate enough, fast, and much cheaper per token than the largest option.
+- **Inference parameters.** Support answers must be consistent and factual, so the temperature is set low. A response-length cap keeps answers short and costs predictable. The marketing team, which uses the same model to brainstorm product names, uses a higher temperature.
+- **Prompt caching.** Every request starts with the same 3,000-token set of instructions and tone guidelines. Caching that part makes answers faster and cuts input costs.
+- **RAG.** Return policies, size guides and product manuals change every season. Rather than training a model on them, the team loads them into S3 and sets up **Amazon Bedrock Knowledge Bases**, with Amazon OpenSearch Service as the vector store. When a policy changes, they update the document and re-sync.
+- **Customization.** Prompting plus RAG already gives good answers. Fine-tuning would cost a training job and Provisioned Throughput and wouldn't keep the policies current, so the team skips it for now.
+- **Agent.** For phase two, Trailmate becomes an agent: it can call Cairnway's order API to check order status and start returns, deployed on **Amazon Bedrock AgentCore**. Refunds over €200 still need a human to approve them.
+
+## AWS services
+
+<Services ids={['bedrock', 'bedrock-knowledge-bases', 'bedrock-evaluations', 'opensearch', 'aurora', 'rds', 'neptune', 'bedrock-agentcore', 'strands-agents', 'nova']} />
+
+## Exam traps
+
+<Callout title="Up-to-date or company-specific facts → RAG, not fine-tuning">
+  <p>If the requirement mentions the latest documents, frequently changing data or answers grounded in company sources, the answer is RAG (often Amazon Bedrock Knowledge Bases). Fine-tuning teaches behaviour and style. It doesn't keep facts current, and every change would mean training again.</p>
+</Callout>
+
+<Callout title="Consistent, less random answers → lower the temperature">
+  <p>Response length controls how long an answer may be, not how predictable it is. Top P and top K also narrow the choices, but the classic exam answer for "more deterministic" is a lower temperature. For "more creative or varied", raise it.</p>
+</Callout>
+
+<Callout title="LEAST operational overhead → the managed option">
+  <p>Bedrock Knowledge Bases over a self-built chunk-embed-store pipeline. Bedrock over hosting an open-source model on EC2. Watch for the words "least effort", "fully managed" and "without managing infrastructure".</p>
+</Callout>
+
+<Callout title="Cheapest customization first">
+  <p>Order of cost: prompt engineering and in-context learning → RAG → fine-tuning or distillation → continued pre-training → pre-training from scratch. An answer that trains a model from scratch is almost always a distractor.</p>
+</Callout>
+
+<Callout title="Custom model on Bedrock → Provisioned Throughput">
+  <p>A fine-tuned or distilled model on Amazon Bedrock is used through purchased Provisioned Throughput, billed by the hour. Base models can be used on demand, per token. A large non-urgent workload points to batch inference.</p>
+</Callout>
+
+<Callout title="Vector store means similarity search">
+  <p>Embeddings belong in a store that supports vector search: OpenSearch Service, Aurora or RDS for PostgreSQL with pgvector, or Neptune. Distractors offer databases or storage that can hold data but can't search it by meaning, such as S3 Glacier.</p>
+</Callout>
+
+<Callout title="Answer vs. act">
+  <p>If the scenario needs the system to take actions (call APIs, update records, complete multi-step tasks), the answer involves an agent. If it only needs to answer questions from documents, RAG is enough.</p>
+</Callout>
