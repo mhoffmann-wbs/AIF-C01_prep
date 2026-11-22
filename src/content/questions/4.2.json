@@ -1,0 +1,1215 @@
+[
+  {
+    "id": "4.2-001",
+    "taskId": "4.2",
+    "kind": "single",
+    "objectives": [
+      "4.2.1"
+    ],
+    "stem": "Cairnway Outfitters is building a model to decide which customers qualify for buy now, pay later. Regulators require the company to give refused customers clear reasons. A deep neural network scored slightly higher in testing than a decision tree. Which choice BEST meets the requirements?",
+    "options": [
+      {
+        "text": "Use the neural network, because accuracy matters most",
+        "correct": false,
+        "rationale": "Its reasoning is too complex to follow, so it can't easily supply the reasons regulators require."
+      },
+      {
+        "text": "Use the decision tree, accepting a small loss in accuracy",
+        "correct": true,
+        "rationale": "A decision tree shows the questions it asked, so Cairnway can give and defend reasons."
+      },
+      {
+        "text": "Use the neural network and publish its internal numbers to customers",
+        "correct": false,
+        "rationale": "Billions of numbers are not an explanation a customer can follow."
+      },
+      {
+        "text": "Use whichever model is cheaper and skip documenting the decision",
+        "correct": false,
+        "rationale": "Cost does not meet a legal need for reasons, and undocumented decisions are hard to defend."
+      }
+    ],
+    "explanation": "Regulation and the need to give reasons are the clues. A simple, interpretable model is the better choice for high-stakes decisions, even at some cost in accuracy."
+  },
+  {
+    "id": "4.2-002",
+    "taskId": "4.2",
+    "kind": "single",
+    "objectives": [
+      "4.2.1"
+    ],
+    "stem": "Which statement describes a black-box model?",
+    "options": [
+      {
+        "text": "Its decisions can be read as a short list of questions asked in a fixed order",
+        "correct": false,
+        "rationale": "This describes a decision tree, which is a transparent model."
+      },
+      {
+        "text": "It shows exactly how much each input counted toward a result",
+        "correct": false,
+        "rationale": "That is typical of a linear model, which is easy to explain."
+      },
+      {
+        "text": "It is always less accurate than a simple model",
+        "correct": false,
+        "rationale": "Black-box models are often more accurate on complex tasks such as language and images."
+      },
+      {
+        "text": "Inputs and outputs are visible, but the reasoning is too complex to follow",
+        "correct": true,
+        "rationale": "This is the defining feature: you can't read why it produced a particular result."
+      }
+    ],
+    "explanation": "A black box hides its reasoning, as deep neural networks and foundation models do. Their strength is often accuracy, while their weakness is that they are hard to audit and defend."
+  },
+  {
+    "id": "4.2-003",
+    "taskId": "4.2",
+    "kind": "single",
+    "objectives": [
+      "4.2.1",
+      "4.2.2"
+    ],
+    "services": [
+      "sagemaker-clarify"
+    ],
+    "stem": "A Cairnway customer asks why a deep-learning model refused her order on credit. The team wants to see how much each input, such as order history, pushed that single prediction up or down. What provides this?",
+    "options": [
+      {
+        "text": "Feature attributions from SageMaker Clarify",
+        "correct": true,
+        "rationale": "Feature attributions score each input's influence on one prediction, which is how a black box can be explained after the fact."
+      },
+      {
+        "text": "A SageMaker Model Card describing the whole model",
+        "correct": false,
+        "rationale": "A model card documents intended use and tests. It doesn't say why one prediction came out as it did."
+      },
+      {
+        "text": "An AWS AI Service Card for the service used",
+        "correct": false,
+        "rationale": "This documents AWS's own services. It does not explain a specific prediction by Cairnway's model."
+      },
+      {
+        "text": "The size of the model's training dataset overall",
+        "correct": false,
+        "rationale": "Dataset size does not show which inputs drove one decision."
+      }
+    ],
+    "explanation": "Asking why one specific prediction happened is explainability, and feature attributions answer it. A model card is documentation of the model as a whole."
+  },
+  {
+    "id": "4.2-004",
+    "taskId": "4.2",
+    "kind": "single",
+    "objectives": [
+      "4.2.1"
+    ],
+    "stem": "Cairnway's Trailmate support page says \"You are chatting with Cairnway's AI assistant\" and explains what it can and can't do. Which concept does this support?",
+    "options": [
+      {
+        "text": "Feature attribution",
+        "correct": false,
+        "rationale": "Attribution scores how much each input influenced one prediction. It is about explaining results, not disclosing AI use."
+      },
+      {
+        "text": "Overfitting",
+        "correct": false,
+        "rationale": "This is when a model learns training data too closely. It is not about disclosure."
+      },
+      {
+        "text": "Transparency",
+        "correct": true,
+        "rationale": "Transparency is openness about the system, such as that AI is involved and what its limits are."
+      },
+      {
+        "text": "Prompt injection",
+        "correct": false,
+        "rationale": "This is an attack that manipulates a model through prompts. It is unrelated to disclosure."
+      }
+    ],
+    "explanation": "Telling people that AI is involved and what it can do is transparency. Explainability, in contrast, is about why a particular output happened."
+  },
+  {
+    "id": "4.2-005",
+    "taskId": "4.2",
+    "kind": "single",
+    "objectives": [
+      "4.2.1"
+    ],
+    "stem": "A Cairnway analyst says that a small decision tree is interpretable, but a foundation model is not. What does \"interpretable\" mean here?",
+    "options": [
+      {
+        "text": "The model can be run without internet access",
+        "correct": false,
+        "rationale": "Where a model runs is unrelated to whether people can understand it."
+      },
+      {
+        "text": "A person can follow how the model works inside",
+        "correct": true,
+        "rationale": "Interpretability is how directly a person can understand a model's inner workings."
+      },
+      {
+        "text": "The model is written in an open programming language",
+        "correct": false,
+        "rationale": "Open code doesn't make a model's reasoning easy to follow."
+      },
+      {
+        "text": "The model has been tested on a large benchmark",
+        "correct": false,
+        "rationale": "Testing shows performance and doesn't make inner workings understandable."
+      }
+    ],
+    "explanation": "Interpretability means a person can follow the inner workings, as with a small decision tree. Explainability is broader and can also be met by adding explanations to a black box."
+  },
+  {
+    "id": "4.2-006",
+    "taskId": "4.2",
+    "kind": "single",
+    "objectives": [
+      "4.2.2"
+    ],
+    "services": [
+      "sagemaker-model-cards"
+    ],
+    "stem": "Cairnway Outfitters is about to deploy its credit-eligibility model. Auditors want one place that records the model's intended use, risk rating, training details and evaluation results. Which solution meets these requirements with the LEAST effort?",
+    "options": [
+      {
+        "text": "Amazon Bedrock Guardrails",
+        "correct": false,
+        "rationale": "Guardrails applies safeguards to model input and output. It does not document a model."
+      },
+      {
+        "text": "Amazon SageMaker Data Wrangler",
+        "correct": false,
+        "rationale": "Data Wrangler prepares data for machine learning. It does not record model documentation."
+      },
+      {
+        "text": "Amazon SageMaker Model Cards",
+        "correct": true,
+        "rationale": "A model card documents these details in one place and versions each edit, giving auditors a clear record."
+      },
+      {
+        "text": "AWS Budgets",
+        "correct": false,
+        "rationale": "Budgets tracks cost and sends alerts. It doesn't document a model."
+      }
+    ],
+    "explanation": "Documenting intended use, risk rating, training details and evaluation results is exactly what a SageMaker Model Card is for. It is documentation people write, which makes a model auditable."
+  },
+  {
+    "id": "4.2-007",
+    "taskId": "4.2",
+    "kind": "single",
+    "objectives": [
+      "4.2.2"
+    ],
+    "stem": "Before adopting an AWS AI service for Trailmate, Cairnway wants to read AWS's own documentation about the service's intended use cases and limitations. Where should the team look?",
+    "options": [
+      {
+        "text": "A SageMaker Model Card created by Cairnway",
+        "correct": false,
+        "rationale": "Model cards are written by you for your own models, not by AWS about its services."
+      },
+      {
+        "text": "An Amazon CloudWatch dashboard",
+        "correct": false,
+        "rationale": "CloudWatch shows metrics and logs about running resources, not documentation of an AI service's limits."
+      },
+      {
+        "text": "An AWS Budgets report",
+        "correct": false,
+        "rationale": "Budgets reports on spending, not on a service's intended use."
+      },
+      {
+        "text": "AWS AI Service Cards",
+        "correct": true,
+        "rationale": "These are AWS's documentation for its AI services and models, covering intended uses, limitations and responsible AI design choices."
+      }
+    ],
+    "explanation": "AI Service Cards are published by AWS about its own services. SageMaker Model Cards are created by you for models you build or deploy."
+  },
+  {
+    "id": "4.2-008",
+    "taskId": "4.2",
+    "kind": "single",
+    "objectives": [
+      "4.2.2"
+    ],
+    "services": [
+      "bedrock-evaluations"
+    ],
+    "stem": "Cairnway Outfitters wants evidence of how three candidate models behave on its own Trailmate prompts, with accuracy, robustness and toxicity results it can keep in a report. Which AWS capability should it use?",
+    "options": [
+      {
+        "text": "Amazon Bedrock Model Evaluation",
+        "correct": true,
+        "rationale": "It measures model behaviour on your prompts and produces results you can keep as evidence."
+      },
+      {
+        "text": "Amazon SageMaker Model Cards",
+        "correct": false,
+        "rationale": "A model card documents a model. It does not run tests on candidate models for you."
+      },
+      {
+        "text": "Amazon SageMaker Feature Store",
+        "correct": false,
+        "rationale": "Feature Store stores and shares ML features. It doesn't evaluate models."
+      },
+      {
+        "text": "Amazon Bedrock Prompt Management",
+        "correct": false,
+        "rationale": "Prompt Management stores and versions prompts. It doesn't test models."
+      }
+    ],
+    "explanation": "Testing candidate models on your own prompts for accuracy, robustness and toxicity is Bedrock Model Evaluation. The report becomes evidence for transparency."
+  },
+  {
+    "id": "4.2-009",
+    "taskId": "4.2",
+    "kind": "single",
+    "objectives": [
+      "4.2.2"
+    ],
+    "services": [
+      "sagemaker-jumpstart"
+    ],
+    "stem": "Cairnway is considering an open model to write product descriptions. Which step should the team take before adopting it?",
+    "options": [
+      {
+        "text": "Assume that open means it has no usage restrictions",
+        "correct": false,
+        "rationale": "Open models can carry licence limits, so this assumption could cause a legal problem."
+      },
+      {
+        "text": "Assume that open means it is explainable and safe",
+        "correct": false,
+        "rationale": "Open models can be inspected, but they still need evaluation and aren't automatically explainable."
+      },
+      {
+        "text": "Read the licence terms for limits on commercial use",
+        "correct": true,
+        "rationale": "Some models are called open yet restrict commercial use, so the licence has to be checked."
+      },
+      {
+        "text": "Skip evaluation because the code is published",
+        "correct": false,
+        "rationale": "Published code doesn't prove the model fits Cairnway's tasks, so it still needs testing."
+      }
+    ],
+    "explanation": "Data and licensing information is part of judging transparency. Open models can be inspected, but their licence terms and their evaluation results still matter."
+  },
+  {
+    "id": "4.2-010",
+    "taskId": "4.2",
+    "kind": "single",
+    "objectives": [
+      "4.2.2"
+    ],
+    "services": [
+      "sagemaker-model-cards"
+    ],
+    "stem": "A Cairnway manager says that because a SageMaker Model Card exists for the credit model, the model is now explainable. What is wrong with this statement?",
+    "options": [
+      {
+        "text": "Model cards can only be created for models trained outside AWS",
+        "correct": false,
+        "rationale": "This is false. Model Cards are created by you for models you build or deploy."
+      },
+      {
+        "text": "A model card documents the model but doesn't explain predictions",
+        "correct": true,
+        "rationale": "It records intended use, training details and evaluation results. It makes the model visible and auditable, but doesn't explain why a prediction came out as it did."
+      },
+      {
+        "text": "Model cards are always generated automatically and need no input",
+        "correct": false,
+        "rationale": "People write and maintain them. The card is only as good as its content."
+      },
+      {
+        "text": "Model cards replace the need for any model evaluation",
+        "correct": false,
+        "rationale": "A card records evaluation results. It does not replace running evaluations."
+      }
+    ],
+    "explanation": "A model card is documentation you write and maintain. It supports transparency, whereas explaining an individual prediction is a job for tools such as feature attributions."
+  },
+  {
+    "id": "4.2-011",
+    "taskId": "4.2",
+    "kind": "single",
+    "objectives": [
+      "4.2.3"
+    ],
+    "stem": "Cairnway Outfitters chooses a decision tree over a more accurate neural network for credit decisions. Which trade-off does this reflect?",
+    "options": [
+      {
+        "text": "Latency against storage cost",
+        "correct": false,
+        "rationale": "This is an infrastructure trade-off. It doesn't relate to explaining decisions."
+      },
+      {
+        "text": "Encryption against availability",
+        "correct": false,
+        "rationale": "This is a security trade-off. It is not about explainability."
+      },
+      {
+        "text": "Training time against dataset size",
+        "correct": false,
+        "rationale": "This is a training trade-off, not about being able to explain results."
+      },
+      {
+        "text": "Explainability against accuracy",
+        "correct": true,
+        "rationale": "Simpler models are easier to explain but may miss complex patterns, while complex models are often more accurate and harder to explain."
+      }
+    ],
+    "explanation": "Giving up some accuracy for decisions that can be explained is the interpretability versus performance trade-off. Teams measure both and decide by the risk of the use case."
+  },
+  {
+    "id": "4.2-012",
+    "taskId": "4.2",
+    "kind": "single",
+    "objectives": [
+      "4.2.3"
+    ],
+    "services": [
+      "bedrock-guardrails"
+    ],
+    "stem": "Cairnway's security lead worries that publishing the exact rules of Trailmate's safety filters would help attackers find ways around them. Which trade-off is this?",
+    "options": [
+      {
+        "text": "Transparency against security",
+        "correct": true,
+        "rationale": "Being open about how safeguards work can help attackers, while hiding too much leaves regulators and users unable to judge the system."
+      },
+      {
+        "text": "Accuracy against fairness goals",
+        "correct": false,
+        "rationale": "This is a different tension between model quality goals. It doesn't concern publishing filter rules."
+      },
+      {
+        "text": "Response speed against hosting cost",
+        "correct": false,
+        "rationale": "This is a performance versus spending trade-off, not about disclosure."
+      },
+      {
+        "text": "Training phase against inference phase",
+        "correct": false,
+        "rationale": "This describes two phases of a model's life, not a trade-off about disclosure."
+      }
+    ],
+    "explanation": "Publishing exactly how a safety filter works can help attackers. Responsible teams share what stakeholders need, such as purpose, limits and evaluation results, and protect what could be misused."
+  },
+  {
+    "id": "4.2-013",
+    "taskId": "4.2",
+    "kind": "single",
+    "objectives": [
+      "4.2.3"
+    ],
+    "services": [
+      "bedrock-guardrails"
+    ],
+    "stem": "After Cairnway sets very strong Amazon Bedrock Guardrails filters on Trailmate, some legitimate customer questions are being blocked. What does this show, and what should the team do?",
+    "options": [
+      {
+        "text": "Filters never affect usefulness, so the blocked questions must be a model fault",
+        "correct": false,
+        "rationale": "Strong filters can block legitimate requests, so the filters are the likely cause."
+      },
+      {
+        "text": "Safety can cut usefulness, so tune filter strength to the use case",
+        "correct": true,
+        "rationale": "Strict safeguards make an application safer but may block legitimate requests, so the strength should be tuned."
+      },
+      {
+        "text": "Safety and usefulness cannot be balanced, so the team should remove all filters",
+        "correct": false,
+        "rationale": "A balance is possible by tuning, and removing all filters would give up safety."
+      },
+      {
+        "text": "The model needs more parameters to understand the questions",
+        "correct": false,
+        "rationale": "Model size isn't the cause. The filters are set too strictly."
+      }
+    ],
+    "explanation": "A safeguard that blocks legitimate use shows the safety versus usefulness trade-off. Teams tune filter strength rather than giving up safety or accepting constant blocking."
+  },
+  {
+    "id": "4.2-014",
+    "taskId": "4.2",
+    "kind": "single",
+    "objectives": [
+      "4.2.3"
+    ],
+    "stem": "Cairnway is choosing between an open model and a closed model for product descriptions. What is a trade-off of choosing the open model?",
+    "options": [
+      {
+        "text": "It is always safer because its code is public",
+        "correct": false,
+        "rationale": "Public code doesn't guarantee safety, since safeguards can be removed."
+      },
+      {
+        "text": "It cannot be tested or evaluated",
+        "correct": false,
+        "rationale": "Open models can be evaluated like any other model."
+      },
+      {
+        "text": "It always has fewer licence restrictions than any closed model could have",
+        "correct": false,
+        "rationale": "Some open models carry limits on commercial use, so the licence has to be read."
+      },
+      {
+        "text": "It can be inspected closely, but others can strip its safeguards",
+        "correct": true,
+        "rationale": "Visibility helps transparency, but safeguards in an open model can be stripped out by others."
+      }
+    ],
+    "explanation": "Open models offer more visibility and closed models may be better protected but are less visible. There is no single right balance."
+  },
+  {
+    "id": "4.2-015",
+    "taskId": "4.2",
+    "kind": "single",
+    "objectives": [
+      "4.2.4"
+    ],
+    "stem": "A Cairnway customer is refused buy now, pay later credit. The company wants to follow human-centered design for explainable AI. Which response BEST does this?",
+    "options": [
+      {
+        "text": "Plain-language reasons plus a way to ask a person to review it",
+        "correct": true,
+        "rationale": "Reasons the customer can understand, plus a path to human review, keep people in control."
+      },
+      {
+        "text": "Show the model's internal weights so the customer can check them",
+        "correct": false,
+        "rationale": "Raw weights are not a reason a customer can follow."
+      },
+      {
+        "text": "Send a message saying only that the computer decided",
+        "correct": false,
+        "rationale": "An unexplained decision gives the customer nothing to understand or challenge."
+      },
+      {
+        "text": "Hide that AI was involved to avoid confusion",
+        "correct": false,
+        "rationale": "Being open that AI is involved is part of AI decision transparency."
+      }
+    ],
+    "explanation": "Human-centered design explains in the user's language and keeps humans in control. Plain-language reasons and a human review route do both."
+  },
+  {
+    "id": "4.2-016",
+    "taskId": "4.2",
+    "kind": "single",
+    "objectives": [
+      "4.2.4"
+    ],
+    "stem": "Trailmate begins each chat with \"I'm Cairnway's AI assistant\" and links to the policy page behind each answer. Which design principle does this show?",
+    "options": [
+      {
+        "text": "Hyperparameter tuning during model training runs",
+        "correct": false,
+        "rationale": "This adjusts training settings and has nothing to do with how users see the assistant."
+      },
+      {
+        "text": "Data augmentation for the training dataset",
+        "correct": false,
+        "rationale": "This adds variations to training data and isn't about showing users anything."
+      },
+      {
+        "text": "Transparency, with sources users can check",
+        "correct": true,
+        "rationale": "Being open that AI is involved and pointing to sources helps users judge the answers for themselves."
+      },
+      {
+        "text": "Model distillation into a smaller model",
+        "correct": false,
+        "rationale": "This builds a smaller model from a larger one and isn't a design principle for users."
+      }
+    ],
+    "explanation": "Disclosing AI use and showing sources are human-centered design for explainable AI, which helps users decide how far to trust the answer."
+  },
+  {
+    "id": "4.2-017",
+    "taskId": "4.2",
+    "kind": "single",
+    "objectives": [
+      "4.2.4"
+    ],
+    "stem": "Cairnway wants customers to be able to flag wrong or unfair Trailmate answers, and wants those reports to feed back into evaluation. Which design feature meets this?",
+    "options": [
+      {
+        "text": "A larger context window for the model's prompts",
+        "correct": false,
+        "rationale": "This lets the model read more text. It doesn't give customers a way to report problems."
+      },
+      {
+        "text": "A thumbs-down button with a comment box",
+        "correct": true,
+        "rationale": "A user-feedback mechanism lets people flag problems, which can then be reviewed and used to improve the system."
+      },
+      {
+        "text": "An encrypted log of every prompt",
+        "correct": false,
+        "rationale": "Logging supports security and audit, but customers can't use it to give feedback."
+      },
+      {
+        "text": "A faster inference endpoint for chats",
+        "correct": false,
+        "rationale": "Speed doesn't let customers report wrong answers."
+      }
+    ],
+    "explanation": "User-feedback mechanisms such as thumbs-down with a comment are a human-centered design practice, and the feedback feeds evaluation and improvement."
+  },
+  {
+    "id": "4.2-018",
+    "taskId": "4.2",
+    "kind": "single",
+    "objectives": [
+      "4.2.4"
+    ],
+    "services": [
+      "augmented-ai"
+    ],
+    "stem": "Cairnway wants uncertain eligibility predictions to be reviewed by a person instead of being decided automatically. Which principle does this show, and which AWS service is built for this kind of review?",
+    "options": [
+      {
+        "text": "Maximising automation, with Amazon Polly for spoken results",
+        "correct": false,
+        "rationale": "Polly converts text to speech and doesn't involve human review."
+      },
+      {
+        "text": "Hiding uncertainty, with AWS Budgets for alerts",
+        "correct": false,
+        "rationale": "Showing or routing uncertainty is a design aim, and Budgets only tracks cost."
+      },
+      {
+        "text": "Reducing transparency, with Amazon Translate for explanations",
+        "correct": false,
+        "rationale": "Translate converts languages and isn't used for human review."
+      },
+      {
+        "text": "Keeping humans in control, with Amazon A2I for human review",
+        "correct": true,
+        "rationale": "A2I sends low-confidence or sampled predictions to human reviewers, so people stay in control of uncertain decisions."
+      }
+    ],
+    "explanation": "Routing uncertain cases to a person is keeping humans in control. Amazon A2I is the AWS service for human review of low-confidence predictions."
+  },
+  {
+    "id": "4.2-019",
+    "taskId": "4.2",
+    "kind": "multi",
+    "objectives": [
+      "4.2.1"
+    ],
+    "stem": "Which characteristics describe models that are NOT transparent or explainable, such as deep neural networks? (Select TWO.)",
+    "select": 2,
+    "options": [
+      {
+        "text": "Billions of internal numbers interact in ways a person can't follow",
+        "correct": true,
+        "rationale": "The reasoning is too complex to follow, which makes the model a black box."
+      },
+      {
+        "text": "They can be hard to audit and may hide bias or errors",
+        "correct": true,
+        "rationale": "Without visible reasoning, problems are harder to spot and to defend."
+      },
+      {
+        "text": "Their logic can be read as a list of questions asked in order",
+        "correct": false,
+        "rationale": "This describes a decision tree, which is transparent."
+      },
+      {
+        "text": "They show how much each input counted in simple weights",
+        "correct": false,
+        "rationale": "This describes a linear model, which is easy to explain."
+      },
+      {
+        "text": "They are always less accurate than simple models",
+        "correct": false,
+        "rationale": "Black boxes are often more accurate on complex tasks."
+      }
+    ],
+    "explanation": "Black-box models trade clarity for capability. They are hard to follow and audit, while simple models are easier to explain."
+  },
+  {
+    "id": "4.2-020",
+    "taskId": "4.2",
+    "kind": "multi",
+    "objectives": [
+      "4.2.1"
+    ],
+    "stem": "Cairnway Outfitters needs a model whose decisions it can explain to auditors. Which model types are generally easy to explain? (Select TWO.)",
+    "select": 2,
+    "options": [
+      {
+        "text": "A decision tree",
+        "correct": true,
+        "rationale": "It shows the questions it asked, in order."
+      },
+      {
+        "text": "A linear regression model",
+        "correct": true,
+        "rationale": "It shows how much each input counted toward the result."
+      },
+      {
+        "text": "A deep neural network",
+        "correct": false,
+        "rationale": "Its internal workings are too complex to follow."
+      },
+      {
+        "text": "A large language model",
+        "correct": false,
+        "rationale": "Foundation models are black boxes."
+      },
+      {
+        "text": "A multimodal foundation model",
+        "correct": false,
+        "rationale": "It has the same hidden reasoning as other foundation models."
+      }
+    ],
+    "explanation": "Simple, rule-based models such as decision trees and linear models are readable. Deep networks, including foundation models, are not."
+  },
+  {
+    "id": "4.2-021",
+    "taskId": "4.2",
+    "kind": "multi",
+    "objectives": [
+      "4.2.2"
+    ],
+    "services": [
+      "sagemaker-model-cards"
+    ],
+    "stem": "Which details can a SageMaker Model Card record for Cairnway's credit-eligibility model? (Select THREE.)",
+    "select": 3,
+    "options": [
+      {
+        "text": "The intended use and a risk rating",
+        "correct": true,
+        "rationale": "A model card records what the model is for and a risk rating, such as high."
+      },
+      {
+        "text": "Training details and metrics",
+        "correct": true,
+        "rationale": "The training information and measured performance are documented."
+      },
+      {
+        "text": "Evaluation results and observations",
+        "correct": true,
+        "rationale": "Test results and the team's observations are part of the card."
+      },
+      {
+        "text": "Each customer's card number and home address",
+        "correct": false,
+        "rationale": "A model card documents the model, not personal data about customers."
+      },
+      {
+        "text": "The live price of every AWS service Cairnway uses",
+        "correct": false,
+        "rationale": "Pricing is not model documentation."
+      }
+    ],
+    "explanation": "A model card gathers intended use, risk rating, training details and metrics, and evaluation results with observations in one place, with versions for each edit."
+  },
+  {
+    "id": "4.2-022",
+    "taskId": "4.2",
+    "kind": "multi",
+    "objectives": [
+      "4.2.2"
+    ],
+    "stem": "Cairnway Outfitters is considering an open model. Which checks help it judge the model's transparency? (Select TWO.)",
+    "select": 2,
+    "options": [
+      {
+        "text": "Where the training data came from",
+        "correct": true,
+        "rationale": "Documentation of data origin is part of transparency."
+      },
+      {
+        "text": "The licence terms for use, change and sharing",
+        "correct": true,
+        "rationale": "The licence says how the model may be used and some limit commercial use."
+      },
+      {
+        "text": "Whether the model's name includes the word open",
+        "correct": false,
+        "rationale": "A name doesn't show how open the model really is."
+      },
+      {
+        "text": "Whether the model is popular on social media",
+        "correct": false,
+        "rationale": "Popularity says nothing about documentation or licence."
+      },
+      {
+        "text": "Whether it ranks highly on a public leaderboard",
+        "correct": false,
+        "rationale": "A leaderboard rank shows performance on a benchmark. It says nothing about where the data came from or how the model may be used."
+      }
+    ],
+    "explanation": "Transparency depends on documented data origin and licence terms, not on the model's name, popularity or benchmark rank."
+  },
+  {
+    "id": "4.2-023",
+    "taskId": "4.2",
+    "kind": "multi",
+    "objectives": [
+      "4.2.2"
+    ],
+    "services": [
+      "sagemaker-model-cards",
+      "bedrock-evaluations"
+    ],
+    "stem": "Which resources help Cairnway identify whether a model is transparent and well documented? (Select TWO.)",
+    "select": 2,
+    "options": [
+      {
+        "text": "AWS AI Service Cards for the AWS services it uses",
+        "correct": true,
+        "rationale": "They document intended use cases, limitations and design choices."
+      },
+      {
+        "text": "A SageMaker Model Card for its own models",
+        "correct": true,
+        "rationale": "It records intended use, training details and evaluation results."
+      },
+      {
+        "text": "Amazon Polly",
+        "correct": false,
+        "rationale": "Polly turns text into speech and doesn't document models."
+      },
+      {
+        "text": "AWS Budgets",
+        "correct": false,
+        "rationale": "Budgets tracks cost and doesn't document models."
+      },
+      {
+        "text": "Amazon Translate",
+        "correct": false,
+        "rationale": "Translate converts languages and doesn't document models."
+      }
+    ],
+    "explanation": "AI Service Cards cover AWS services, and Model Cards cover models you build or deploy. Polly, Budgets and Translate do other jobs."
+  },
+  {
+    "id": "4.2-024",
+    "taskId": "4.2",
+    "kind": "multi",
+    "objectives": [
+      "4.2.3"
+    ],
+    "stem": "Which statements correctly describe trade-offs between model safety and transparency? (Select TWO.)",
+    "select": 2,
+    "options": [
+      {
+        "text": "Simple models are easier to explain but may miss complex patterns",
+        "correct": true,
+        "rationale": "This is the interpretability versus performance trade-off."
+      },
+      {
+        "text": "Publishing exact filter details can help attackers get around them",
+        "correct": true,
+        "rationale": "Too much openness can help misuse, so teams share what stakeholders need."
+      },
+      {
+        "text": "Explaining a decision never exposes anyone's personal data",
+        "correct": false,
+        "rationale": "An explanation shouldn't reveal other people's data, but this must be managed."
+      },
+      {
+        "text": "Open models cannot be inspected",
+        "correct": false,
+        "rationale": "Open models can be inspected more closely than closed ones."
+      },
+      {
+        "text": "Stronger safeguards never block legitimate requests",
+        "correct": false,
+        "rationale": "Strict safeguards can block some legitimate requests."
+      }
+    ],
+    "explanation": "Interpretability versus performance and transparency versus security are standard trade-offs. The other statements are false."
+  },
+  {
+    "id": "4.2-025",
+    "taskId": "4.2",
+    "kind": "multi",
+    "objectives": [
+      "4.2.3"
+    ],
+    "stem": "Cairnway Outfitters must balance explainability and accuracy for a regulated credit decision. Which actions help it do this? (Select TWO.)",
+    "select": 2,
+    "options": [
+      {
+        "text": "Measure both the model's accuracy and how well its decisions can be explained",
+        "correct": true,
+        "rationale": "Measuring both lets the team choose according to the risk of the use case."
+      },
+      {
+        "text": "Use a simpler model for regulated decisions and a more powerful one where stakes are low",
+        "correct": true,
+        "rationale": "This matches model type to risk."
+      },
+      {
+        "text": "Always choose the most accurate model whatever its risk",
+        "correct": false,
+        "rationale": "This ignores the need for explanations in high-stakes decisions."
+      },
+      {
+        "text": "Remove all documentation to keep the model simple",
+        "correct": false,
+        "rationale": "Documentation supports transparency and auditing."
+      },
+      {
+        "text": "Choose by price alone",
+        "correct": false,
+        "rationale": "Price doesn't address explainability or risk."
+      }
+    ],
+    "explanation": "A balance comes from measuring both qualities and matching the model to the risk."
+  },
+  {
+    "id": "4.2-026",
+    "taskId": "4.2",
+    "kind": "multi",
+    "objectives": [
+      "4.2.4"
+    ],
+    "stem": "Cairnway Outfitters wants to follow human-centered design for its explainable AI. Which practices should it adopt? (Select THREE.)",
+    "select": 3,
+    "options": [
+      {
+        "text": "Explain decisions in plain language that the user can follow",
+        "correct": true,
+        "rationale": "Reasons should be in the user's language."
+      },
+      {
+        "text": "Provide a thumbs-down button and comment box for feedback",
+        "correct": true,
+        "rationale": "User feedback helps catch wrong or unfair answers."
+      },
+      {
+        "text": "Let people ask for a person to review or appeal a decision",
+        "correct": true,
+        "rationale": "Humans stay in control of automated decisions."
+      },
+      {
+        "text": "Show raw model weights to every customer",
+        "correct": false,
+        "rationale": "This isn't understandable to most users."
+      },
+      {
+        "text": "Avoid telling users that AI is involved",
+        "correct": false,
+        "rationale": "Being open about AI is part of AI decision transparency."
+      }
+    ],
+    "explanation": "Plain explanations, feedback and human review are central. Raw weights and hiding AI work against explainability."
+  },
+  {
+    "id": "4.2-027",
+    "taskId": "4.2",
+    "kind": "multi",
+    "objectives": [
+      "4.2.4"
+    ],
+    "stem": "Which design choices increase user trust in Trailmate's answers? (Select TWO.)",
+    "select": 2,
+    "options": [
+      {
+        "text": "Telling users they are chatting with an AI assistant",
+        "correct": true,
+        "rationale": "This is AI decision transparency."
+      },
+      {
+        "text": "Linking to the source document behind each answer",
+        "correct": true,
+        "rationale": "Sources let users check the answer."
+      },
+      {
+        "text": "Applying decisions automatically with no review route",
+        "correct": false,
+        "rationale": "People need a way to correct or appeal."
+      },
+      {
+        "text": "Hiding any uncertainty in the model's answers",
+        "correct": false,
+        "rationale": "Showing uncertainty helps users judge."
+      },
+      {
+        "text": "Removing the feedback button to avoid complaints",
+        "correct": false,
+        "rationale": "Feedback mechanisms are part of the design."
+      }
+    ],
+    "explanation": "Disclosure of AI use and visible sources let users make informed choices, as human-centered design intends."
+  },
+  {
+    "id": "4.2-028",
+    "taskId": "4.2",
+    "kind": "order",
+    "objectives": [
+      "4.2.4"
+    ],
+    "stem": "Put these steps in a human-centered handling of a refused Cairnway credit decision in the correct order.",
+    "steps": [
+      "The model produces a credit decision",
+      "The customer sees plain-language reasons",
+      "The customer asks for a person to review the decision",
+      "A person reviews and can correct the decision"
+    ],
+    "explanation": "The decision must exist before it can be explained. The reasons come next, so the customer can decide whether to question them. A review request then leads to a human review, which keeps people in control."
+  },
+  {
+    "id": "4.2-029",
+    "taskId": "4.2",
+    "kind": "order",
+    "objectives": [
+      "4.2.2"
+    ],
+    "services": [
+      "sagemaker-model-cards",
+      "bedrock-evaluations"
+    ],
+    "stem": "Put these steps for adopting an open model at Cairnway in the correct order.",
+    "steps": [
+      "Shortlist an open model",
+      "Read its licence and data documentation",
+      "Test it on Cairnway's own prompts with Bedrock Model Evaluation",
+      "Record the intended use and results in a model card"
+    ],
+    "explanation": "A candidate comes first. The licence and documentation checks can rule it out cheaply before time is spent on testing. The model's results can then be recorded in a model card for others to review."
+  },
+  {
+    "id": "4.2-030",
+    "taskId": "4.2",
+    "kind": "match",
+    "objectives": [
+      "4.2.2"
+    ],
+    "services": [
+      "sagemaker-model-cards",
+      "sagemaker-clarify",
+      "bedrock-evaluations"
+    ],
+    "stem": "Match each tool or resource with what it does for transparency and explainability.",
+    "pairs": [
+      {
+        "prompt": "SageMaker Model Cards",
+        "answer": "Documents a model's intended use, training details and risk rating"
+      },
+      {
+        "prompt": "AWS AI Service Cards",
+        "answer": "AWS's documentation of its AI services' uses and limits"
+      },
+      {
+        "prompt": "Amazon Bedrock Model Evaluation",
+        "answer": "Measures how a model behaves on your prompts"
+      },
+      {
+        "prompt": "SageMaker Clarify",
+        "answer": "Explains predictions with feature attributions"
+      }
+    ],
+    "distractors": [
+      "Sends an alert when spending passes a limit"
+    ],
+    "explanation": "Each resource supports transparency in a different way. The cost alert belongs to AWS Budgets and isn't a transparency tool."
+  },
+  {
+    "id": "4.2-031",
+    "taskId": "4.2",
+    "kind": "match",
+    "objectives": [
+      "4.2.1"
+    ],
+    "stem": "Match each description with the type of model it describes.",
+    "pairs": [
+      {
+        "prompt": "It shows the questions it asked, in order",
+        "answer": "Decision tree"
+      },
+      {
+        "prompt": "Billions of interacting numbers make its reasoning hard to follow",
+        "answer": "Deep neural network"
+      },
+      {
+        "prompt": "It shows how much each input counted toward the result",
+        "answer": "Linear model"
+      }
+    ],
+    "distractors": [
+      "Vector database",
+      "Prompt template"
+    ],
+    "explanation": "Decision trees and linear models are readable, while deep neural networks are black boxes. A vector database and a prompt template are not model types."
+  },
+  {
+    "id": "4.2-032",
+    "taskId": "4.2",
+    "kind": "match",
+    "objectives": [
+      "4.2.3"
+    ],
+    "stem": "Match each Cairnway situation with the trade-off it shows.",
+    "pairs": [
+      {
+        "prompt": "An explainable decision tree scores lower than a neural network",
+        "answer": "Interpretability against performance"
+      },
+      {
+        "prompt": "Publishing full filter rules might help attackers",
+        "answer": "Transparency against security"
+      },
+      {
+        "prompt": "Very strong filters block legitimate customer questions",
+        "answer": "Safety against usefulness"
+      },
+      {
+        "prompt": "An explanation might reveal other people's data",
+        "answer": "Transparency against privacy"
+      }
+    ],
+    "distractors": [
+      "Latency against cost"
+    ],
+    "explanation": "Each situation sets two good aims against each other. Latency against cost is a different engineering trade-off."
+  },
+  {
+    "id": "4.2-033",
+    "taskId": "4.2",
+    "kind": "case",
+    "services": [
+      "sagemaker-model-cards",
+      "sagemaker-clarify"
+    ],
+    "scenario": "Cairnway Outfitters offers buy now, pay later credit to customers in several countries. Because customers can be refused, the company must be able to explain and defend each decision. The data team compares a decision tree with a deep neural network, which scored slightly higher in testing. Auditors want clear documentation of the chosen model before launch, and the product team is designing what a refused customer will see.",
+    "parts": [
+      {
+        "kind": "single",
+        "objectives": [
+          "4.2.1"
+        ],
+        "stem": "The team wants to confirm that postal code is not acting as a stand-in for ethnicity in individual refusals. What does it need?",
+        "options": [
+          {
+            "text": "A SageMaker Model Card listing the intended use",
+            "correct": false,
+            "rationale": "The card documents the model overall. It doesn't show which inputs drove each decision."
+          },
+          {
+            "text": "Feature attributions for each decision",
+            "correct": true,
+            "rationale": "Attributions show which inputs pushed a prediction, so the team can see whether postal code mattered."
+          },
+          {
+            "text": "A larger training dataset",
+            "correct": false,
+            "rationale": "More data doesn't show which inputs drove a decision."
+          },
+          {
+            "text": "An AWS AI Service Card for the service used",
+            "correct": false,
+            "rationale": "This documents AWS services. It doesn't explain Cairnway's model."
+          }
+        ],
+        "explanation": "Seeing which inputs drive individual decisions is explainability, answered by feature attributions."
+      },
+      {
+        "kind": "single",
+        "objectives": [
+          "4.2.2"
+        ],
+        "stem": "Auditors ask for one record of the model's intended use, its high risk rating, training details and results, with a history of changes. What should the team create?",
+        "options": [
+          {
+            "text": "An Amazon Bedrock Guardrails policy",
+            "correct": false,
+            "rationale": "Guardrails filters content and doesn't record model documentation."
+          },
+          {
+            "text": "A new Amazon Polly voice",
+            "correct": false,
+            "rationale": "Polly produces speech and has no model documentation role."
+          },
+          {
+            "text": "An AWS Budgets alert",
+            "correct": false,
+            "rationale": "Budgets sends cost alerts and doesn't document a model."
+          },
+          {
+            "text": "A SageMaker Model Card",
+            "correct": true,
+            "rationale": "A model card holds these details and creates a new version for each edit."
+          }
+        ],
+        "explanation": "A single auditable record of intended use, risk rating, training details and evaluation results is a model card."
+      },
+      {
+        "kind": "single",
+        "objectives": [
+          "4.2.3"
+        ],
+        "stem": "The neural network scored slightly higher in tests than the tree. Why did the team still choose the tree?",
+        "options": [
+          {
+            "text": "It needs reasons for refusals, so it accepted a small accuracy loss",
+            "correct": true,
+            "rationale": "This balances interpretability and performance by the risk of the use case."
+          },
+          {
+            "text": "Black-box models are always much less accurate than any simple tree",
+            "correct": false,
+            "rationale": "Black boxes are often more accurate, which is the trade-off the team faced."
+          },
+          {
+            "text": "Trees cannot be audited",
+            "correct": false,
+            "rationale": "Trees are easy to audit, which is a reason to choose one."
+          },
+          {
+            "text": "Neural networks cannot be used on AWS",
+            "correct": false,
+            "rationale": "They can run on AWS. The reason is explainability."
+          }
+        ],
+        "explanation": "Interpretability versus performance, decided by risk: a high-stakes, refusable decision needs explanations."
+      },
+      {
+        "kind": "single",
+        "objectives": [
+          "4.2.4"
+        ],
+        "stem": "Which design for a refused customer follows human-centered design for explainable AI?",
+        "options": [
+          {
+            "text": "A list of the model's internal weights",
+            "correct": false,
+            "rationale": "This is not understandable to most customers."
+          },
+          {
+            "text": "A message that the system cannot give a reason",
+            "correct": false,
+            "rationale": "This leaves the customer without help and without a way to challenge it."
+          },
+          {
+            "text": "Plain reasons and a way to reach a person",
+            "correct": true,
+            "rationale": "The customer understands the reasons and can reach a person."
+          },
+          {
+            "text": "An automatic refusal with no appeal",
+            "correct": false,
+            "rationale": "People should be able to review or appeal automated decisions."
+          }
+        ],
+        "explanation": "Plain language plus a human review route puts people in control."
+      }
+    ]
+  }
+]

@@ -1,0 +1,1767 @@
+[
+  {
+    "id": "3.4-001",
+    "taskId": "3.4",
+    "kind": "single",
+    "objectives": [
+      "3.4.1"
+    ],
+    "services": [
+      "bedrock-evaluations",
+      "bedrock"
+    ],
+    "stem": "Cairnway Outfitters wants to compare three candidate models for its Trailmate support assistant. The team has written 300 real support questions with ideal answers and wants fast, repeatable, low-cost scoring of each model on exactly the same test. Which approach meets these requirements?",
+    "options": [
+      {
+        "text": "Score each model on the 300-question benchmark dataset automatically",
+        "correct": true,
+        "rationale": "A fixed dataset gives every model the same test, and automatic scoring is quick, cheap and repeatable. Amazon Bedrock Model Evaluation can run this kind of job."
+      },
+      {
+        "text": "Ask a panel of support agents to read and rate every single answer by hand",
+        "correct": false,
+        "rationale": "People catch subtle problems, but rating 300 answers for three models is slow and costly, and raters can disagree."
+      },
+      {
+        "text": "Release each model to customers for a week and compare complaints",
+        "correct": false,
+        "rationale": "This is slow and risks customer trust. It is also not a repeatable test on identical questions."
+      },
+      {
+        "text": "Fine-tune each model on the 300 questions and compare training time",
+        "correct": false,
+        "rationale": "Training time says nothing about answer quality, and the same questions would no longer be a fair test."
+      }
+    ],
+    "explanation": "The deciding clues are a fixed set of questions with ideal answers and the need for fast, repeatable, low-cost scoring. That describes a benchmark dataset with automatic metrics. Human rating is better for subjective qualities but is slow and costly."
+  },
+  {
+    "id": "3.4-002",
+    "taskId": "3.4",
+    "kind": "single",
+    "objectives": [
+      "3.4.1"
+    ],
+    "services": [
+      "bedrock-evaluations"
+    ],
+    "stem": "Cairnway Outfitters is testing a model that writes product descriptions. The brand team wants to know whether the writing sounds friendly, on-brand and persuasive. Which evaluation approach is MOST appropriate?",
+    "options": [
+      {
+        "text": "Automatic scoring on a benchmark dataset of product facts",
+        "correct": false,
+        "rationale": "Automatic benchmarks are fast, but a score can't tell whether writing feels friendly or on-brand."
+      },
+      {
+        "text": "A toxicity check with a toxicity detection model",
+        "correct": false,
+        "rationale": "Toxicity detection looks for harmful language. A clean result says nothing about brand voice."
+      },
+      {
+        "text": "Human-in-the-loop rating by the copywriters",
+        "correct": true,
+        "rationale": "Tone, brand voice and persuasiveness are subjective. People are the best judges of them, and Bedrock Model Evaluation supports human-based jobs."
+      },
+      {
+        "text": "Counting the tokens in each generated description",
+        "correct": false,
+        "rationale": "Token count measures length and cost, not whether the writing suits the brand."
+      }
+    ],
+    "explanation": "Subjective qualities such as tone and brand voice are the clue. Those need human raters, even though people are slower and costlier than automatic methods."
+  },
+  {
+    "id": "3.4-003",
+    "taskId": "3.4",
+    "kind": "single",
+    "objectives": [
+      "3.4.1"
+    ],
+    "services": [
+      "bedrock-evaluations",
+      "bedrock"
+    ],
+    "stem": "Cairnway Outfitters has 20,000 sample Trailmate answers to score before a launch review. The team wants written reasons for each score and wants to avoid the cost and delay of rating every answer with staff. Which approach meets these requirements?",
+    "options": [
+      {
+        "text": "Ask support staff to review all 20,000 answers",
+        "correct": false,
+        "rationale": "Staff reviews give good insight but are slow and costly at this volume, which the team wants to avoid."
+      },
+      {
+        "text": "Use LLM-as-a-judge evaluation in Amazon Bedrock",
+        "correct": true,
+        "rationale": "A second model scores each answer and explains the score. It is much faster and cheaper than people at this scale."
+      },
+      {
+        "text": "Compute BLEU against one reference answer per question",
+        "correct": false,
+        "rationale": "BLEU only counts word overlap with a reference. It gives a number, not a written reason for each score."
+      },
+      {
+        "text": "Apply Amazon Bedrock Guardrails to the 20,000 answers",
+        "correct": false,
+        "rationale": "Guardrails filters unwanted content in an application. It does not score answer quality or give reasons."
+      }
+    ],
+    "explanation": "Scoring at large scale with written reasons points to LLM-as-a-judge. The trade-off is that the judge is a model too, so a small sample should still be spot-checked by people."
+  },
+  {
+    "id": "3.4-004",
+    "taskId": "3.4",
+    "kind": "single",
+    "objectives": [
+      "3.4.1"
+    ],
+    "stem": "Which statement describes a benchmark dataset used to evaluate a foundation model?",
+    "options": [
+      {
+        "text": "The collection of documents a model learned from during pre-training",
+        "correct": false,
+        "rationale": "That is training data. A benchmark is a separate test set kept apart from training data."
+      },
+      {
+        "text": "A group of people who rate the quality of a model's answers",
+        "correct": false,
+        "rationale": "That describes human-in-the-loop evaluation, not a dataset."
+      },
+      {
+        "text": "A second model that scores the first model's answers and explains why",
+        "correct": false,
+        "rationale": "That describes LLM-as-a-judge. A benchmark dataset is the set of test prompts."
+      },
+      {
+        "text": "A fixed set of prompts, often with answers, used to score models",
+        "correct": true,
+        "rationale": "Running every model on the same set makes results comparable, and reference answers allow automatic scoring."
+      }
+    ],
+    "explanation": "A benchmark dataset is a test: the same prompts, often with ground-truth answers, run against each model. It is fast and repeatable, though a generic benchmark may not look like real work, so teams also build their own."
+  },
+  {
+    "id": "3.4-005",
+    "taskId": "3.4",
+    "kind": "single",
+    "objectives": [
+      "3.4.1"
+    ],
+    "services": [
+      "bedrock-evaluations",
+      "bedrock-guardrails",
+      "bedrock-prompt-management",
+      "comprehend"
+    ],
+    "stem": "Cairnway Outfitters wants one managed AWS capability to compare foundation models on its own prompts, using automatic metrics, human raters or a model acting as judge. Which service or feature should it use?",
+    "options": [
+      {
+        "text": "Amazon Bedrock Model Evaluation",
+        "correct": true,
+        "rationale": "Bedrock Model Evaluation supports automatic, human-based and LLM-as-a-judge jobs for comparing models on your data."
+      },
+      {
+        "text": "Amazon Bedrock Guardrails",
+        "correct": false,
+        "rationale": "Guardrails applies safeguards such as denied topics and content filters. It does not measure model quality."
+      },
+      {
+        "text": "Amazon Bedrock Prompt Management",
+        "correct": false,
+        "rationale": "Prompt Management stores and versions prompts. It does not score a model."
+      },
+      {
+        "text": "Amazon Comprehend",
+        "correct": false,
+        "rationale": "Comprehend analyses text for sentiment, entities and similar. It is not a tool for evaluating foundation models."
+      }
+    ],
+    "explanation": "The clue is comparing models on your own prompts with several evaluation methods. That is Bedrock Model Evaluation. Guardrails filters content and Prompt Management stores prompts, so neither measures quality."
+  },
+  {
+    "id": "3.4-006",
+    "taskId": "3.4",
+    "kind": "single",
+    "objectives": [
+      "3.4.1"
+    ],
+    "services": [
+      "bedrock-evaluations"
+    ],
+    "stem": "Cairnway Outfitters uses a judge model in Amazon Bedrock to score Trailmate answers. The support lead is worried that the judge could be wrong or biased. What should the team do?",
+    "options": [
+      {
+        "text": "Nothing, because a judge model's scores are always objective and reliable",
+        "correct": false,
+        "rationale": "A judge is a model too. It can be wrong or biased, so its scores need checking."
+      },
+      {
+        "text": "Switch to ROUGE scoring, which is never biased",
+        "correct": false,
+        "rationale": "ROUGE needs reference text and measures word overlap only. It does not replace the quality checks a judge provides."
+      },
+      {
+        "text": "Ask the judge to score its own scores a second time",
+        "correct": false,
+        "rationale": "The same model repeating itself shares its own blind spots. An independent human check is stronger."
+      },
+      {
+        "text": "Have people rate a sample of answers and compare with the judge",
+        "correct": true,
+        "rationale": "Human ratings on a sample show whether the judge can be trusted before the team relies on it."
+      }
+    ],
+    "explanation": "LLM-as-a-judge is fast and cheap, but the judge can make mistakes. Spot-checking a sample with human raters is the standard way to confirm it is trustworthy."
+  },
+  {
+    "id": "3.4-007",
+    "taskId": "3.4",
+    "kind": "single",
+    "objectives": [
+      "3.4.1"
+    ],
+    "stem": "Cairnway Outfitters asks raters to look at two Trailmate answers to the same question and click the one they prefer. Which human rating method is this?",
+    "options": [
+      {
+        "text": "Thumbs up and down",
+        "correct": false,
+        "rationale": "This records whether one answer is acceptable or not. It does not compare two answers."
+      },
+      {
+        "text": "Choice buttons",
+        "correct": true,
+        "rationale": "Choice buttons ask the rater to pick which of two responses is preferred."
+      },
+      {
+        "text": "A 5-point Likert scale",
+        "correct": false,
+        "rationale": "A Likert scale records how strongly a rater approves of one answer, not a choice between two."
+      },
+      {
+        "text": "Ordinal rank",
+        "correct": false,
+        "rationale": "Ordinal rank puts several answers in order. It is more than a simple pick of one from two."
+      }
+    ],
+    "explanation": "Picking the preferred answer from two is a choice-button method. Thumbs up or down rates one answer as acceptable or not, a Likert scale rates how much the rater approves, and ordinal rank puts answers in order."
+  },
+  {
+    "id": "3.4-008",
+    "taskId": "3.4",
+    "kind": "single",
+    "objectives": [
+      "3.4.2"
+    ],
+    "services": [
+      "bedrock-evaluations"
+    ],
+    "stem": "Cairnway Outfitters compares model-written summaries of customer reviews with summaries written by its team. It wants a metric that shows how much of the reference summary's content, in words and word sequences, appears in the model summary. Which metric fits?",
+    "options": [
+      {
+        "text": "BLEU",
+        "correct": false,
+        "rationale": "BLEU is also an overlap metric, but it is precision-oriented and is the classic choice for translation."
+      },
+      {
+        "text": "Task completion rate",
+        "correct": false,
+        "rationale": "This is a business metric about how often users reach their goal. It does not compare text with a reference."
+      },
+      {
+        "text": "ROUGE",
+        "correct": true,
+        "rationale": "ROUGE counts overlapping words and word sequences with a reference and is recall-oriented. It is the usual metric for summarization."
+      },
+      {
+        "text": "Cost per interaction",
+        "correct": false,
+        "rationale": "This is a business metric about spend. It does not measure how close a summary is to a reference."
+      }
+    ],
+    "explanation": "A model summary compared with a human-written reference, measured by overlapping words and word sequences, is ROUGE. BLEU uses a similar idea for machine translation."
+  },
+  {
+    "id": "3.4-009",
+    "taskId": "3.4",
+    "kind": "single",
+    "objectives": [
+      "3.4.2"
+    ],
+    "services": [
+      "translate"
+    ],
+    "stem": "Cairnway Outfitters translates German customer reviews into English with a foundation model. The team has professional human translations of 500 reviews and wants a classic reference-based metric to score the model's translations. Which metric should it use?",
+    "options": [
+      {
+        "text": "BLEU",
+        "correct": true,
+        "rationale": "BLEU measures word-sequence overlap with reference text and is the classic metric for machine translation."
+      },
+      {
+        "text": "ROUGE",
+        "correct": false,
+        "rationale": "ROUGE is the usual choice for summarization. It can be computed on translations, but BLEU is the classic translation metric."
+      },
+      {
+        "text": "Escalation rate",
+        "correct": false,
+        "rationale": "This is a business metric about handovers to people. It does not score translations."
+      },
+      {
+        "text": "User satisfaction",
+        "correct": false,
+        "rationale": "This measures how happy users are. It is not a reference-based score of translation text."
+      }
+    ],
+    "explanation": "Translation with human reference translations points to BLEU. Both BLEU and ROUGE count matching words, so the task is what separates them."
+  },
+  {
+    "id": "3.4-010",
+    "taskId": "3.4",
+    "kind": "single",
+    "objectives": [
+      "3.4.2"
+    ],
+    "services": [
+      "bedrock-evaluations"
+    ],
+    "stem": "A Cairnway copywriter rewrites a model's product description using different words but the same meaning. The team's word-overlap score for the model text is low, yet readers say the two texts say the same thing. Which metric is designed to recognise this similarity?",
+    "options": [
+      {
+        "text": "ROUGE",
+        "correct": false,
+        "rationale": "ROUGE counts matching words and word sequences, so a paraphrase scores low."
+      },
+      {
+        "text": "BLEU",
+        "correct": false,
+        "rationale": "BLEU also counts matching word sequences, so different wording lowers the score."
+      },
+      {
+        "text": "Exact match",
+        "correct": false,
+        "rationale": "Exact match only credits an identical answer, so it would reject a rewording."
+      },
+      {
+        "text": "BERTScore",
+        "correct": true,
+        "rationale": "BERTScore compares the meaning of two texts with embeddings, so a paraphrase can score high even with different words."
+      }
+    ],
+    "explanation": "Different words with the same meaning is the clue. Overlap metrics such as ROUGE and BLEU penalise a paraphrase, while BERTScore compares embeddings and recognises similar meaning."
+  },
+  {
+    "id": "3.4-011",
+    "taskId": "3.4",
+    "kind": "single",
+    "objectives": [
+      "3.4.2"
+    ],
+    "services": [
+      "bedrock-evaluations",
+      "bedrock-knowledge-bases"
+    ],
+    "stem": "Cairnway Outfitters wants an LLM-as-a-judge metric that checks whether each Trailmate answer sticks to the retrieved return-policy text and does not add information that is not there. Which metric should the team choose?",
+    "options": [
+      {
+        "text": "Helpfulness",
+        "correct": false,
+        "rationale": "Helpfulness looks at whether the response follows instructions and anticipates needs. It does not test loyalty to the source text."
+      },
+      {
+        "text": "Faithfulness",
+        "correct": true,
+        "rationale": "Faithfulness checks that a response sticks to the given context without adding information. It is a key hallucination check."
+      },
+      {
+        "text": "Stereotyping",
+        "correct": false,
+        "rationale": "Stereotyping checks for generalised statements about groups. It is unrelated to staying within source text."
+      },
+      {
+        "text": "Refusal",
+        "correct": false,
+        "rationale": "Refusal measures whether the model declines to answer. It does not check whether answers invent facts."
+      }
+    ],
+    "explanation": "Staying within the supplied context and not inventing details is the definition of faithfulness, which makes it the natural hallucination check for RAG answers."
+  },
+  {
+    "id": "3.4-012",
+    "taskId": "3.4",
+    "kind": "single",
+    "objectives": [
+      "3.4.2"
+    ],
+    "services": [
+      "bedrock-evaluations"
+    ],
+    "stem": "Cairnway Outfitters wants to know whether Trailmate still answers correctly when customers make typing mistakes. Which type of metric in Amazon Bedrock's automatic evaluations addresses this?",
+    "options": [
+      {
+        "text": "Toxicity",
+        "correct": false,
+        "rationale": "Toxicity is checked by toxicity detection models for harmful language. It does not test typo tolerance."
+      },
+      {
+        "text": "Cost per interaction",
+        "correct": false,
+        "rationale": "This is a business metric about spend and is not a technical quality score."
+      },
+      {
+        "text": "Robustness",
+        "correct": true,
+        "rationale": "Semantic robustness measures how much the output changes when the input has small, meaning-preserving changes such as typos."
+      },
+      {
+        "text": "Escalation rate",
+        "correct": false,
+        "rationale": "This business metric counts handovers to people. It does not test sensitivity to typos."
+      }
+    ],
+    "explanation": "Typos are small changes that should not change the meaning. How stable the output stays is the robustness metric, alongside accuracy and toxicity."
+  },
+  {
+    "id": "3.4-013",
+    "taskId": "3.4",
+    "kind": "single",
+    "objectives": [
+      "3.4.2"
+    ],
+    "services": [
+      "bedrock-evaluations"
+    ],
+    "stem": "Cairnway's analyst sees that a model's summaries score a high ROUGE value against the reference summaries. What can the team conclude?",
+    "options": [
+      {
+        "text": "The summaries are guaranteed to be factually correct and complete",
+        "correct": false,
+        "rationale": "A high score only shows similarity to the reference. If the reference is flawed, so are the matches."
+      },
+      {
+        "text": "Customers will certainly be satisfied with the assistant",
+        "correct": false,
+        "rationale": "ROUGE is a technical score. Satisfaction must be measured with business metrics such as survey ratings."
+      },
+      {
+        "text": "The model is cheaper to run than the other candidate models",
+        "correct": false,
+        "rationale": "ROUGE says nothing about cost. Cost per interaction is a separate business metric."
+      },
+      {
+        "text": "They resemble the reference, which does not prove truth",
+        "correct": true,
+        "rationale": "ROUGE measures overlap with a reference. A high score means similarity, not factual accuracy."
+      }
+    ],
+    "explanation": "ROUGE is a reference-based technical score, so a high value means close to the reference. It neither proves truth nor shows business value."
+  },
+  {
+    "id": "3.4-014",
+    "taskId": "3.4",
+    "kind": "single",
+    "objectives": [
+      "3.4.3",
+      "3.4.5"
+    ],
+    "services": [
+      "bedrock-evaluations"
+    ],
+    "stem": "The Cairnway board asks whether Trailmate is worth keeping. The model has strong BERTScore results, but the board wants to know if it achieves the business goal. What should the team measure?",
+    "options": [
+      {
+        "text": "Task completion, satisfaction and cost per interaction",
+        "correct": true,
+        "rationale": "These tie the evaluation to what the business wanted: solved questions, happy customers and lower cost."
+      },
+      {
+        "text": "More BERTScore runs on a larger reference set of examples",
+        "correct": false,
+        "rationale": "A technical score cannot show business value, however many times it is run."
+      },
+      {
+        "text": "The number of parameters in the model and its context size",
+        "correct": false,
+        "rationale": "Model size is not a business outcome. A large model can still fail the business goal."
+      },
+      {
+        "text": "The number of prompts in the benchmark dataset, made larger",
+        "correct": false,
+        "rationale": "A bigger test set makes technical scores more reliable but still does not measure business results."
+      }
+    ],
+    "explanation": "The question moves from model quality to business value. Technical scores such as BERTScore do not answer it, so the team uses business metrics tied to the original goal."
+  },
+  {
+    "id": "3.4-015",
+    "taskId": "3.4",
+    "kind": "single",
+    "objectives": [
+      "3.4.3"
+    ],
+    "stem": "Before launching a model that drafts product descriptions, Cairnway wants to judge whether it improves productivity. What should the team do FIRST?",
+    "options": [
+      {
+        "text": "Launch to all customers and review the numbers later",
+        "correct": false,
+        "rationale": "Without a baseline and a threshold set in advance, the team can't tell whether results are good enough."
+      },
+      {
+        "text": "Choose the model with the highest ROUGE score",
+        "correct": false,
+        "rationale": "A technical score does not show whether copywriters save time."
+      },
+      {
+        "text": "Define the goal and threshold, and measure how long drafting takes now",
+        "correct": true,
+        "rationale": "A baseline and a target are needed so that results after launch can be compared and judged."
+      },
+      {
+        "text": "Wait for complaints and treat each one as a metric",
+        "correct": false,
+        "rationale": "Complaints are a late and partial signal. Productivity needs a planned measurement."
+      }
+    ],
+    "explanation": "Business evaluation starts with the goal and a threshold, plus a baseline of how work is done today. A pilot and ongoing measurement follow."
+  },
+  {
+    "id": "3.4-016",
+    "taskId": "3.4",
+    "kind": "single",
+    "objectives": [
+      "3.4.3"
+    ],
+    "stem": "Cairnway wants to know whether staff and customers actually adopt its new AI product-finder. Which measure shows user engagement?",
+    "options": [
+      {
+        "text": "The BLEU score of its generated text for sample inputs",
+        "correct": false,
+        "rationale": "BLEU is a technical translation metric. It does not show whether anyone uses the tool."
+      },
+      {
+        "text": "How often users return and accept its suggestions",
+        "correct": true,
+        "rationale": "Repeat use and acceptance of suggestions show whether people find the tool worth using."
+      },
+      {
+        "text": "The size of the model's context window in tokens",
+        "correct": false,
+        "rationale": "This is a technical specification, not a measure of adoption."
+      },
+      {
+        "text": "The toxicity score on a safety benchmark dataset",
+        "correct": false,
+        "rationale": "Toxicity is a safety check. It does not measure adoption."
+      }
+    ],
+    "explanation": "Engagement is about whether people use the tool and come back. Usage rate, session length, repeat use and suggestion acceptance are the typical measures."
+  },
+  {
+    "id": "3.4-017",
+    "taskId": "3.4",
+    "kind": "single",
+    "objectives": [
+      "3.4.3"
+    ],
+    "stem": "A Cairnway engineer says the guide's idea of \"task engineering\" for evaluation also covers how well the task and the prompt were designed for the model. Why does this matter when judging whether an FM meets a business objective?",
+    "options": [
+      {
+        "text": "It removes the need to measure business outcomes",
+        "correct": false,
+        "rationale": "Task design does not replace business measures. It is one factor in whether the goal is met."
+      },
+      {
+        "text": "It guarantees that the cheapest model always wins",
+        "correct": false,
+        "rationale": "Cost matters, but design does not guarantee any model is the best choice."
+      },
+      {
+        "text": "It only applies to models that have been fine-tuned",
+        "correct": false,
+        "rationale": "Task and prompt design matter for any foundation model, tuned or not."
+      },
+      {
+        "text": "Poor task design can make a good model look like it fails",
+        "correct": true,
+        "rationale": "The result depends on how the task was set up, so success must be judged on task design too."
+      }
+    ],
+    "explanation": "Whether a model gets the job done depends partly on how the task and prompt are designed. That is why task success is judged along with the setup, not the model alone."
+  },
+  {
+    "id": "3.4-018",
+    "taskId": "3.4",
+    "kind": "single",
+    "objectives": [
+      "3.4.4"
+    ],
+    "services": [
+      "bedrock-evaluations",
+      "bedrock-knowledge-bases"
+    ],
+    "stem": "Cairnway's team finds that Trailmate usually retrieves the right return-policy document but sometimes leaves out a condition in its answer. Which evaluation approach finds this kind of problem?",
+    "options": [
+      {
+        "text": "Score only the final answer text with BLEU",
+        "correct": false,
+        "rationale": "One overall score hides whether retrieval or generation caused the miss."
+      },
+      {
+        "text": "Score retrieval and generation separately with a RAG evaluation",
+        "correct": true,
+        "rationale": "A RAG evaluation separates retrieved-information quality from answer quality, so the team can see which step fails."
+      },
+      {
+        "text": "Re-train the embedding model on all policy documents",
+        "correct": false,
+        "rationale": "The right document is already retrieved, so changing the embeddings addresses the wrong part."
+      },
+      {
+        "text": "Increase the knowledge base's storage capacity",
+        "correct": false,
+        "rationale": "Capacity has nothing to do with how the model uses documents."
+      }
+    ],
+    "explanation": "The right document is found but the answer drops a condition, so retrieval works and generation does not. Evaluating the two parts separately shows this, and the fix is the prompt rather than the documents."
+  },
+  {
+    "id": "3.4-019",
+    "taskId": "3.4",
+    "kind": "single",
+    "objectives": [
+      "3.4.4"
+    ],
+    "services": [
+      "bedrock-evaluations",
+      "bedrock-knowledge-bases"
+    ],
+    "stem": "Cairnway wants to measure only how well its knowledge base finds relevant document passages, before any model writes an answer. Which Amazon Bedrock evaluation job type fits?",
+    "options": [
+      {
+        "text": "A retrieve-only RAG evaluation job",
+        "correct": true,
+        "rationale": "A retrieve-only job reports on the data retrieved from the RAG source, without scoring generated answers."
+      },
+      {
+        "text": "A retrieve-and-generate RAG evaluation job",
+        "correct": false,
+        "rationale": "This also scores the generated answers. The team wants retrieval alone."
+      },
+      {
+        "text": "A human-based job rating product descriptions",
+        "correct": false,
+        "rationale": "This tests writing quality, not retrieval from a knowledge base."
+      },
+      {
+        "text": "A toxicity-only automatic job",
+        "correct": false,
+        "rationale": "This checks for harmful language and does not measure retrieval."
+      }
+    ],
+    "explanation": "Only the retrieval step is in scope, which is what a retrieve-only job reports. Retrieve-and-generate adds the model's answers."
+  },
+  {
+    "id": "3.4-020",
+    "taskId": "3.4",
+    "kind": "single",
+    "objectives": [
+      "3.4.4"
+    ],
+    "services": [
+      "bedrock-agentcore-evaluations",
+      "bedrock-agentcore"
+    ],
+    "stem": "Cairnway is building an order-status agent that calls a tool with the customer's order number. The team wants an AWS service to assess how well the agent performs tasks, handles edge cases and stays consistent, using traces of its steps. Which service meets this requirement?",
+    "options": [
+      {
+        "text": "Amazon Bedrock Guardrails",
+        "correct": false,
+        "rationale": "Guardrails filters content and applies safeguards. It does not score agent behaviour."
+      },
+      {
+        "text": "Amazon Comprehend",
+        "correct": false,
+        "rationale": "Comprehend analyses text for entities and sentiment. It does not evaluate agents."
+      },
+      {
+        "text": "Amazon Bedrock Prompt Management",
+        "correct": false,
+        "rationale": "Prompt Management stores and versions prompts and does not assess an agent's steps."
+      },
+      {
+        "text": "Amazon Bedrock AgentCore Evaluations",
+        "correct": true,
+        "rationale": "AgentCore Evaluations provides automated assessment of agents and tools, scoring agent traces with LLM-as-a-judge techniques."
+      }
+    ],
+    "explanation": "Evaluating an agent means checking its steps, such as the right tool with the right arguments, not only the final reply. AgentCore Evaluations does this by scoring traces."
+  },
+  {
+    "id": "3.4-021",
+    "taskId": "3.4",
+    "kind": "single",
+    "objectives": [
+      "3.4.4"
+    ],
+    "services": [
+      "bedrock-flows"
+    ],
+    "stem": "Cairnway chains several steps together: classify the customer message, look up the order, then write a reply. How should the team test this workflow?",
+    "options": [
+      {
+        "text": "Test only the final reply, since earlier steps are hidden",
+        "correct": false,
+        "rationale": "Hidden failures in early steps are hard to find if only the last output is checked."
+      },
+      {
+        "text": "Test only the first step, since it drives the rest",
+        "correct": false,
+        "rationale": "A good first step can still be followed by a failing later step."
+      },
+      {
+        "text": "Test each step on its own, then run end-to-end tests with realistic cases",
+        "correct": true,
+        "rationale": "Step-level tests locate the failing link, and end-to-end tests show how the whole chain behaves."
+      },
+      {
+        "text": "Skip testing until customers report errors",
+        "correct": false,
+        "rationale": "This leaves failures to customers and cannot be repeated or measured in advance."
+      }
+    ],
+    "explanation": "A workflow is a chain, and any link can fail. Testing steps individually and then the whole path with realistic cases is the recommended approach."
+  },
+  {
+    "id": "3.4-022",
+    "taskId": "3.4",
+    "kind": "single",
+    "objectives": [
+      "3.4.4"
+    ],
+    "services": [
+      "bedrock-evaluations"
+    ],
+    "stem": "After each change to Trailmate's prompt, Cairnway re-runs the same set of 300 real customer questions to make sure nothing that used to work has broken. What is this practice called?",
+    "options": [
+      {
+        "text": "Hyperparameter tuning",
+        "correct": false,
+        "rationale": "This adjusts training settings to improve a model. It is not a repeat check after a prompt change."
+      },
+      {
+        "text": "Regression testing",
+        "correct": true,
+        "rationale": "Regression testing checks that a change did not break something that used to work."
+      },
+      {
+        "text": "Pre-training",
+        "correct": false,
+        "rationale": "Pre-training is the first large training phase of a foundation model."
+      },
+      {
+        "text": "Data labelling",
+        "correct": false,
+        "rationale": "Labelling adds answers or categories to data. It is not the re-testing of a changed application."
+      }
+    ],
+    "explanation": "Re-running the same realistic test set after every change to the prompt, model or documents is regression testing."
+  },
+  {
+    "id": "3.4-023",
+    "taskId": "3.4",
+    "kind": "single",
+    "objectives": [
+      "3.4.5"
+    ],
+    "stem": "Cairnway's support lead wants one number that shows how often Trailmate chats end with the customer's question resolved without a human. Which metric is this?",
+    "options": [
+      {
+        "text": "Cost per interaction",
+        "correct": false,
+        "rationale": "This is total AI cost divided by the number of interactions. It measures spend."
+      },
+      {
+        "text": "Response time",
+        "correct": false,
+        "rationale": "This measures how long users wait, not whether the question was resolved."
+      },
+      {
+        "text": "Error rate",
+        "correct": false,
+        "rationale": "This counts how often answers go wrong. It is not the share of resolved chats."
+      },
+      {
+        "text": "Task completion rate",
+        "correct": true,
+        "rationale": "This is the share of attempts where the user's goal was achieved, such as a question resolved without a human."
+      }
+    ],
+    "explanation": "The share of chats where the goal is achieved is the definition of task completion rate."
+  },
+  {
+    "id": "3.4-024",
+    "taskId": "3.4",
+    "kind": "single",
+    "objectives": [
+      "3.4.5"
+    ],
+    "stem": "The Cairnway finance team wants to compare what an AI-handled chat costs with a human-handled chat, including model usage, infrastructure and human follow-up. Which metric supports this comparison?",
+    "options": [
+      {
+        "text": "Cost per interaction",
+        "correct": true,
+        "rationale": "Total AI cost divided by the number of interactions, which can be put next to the human cost per chat."
+      },
+      {
+        "text": "Task completion rate",
+        "correct": false,
+        "rationale": "This shows how often goals are met, not what each chat costs."
+      },
+      {
+        "text": "User satisfaction",
+        "correct": false,
+        "rationale": "This shows how happy users are. It is not a cost figure."
+      },
+      {
+        "text": "Escalation rate",
+        "correct": false,
+        "rationale": "This shows how often chats are handed to a person. It is not a cost."
+      }
+    ],
+    "explanation": "Comparing spend per chat with the human alternative needs cost per interaction. It is best read together with completion and satisfaction."
+  },
+  {
+    "id": "3.4-025",
+    "taskId": "3.4",
+    "kind": "single",
+    "objectives": [
+      "3.4.5"
+    ],
+    "stem": "Cairnway wants to track how often Trailmate hands a conversation over to a human agent. Which business metric is this?",
+    "options": [
+      {
+        "text": "Conversion rate",
+        "correct": false,
+        "rationale": "This tracks effect on sales, such as orders after a recommendation."
+      },
+      {
+        "text": "Cost per interaction",
+        "correct": false,
+        "rationale": "This tracks spend. It does not count handovers."
+      },
+      {
+        "text": "Escalation or fallback rate",
+        "correct": true,
+        "rationale": "This measures how often the AI hands over to a person."
+      },
+      {
+        "text": "Latency",
+        "correct": false,
+        "rationale": "This measures how long users wait for an answer, not who handles the chat."
+      }
+    ],
+    "explanation": "Handovers to a person are the escalation or fallback rate, a common dashboard metric for support assistants."
+  },
+  {
+    "id": "3.4-026",
+    "taskId": "3.4",
+    "kind": "single",
+    "objectives": [
+      "3.4.5"
+    ],
+    "services": [
+      "personalize"
+    ],
+    "stem": "Cairnway adds AI-generated product recommendations to its website and wants to know whether they help the business. Which metric best shows the effect on sales?",
+    "options": [
+      {
+        "text": "ROUGE score of the recommendation text",
+        "correct": false,
+        "rationale": "ROUGE compares text with a reference. It does not show whether sales improve."
+      },
+      {
+        "text": "Conversion or revenue impact, such as orders after a recommendation",
+        "correct": true,
+        "rationale": "This tracks the effect on sales, which is the business goal of recommendations."
+      },
+      {
+        "text": "The model's embedding size",
+        "correct": false,
+        "rationale": "This is a technical property and says nothing about sales."
+      },
+      {
+        "text": "The toxicity score of the recommendations",
+        "correct": false,
+        "rationale": "Toxicity is a safety check. It does not show sales impact."
+      }
+    ],
+    "explanation": "A goal of better sales is measured with conversion or revenue impact, not with a technical text score."
+  },
+  {
+    "id": "3.4-027",
+    "taskId": "3.4",
+    "kind": "single",
+    "objectives": [
+      "3.4.2"
+    ],
+    "services": [
+      "bedrock-evaluations"
+    ],
+    "stem": "Cairnway Outfitters wants Trailmate's judge-based evaluation to show whether each answer follows the customer's instructions and makes sense. Which type of metric should it use?",
+    "options": [
+      {
+        "text": "A reference-overlap metric such as ROUGE for every answer",
+        "correct": false,
+        "rationale": "ROUGE needs a reference text and counts matching words. It does not judge whether instructions were followed."
+      },
+      {
+        "text": "A judge metric such as helpfulness",
+        "correct": true,
+        "rationale": "Helpfulness covers whether a response follows instructions and makes sense, and anticipates implicit needs."
+      },
+      {
+        "text": "A cost metric such as cost per interaction for each chat",
+        "correct": false,
+        "rationale": "This is a business metric about spend and does not rate the quality of an answer."
+      },
+      {
+        "text": "A speed metric such as response time for the first reply",
+        "correct": false,
+        "rationale": "This measures how long users wait and does not judge whether an answer follows instructions."
+      }
+    ],
+    "explanation": "Whether an answer follows instructions and makes sense is a quality judgement, which LLM-as-a-judge metrics such as helpfulness cover. Overlap, cost and speed measures answer other questions."
+  },
+  {
+    "id": "3.4-028",
+    "taskId": "3.4",
+    "kind": "multi",
+    "objectives": [
+      "3.4.1"
+    ],
+    "services": [
+      "bedrock-evaluations"
+    ],
+    "stem": "Cairnway Outfitters wants to evaluate a new model for Trailmate using methods that Amazon Bedrock Model Evaluation supports. Which approaches can it use? (Select TWO.)",
+    "select": 2,
+    "options": [
+      {
+        "text": "A job in which a team of staff or experts rates responses",
+        "correct": true,
+        "rationale": "Human-based evaluation uses a workforce, such as your employees or subject-matter experts, to give ratings and preferences."
+      },
+      {
+        "text": "A job in which another model scores the responses and explains each score",
+        "correct": true,
+        "rationale": "LLM-as-a-judge evaluation uses a second model to score responses and give reasons."
+      },
+      {
+        "text": "A job that raises the model's temperature until answers improve",
+        "correct": false,
+        "rationale": "Temperature is an inference setting that changes randomness. It is not an evaluation method."
+      },
+      {
+        "text": "A job that reserves model capacity with Provisioned Throughput",
+        "correct": false,
+        "rationale": "Provisioned Throughput reserves capacity for a model. It does not evaluate it."
+      },
+      {
+        "text": "A job that blocks harmful content with Amazon Bedrock Guardrails",
+        "correct": false,
+        "rationale": "Guardrails applies safeguards at run time. It does not score model quality."
+      }
+    ],
+    "explanation": "Bedrock Model Evaluation covers programmatic (automatic), human-based, LLM-as-a-judge and RAG evaluations. The other options are settings or safeguards, not evaluation jobs."
+  },
+  {
+    "id": "3.4-029",
+    "taskId": "3.4",
+    "kind": "multi",
+    "objectives": [
+      "3.4.1"
+    ],
+    "stem": "Cairnway Outfitters is considering automatic scoring on a benchmark dataset for its product-description model. Which statements describe strengths of this approach? (Select TWO.)",
+    "select": 2,
+    "options": [
+      {
+        "text": "It is fast and cheap compared with rating answers by hand",
+        "correct": true,
+        "rationale": "Automatic scoring needs no panel of raters, so large test sets can be scored quickly and at low cost."
+      },
+      {
+        "text": "It lets the team compare models fairly on the same test",
+        "correct": true,
+        "rationale": "Every model sees the same prompts, so differences in scores reflect the models."
+      },
+      {
+        "text": "It judges subtle tone and brand voice better than people can",
+        "correct": false,
+        "rationale": "Subtle, subjective qualities are the weakness of automatic scores. People judge them better."
+      },
+      {
+        "text": "It always matches the real questions customers ask",
+        "correct": false,
+        "rationale": "A generic benchmark may not look like real work, so teams also build their own dataset."
+      },
+      {
+        "text": "It removes the need for any reference answers",
+        "correct": false,
+        "rationale": "Many automatic metrics compare against reference answers, so these are often needed."
+      }
+    ],
+    "explanation": "Benchmark datasets are valued for speed, low cost and repeatability, which allow fair comparison. Their weaknesses are subjective qualities and a possible mismatch with real use."
+  },
+  {
+    "id": "3.4-030",
+    "taskId": "3.4",
+    "kind": "multi",
+    "objectives": [
+      "3.4.1"
+    ],
+    "stem": "Cairnway Outfitters asks its support team to rate Trailmate answers by hand as part of an evaluation. Which statements describe drawbacks of human-in-the-loop evaluation? (Select TWO.)",
+    "select": 2,
+    "options": [
+      {
+        "text": "It is slow and costly compared with automatic methods",
+        "correct": true,
+        "rationale": "People need time to read and rate each answer, which limits how many can be checked."
+      },
+      {
+        "text": "Ratings can vary from one rater to another",
+        "correct": true,
+        "rationale": "Different raters may judge the same answer differently, so clear instructions and a rating method are needed."
+      },
+      {
+        "text": "It cannot assess tone or helpfulness",
+        "correct": false,
+        "rationale": "Tone and helpfulness are what people judge best. This is a strength, not a drawback."
+      },
+      {
+        "text": "It can only be used with benchmark datasets",
+        "correct": false,
+        "rationale": "Human evaluation can rate answers to any prompts. It does not depend on a benchmark."
+      },
+      {
+        "text": "It gives written reasons automatically for every score",
+        "correct": false,
+        "rationale": "Written reasons for each score are a feature of LLM-as-a-judge, not an automatic result of human rating."
+      }
+    ],
+    "explanation": "People catch subtle problems but are slow, costly and sometimes inconsistent. That is why human ratings are often used on a sample while automatic or judge-based methods handle volume."
+  },
+  {
+    "id": "3.4-031",
+    "taskId": "3.4",
+    "kind": "multi",
+    "objectives": [
+      "3.4.1"
+    ],
+    "services": [
+      "bedrock-evaluations",
+      "sagemaker-jumpstart"
+    ],
+    "stem": "Cairnway Outfitters has customized one model and imported another. It wants to compare both with a standard foundation model using Amazon Bedrock Model Evaluation. Which statements are true? (Select TWO.)",
+    "select": 2,
+    "options": [
+      {
+        "text": "Customized models can be evaluated",
+        "correct": true,
+        "rationale": "Bedrock Model Evaluation can evaluate foundation models and customized models."
+      },
+      {
+        "text": "Imported models can be evaluated",
+        "correct": true,
+        "rationale": "Imported models are supported too, so all three can be compared on the same prompts."
+      },
+      {
+        "text": "Only base foundation models can be evaluated",
+        "correct": false,
+        "rationale": "This is wrong. Customized and imported models are also supported."
+      },
+      {
+        "text": "Evaluation jobs can only use human raters",
+        "correct": false,
+        "rationale": "Automatic, judge-based and RAG jobs are also available."
+      },
+      {
+        "text": "Evaluation requires a built-in dataset and cannot use your own prompts",
+        "correct": false,
+        "rationale": "You can supply your own prompt dataset as well as use built-in datasets."
+      }
+    ],
+    "explanation": "Bedrock Model Evaluation can compare foundation models, customized models, imported models and prompt routers, using your own dataset or a built-in one."
+  },
+  {
+    "id": "3.4-032",
+    "taskId": "3.4",
+    "kind": "multi",
+    "objectives": [
+      "3.4.2"
+    ],
+    "services": [
+      "bedrock-evaluations"
+    ],
+    "stem": "Cairnway Outfitters scores model-written text against human-written reference texts. Which metrics need a reference text to compare with? (Select THREE.)",
+    "select": 3,
+    "options": [
+      {
+        "text": "ROUGE",
+        "correct": true,
+        "rationale": "ROUGE counts overlapping words and word sequences with a reference."
+      },
+      {
+        "text": "BLEU",
+        "correct": true,
+        "rationale": "BLEU compares word sequences with reference text."
+      },
+      {
+        "text": "BERTScore",
+        "correct": true,
+        "rationale": "BERTScore compares the meaning of the model text with the reference, using embeddings."
+      },
+      {
+        "text": "Cost per interaction",
+        "correct": false,
+        "rationale": "This is a business metric calculated from spend and number of chats. No reference text is involved."
+      },
+      {
+        "text": "User satisfaction",
+        "correct": false,
+        "rationale": "This comes from ratings or surveys of users, not from comparison with a reference text."
+      }
+    ],
+    "explanation": "ROUGE, BLEU and BERTScore are all reference-based text metrics. Cost per interaction and user satisfaction are business metrics that do not compare texts."
+  },
+  {
+    "id": "3.4-033",
+    "taskId": "3.4",
+    "kind": "multi",
+    "objectives": [
+      "3.4.2"
+    ],
+    "services": [
+      "bedrock-evaluations"
+    ],
+    "stem": "Cairnway Outfitters wants LLM-as-a-judge metrics for Trailmate that check whether answers cover everything the customer asked and whether they are correct. Which metrics should it select? (Select TWO.)",
+    "select": 2,
+    "options": [
+      {
+        "text": "Correctness",
+        "correct": true,
+        "rationale": "Correctness asks whether the response is correct."
+      },
+      {
+        "text": "Completeness",
+        "correct": true,
+        "rationale": "Completeness asks whether the response answers every question in the prompt."
+      },
+      {
+        "text": "Escalation rate",
+        "correct": false,
+        "rationale": "This is a business metric about handovers, not a judge metric for a single answer."
+      },
+      {
+        "text": "Cost per interaction",
+        "correct": false,
+        "rationale": "This is a business metric about spend. A judge does not score cost."
+      },
+      {
+        "text": "Response time",
+        "correct": false,
+        "rationale": "This measures speed and is not a judge metric for answer quality."
+      }
+    ],
+    "explanation": "Correctness and completeness are built-in judge metrics for accuracy and coverage. Escalation rate, cost and response time are business or performance measures outside a judge's scoring of a single answer."
+  },
+  {
+    "id": "3.4-034",
+    "taskId": "3.4",
+    "kind": "multi",
+    "objectives": [
+      "3.4.2"
+    ],
+    "services": [
+      "bedrock-evaluations"
+    ],
+    "stem": "A Cairnway analyst makes statements about reference-based text metrics. Which statements are correct? (Select TWO.)",
+    "select": 2,
+    "options": [
+      {
+        "text": "ROUGE and BLEU count matching words and word sequences",
+        "correct": true,
+        "rationale": "Both are overlap metrics, with ROUGE recall-oriented and BLEU precision-oriented."
+      },
+      {
+        "text": "BERTScore compares meaning with embeddings, so paraphrases can score well",
+        "correct": true,
+        "rationale": "Because it uses embeddings rather than exact words, similar meanings count as similar."
+      },
+      {
+        "text": "A high BERTScore proves a summary is factually true",
+        "correct": false,
+        "rationale": "A high score means similar to the reference. It does not prove truth."
+      },
+      {
+        "text": "ROUGE is mainly used to score machine translation",
+        "correct": false,
+        "rationale": "ROUGE is mainly used for summarization. BLEU is the classic translation metric."
+      },
+      {
+        "text": "BLEU compares embeddings and ignores the exact words",
+        "correct": false,
+        "rationale": "BLEU counts matching word sequences. Comparing embeddings is what BERTScore does."
+      }
+    ],
+    "explanation": "Overlap metrics (ROUGE, BLEU) look at words, while BERTScore looks at meaning. None of them proves truth, and ROUGE and BLEU suit summarization and translation respectively."
+  },
+  {
+    "id": "3.4-035",
+    "taskId": "3.4",
+    "kind": "multi",
+    "objectives": [
+      "3.4.3",
+      "3.4.5"
+    ],
+    "stem": "Cairnway Outfitters tests an AI tool that drafts product descriptions. Which measurements show whether it improves copywriter productivity? (Select TWO.)",
+    "select": 2,
+    "options": [
+      {
+        "text": "Minutes needed to produce a publishable description",
+        "correct": true,
+        "rationale": "Time saved per task is a direct measure of productivity."
+      },
+      {
+        "text": "Descriptions completed per copywriter per day",
+        "correct": true,
+        "rationale": "Output per person per day shows whether the tool lets the team do more work."
+      },
+      {
+        "text": "ROUGE score against the reference descriptions",
+        "correct": false,
+        "rationale": "This measures text similarity, a technical quality score, not time saved."
+      },
+      {
+        "text": "Toxicity score on a benchmark dataset",
+        "correct": false,
+        "rationale": "This is a safety measure and says nothing about how fast writers work."
+      },
+      {
+        "text": "Number of parameters in the model",
+        "correct": false,
+        "rationale": "Model size is not a productivity result."
+      }
+    ],
+    "explanation": "Productivity is judged by time and output, such as minutes per task and tasks per employee per day. Technical scores do not show them."
+  },
+  {
+    "id": "3.4-036",
+    "taskId": "3.4",
+    "kind": "multi",
+    "objectives": [
+      "3.4.3"
+    ],
+    "services": [
+      "bedrock-evaluations"
+    ],
+    "stem": "Cairnway Outfitters wants to judge whether a new assistant meets a business objective. Which steps belong in the method? (Select THREE.)",
+    "select": 3,
+    "options": [
+      {
+        "text": "Set the goal and a success threshold before launch",
+        "correct": true,
+        "rationale": "A target decided in advance makes the later comparison honest."
+      },
+      {
+        "text": "Measure a baseline of how the work is done today",
+        "correct": true,
+        "rationale": "A baseline gives something to compare the AI results against."
+      },
+      {
+        "text": "Run a pilot, compare results with the baseline and keep measuring after launch",
+        "correct": true,
+        "rationale": "Pilots and ongoing measurement show whether the goal is met and whether results drift over time."
+      },
+      {
+        "text": "Choose the metrics only after seeing which look best",
+        "correct": false,
+        "rationale": "Picking metrics afterwards invites cherry-picking and makes the result unreliable."
+      },
+      {
+        "text": "Rely on ROUGE alone to prove business value",
+        "correct": false,
+        "rationale": "ROUGE is a technical text metric. It cannot show business results."
+      }
+    ],
+    "explanation": "Business evaluation sets goals and thresholds first, measures a baseline, pilots, compares and keeps tracking. Technical scores alone don't prove business value."
+  },
+  {
+    "id": "3.4-037",
+    "taskId": "3.4",
+    "kind": "multi",
+    "objectives": [
+      "3.4.4"
+    ],
+    "services": [
+      "bedrock-evaluations",
+      "bedrock-knowledge-bases"
+    ],
+    "stem": "Cairnway Outfitters runs a RAG evaluation on its Trailmate knowledge base in Amazon Bedrock. Which questions does it help answer? (Select TWO.)",
+    "select": 2,
+    "options": [
+      {
+        "text": "Is the relevant information retrieved from the knowledge base?",
+        "correct": true,
+        "rationale": "RAG evaluation measures how relevant the retrieved information is."
+      },
+      {
+        "text": "Is the generated answer useful, appropriate and faithful to what was retrieved?",
+        "correct": true,
+        "rationale": "A retrieve-and-generate job also scores the quality of the answers."
+      },
+      {
+        "text": "How many Regions does the knowledge base's vector store run in?",
+        "correct": false,
+        "rationale": "This is an infrastructure question. It is not part of what the evaluation measures."
+      },
+      {
+        "text": "Which employees are allowed to read the source documents?",
+        "correct": false,
+        "rationale": "This is access control, handled with permissions rather than evaluation metrics."
+      },
+      {
+        "text": "How much does the embedding model cost per token?",
+        "correct": false,
+        "rationale": "Price is a cost question, not a retrieval or answer-quality measure."
+      }
+    ],
+    "explanation": "A RAG application can fail at retrieval or at generation, so RAG evaluations score both: how relevant the retrieved information is and how good the answer is."
+  },
+  {
+    "id": "3.4-038",
+    "taskId": "3.4",
+    "kind": "multi",
+    "objectives": [
+      "3.4.4"
+    ],
+    "services": [
+      "bedrock-agentcore-evaluations"
+    ],
+    "stem": "Cairnway Outfitters is evaluating its order-status agent beyond the final reply. Which checks apply to an agent? (Select TWO.)",
+    "select": 2,
+    "options": [
+      {
+        "text": "Did it choose the right tool for the request?",
+        "correct": true,
+        "rationale": "Choosing the right tool is a step in the agent's work that can fail even when the final reply sounds fine."
+      },
+      {
+        "text": "Did it call the tool with correct inputs, such as the right order number?",
+        "correct": true,
+        "rationale": "A wrong input leads to a wrong result, so tool calls are checked step by step."
+      },
+      {
+        "text": "How many words overlap with a human-written reply?",
+        "correct": false,
+        "rationale": "This overlap measure may be used on text, but it says nothing about the agent's tool use."
+      },
+      {
+        "text": "How many layers does the underlying model have?",
+        "correct": false,
+        "rationale": "Model architecture is a technical detail and not an agent evaluation check."
+      },
+      {
+        "text": "How large was the model's training dataset?",
+        "correct": false,
+        "rationale": "Training data size is not an evaluation of how the agent behaves."
+      }
+    ],
+    "explanation": "Agents act in steps, so evaluation looks at the steps (right tool, correct call, goal finished, edge cases) as well as the final answer."
+  },
+  {
+    "id": "3.4-039",
+    "taskId": "3.4",
+    "kind": "multi",
+    "objectives": [
+      "3.4.5"
+    ],
+    "services": [
+      "cloudwatch"
+    ],
+    "stem": "Cairnway Outfitters builds a weekly dashboard to show the board whether Trailmate achieves its business objectives. Which metrics belong on it? (Select THREE.)",
+    "select": 3,
+    "options": [
+      {
+        "text": "Task completion rate",
+        "correct": true,
+        "rationale": "It shows how often customers' questions are resolved."
+      },
+      {
+        "text": "Customer satisfaction scores",
+        "correct": true,
+        "rationale": "Satisfaction shows whether users are happy with the assistant."
+      },
+      {
+        "text": "Cost per interaction",
+        "correct": true,
+        "rationale": "It shows whether the assistant costs less than the alternative."
+      },
+      {
+        "text": "ROUGE score on a benchmark",
+        "correct": false,
+        "rationale": "A technical text-similarity score, not a business alignment metric."
+      },
+      {
+        "text": "BLEU score on translated reviews",
+        "correct": false,
+        "rationale": "A technical translation metric, not something a business dashboard needs for goal tracking."
+      }
+    ],
+    "explanation": "Business alignment metrics such as task completion rate, satisfaction and cost per interaction show whether the AI meets the business goal. ROUGE and BLEU are technical scores."
+  },
+  {
+    "id": "3.4-040",
+    "taskId": "3.4",
+    "kind": "multi",
+    "objectives": [
+      "3.4.5"
+    ],
+    "stem": "Cairnway Outfitters wants to know whether Trailmate is giving a smooth experience. Which metrics help answer this? (Select TWO.)",
+    "select": 2,
+    "options": [
+      {
+        "text": "Escalation rate",
+        "correct": true,
+        "rationale": "A high rate of handovers to people can signal that the assistant is not resolving questions."
+      },
+      {
+        "text": "Response time",
+        "correct": true,
+        "rationale": "Long waits for the first answer hurt the experience."
+      },
+      {
+        "text": "BERTScore against reference answers",
+        "correct": false,
+        "rationale": "This is a technical similarity score and not a measure of the customer experience."
+      },
+      {
+        "text": "The model's number of parameters",
+        "correct": false,
+        "rationale": "Model size is not a user-experience measure."
+      },
+      {
+        "text": "The size of the benchmark dataset",
+        "correct": false,
+        "rationale": "A bigger test set doesn't describe what customers experience."
+      }
+    ],
+    "explanation": "Escalation or fallback rate and response time (latency) are business metrics that reflect how well the experience works for users."
+  },
+  {
+    "id": "3.4-041",
+    "taskId": "3.4",
+    "kind": "order",
+    "objectives": [
+      "3.4.3"
+    ],
+    "stem": "Put these steps for judging whether a new Cairnway assistant meets its business objective in the correct order.",
+    "steps": [
+      "Set the business goal and a success threshold",
+      "Measure a baseline of how the work is done today",
+      "Run a pilot with the assistant",
+      "Compare the pilot results with the baseline and the threshold",
+      "Keep measuring after launch"
+    ],
+    "explanation": "The goal and threshold come first so that results can be judged honestly. A baseline is measured before the change, then a pilot produces new numbers, which are compared. Models drift and customers change, so measurement continues after launch."
+  },
+  {
+    "id": "3.4-042",
+    "taskId": "3.4",
+    "kind": "order",
+    "objectives": [
+      "3.4.1"
+    ],
+    "services": [
+      "bedrock-evaluations"
+    ],
+    "stem": "Put these steps for comparing models on a benchmark dataset of Cairnway's own questions in the correct order.",
+    "steps": [
+      "Collect real support questions and write ideal answers",
+      "Run each candidate model on the same questions",
+      "Compute scores for each model's answers",
+      "Compare the scores and choose a model"
+    ],
+    "explanation": "The dataset has to exist before models can be tested. All models then run on identical questions, results are scored and finally compared, which is what makes the comparison fair."
+  },
+  {
+    "id": "3.4-043",
+    "taskId": "3.4",
+    "kind": "order",
+    "objectives": [
+      "3.4.4"
+    ],
+    "stem": "Put these steps for testing a Cairnway workflow that chains several steps in the correct order.",
+    "steps": [
+      "Build a test set that looks like real customer use",
+      "Test each step on its own",
+      "Run end-to-end tests with realistic cases",
+      "Re-run the tests after every change to the prompt, model or documents"
+    ],
+    "explanation": "A realistic test set is needed first. Step-level tests find which link fails, end-to-end tests check the whole chain, and re-running after each change (regression testing) catches new breakage."
+  },
+  {
+    "id": "3.4-044",
+    "taskId": "3.4",
+    "kind": "match",
+    "objectives": [
+      "3.4.2"
+    ],
+    "services": [
+      "bedrock-evaluations"
+    ],
+    "stem": "Match each task or need at Cairnway with the metric that fits it best.",
+    "pairs": [
+      {
+        "prompt": "Compare model-written review summaries with human-written summaries",
+        "answer": "ROUGE"
+      },
+      {
+        "prompt": "Score German-to-English review translations against human translations",
+        "answer": "BLEU"
+      },
+      {
+        "prompt": "Compare the meaning of two descriptions that use different words",
+        "answer": "BERTScore"
+      },
+      {
+        "prompt": "Check answers to factual questions for an identical match with the expected answer",
+        "answer": "Exact match"
+      }
+    ],
+    "distractors": [
+      "Task completion rate"
+    ],
+    "explanation": "ROUGE suits summarization and BLEU translation, both by word overlap. BERTScore compares meaning with embeddings. Exact match is a question-answering metric that credits identical answers. Task completion rate is a business metric, so it matches none of these."
+  },
+  {
+    "id": "3.4-045",
+    "taskId": "3.4",
+    "kind": "match",
+    "objectives": [
+      "3.4.1"
+    ],
+    "services": [
+      "bedrock-evaluations"
+    ],
+    "stem": "Match each Cairnway evaluation activity with the approach it describes.",
+    "pairs": [
+      {
+        "prompt": "Support staff click thumbs up or down on Trailmate answers",
+        "answer": "Human-in-the-loop evaluation"
+      },
+      {
+        "prompt": "300 fixed questions are run through every candidate model and scored automatically",
+        "answer": "Benchmark dataset"
+      },
+      {
+        "prompt": "A second model scores each answer and explains the score",
+        "answer": "LLM-as-a-judge"
+      }
+    ],
+    "distractors": [
+      "Provisioned Throughput",
+      "Denied topics"
+    ],
+    "explanation": "People rating answers is human-in-the-loop evaluation, a fixed question set scored by metrics is a benchmark dataset, and a model that scores answers with reasons is LLM-as-a-judge. Provisioned Throughput and denied topics are not evaluation approaches."
+  },
+  {
+    "id": "3.4-046",
+    "taskId": "3.4",
+    "kind": "match",
+    "objectives": [
+      "3.4.5"
+    ],
+    "stem": "Match each business metric with what it tells Cairnway.",
+    "pairs": [
+      {
+        "prompt": "Task completion rate",
+        "answer": "Share of attempts where the user's goal was achieved"
+      },
+      {
+        "prompt": "Cost per interaction",
+        "answer": "Total AI cost divided by the number of interactions"
+      },
+      {
+        "prompt": "Escalation rate",
+        "answer": "How often the AI hands a chat to a person"
+      },
+      {
+        "prompt": "User satisfaction",
+        "answer": "How happy users are, from ratings or surveys"
+      }
+    ],
+    "distractors": [
+      "How much model text overlaps with a reference"
+    ],
+    "explanation": "Each business metric answers a different question about the assistant. The overlap measure belongs to technical text metrics such as ROUGE, not to the business dashboard."
+  },
+  {
+    "id": "3.4-047",
+    "taskId": "3.4",
+    "kind": "match",
+    "objectives": [
+      "3.4.4"
+    ],
+    "services": [
+      "bedrock-evaluations"
+    ],
+    "stem": "Match each type of FM application at Cairnway with what its evaluation should check.",
+    "pairs": [
+      {
+        "prompt": "RAG application",
+        "answer": "Retrieval and generation, scored separately"
+      },
+      {
+        "prompt": "Agent",
+        "answer": "The steps: right tool, correct call and finished goal"
+      },
+      {
+        "prompt": "Multi-step workflow",
+        "answer": "Each step on its own, then end-to-end tests"
+      }
+    ],
+    "distractors": [
+      "Only the model's token count"
+    ],
+    "explanation": "A RAG application can fail at retrieval or generation, an agent can fail in its tool use, and a workflow can fail at any link. Token count is a cost detail, not an evaluation of any of them."
+  },
+  {
+    "id": "3.4-048",
+    "taskId": "3.4",
+    "kind": "case",
+    "services": [
+      "bedrock-evaluations",
+      "bedrock-knowledge-bases"
+    ],
+    "scenario": "Cairnway Outfitters is preparing to launch Trailmate, its support assistant, to all customers. The team has built a benchmark of 300 real support questions with ideal answers and will use Amazon Bedrock Model Evaluation with an LLM-as-a-judge job to compare three candidate models. Trailmate uses a Bedrock knowledge base for its return policy, and the team also translates German customer reviews into English. The board wants proof that the assistant is worth the cost.",
+    "parts": [
+      {
+        "kind": "single",
+        "objectives": [
+          "3.4.1"
+        ],
+        "stem": "The team wants to confirm that the judge model is trustworthy before relying on its scores. What should it do?",
+        "options": [
+          {
+            "text": "Ask the judge model to rate its own scores",
+            "correct": false,
+            "rationale": "The same model would repeat its own blind spots, so this is not an independent check."
+          },
+          {
+            "text": "Replace the judge with a larger benchmark dataset",
+            "correct": false,
+            "rationale": "A bigger dataset changes what is tested, not whether the judge is reliable."
+          },
+          {
+            "text": "Have support agents rate a sample of the answers and compare with the judge",
+            "correct": true,
+            "rationale": "Human ratings on a sample show whether the judge's scores can be trusted."
+          },
+          {
+            "text": "Accept the scores because judge models are never biased",
+            "correct": false,
+            "rationale": "A judge is a model and can be wrong or biased."
+          }
+        ],
+        "explanation": "The judge model is fast, but it can be wrong or biased. Comparing its scores with human ratings on a sample is the way to check it."
+      },
+      {
+        "kind": "single",
+        "objectives": [
+          "3.4.2"
+        ],
+        "stem": "For the German-to-English review translations, the team wants a classic reference-based metric against the human translations. Which metric should it use?",
+        "options": [
+          {
+            "text": "BLEU",
+            "correct": true,
+            "rationale": "BLEU compares word sequences with reference text and is the classic metric for machine translation."
+          },
+          {
+            "text": "Escalation rate",
+            "correct": false,
+            "rationale": "This business metric counts handovers to people. It does not score translations."
+          },
+          {
+            "text": "Faithfulness",
+            "correct": false,
+            "rationale": "Faithfulness checks that answers stick to given context. It does not compare translations with a reference."
+          },
+          {
+            "text": "Cost per interaction",
+            "correct": false,
+            "rationale": "This business metric measures spend, not translation quality."
+          }
+        ],
+        "explanation": "Translation compared with human reference translations points to BLEU, an overlap metric."
+      },
+      {
+        "kind": "single",
+        "objectives": [
+          "3.4.4"
+        ],
+        "stem": "Trailmate usually retrieves the right return policy but sometimes drops a condition from its answer. What should the team do?",
+        "options": [
+          {
+            "text": "Add more documents to the knowledge base",
+            "correct": false,
+            "rationale": "The right document is already retrieved. More documents wouldn't fix a dropped condition."
+          },
+          {
+            "text": "Re-run ROUGE on the whole answer and accept the score",
+            "correct": false,
+            "rationale": "One overall score hides which step fails."
+          },
+          {
+            "text": "Turn off the knowledge base so the model answers alone",
+            "correct": false,
+            "rationale": "Without the knowledge base the model has no policy text to ground its answers."
+          },
+          {
+            "text": "Run a RAG evaluation that scores retrieval and generation separately, then improve the prompt",
+            "correct": true,
+            "rationale": "The scores show retrieval is fine and generation is the weak step, so the prompt is the fix."
+          }
+        ],
+        "explanation": "Retrieval works and generation does not. Separate scoring pinpoints this, and the remedy is in the prompt rather than the documents."
+      },
+      {
+        "kind": "single",
+        "objectives": [
+          "3.4.5"
+        ],
+        "stem": "The board wants a single metric on a dashboard that shows how often customers' questions are resolved without a human. Which metric should the team show?",
+        "options": [
+          {
+            "text": "BERTScore",
+            "correct": false,
+            "rationale": "This technical score compares meaning with a reference. It does not count resolved chats."
+          },
+          {
+            "text": "Task completion rate",
+            "correct": true,
+            "rationale": "This is the share of attempts where the user's goal was achieved."
+          },
+          {
+            "text": "BLEU",
+            "correct": false,
+            "rationale": "This technical score compares word sequences. It does not count resolved chats."
+          },
+          {
+            "text": "The size of the benchmark dataset",
+            "correct": false,
+            "rationale": "This describes the test, not how many chats are resolved."
+          }
+        ],
+        "explanation": "Resolved questions are measured by task completion rate, a business alignment metric."
+      }
+    ]
+  }
+]
