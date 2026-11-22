@@ -1,0 +1,1757 @@
+[
+  {
+    "id": "2.3-001",
+    "taskId": "2.3",
+    "kind": "single",
+    "objectives": [
+      "2.3.1"
+    ],
+    "stem": "Cairnway Outfitters wants to launch its Trailmate support assistant using foundation models from several providers. The team has no machine learning engineers and does not want to manage any servers. Which AWS service meets these requirements with the LEAST operational overhead?",
+    "options": [
+      {
+        "text": "Amazon SageMaker AI",
+        "correct": false,
+        "rationale": "SageMaker AI is for building, training and hosting your own models. It gives more control but needs a data science team and more work."
+      },
+      {
+        "text": "Amazon Quick",
+        "correct": false,
+        "rationale": "Quick is an AI workspace for business users. It is not the service developers use to build a customer-facing assistant on foundation models."
+      },
+      {
+        "text": "Amazon Bedrock",
+        "correct": true,
+        "rationale": "Bedrock offers many foundation models through one managed API, and AWS runs the infrastructure, so the team manages no servers."
+      },
+      {
+        "text": "Kiro",
+        "correct": false,
+        "rationale": "Kiro helps developers write and check software. It does not host foundation models for an application."
+      }
+    ],
+    "explanation": "The clues are 'several providers', 'no ML engineers' and 'no servers'. Amazon Bedrock is the managed layer where developers call many foundation models through one API, so it is the default answer for using a foundation model with the least effort.",
+    "services": [
+      "bedrock",
+      "sagemaker-ai",
+      "quick",
+      "kiro"
+    ]
+  },
+  {
+    "id": "2.3-002",
+    "taskId": "2.3",
+    "kind": "single",
+    "objectives": [
+      "2.3.1"
+    ],
+    "stem": "Cairnway's marketing and finance staff are not technical. They want an AI workspace where they can summarize reports, run research and build dashboards without writing any code. Which AWS offering is the best fit?",
+    "options": [
+      {
+        "text": "Amazon Quick",
+        "correct": true,
+        "rationale": "Quick is an AI workspace for business users. Staff can create documents, run research and build dashboards and simple apps without code."
+      },
+      {
+        "text": "Amazon Bedrock",
+        "correct": false,
+        "rationale": "Bedrock gives developers models through an API. Non-technical staff would still need someone to build an application on top of it."
+      },
+      {
+        "text": "Amazon SageMaker JumpStart",
+        "correct": false,
+        "rationale": "JumpStart is a hub for pretrained models inside SageMaker AI. It is aimed at data scientists, not business users."
+      },
+      {
+        "text": "Kiro",
+        "correct": false,
+        "rationale": "Kiro is an engineering tool for developers who plan, build and review software. It is not meant for finance or marketing staff."
+      }
+    ],
+    "explanation": "The deciding clue is 'not technical' with 'no code'. Amazon Quick is the AWS offering built for business users, including dashboards. The other options all assume developers or data scientists.",
+    "services": [
+      "quick",
+      "bedrock",
+      "kiro"
+    ]
+  },
+  {
+    "id": "2.3-003",
+    "taskId": "2.3",
+    "kind": "single",
+    "objectives": [
+      "2.3.1"
+    ],
+    "stem": "Cairnway's developers want an AI system that helps them plan, build, review and verify the code of the company's own online shop. Which AWS offering is designed for this purpose?",
+    "options": [
+      {
+        "text": "Amazon Quick",
+        "correct": false,
+        "rationale": "Quick is a workspace for business users who want documents, research and dashboards. It is not a software engineering tool."
+      },
+      {
+        "text": "Strands Agents",
+        "correct": false,
+        "rationale": "Strands Agents is a toolkit developers use to write an AI agent. It does not help them write the shop's own code."
+      },
+      {
+        "text": "Amazon Bedrock Guardrails",
+        "correct": false,
+        "rationale": "Guardrails add safety filters to model inputs and outputs. They do not help developers write or review software."
+      },
+      {
+        "text": "Kiro",
+        "correct": true,
+        "rationale": "Kiro is an agentic AI engineering system from AWS that helps developers plan, build, review and verify software."
+      }
+    ],
+    "explanation": "The clue is that the developers want help with their own code. Kiro is the AWS engineering tool for that. Strands Agents is for building agents, and Quick is for business users.",
+    "services": [
+      "kiro",
+      "quick",
+      "strands-agents"
+    ]
+  },
+  {
+    "id": "2.3-004",
+    "taskId": "2.3",
+    "kind": "single",
+    "objectives": [
+      "2.3.1"
+    ],
+    "stem": "A Cairnway developer wants to write a shopping agent in code with an open-source toolkit. The toolkit must support multi-agent patterns and let the developer choose any model. Which should the developer use?",
+    "options": [
+      {
+        "text": "Amazon Bedrock AgentCore",
+        "correct": false,
+        "rationale": "AgentCore is the platform that hosts and operates a finished agent. It is not the toolkit used to write the agent."
+      },
+      {
+        "text": "Strands Agents",
+        "correct": true,
+        "rationale": "Strands Agents is an open-source toolkit for building production agents in code, with multi-agent patterns, MCP support and a choice of model."
+      },
+      {
+        "text": "Amazon Quick",
+        "correct": false,
+        "rationale": "Quick is a no-code workspace for business users, not a toolkit for writing agents in code."
+      },
+      {
+        "text": "Amazon SageMaker JumpStart",
+        "correct": false,
+        "rationale": "JumpStart helps you deploy and customize pretrained models. It is not an agent-building toolkit."
+      }
+    ],
+    "explanation": "The clues are 'open-source', 'in code' and 'multi-agent'. Strands Agents is the toolkit used to write an agent. AgentCore comes later, when the finished agent needs to run in production.",
+    "services": [
+      "strands-agents",
+      "bedrock-agentcore",
+      "kiro"
+    ]
+  },
+  {
+    "id": "2.3-005",
+    "taskId": "2.3",
+    "kind": "single",
+    "objectives": [
+      "2.3.1"
+    ],
+    "stem": "Cairnway has written its order-support agent. The team now needs to run it in production with secure access control, memory between conversations and monitoring. Which AWS service should it use?",
+    "options": [
+      {
+        "text": "Strands Agents",
+        "correct": false,
+        "rationale": "Strands Agents is used to write the agent. The agent here is already written, so it does not solve the hosting need."
+      },
+      {
+        "text": "Amazon Bedrock AgentCore",
+        "correct": true,
+        "rationale": "AgentCore is a platform for deploying and operating agents securely at scale, with services such as Runtime, Memory, Identity and Observability."
+      },
+      {
+        "text": "Amazon Bedrock Knowledge Bases",
+        "correct": false,
+        "rationale": "Knowledge Bases connect a model to company documents for RAG. They do not host or monitor agents."
+      },
+      {
+        "text": "Amazon Quick",
+        "correct": false,
+        "rationale": "Quick is an AI workspace for business users. It is not a platform for running developer-built agents."
+      }
+    ],
+    "explanation": "The agent is already built, and the needs are runtime, memory, identity and monitoring. Those are the modular services of Amazon Bedrock AgentCore. Build the agent with Strands Agents, run it on AgentCore.",
+    "services": [
+      "bedrock-agentcore",
+      "strands-agents"
+    ]
+  },
+  {
+    "id": "2.3-006",
+    "taskId": "2.3",
+    "kind": "single",
+    "objectives": [
+      "2.3.1"
+    ],
+    "stem": "Cairnway's data science team wants to train its own demand-forecasting model on three years of sales history. They need full control over training and hosting. Which AWS service fits best?",
+    "options": [
+      {
+        "text": "Amazon Bedrock Knowledge Bases",
+        "correct": false,
+        "rationale": "Bedrock uses foundation models that others built and host. Forecasting from sales history is not a foundation-model task."
+      },
+      {
+        "text": "Amazon Quick",
+        "correct": false,
+        "rationale": "Quick gives business users an AI workspace. It does not give a data science team control over model training."
+      },
+      {
+        "text": "Kiro",
+        "correct": false,
+        "rationale": "Kiro helps developers write and review software. It does not train or host forecasting models."
+      },
+      {
+        "text": "Amazon SageMaker AI",
+        "correct": true,
+        "rationale": "SageMaker AI lets data scientists customize, train and deploy their own models, with control over training clusters and endpoints."
+      }
+    ],
+    "explanation": "The clues are 'train its own model' and 'full control'. Amazon SageMaker AI is for building, training and hosting your own models. Bedrock is for using models someone else built.",
+    "services": [
+      "sagemaker-ai",
+      "bedrock"
+    ]
+  },
+  {
+    "id": "2.3-007",
+    "taskId": "2.3",
+    "kind": "single",
+    "objectives": [
+      "2.3.1"
+    ],
+    "stem": "Cairnway's data scientists want a quick start from a pretrained open model. They want to customize it with their own data and run it in their own SageMaker environment. Which feature should they use?",
+    "options": [
+      {
+        "text": "Amazon SageMaker JumpStart",
+        "correct": true,
+        "rationale": "JumpStart is a machine learning hub inside SageMaker AI where you can compare, customize and deploy pretrained models."
+      },
+      {
+        "text": "Amazon Quick",
+        "correct": false,
+        "rationale": "Quick is a workspace for business users and does not deploy models into your own environment."
+      },
+      {
+        "text": "Amazon Bedrock AgentCore",
+        "correct": false,
+        "rationale": "AgentCore hosts and operates agents. It is not a hub for pretrained models."
+      },
+      {
+        "text": "AWS Budgets",
+        "correct": false,
+        "rationale": "Budgets tracks spending and sends alerts. It does not provide or deploy models."
+      }
+    ],
+    "explanation": "A pretrained model that runs in the team's own SageMaker environment is what JumpStart offers. It sits inside SageMaker AI, so the team keeps control over the hosting.",
+    "services": [
+      "sagemaker-jumpstart",
+      "sagemaker-ai"
+    ]
+  },
+  {
+    "id": "2.3-008",
+    "taskId": "2.3",
+    "kind": "single",
+    "objectives": [
+      "2.3.1"
+    ],
+    "stem": "Which statement correctly distinguishes Amazon Bedrock from Amazon SageMaker AI?",
+    "options": [
+      {
+        "text": "Bedrock is for data scientists who train models from scratch, while SageMaker AI is for business users.",
+        "correct": false,
+        "rationale": "This reverses the roles. Business users are served by Amazon Quick, and training from scratch belongs with SageMaker AI."
+      },
+      {
+        "text": "Bedrock only runs open-source models, while SageMaker AI only runs models from commercial providers.",
+        "correct": false,
+        "rationale": "Neither service is limited in that way. Bedrock offers models from leading AI companies, and SageMaker AI hosts models you choose."
+      },
+      {
+        "text": "Bedrock uses foundation models that others built and host; SageMaker AI is for building, training and hosting your own models.",
+        "correct": true,
+        "rationale": "This is the standard one-line difference: Bedrock is the managed way to use models, SageMaker AI is the way to build your own."
+      },
+      {
+        "text": "Bedrock requires you to manage servers, while SageMaker AI is fully managed with no infrastructure choices.",
+        "correct": false,
+        "rationale": "This is backwards. Bedrock is the layer where AWS runs the infrastructure, and SageMaker AI gives you more control."
+      }
+    ],
+    "explanation": "Think of layers. Bedrock sits higher, with managed models and the least work. SageMaker AI sits lower, with more control and more responsibility for training and hosting.",
+    "services": [
+      "bedrock",
+      "sagemaker-ai"
+    ]
+  },
+  {
+    "id": "2.3-009",
+    "taskId": "2.3",
+    "kind": "single",
+    "objectives": [
+      "2.3.2"
+    ],
+    "stem": "Cairnway's leadership wants a working prototype of a product-question assistant within days, not months. Which advantage of AWS managed GenAI services best supports this goal?",
+    "options": [
+      {
+        "text": "AWS automatically trains a new foundation model for each customer.",
+        "correct": false,
+        "rationale": "Customers do not get a model trained for them automatically. Training from scratch is slow and expensive."
+      },
+      {
+        "text": "Managed services remove the need for any testing before launch.",
+        "correct": false,
+        "rationale": "Testing is still needed. Managed services reduce infrastructure work, not quality checks."
+      },
+      {
+        "text": "Ready-made parts, such as Knowledge Bases for RAG and Guardrails.",
+        "correct": true,
+        "rationale": "Managed building blocks mean the team does not build RAG, safety filters or hosting from scratch, which shortens time to market."
+      },
+      {
+        "text": "The team must first buy GPU servers so models run on its own hardware.",
+        "correct": false,
+        "rationale": "Buying hardware slows a project down. Managed services remove that step."
+      }
+    ],
+    "explanation": "'Within days' points to speed to market. Managed services supply ready-made parts such as RAG, safety filters and agent hosting, so the team builds only the application on top.",
+    "services": [
+      "bedrock",
+      "bedrock-knowledge-bases",
+      "bedrock-guardrails"
+    ]
+  },
+  {
+    "id": "2.3-010",
+    "taskId": "2.3",
+    "kind": "single",
+    "objectives": [
+      "2.3.2"
+    ],
+    "stem": "Cairnway's finance lead asks why the company should not buy its own GPU servers to host a model for Trailmate. Which advantage of Amazon Bedrock best answers this question?",
+    "options": [
+      {
+        "text": "The company pays for what it uses, such as per token, with no up-front hardware purchase.",
+        "correct": true,
+        "rationale": "Pay-as-you-go pricing avoids large up-front costs, and the company can stop at any time. This is the cost-effectiveness advantage."
+      },
+      {
+        "text": "Bedrock models never need updating, so there are no running costs.",
+        "correct": false,
+        "rationale": "Models still cost money per use, and providers release new versions. Bedrock is not free to run."
+      },
+      {
+        "text": "Owning hardware is not allowed under AWS compliance programs.",
+        "correct": false,
+        "rationale": "Compliance programs do not forbid owning hardware. The reason is cost and effort, not a rule."
+      },
+      {
+        "text": "Bedrock is always cheaper than any other approach at any traffic volume.",
+        "correct": false,
+        "rationale": "At very high steady volume other options, such as reserved capacity, can be cheaper. No option is always cheapest."
+      }
+    ],
+    "explanation": "The finance lead is asking about cost. Managed services replace a large up-front investment with usage-based pricing, so the company pays only for what it uses.",
+    "services": [
+      "bedrock"
+    ]
+  },
+  {
+    "id": "2.3-011",
+    "taskId": "2.3",
+    "kind": "single",
+    "objectives": [
+      "2.3.2"
+    ],
+    "stem": "Cairnway wants to test several foundation models for product descriptions and switch to a different one later if results improve, without rebuilding the application. Which advantage of Amazon Bedrock supports this?",
+    "options": [
+      {
+        "text": "Each model needs its own dedicated infrastructure to be set up first.",
+        "correct": false,
+        "rationale": "The opposite is true. AWS runs the infrastructure, so the team does not set it up per model."
+      },
+      {
+        "text": "Only a single model can be used at a time per AWS account.",
+        "correct": false,
+        "rationale": "There is no such limit. Bedrock offers many models, and an application can use different ones."
+      },
+      {
+        "text": "Switching models requires retraining the application from scratch.",
+        "correct": false,
+        "rationale": "Switching does not need retraining, because the models are used through the same API."
+      },
+      {
+        "text": "Many models from leading AI companies are available behind one API.",
+        "correct": true,
+        "rationale": "With one API for many models, the team can try several and switch with little change to the application. This is accessibility."
+      }
+    ],
+    "explanation": "'Try several and switch' is about accessibility: many models behind one API. This also lowers the cost of experimenting.",
+    "services": [
+      "bedrock"
+    ]
+  },
+  {
+    "id": "2.3-012",
+    "taskId": "2.3",
+    "kind": "single",
+    "objectives": [
+      "2.3.2"
+    ],
+    "stem": "A Cairnway developer says, 'We spend our time on the shop's features instead of patching servers and adding capacity.' Which advantage of managed AWS GenAI services does this describe?",
+    "options": [
+      {
+        "text": "Compliance, because AWS removes all regulatory duties.",
+        "correct": false,
+        "rationale": "Compliance support helps, but customers keep their own duties. It is not what the quote describes."
+      },
+      {
+        "text": "Efficiency, because AWS handles servers, scaling and updates.",
+        "correct": true,
+        "rationale": "When AWS manages infrastructure, the team's effort goes into the application. This is the efficiency advantage."
+      },
+      {
+        "text": "Redundancy, because the application runs in several Regions.",
+        "correct": false,
+        "rationale": "Redundancy is about running in more than one place. The quote is about who manages servers."
+      },
+      {
+        "text": "Regional coverage, because every model is offered in every Region.",
+        "correct": false,
+        "rationale": "Models are not offered in every Region, and the quote is not about location."
+      }
+    ],
+    "explanation": "The quote is about time saved on servers, scaling and updates. That is efficiency: AWS runs the infrastructure so the team can focus on the application."
+  },
+  {
+    "id": "2.3-013",
+    "taskId": "2.3",
+    "kind": "single",
+    "objectives": [
+      "2.3.3"
+    ],
+    "stem": "Cairnway's security team requires that traffic between its private network and Amazon Bedrock does not cross the public internet. Which AWS capability meets this requirement?",
+    "options": [
+      {
+        "text": "AWS Budgets cost alerts",
+        "correct": false,
+        "rationale": "Budgets sends cost alerts. It does not control how network traffic travels."
+      },
+      {
+        "text": "AWS PrivateLink from the VPC",
+        "correct": true,
+        "rationale": "PrivateLink gives private connectivity from a VPC to Amazon Bedrock, so traffic need not cross the public internet."
+      },
+      {
+        "text": "Amazon Macie sensitive-data scans",
+        "correct": false,
+        "rationale": "Macie finds sensitive data in Amazon S3. It does not provide private connectivity."
+      },
+      {
+        "text": "AWS Trusted Advisor best-practice checks",
+        "correct": false,
+        "rationale": "Trusted Advisor recommends improvements. It does not change network paths."
+      }
+    ],
+    "explanation": "The clue is 'does not cross the public internet'. AWS PrivateLink provides private connectivity from a VPC to Amazon Bedrock, which is part of the security benefit of AWS infrastructure.",
+    "services": [
+      "privatelink",
+      "bedrock",
+      "vpc"
+    ]
+  },
+  {
+    "id": "2.3-014",
+    "taskId": "2.3",
+    "kind": "single",
+    "objectives": [
+      "2.3.3"
+    ],
+    "stem": "Cairnway's compliance officer wants to control the encryption keys used for the data Amazon Bedrock stores for the company. Which AWS service lets Cairnway manage its own keys?",
+    "options": [
+      {
+        "text": "AWS CloudTrail",
+        "correct": false,
+        "rationale": "CloudTrail records account activity for auditing. It does not create or hold encryption keys."
+      },
+      {
+        "text": "Amazon Cognito",
+        "correct": false,
+        "rationale": "Cognito manages sign-in for application users. It does not manage encryption keys for Bedrock."
+      },
+      {
+        "text": "AWS Config",
+        "correct": false,
+        "rationale": "Config tracks resource configuration changes. It does not manage encryption keys."
+      },
+      {
+        "text": "AWS KMS",
+        "correct": true,
+        "rationale": "KMS lets customers create and control encryption keys. Bedrock supports customer-managed keys through KMS for data at rest."
+      }
+    ],
+    "explanation": "Customer-controlled encryption keys come from AWS KMS. AWS describes Bedrock data as encrypted in transit and at rest, with customer-managed keys available through KMS.",
+    "services": [
+      "kms",
+      "bedrock"
+    ]
+  },
+  {
+    "id": "2.3-015",
+    "taskId": "2.3",
+    "kind": "single",
+    "objectives": [
+      "2.3.3"
+    ],
+    "stem": "Cairnway uses Amazon Bedrock, a fully managed service. According to the AWS shared responsibility model, which task still belongs to Cairnway?",
+    "options": [
+      {
+        "text": "Setting IAM permissions that decide who can call the models",
+        "correct": true,
+        "rationale": "Customers control access to their own account and resources. AWS does not decide which of your staff may use a service."
+      },
+      {
+        "text": "Securing the physical data centres that run the service",
+        "correct": false,
+        "rationale": "AWS is responsible for the physical data centres, network and hardware."
+      },
+      {
+        "text": "Maintaining the hardware that hosts the foundation models",
+        "correct": false,
+        "rationale": "AWS maintains the hardware behind a managed service."
+      },
+      {
+        "text": "Keeping the compliance of the underlying AWS infrastructure",
+        "correct": false,
+        "rationale": "AWS maintains the compliance of its own infrastructure. Customers handle their own use of it."
+      }
+    ],
+    "explanation": "Under shared responsibility, AWS secures the cloud, and the customer secures what it puts in the cloud. IAM permissions, logging and data choices stay with Cairnway even with a managed service.",
+    "services": [
+      "iam",
+      "bedrock"
+    ]
+  },
+  {
+    "id": "2.3-016",
+    "taskId": "2.3",
+    "kind": "single",
+    "objectives": [
+      "2.3.3"
+    ],
+    "stem": "Cairnway's legal team worries that customer prompts sent to Amazon Bedrock could be shared with model providers or used to improve the base models. What does AWS state about this?",
+    "options": [
+      {
+        "text": "All prompts are added to the base models after a monthly review.",
+        "correct": false,
+        "rationale": "Bedrock does not use customer prompts to improve base models."
+      },
+      {
+        "text": "Prompts are shared with providers unless the customer buys Provisioned Throughput.",
+        "correct": false,
+        "rationale": "Sharing is not tied to Provisioned Throughput, and prompts are not shared with providers."
+      },
+      {
+        "text": "Data is not shared with model providers and is not used to improve the base models.",
+        "correct": true,
+        "rationale": "AWS states this about Amazon Bedrock, which supports the privacy part of the security benefit."
+      },
+      {
+        "text": "Data privacy is the customer's job alone, so AWS makes no statement about it.",
+        "correct": false,
+        "rationale": "AWS makes a clear statement about how Bedrock data is handled, although the customer still owns its own data choices."
+      }
+    ],
+    "explanation": "The concern is data privacy. AWS states that in Amazon Bedrock prompts and outputs are not shared with model providers and are not used to improve the base models. A tuned model is a private copy.",
+    "services": [
+      "bedrock"
+    ],
+    "sourceLinks": [
+      "https://docs.aws.amazon.com/bedrock/latest/userguide/data-protection.html",
+      "https://aws.amazon.com/bedrock/security-compliance/"
+    ]
+  },
+  {
+    "id": "2.3-017",
+    "taskId": "2.3",
+    "kind": "single",
+    "objectives": [
+      "2.3.3"
+    ],
+    "stem": "Cairnway's auditors want a record of which users and applications called Amazon Bedrock APIs in the company's AWS account. Which service provides this?",
+    "options": [
+      {
+        "text": "AWS Budgets reports",
+        "correct": false,
+        "rationale": "Budgets tracks cost against a plan. It does not record who called an API."
+      },
+      {
+        "text": "Amazon Polly voices",
+        "correct": false,
+        "rationale": "Polly turns text into speech. It has no audit function."
+      },
+      {
+        "text": "AWS CloudTrail",
+        "correct": true,
+        "rationale": "CloudTrail records API activity in an AWS account, so auditors can see who did what and when."
+      },
+      {
+        "text": "AWS Artifact reports",
+        "correct": false,
+        "rationale": "Artifact provides AWS's compliance reports for download. It does not log your own API calls."
+      }
+    ],
+    "explanation": "An audit record of who called which API is what CloudTrail provides. Turning on logging is part of the customer side of shared responsibility.",
+    "services": [
+      "cloudtrail",
+      "bedrock"
+    ]
+  },
+  {
+    "id": "2.3-018",
+    "taskId": "2.3",
+    "kind": "single",
+    "objectives": [
+      "2.3.3"
+    ],
+    "stem": "Cairnway wants to help block harmful content in Trailmate's replies as part of using AI responsibly. Which Amazon Bedrock feature adds this kind of safeguard?",
+    "options": [
+      {
+        "text": "Amazon Bedrock Guardrails",
+        "correct": true,
+        "rationale": "Guardrails add configurable safeguards that help block harmful content in model inputs and outputs."
+      },
+      {
+        "text": "Amazon Bedrock Knowledge Bases",
+        "correct": false,
+        "rationale": "Knowledge Bases connect a model to company documents for RAG. They do not filter harmful content."
+      },
+      {
+        "text": "Amazon Bedrock Provisioned Throughput",
+        "correct": false,
+        "rationale": "Provisioned Throughput reserves capacity for predictable performance. It has no safety function."
+      },
+      {
+        "text": "Amazon Bedrock batch inference",
+        "correct": false,
+        "rationale": "Batch inference processes many prompts at a lower price. It does not filter content."
+      }
+    ],
+    "explanation": "Safety is part of the benefit of AWS infrastructure. Bedrock Guardrails is the feature that adds safeguards to help block harmful content.",
+    "services": [
+      "bedrock-guardrails",
+      "bedrock"
+    ]
+  },
+  {
+    "id": "2.3-019",
+    "taskId": "2.3",
+    "kind": "single",
+    "objectives": [
+      "2.3.4"
+    ],
+    "stem": "Cairnway's Trailmate chat traffic is unpredictable and low on most days. The team wants no commitment and wants to pay only for what it uses. Which pricing choice fits best?",
+    "options": [
+      {
+        "text": "Provisioned Throughput with a six-month commitment",
+        "correct": false,
+        "rationale": "Provisioned Throughput is billed hourly whether or not it is used, which wastes money on low traffic."
+      },
+      {
+        "text": "A global inference profile with reserved capacity",
+        "correct": false,
+        "rationale": "Inference profiles route requests across Regions. They are not a pricing plan and do not reserve capacity."
+      },
+      {
+        "text": "Batch inference for every chat message",
+        "correct": false,
+        "rationale": "Batch is not real time. A live chat needs an answer straight away."
+      },
+      {
+        "text": "On-demand, token-based pricing",
+        "correct": true,
+        "rationale": "On-demand pricing has no commitment, and the company pays only for the tokens used. It suits low or unpredictable traffic."
+      }
+    ],
+    "explanation": "'No commitment' and 'unpredictable low traffic' point to on-demand, token-based pricing. Provisioned Throughput suits steady high volume, and batch suits work that can wait.",
+    "services": [
+      "bedrock"
+    ],
+    "sourceLinks": [
+      "https://aws.amazon.com/bedrock/pricing/",
+      "https://docs.aws.amazon.com/bedrock/latest/userguide/prov-throughput.html"
+    ]
+  },
+  {
+    "id": "2.3-020",
+    "taskId": "2.3",
+    "kind": "single",
+    "objectives": [
+      "2.3.4"
+    ],
+    "stem": "Each night Cairnway generates 40,000 product descriptions. The results are only needed by morning. Which option is the MOST cost-effective?",
+    "options": [
+      {
+        "text": "On-demand inference",
+        "correct": false,
+        "rationale": "On-demand works, but it costs more than batch for work that is not urgent."
+      },
+      {
+        "text": "Batch inference",
+        "correct": true,
+        "rationale": "Batch inference is not real time, and AWS lists select models at a lower price than on-demand. It suits work that can wait."
+      },
+      {
+        "text": "Provisioned Throughput",
+        "correct": false,
+        "rationale": "Provisioned Throughput bills by the hour for reserved capacity, which is wasteful for a job that runs once a night."
+      },
+      {
+        "text": "A custom model trained for descriptions",
+        "correct": false,
+        "rationale": "A custom model adds training cost and needs Provisioned Throughput, which raises cost."
+      }
+    ],
+    "explanation": "'Only needed by morning' means the work can wait, so batch inference is the cheaper fit. AWS lists select models at a 50 percent lower price than on-demand.",
+    "services": [
+      "bedrock-batch-inference",
+      "bedrock"
+    ],
+    "sourceLinks": [
+      "https://aws.amazon.com/bedrock/pricing/"
+    ]
+  },
+  {
+    "id": "2.3-021",
+    "taskId": "2.3",
+    "kind": "single",
+    "objectives": [
+      "2.3.4"
+    ],
+    "stem": "Cairnway has fine-tuned a model on Amazon Bedrock to match its brand voice. How must the company run the customized model?",
+    "options": [
+      {
+        "text": "By paying on-demand, per token, like a base model",
+        "correct": false,
+        "rationale": "On-demand per-token pricing is not available for a custom model on Bedrock."
+      },
+      {
+        "text": "By purchasing Provisioned Throughput for the model",
+        "correct": true,
+        "rationale": "A customized model on Amazon Bedrock must be used through Provisioned Throughput, which is billed per hour."
+      },
+      {
+        "text": "By running it for free inside an inference profile",
+        "correct": false,
+        "rationale": "Inference profiles route requests across Regions. They do not make a custom model free, and they do not support Provisioned Throughput."
+      },
+      {
+        "text": "By submitting it only as nightly batch jobs",
+        "correct": false,
+        "rationale": "Batch inference is not the required way to run a custom model."
+      }
+    ],
+    "explanation": "A custom model on Bedrock needs Provisioned Throughput. This is a cost tradeoff to plan for, because the hourly fee applies whether or not the capacity is used.",
+    "services": [
+      "bedrock",
+      "bedrock-provisioned-throughput"
+    ],
+    "sourceLinks": [
+      "https://docs.aws.amazon.com/bedrock/latest/userguide/prov-throughput.html"
+    ]
+  },
+  {
+    "id": "2.3-022",
+    "taskId": "2.3",
+    "kind": "single",
+    "objectives": [
+      "2.3.4"
+    ],
+    "stem": "Cairnway serves EU customers and must keep prompt processing inside Europe. It also wants more availability when traffic spikes. Which approach meets both requirements?",
+    "options": [
+      {
+        "text": "A global cross-Region inference profile",
+        "correct": false,
+        "rationale": "A global profile can route to any supported commercial Region, so it breaks the Europe-only rule."
+      },
+      {
+        "text": "A single Region with no cross-Region inference",
+        "correct": false,
+        "rationale": "This keeps data local but gives no extra capacity or availability for traffic spikes."
+      },
+      {
+        "text": "Batch inference in the US",
+        "correct": false,
+        "rationale": "Batch is not real time, and processing in the US breaks the Europe-only rule."
+      },
+      {
+        "text": "A geographic inference profile for the EU",
+        "correct": true,
+        "rationale": "A geographic profile routes requests among Regions in one geography, so data stays in Europe while capacity improves."
+      }
+    ],
+    "explanation": "The deciding clue is 'inside Europe' plus 'availability'. Geographic inference profiles keep processing within a geography and use standard pricing. Global profiles can be cheaper but process anywhere.",
+    "services": [
+      "bedrock-cross-region-inference",
+      "bedrock"
+    ],
+    "sourceLinks": [
+      "https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference.html"
+    ]
+  },
+  {
+    "id": "2.3-023",
+    "taskId": "2.3",
+    "kind": "single",
+    "objectives": [
+      "2.3.4"
+    ],
+    "stem": "After a year, Trailmate's chat traffic is high and steady. Cairnway needs predictable performance and responsiveness and wants a lower hourly rate. Which option should it evaluate?",
+    "options": [
+      {
+        "text": "Provisioned Throughput with a longer commitment term",
+        "correct": true,
+        "rationale": "Provisioned Throughput reserves capacity for predictable performance, and longer commitments lower the hourly price."
+      },
+      {
+        "text": "On-demand pricing with no commitment",
+        "correct": false,
+        "rationale": "On-demand has no commitment, but its throughput can vary under heavy load and cost climbs steadily with volume."
+      },
+      {
+        "text": "Batch inference for live chats",
+        "correct": false,
+        "rationale": "Batch is not real time, so it cannot serve live chat."
+      },
+      {
+        "text": "A bigger model on on-demand pricing",
+        "correct": false,
+        "rationale": "Bigger models cost more per token and answer more slowly. They do not give reserved capacity."
+      }
+    ],
+    "explanation": "High, steady traffic and a need for predictable performance are the case for Provisioned Throughput. The tradeoff is an hourly fee even when capacity is idle.",
+    "services": [
+      "bedrock-provisioned-throughput",
+      "bedrock"
+    ],
+    "sourceLinks": [
+      "https://docs.aws.amazon.com/bedrock/latest/userguide/prov-throughput.html",
+      "https://aws.amazon.com/bedrock/pricing/"
+    ]
+  },
+  {
+    "id": "2.3-024",
+    "taskId": "2.3",
+    "kind": "single",
+    "objectives": [
+      "2.3.4"
+    ],
+    "stem": "Cairnway is deciding between a small and a large foundation model for Trailmate's simple FAQ answers. Which statement describes the tradeoff?",
+    "options": [
+      {
+        "text": "A larger model is always cheaper because it needs fewer tokens.",
+        "correct": false,
+        "rationale": "Larger models generally cost more per token, so this is not true."
+      },
+      {
+        "text": "A smaller model always gives better answers on every task.",
+        "correct": false,
+        "rationale": "Smaller models are cheaper and faster but are not better on every task."
+      },
+      {
+        "text": "A larger model costs more per token and answers more slowly, so it should be justified by need.",
+        "correct": true,
+        "rationale": "Bigger models are more capable but cost more per token and are slower. A simple FAQ may not need that capability."
+      },
+      {
+        "text": "Model size has no effect on cost or response time.",
+        "correct": false,
+        "rationale": "Size affects both cost per token and response speed."
+      }
+    ],
+    "explanation": "Cost tradeoffs include model size. Simple tasks often run well on a smaller, cheaper and faster model, while a bigger model adds capability at a higher price.",
+    "services": [
+      "bedrock"
+    ]
+  },
+  {
+    "id": "2.3-025",
+    "taskId": "2.3",
+    "kind": "multi",
+    "objectives": [
+      "2.3.1"
+    ],
+    "stem": "Cairnway's developers will build and run a production agent. Which TWO AWS offerings are made for building and operating agents? (Select TWO.)",
+    "select": 2,
+    "options": [
+      {
+        "text": "Amazon Polly",
+        "correct": false,
+        "rationale": "Converts text to speech. It has nothing to do with building agents."
+      },
+      {
+        "text": "Amazon Bedrock AgentCore",
+        "correct": true,
+        "rationale": "A platform for deploying and operating agents securely at scale."
+      },
+      {
+        "text": "Amazon SageMaker JumpStart",
+        "correct": false,
+        "rationale": "A hub for pretrained models. It is not an agent toolkit or agent host."
+      },
+      {
+        "text": "Strands Agents",
+        "correct": true,
+        "rationale": "An open-source toolkit for writing agents in code."
+      },
+      {
+        "text": "Amazon Quick",
+        "correct": false,
+        "rationale": "A workspace for business users, not a toolkit or hosting platform for agents."
+      }
+    ],
+    "explanation": "Agents are written with Strands Agents and run on Amazon Bedrock AgentCore. The older Amazon Bedrock Agents is now Agents Classic and is not the current answer.",
+    "services": [
+      "strands-agents",
+      "bedrock-agentcore",
+      "quick",
+      "sagemaker-jumpstart",
+      "polly"
+    ]
+  },
+  {
+    "id": "2.3-026",
+    "taskId": "2.3",
+    "kind": "multi",
+    "objectives": [
+      "2.3.1"
+    ],
+    "stem": "Which THREE are modular services of Amazon Bedrock AgentCore? (Select THREE.)",
+    "select": 3,
+    "options": [
+      {
+        "text": "Memory",
+        "correct": true,
+        "rationale": "Lets an agent remember context between conversations."
+      },
+      {
+        "text": "Amazon Polly",
+        "correct": false,
+        "rationale": "A text-to-speech service, not part of AgentCore."
+      },
+      {
+        "text": "Runtime",
+        "correct": true,
+        "rationale": "Hosts and runs the agent in production."
+      },
+      {
+        "text": "Gateway",
+        "correct": true,
+        "rationale": "Lets an agent reach tools and systems such as an order system."
+      },
+      {
+        "text": "SageMaker Model Cards",
+        "correct": false,
+        "rationale": "Documents a model's details. It is not an AgentCore service."
+      },
+      {
+        "text": "AWS Budgets",
+        "correct": false,
+        "rationale": "A cost-tracking service, not part of AgentCore."
+      }
+    ],
+    "explanation": "AgentCore's modular services include Runtime, Memory, Gateway, Identity, Observability and Policy. Together they let a built agent run in production securely.",
+    "services": [
+      "bedrock-agentcore"
+    ]
+  },
+  {
+    "id": "2.3-027",
+    "taskId": "2.3",
+    "kind": "multi",
+    "objectives": [
+      "2.3.1"
+    ],
+    "stem": "Which THREE are features of Amazon Bedrock that add capabilities to foundation models? (Select THREE.)",
+    "select": 3,
+    "options": [
+      {
+        "text": "Guardrails, which add safety filters",
+        "correct": true,
+        "rationale": "Help block harmful content and unwanted topics."
+      },
+      {
+        "text": "Amazon Quick, which builds dashboards",
+        "correct": false,
+        "rationale": "A separate AWS workspace for business users, not a Bedrock feature."
+      },
+      {
+        "text": "Knowledge Bases, which add RAG",
+        "correct": true,
+        "rationale": "Connects a model to company documents so answers use current facts."
+      },
+      {
+        "text": "Kiro, which reviews developers' code",
+        "correct": false,
+        "rationale": "A separate AWS engineering tool, not a feature inside Bedrock."
+      },
+      {
+        "text": "Evaluations, which compare models",
+        "correct": true,
+        "rationale": "Compare models on quality and safety."
+      }
+    ],
+    "explanation": "Knowledge Bases, Guardrails and Evaluations are features of Bedrock. Kiro and Quick are separate AWS offerings for different users.",
+    "services": [
+      "bedrock",
+      "bedrock-knowledge-bases",
+      "bedrock-guardrails",
+      "bedrock-evaluations",
+      "quick",
+      "kiro"
+    ]
+  },
+  {
+    "id": "2.3-028",
+    "taskId": "2.3",
+    "kind": "multi",
+    "objectives": [
+      "2.3.2"
+    ],
+    "stem": "Which TWO are advantages of building Cairnway's assistant on AWS managed GenAI services? (Select TWO.)",
+    "select": 2,
+    "options": [
+      {
+        "text": "The team can start with a few API calls.",
+        "correct": true,
+        "rationale": "A low barrier to entry means developers need no special infrastructure skills."
+      },
+      {
+        "text": "Hallucinations are guaranteed never to occur.",
+        "correct": false,
+        "rationale": "Managed models can still produce incorrect answers. No service guarantees otherwise."
+      },
+      {
+        "text": "The team avoids buying and running its own hardware.",
+        "correct": true,
+        "rationale": "AWS runs the infrastructure, which lowers cost and effort."
+      },
+      {
+        "text": "The team no longer needs to set IAM permissions.",
+        "correct": false,
+        "rationale": "Access control remains the customer's job under shared responsibility."
+      },
+      {
+        "text": "Usage is free for the first year.",
+        "correct": false,
+        "rationale": "Usage is priced, for example per token. There is no automatic free year."
+      }
+    ],
+    "explanation": "Managed services lower the barrier to entry and raise efficiency by taking over infrastructure. They do not remove accuracy risks or the customer's security duties.",
+    "services": [
+      "bedrock"
+    ]
+  },
+  {
+    "id": "2.3-029",
+    "taskId": "2.3",
+    "kind": "multi",
+    "objectives": [
+      "2.3.2"
+    ],
+    "stem": "Cairnway wants to show how AWS GenAI services improve accessibility. Which THREE statements describe this advantage? (Select THREE.)",
+    "select": 3,
+    "options": [
+      {
+        "text": "Models are available through a console, without a research team.",
+        "correct": true,
+        "rationale": "Teams get powerful models without hiring a research team or buying hardware."
+      },
+      {
+        "text": "Only large companies with ML teams can use the models.",
+        "correct": false,
+        "rationale": "The point of managed services is that smaller teams can use them too."
+      },
+      {
+        "text": "Non-technical staff can use Amazon Quick without code.",
+        "correct": true,
+        "rationale": "This puts AI in the hands of people who are not developers."
+      },
+      {
+        "text": "Customer data automatically trains every model for all users.",
+        "correct": false,
+        "rationale": "On Bedrock, customer data is not used to improve base models."
+      },
+      {
+        "text": "Many models are available through one API.",
+        "correct": true,
+        "rationale": "Teams can try several models without separate setups."
+      }
+    ],
+    "explanation": "Accessibility means powerful models are within reach of more people: through an API, a console and no-code tools such as Amazon Quick.",
+    "services": [
+      "bedrock",
+      "quick"
+    ]
+  },
+  {
+    "id": "2.3-030",
+    "taskId": "2.3",
+    "kind": "multi",
+    "objectives": [
+      "2.3.3"
+    ],
+    "stem": "Which TWO security benefits does AWS describe for Amazon Bedrock? (Select TWO.)",
+    "select": 2,
+    "options": [
+      {
+        "text": "AWS writes and manages the customer's IAM policies.",
+        "correct": false,
+        "rationale": "Customers control access with their own IAM policies."
+      },
+      {
+        "text": "Data is encrypted in transit and at rest, with customer-managed keys through AWS KMS.",
+        "correct": true,
+        "rationale": "Customers can control the keys that protect their data."
+      },
+      {
+        "text": "Private connectivity from a VPC through AWS PrivateLink.",
+        "correct": true,
+        "rationale": "Traffic need not cross the public internet."
+      },
+      {
+        "text": "Prompts are shared with model providers to improve quality.",
+        "correct": false,
+        "rationale": "AWS states that Bedrock data is not shared with model providers."
+      },
+      {
+        "text": "Traffic must always cross the public internet for safety.",
+        "correct": false,
+        "rationale": "Private connectivity is available, so this is false."
+      }
+    ],
+    "explanation": "Encryption with customer-managed keys and private connectivity are named security benefits. IAM remains the customer's responsibility.",
+    "services": [
+      "kms",
+      "privatelink",
+      "bedrock"
+    ]
+  },
+  {
+    "id": "2.3-031",
+    "taskId": "2.3",
+    "kind": "multi",
+    "objectives": [
+      "2.3.3"
+    ],
+    "stem": "Which THREE statements describe how Amazon Bedrock supports compliance, responsibility and safety? (Select THREE.)",
+    "select": 3,
+    "options": [
+      {
+        "text": "AWS takes over all of the customer's regulatory duties.",
+        "correct": false,
+        "rationale": "Customers still choose Regions and configure services to meet their own regulations."
+      },
+      {
+        "text": "Bedrock automatically removes all bias from model answers.",
+        "correct": false,
+        "rationale": "No service removes all bias automatically. Evaluation and safeguards help reduce it."
+      },
+      {
+        "text": "Guardrails help block harmful content.",
+        "correct": true,
+        "rationale": "Safeguards support responsible use."
+      },
+      {
+        "text": "AWS lists Bedrock as in scope for standards such as ISO, SOC and CSA STAR Level 2.",
+        "correct": true,
+        "rationale": "Compliance programs show that the service meets recognized standards."
+      },
+      {
+        "text": "Bedrock is HIPAA eligible.",
+        "correct": true,
+        "rationale": "This allows its use in health-related workloads under the right terms."
+      }
+    ],
+    "explanation": "Compliance listings, HIPAA eligibility and Guardrails are named benefits. They support Cairnway's compliance work but do not replace it.",
+    "services": [
+      "bedrock",
+      "bedrock-guardrails"
+    ],
+    "sourceLinks": [
+      "https://aws.amazon.com/bedrock/security-compliance/"
+    ]
+  },
+  {
+    "id": "2.3-032",
+    "taskId": "2.3",
+    "kind": "multi",
+    "objectives": [
+      "2.3.3"
+    ],
+    "stem": "Under the shared responsibility model, which TWO duties belong to Cairnway when it uses Amazon Bedrock? (Select TWO.)",
+    "select": 2,
+    "options": [
+      {
+        "text": "Deciding what customer data goes into prompts",
+        "correct": true,
+        "rationale": "The customer controls its own content and data."
+      },
+      {
+        "text": "Patching the hardware behind the managed service",
+        "correct": false,
+        "rationale": "AWS maintains the underlying hardware."
+      },
+      {
+        "text": "Securing the physical data centres",
+        "correct": false,
+        "rationale": "This is AWS's job."
+      },
+      {
+        "text": "Maintaining the global AWS network",
+        "correct": false,
+        "rationale": "This is part of AWS's responsibility for global infrastructure."
+      },
+      {
+        "text": "Configuring IAM permissions and logging",
+        "correct": true,
+        "rationale": "The customer sets who has access and turns on audit logs."
+      }
+    ],
+    "explanation": "AWS secures the infrastructure. Customers control their data, access and configuration. A managed service does not remove those duties.",
+    "services": [
+      "iam",
+      "bedrock"
+    ]
+  },
+  {
+    "id": "2.3-033",
+    "taskId": "2.3",
+    "kind": "multi",
+    "objectives": [
+      "2.3.4"
+    ],
+    "stem": "Cairnway is planning a custom model on Amazon Bedrock. Which TWO cost factors should the team expect? (Select TWO.)",
+    "select": 2,
+    "options": [
+      {
+        "text": "Provisioned Throughput is required to use the custom model.",
+        "correct": true,
+        "rationale": "A customized model on Bedrock must run through Provisioned Throughput."
+      },
+      {
+        "text": "Provisioned Throughput is billed hourly, even when idle.",
+        "correct": true,
+        "rationale": "Billing continues until the capacity is deleted."
+      },
+      {
+        "text": "Custom models are cheaper than base models in every case.",
+        "correct": false,
+        "rationale": "They add cost, so this is not true."
+      },
+      {
+        "text": "Custom models are billed only per token with no commitment.",
+        "correct": false,
+        "rationale": "Per-token on-demand pricing does not apply to a custom model on Bedrock."
+      },
+      {
+        "text": "Customization has no training cost.",
+        "correct": false,
+        "rationale": "Training a customized model adds cost."
+      }
+    ],
+    "explanation": "Custom models trade quality for cost. The hourly Provisioned Throughput fee is the main extra expense.",
+    "services": [
+      "bedrock",
+      "bedrock-provisioned-throughput"
+    ],
+    "sourceLinks": [
+      "https://docs.aws.amazon.com/bedrock/latest/userguide/prov-throughput.html",
+      "https://aws.amazon.com/bedrock/pricing/"
+    ]
+  },
+  {
+    "id": "2.3-034",
+    "taskId": "2.3",
+    "kind": "multi",
+    "objectives": [
+      "2.3.4"
+    ],
+    "stem": "Cairnway wants to lower the cost of a bulk job that can wait until morning. Which TWO choices help reduce cost? (Select TWO.)",
+    "select": 2,
+    "options": [
+      {
+        "text": "Use the largest model available",
+        "correct": false,
+        "rationale": "Larger models cost more per token."
+      },
+      {
+        "text": "Move the job to a geographic profile",
+        "correct": false,
+        "rationale": "A geographic profile keeps data in a region but is not a saving."
+      },
+      {
+        "text": "Use a smaller model that is good enough",
+        "correct": true,
+        "rationale": "Smaller models cost less per token and respond faster."
+      },
+      {
+        "text": "Use batch inference for the job",
+        "correct": true,
+        "rationale": "Batch is not real time and has a lower price for select models."
+      },
+      {
+        "text": "Buy Provisioned Throughput with a six-month commitment",
+        "correct": false,
+        "rationale": "Reserved hourly capacity is wasteful for a job that runs rarely."
+      }
+    ],
+    "explanation": "Work that can wait suits batch pricing, and a smaller model lowers the token cost. Reserved capacity and bigger models raise cost.",
+    "services": [
+      "bedrock-batch-inference",
+      "bedrock"
+    ],
+    "sourceLinks": [
+      "https://aws.amazon.com/bedrock/pricing/"
+    ]
+  },
+  {
+    "id": "2.3-035",
+    "taskId": "2.3",
+    "kind": "multi",
+    "objectives": [
+      "2.3.4"
+    ],
+    "stem": "Which TWO statements about Amazon Bedrock cross-Region inference are correct? (Select TWO.)",
+    "select": 2,
+    "options": [
+      {
+        "text": "A global profile can route to any supported commercial Region, with approximately 10 percent savings listed by AWS.",
+        "correct": true,
+        "rationale": "The saving costs you the geographic boundary."
+      },
+      {
+        "text": "A geographic profile keeps processing within a geography such as the EU and uses standard pricing.",
+        "correct": true,
+        "rationale": "This suits data-residency rules."
+      },
+      {
+        "text": "Inference profiles support Provisioned Throughput.",
+        "correct": false,
+        "rationale": "AWS states they do not."
+      },
+      {
+        "text": "Requests travel over the public internet between Regions.",
+        "correct": false,
+        "rationale": "Data stays on the AWS network and is encrypted in transit."
+      },
+      {
+        "text": "Routing adds an extra fee on top of model prices.",
+        "correct": false,
+        "rationale": "There is no additional routing cost."
+      }
+    ],
+    "explanation": "Cross-Region inference improves availability. Choose geographic for residency and global for possible savings.",
+    "services": [
+      "bedrock-cross-region-inference"
+    ],
+    "sourceLinks": [
+      "https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference.html"
+    ]
+  },
+  {
+    "id": "2.3-036",
+    "taskId": "2.3",
+    "kind": "multi",
+    "objectives": [
+      "2.3.4"
+    ],
+    "stem": "Which TWO conditions favor buying Provisioned Throughput instead of on-demand pricing? (Select TWO.)",
+    "select": 2,
+    "options": [
+      {
+        "text": "Traffic is high and steady all day",
+        "correct": true,
+        "rationale": "Steady use keeps the reserved capacity busy, so its fixed hourly price pays off."
+      },
+      {
+        "text": "The team wants no commitment at all",
+        "correct": false,
+        "rationale": "Provisioned Throughput involves hourly billing, and longer terms lower the price."
+      },
+      {
+        "text": "Traffic is rare and unpredictable",
+        "correct": false,
+        "rationale": "Idle reserved capacity would still be billed hourly."
+      },
+      {
+        "text": "The job runs once a night and can wait",
+        "correct": false,
+        "rationale": "Batch inference fits that pattern better."
+      },
+      {
+        "text": "The application needs predictable performance and responsiveness",
+        "correct": true,
+        "rationale": "Reserved capacity avoids the variation that on-demand can show under heavy load."
+      }
+    ],
+    "explanation": "Provisioned Throughput is for predictable high volume. On-demand or batch fit uneven or non-urgent work.",
+    "services": [
+      "bedrock-provisioned-throughput"
+    ],
+    "sourceLinks": [
+      "https://docs.aws.amazon.com/bedrock/latest/userguide/prov-throughput.html"
+    ]
+  },
+  {
+    "id": "2.3-037",
+    "taskId": "2.3",
+    "kind": "order",
+    "objectives": [
+      "2.3.1",
+      "2.3.4"
+    ],
+    "stem": "Cairnway wants to build and run a new shopping agent. Put these steps in the correct order.",
+    "steps": [
+      "Write the agent in code with Strands Agents",
+      "Deploy the agent to Amazon Bedrock AgentCore Runtime",
+      "Connect the agent to the order system through AgentCore Gateway",
+      "Watch the agent's behavior with AgentCore observability"
+    ],
+    "explanation": "Strands Agents is the toolkit used to write the agent. AgentCore is the platform that then hosts it, connects it to tools and lets the team monitor it in production. You cannot deploy an agent that has not been written, and you monitor once it is running.",
+    "services": [
+      "strands-agents",
+      "bedrock-agentcore"
+    ]
+  },
+  {
+    "id": "2.3-038",
+    "taskId": "2.3",
+    "kind": "order",
+    "objectives": [
+      "2.3.4"
+    ],
+    "stem": "Cairnway's Trailmate chat traffic is growing. Put the steps for deciding whether to move to Provisioned Throughput in the correct order.",
+    "steps": [
+      "Start on-demand, paying per token",
+      "Measure how steady the monthly token volume is",
+      "Compare the monthly token bill with the hourly Provisioned Throughput price",
+      "Buy Provisioned Throughput for a commitment term if it is cheaper"
+    ],
+    "explanation": "The team starts with the no-commitment option, gathers real usage data, compares costs, and only then commits. Buying before measuring risks paying hourly for unused capacity.",
+    "services": [
+      "bedrock",
+      "bedrock-provisioned-throughput"
+    ]
+  },
+  {
+    "id": "2.3-039",
+    "taskId": "2.3",
+    "kind": "order",
+    "objectives": [
+      "2.3.4"
+    ],
+    "stem": "Cairnway wants to use a customized foundation model on Amazon Bedrock. Put the steps in the correct order.",
+    "steps": [
+      "Prepare the training data and store it in Amazon S3",
+      "Fine-tune a supported model on Amazon Bedrock",
+      "Purchase Provisioned Throughput for the custom model",
+      "Send requests to the custom model"
+    ],
+    "explanation": "Data comes first, then training. Because a custom model on Bedrock must be used through Provisioned Throughput, the capacity is purchased before the model can answer requests.",
+    "services": [
+      "bedrock",
+      "s3",
+      "bedrock-provisioned-throughput"
+    ]
+  },
+  {
+    "id": "2.3-040",
+    "taskId": "2.3",
+    "kind": "match",
+    "objectives": [
+      "2.3.1"
+    ],
+    "stem": "Match each Cairnway need to the AWS offering that fits best.",
+    "pairs": [
+      {
+        "prompt": "Marketing staff want dashboards and summaries without writing code",
+        "answer": "Amazon Quick"
+      },
+      {
+        "prompt": "Developers want AI help writing and checking the shop's code",
+        "answer": "Kiro"
+      },
+      {
+        "prompt": "A developer writes an agent in open-source code",
+        "answer": "Strands Agents"
+      },
+      {
+        "prompt": "A finished agent must run securely with memory and monitoring",
+        "answer": "Amazon Bedrock AgentCore"
+      },
+      {
+        "prompt": "Data scientists train their own forecasting model",
+        "answer": "Amazon SageMaker AI"
+      }
+    ],
+    "explanation": "Each offering has a role: Quick for business users, Kiro for software engineering, Strands Agents for building agents, AgentCore for running them, and SageMaker AI for training your own models.",
+    "distractors": [
+      "Amazon Polly"
+    ],
+    "services": [
+      "quick",
+      "kiro",
+      "strands-agents",
+      "bedrock-agentcore",
+      "sagemaker-ai"
+    ]
+  },
+  {
+    "id": "2.3-041",
+    "taskId": "2.3",
+    "kind": "match",
+    "objectives": [
+      "2.3.4"
+    ],
+    "stem": "Match each Cairnway situation to the Bedrock pricing or routing option that fits best.",
+    "pairs": [
+      {
+        "prompt": "Low, unpredictable chat traffic with no commitment",
+        "answer": "On-demand, token-based pricing"
+      },
+      {
+        "prompt": "A nightly bulk job that can wait",
+        "answer": "Batch inference"
+      },
+      {
+        "prompt": "High, steady traffic needing predictable performance",
+        "answer": "Provisioned Throughput"
+      },
+      {
+        "prompt": "EU data must stay in Europe while capacity improves",
+        "answer": "Geographic inference profile"
+      }
+    ],
+    "explanation": "Each choice trades cost against flexibility. On-demand is flexible, batch is cheaper but not real time, Provisioned Throughput reserves capacity, and a geographic profile keeps processing within a geography.",
+    "distractors": [
+      "Global inference profile"
+    ],
+    "services": [
+      "bedrock",
+      "bedrock-batch-inference",
+      "bedrock-provisioned-throughput",
+      "bedrock-cross-region-inference"
+    ]
+  },
+  {
+    "id": "2.3-042",
+    "taskId": "2.3",
+    "kind": "match",
+    "objectives": [
+      "2.3.2"
+    ],
+    "stem": "Cairnway lists advantages of building with AWS generative AI services. Match each observation to the advantage it shows.",
+    "pairs": [
+      {
+        "prompt": "The company pays per token instead of buying GPU servers",
+        "answer": "Cost-effectiveness"
+      },
+      {
+        "prompt": "A working prototype is ready in days using ready-made models",
+        "answer": "Speed to market"
+      },
+      {
+        "prompt": "A non-technical employee can use AI with no code",
+        "answer": "Lower barrier to entry"
+      }
+    ],
+    "explanation": "Paying only for what you use, instead of buying hardware, is cost-effectiveness. Reaching a working prototype quickly is speed to market. Letting people without ML or coding skills use AI is a lower barrier to entry. Higher latency is a drawback, not an advantage.",
+    "services": [
+      "bedrock",
+      "quick"
+    ],
+    "distractors": [
+      "Higher latency"
+    ]
+  },
+  {
+    "id": "2.3-043",
+    "taskId": "2.3",
+    "kind": "match",
+    "objectives": [
+      "2.3.3"
+    ],
+    "stem": "Match each Cairnway security or safety need to the AWS capability that addresses it.",
+    "pairs": [
+      {
+        "prompt": "Control the encryption keys",
+        "answer": "AWS KMS"
+      },
+      {
+        "prompt": "Keep traffic off the public internet",
+        "answer": "AWS PrivateLink"
+      },
+      {
+        "prompt": "Record who called the APIs",
+        "answer": "AWS CloudTrail"
+      },
+      {
+        "prompt": "Help block harmful content in replies",
+        "answer": "Amazon Bedrock Guardrails"
+      }
+    ],
+    "explanation": "KMS manages keys, PrivateLink gives private connectivity, CloudTrail records API activity, and Guardrails add safeguards. Together they show the security and safety benefits of AWS infrastructure.",
+    "distractors": [
+      "AWS Budgets"
+    ],
+    "services": [
+      "kms",
+      "privatelink",
+      "cloudtrail",
+      "bedrock-guardrails"
+    ]
+  },
+  {
+    "id": "2.3-044",
+    "taskId": "2.3",
+    "kind": "case",
+    "scenario": "Cairnway Outfitters is building a GenAI assistant for its EU customers. The developers will use foundation models through an API, with no servers to manage. The assistant will handle customer chats that are subject to GDPR. Chat traffic is low today but is expected to become steady and high next year. The finance team also wants a monthly summary of sales reports, but its staff cannot code.",
+    "parts": [
+      {
+        "kind": "single",
+        "objectives": [
+          "2.3.1"
+        ],
+        "stem": "Which AWS offerings fit the developers' assistant and the finance team's report summaries?",
+        "options": [
+          {
+            "text": "Amazon SageMaker AI for the assistant and Kiro for the report summaries",
+            "correct": false,
+            "rationale": "SageMaker AI means managing training and hosting, and Kiro is a developer tool, not for finance staff."
+          },
+          {
+            "text": "Amazon Quick for the assistant and Amazon Bedrock for the report summaries",
+            "correct": false,
+            "rationale": "This reverses the roles. Finance staff cannot build on an API."
+          },
+          {
+            "text": "Amazon Bedrock for the assistant and Amazon Quick for the report summaries",
+            "correct": true,
+            "rationale": "Bedrock gives developers managed models through an API, and Quick lets business users summarize reports without code."
+          },
+          {
+            "text": "Strands Agents for both the assistant and the report summaries",
+            "correct": false,
+            "rationale": "Strands Agents is a coding toolkit for agents, so finance staff could not use it."
+          }
+        ],
+        "explanation": "The developers want managed models with no servers, which is Amazon Bedrock. Staff who cannot code need Amazon Quick."
+      },
+      {
+        "kind": "single",
+        "objectives": [
+          "2.3.3"
+        ],
+        "stem": "The legal team wants Cairnway to keep processing inside Europe, and the company must still secure its own use of the service. Which statement is correct?",
+        "options": [
+          {
+            "text": "Use a geographic EU inference profile, and set IAM permissions yourself.",
+            "correct": true,
+            "rationale": "A geographic profile keeps processing within the EU, and access control stays with the customer under shared responsibility."
+          },
+          {
+            "text": "Use a global inference profile, because AWS handles all security.",
+            "correct": false,
+            "rationale": "A global profile can process in any commercial Region, and AWS does not handle all security."
+          },
+          {
+            "text": "Use a geographic EU profile, because AWS also sets your IAM permissions.",
+            "correct": false,
+            "rationale": "AWS does not set a customer's IAM permissions."
+          },
+          {
+            "text": "Use no Regions at all, because compliance is automatic.",
+            "correct": false,
+            "rationale": "Customers must choose Regions and configure services to meet regulations."
+          }
+        ],
+        "explanation": "Data residency points to a geographic profile. Under shared responsibility, AWS secures the infrastructure while Cairnway controls access, logging and data choices."
+      },
+      {
+        "kind": "single",
+        "objectives": [
+          "2.3.4"
+        ],
+        "stem": "Next year's traffic will be steady and high. The team wants predictable performance and a lower hourly rate. Which option should it evaluate?",
+        "options": [
+          {
+            "text": "On-demand pricing, because it always costs least at high volume",
+            "correct": false,
+            "rationale": "Cost climbs with volume, and throughput can vary under heavy load."
+          },
+          {
+            "text": "Batch inference for all live chats",
+            "correct": false,
+            "rationale": "Batch is not real time, so live chat cannot use it."
+          },
+          {
+            "text": "A global inference profile, because it adds reserved capacity",
+            "correct": false,
+            "rationale": "Inference profiles route requests across Regions. They do not reserve capacity."
+          },
+          {
+            "text": "Provisioned Throughput with a longer commitment",
+            "correct": true,
+            "rationale": "It reserves capacity for predictable performance, and longer commitment terms lower the hourly price."
+          }
+        ],
+        "explanation": "Steady high traffic and a need for predictable performance fit Provisioned Throughput. Compare its hourly price with the token bill first."
+      },
+      {
+        "kind": "single",
+        "objectives": [
+          "2.3.2"
+        ],
+        "stem": "A manager asks why the team uses a managed service instead of hosting its own model. Which reply is the best one?",
+        "options": [
+          {
+            "text": "It guarantees that the answers will never be wrong on any topic.",
+            "correct": false,
+            "rationale": "No service guarantees perfect accuracy."
+          },
+          {
+            "text": "It lowers the barrier to entry: AWS runs the infrastructure.",
+            "correct": true,
+            "rationale": "Managed services remove up-front hardware cost and server work, so the team can focus on the application."
+          },
+          {
+            "text": "It removes the need for Cairnway to follow GDPR as a retailer.",
+            "correct": false,
+            "rationale": "Cairnway must still meet its own regulations."
+          },
+          {
+            "text": "It makes every model free to use for the whole first year.",
+            "correct": false,
+            "rationale": "Models are priced, for example per token."
+          }
+        ],
+        "explanation": "The advantages of managed services are efficiency, lower barrier to entry and cost-effectiveness. They do not remove accuracy risk or regulatory duties."
+      }
+    ],
+    "services": [
+      "bedrock",
+      "quick",
+      "bedrock-cross-region-inference",
+      "bedrock-provisioned-throughput"
+    ]
+  }
+]

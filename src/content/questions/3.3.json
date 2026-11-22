@@ -1,0 +1,1124 @@
+[
+  {
+    "id": "3.3-001",
+    "taskId": "3.3",
+    "kind": "single",
+    "objectives": [
+      "3.3.1"
+    ],
+    "stem": "A Cairnway analyst asks how a foundation model first gets its broad knowledge of language. Which training stage provides this?",
+    "options": [
+      {
+        "text": "Fine-tuning on a few labeled prompt and answer pairs",
+        "correct": false,
+        "rationale": "Fine-tuning adapts a model that already exists. It does not give the model its broad knowledge."
+      },
+      {
+        "text": "Distillation from a larger teacher model",
+        "correct": false,
+        "rationale": "Distillation trains a smaller student from a teacher. It depends on a model that already exists."
+      },
+      {
+        "text": "Pre-training on huge amounts of unlabeled data",
+        "correct": true,
+        "rationale": "Pre-training builds broad general knowledge from vast unlabeled data. It is done by the model provider."
+      },
+      {
+        "text": "Retrieval Augmented Generation at question time",
+        "correct": false,
+        "rationale": "RAG adds documents to the prompt. It does not train the model at all."
+      }
+    ],
+    "explanation": "The clue is 'first gets broad knowledge'. Pre-training uses very large amounts of unlabeled data and is very expensive, so it is a model provider's job, not Cairnway's.",
+    "services": [
+      "bedrock"
+    ]
+  },
+  {
+    "id": "3.3-002",
+    "taskId": "3.3",
+    "kind": "single",
+    "objectives": [
+      "3.3.1"
+    ],
+    "stem": "Cairnway's high-volume product-description job runs on a large model that is slow and costly. The team wants a smaller, faster and cheaper model that keeps most of the quality for this one task. Which technique fits?",
+    "options": [
+      {
+        "text": "Distillation into a smaller student model",
+        "correct": true,
+        "rationale": "Distillation transfers knowledge from a larger model to a smaller, faster and cheaper one."
+      },
+      {
+        "text": "Pre-training a new model from scratch",
+        "correct": false,
+        "rationale": "Training from scratch is very expensive. It is not how a smaller model is made cheaply for one task."
+      },
+      {
+        "text": "Retrieval Augmented Generation with a vector store",
+        "correct": false,
+        "rationale": "RAG adds facts to prompts. It does not make the model smaller or cheaper to run."
+      },
+      {
+        "text": "Reinforcement learning from human feedback",
+        "correct": false,
+        "rationale": "RLHF aligns answers with human preferences. It does not shrink a model."
+      }
+    ],
+    "explanation": "'Smaller, faster, cheaper' for a specific task is the goal of distillation. A larger teacher model produces answers that train a smaller student model.",
+    "services": [
+      "bedrock",
+      "nova"
+    ],
+    "sourceLinks": [
+      "https://docs.aws.amazon.com/bedrock/latest/userguide/model-distillation.html"
+    ]
+  },
+  {
+    "id": "3.3-003",
+    "taskId": "3.3",
+    "kind": "single",
+    "objectives": [
+      "3.3.1"
+    ],
+    "stem": "A Cairnway team has thousands of unlabeled gear manuals and magazine articles. It wants an existing model to absorb niche mountaineering vocabulary by training on this raw text. Which concept describes this?",
+    "options": [
+      {
+        "text": "Supervised fine-tuning on prompt and answer pairs",
+        "correct": false,
+        "rationale": "This needs labeled examples with answers attached, and the manuals have none."
+      },
+      {
+        "text": "Distillation into a smaller student model",
+        "correct": false,
+        "rationale": "Distillation copies a teacher's answers into a smaller model. It does not teach new vocabulary."
+      },
+      {
+        "text": "Prompt caching of the manuals",
+        "correct": false,
+        "rationale": "Caching reuses prompt content to save cost. It does not train the model."
+      },
+      {
+        "text": "Continued pre-training on unlabeled domain text",
+        "correct": true,
+        "rationale": "Continued pre-training keeps training an existing model on a large set of unlabeled text from one field."
+      }
+    ],
+    "explanation": "'Unlabeled' and 'absorb vocabulary' point to continued pre-training. It is a general machine-learning concept in the exam guide, though it is not on Amazon Bedrock's current list of customization methods.",
+    "services": [
+      "bedrock"
+    ]
+  },
+  {
+    "id": "3.3-004",
+    "taskId": "3.3",
+    "kind": "single",
+    "objectives": [
+      "3.3.1"
+    ],
+    "stem": "Cairnway has 1,500 past support replies, each paired with the customer question and rated excellent by senior agents. It wants Trailmate to answer in the same style. Which stage uses this kind of data?",
+    "options": [
+      {
+        "text": "Pre-training from scratch on unlabeled text",
+        "correct": false,
+        "rationale": "Pre-training uses vast unlabeled data, not a small set of labeled examples."
+      },
+      {
+        "text": "Fine-tuning on labeled examples",
+        "correct": true,
+        "rationale": "Fine-tuning trains an existing model on labeled examples so it performs a task or style better."
+      },
+      {
+        "text": "Continued pre-training on raw text",
+        "correct": false,
+        "rationale": "Continued pre-training uses large amounts of unlabeled text, not paired examples."
+      },
+      {
+        "text": "Model evaluation with a benchmark dataset",
+        "correct": false,
+        "rationale": "Evaluation measures a model. It does not change it."
+      }
+    ],
+    "explanation": "Questions paired with ideal replies are labeled data. Fine-tuning uses labeled examples to adjust a pre-trained model's weights toward a task or style.",
+    "services": [
+      "bedrock"
+    ]
+  },
+  {
+    "id": "3.3-005",
+    "taskId": "3.3",
+    "kind": "single",
+    "objectives": [
+      "3.3.1"
+    ],
+    "stem": "Which approach does NOT change a foundation model's weights?",
+    "options": [
+      {
+        "text": "Supervised fine-tuning on labeled examples",
+        "correct": false,
+        "rationale": "Fine-tuning further trains the model, so its weights change."
+      },
+      {
+        "text": "Retrieval Augmented Generation (RAG)",
+        "correct": true,
+        "rationale": "RAG retrieves documents and adds them to the prompt. The model itself is unchanged."
+      },
+      {
+        "text": "Continued pre-training on domain text",
+        "correct": false,
+        "rationale": "Continued pre-training trains an existing model further, so its weights change."
+      },
+      {
+        "text": "Distillation into a smaller student model",
+        "correct": false,
+        "rationale": "Distillation trains a student model, so the student's weights are learned from the teacher."
+      }
+    ],
+    "explanation": "Fine-tuning, continued pre-training and distillation all train a model and change weights. Prompting and RAG change nothing inside the model, which is why they are tried first.",
+    "services": [
+      "bedrock-knowledge-bases",
+      "bedrock"
+    ]
+  },
+  {
+    "id": "3.3-006",
+    "taskId": "3.3",
+    "kind": "single",
+    "objectives": [
+      "3.3.1"
+    ],
+    "stem": "Which of the following is a customization method that Amazon Bedrock currently lists for tailoring a model?",
+    "options": [
+      {
+        "text": "Pre-training a new model on your own cloud hardware",
+        "correct": false,
+        "rationale": "Pre-training from scratch is a provider's job and is not a Bedrock customization method."
+      },
+      {
+        "text": "Retraining the model on every customer prompt automatically",
+        "correct": false,
+        "rationale": "Bedrock does not retrain base models from customer prompts."
+      },
+      {
+        "text": "Editing the model's weights by hand in the console",
+        "correct": false,
+        "rationale": "Weights are not edited by hand. Customization works by training."
+      },
+      {
+        "text": "Distillation",
+        "correct": true,
+        "rationale": "Distillation is on Amazon Bedrock's list of customization methods, next to supervised and reinforcement fine-tuning."
+      }
+    ],
+    "explanation": "Amazon Bedrock lists supervised fine-tuning, reinforcement fine-tuning and distillation. A customized model is then used through Provisioned Throughput.",
+    "services": [
+      "bedrock"
+    ],
+    "sourceLinks": [
+      "https://docs.aws.amazon.com/bedrock/latest/userguide/custom-models.html"
+    ]
+  },
+  {
+    "id": "3.3-007",
+    "taskId": "3.3",
+    "kind": "single",
+    "objectives": [
+      "3.3.2"
+    ],
+    "stem": "A Cairnway data scientist explains that reusing what a pre-trained model learned as a starting point lets the team succeed with far less data and money than training from scratch. Which concept is this?",
+    "options": [
+      {
+        "text": "Transfer learning",
+        "correct": true,
+        "rationale": "Transfer learning reuses knowledge learned on one task as the starting point for another. All fine-tuning is transfer learning."
+      },
+      {
+        "text": "Data labeling by humans",
+        "correct": false,
+        "rationale": "Labeling attaches correct answers to examples. It is a data task, not a reuse concept."
+      },
+      {
+        "text": "Prompt chaining steps",
+        "correct": false,
+        "rationale": "Chaining splits work across several prompts. It does not train a model."
+      },
+      {
+        "text": "Overfitting to the data",
+        "correct": false,
+        "rationale": "Overfitting is a problem where a model memorizes its training data. It is not a technique."
+      }
+    ],
+    "explanation": "'Reuse what a model already learned' is the definition of transfer learning. Fine-tuning is the practice, and transfer learning is the idea behind it.",
+    "services": [
+      "sagemaker-jumpstart"
+    ]
+  },
+  {
+    "id": "3.3-008",
+    "taskId": "3.3",
+    "kind": "single",
+    "objectives": [
+      "3.3.2"
+    ],
+    "stem": "Cairnway has 1,500 customer questions each paired with an ideal agent reply. It wants Trailmate to follow instructions in that style more reliably. Which fine-tuning method fits best?",
+    "options": [
+      {
+        "text": "Domain adaptation on raw unlabeled text",
+        "correct": false,
+        "rationale": "Domain adaptation uses plain unlabeled domain text, not question and answer pairs."
+      },
+      {
+        "text": "Pre-training a model from scratch",
+        "correct": false,
+        "rationale": "Training from scratch is far too costly for a style change."
+      },
+      {
+        "text": "Instruction tuning on labeled pairs",
+        "correct": true,
+        "rationale": "Instruction tuning trains on labeled prompt and response pairs so the model follows that kind of instruction better."
+      },
+      {
+        "text": "Distillation into a smaller model",
+        "correct": false,
+        "rationale": "Distillation makes a model smaller and cheaper. It is not aimed at a reply style."
+      }
+    ],
+    "explanation": "Labeled prompt and response pairs point to instruction tuning, also called instruction-based fine-tuning. The model's weights are modified.",
+    "services": [
+      "bedrock"
+    ]
+  },
+  {
+    "id": "3.3-009",
+    "taskId": "3.3",
+    "kind": "single",
+    "objectives": [
+      "3.3.2"
+    ],
+    "stem": "Cairnway's product team has many unlabeled industry reports and technical manuals. Prompt engineering alone does not handle the jargon. Which method should the team consider?",
+    "options": [
+      {
+        "text": "Instruction tuning on prompt and response pairs",
+        "correct": false,
+        "rationale": "This needs labeled pairs, and the team only has raw text."
+      },
+      {
+        "text": "Reinforcement learning from human feedback",
+        "correct": false,
+        "rationale": "RLHF needs human rankings of answers, not raw documents."
+      },
+      {
+        "text": "Domain adaptation on unlabeled domain text",
+        "correct": true,
+        "rationale": "Domain adaptation trains on plain text from your field so the model becomes comfortable with its jargon."
+      },
+      {
+        "text": "Batch inference on the manuals",
+        "correct": false,
+        "rationale": "Batch inference runs prompts at a lower price. It does not train a model."
+      }
+    ],
+    "explanation": "'Unlabeled domain text' and 'jargon' point to domain adaptation. Instruction tuning would need labeled pairs.",
+    "services": [
+      "sagemaker-jumpstart"
+    ]
+  },
+  {
+    "id": "3.3-010",
+    "taskId": "3.3",
+    "kind": "single",
+    "objectives": [
+      "3.3.2"
+    ],
+    "stem": "Cairnway's return window changes every few weeks, and Trailmate must always quote the current policy. Which approach is the best fit, with the LEAST effort?",
+    "options": [
+      {
+        "text": "RAG over the current policy documents",
+        "correct": true,
+        "rationale": "RAG fetches the latest documents at question time, so changes need no retraining."
+      },
+      {
+        "text": "Fine-tune the model again each time the policy changes",
+        "correct": false,
+        "rationale": "Retraining for every change is costly, and fine-tuning teaches style, not changing facts."
+      },
+      {
+        "text": "Pre-train a new model on the policy",
+        "correct": false,
+        "rationale": "Pre-training is far too costly for a small, changing fact."
+      },
+      {
+        "text": "Distill the model into a smaller student each month",
+        "correct": false,
+        "rationale": "Distillation makes a model smaller. It does not keep facts current."
+      }
+    ],
+    "explanation": "Facts that change belong in RAG. Fine-tuning is for tone, format and task behavior. The word 'always current' is the clue.",
+    "services": [
+      "bedrock-knowledge-bases",
+      "bedrock"
+    ]
+  },
+  {
+    "id": "3.3-011",
+    "taskId": "3.3",
+    "kind": "single",
+    "objectives": [
+      "3.3.2"
+    ],
+    "stem": "Cairnway wants to fine-tune a supported foundation model without managing any servers. Which AWS service should it use?",
+    "options": [
+      {
+        "text": "Amazon SageMaker JumpStart on self-managed training clusters",
+        "correct": false,
+        "rationale": "JumpStart gives more control over training settings, but it needs more setup than Bedrock."
+      },
+      {
+        "text": "Amazon Quick",
+        "correct": false,
+        "rationale": "Quick is a business user workspace and does not fine-tune foundation models."
+      },
+      {
+        "text": "AWS Budgets",
+        "correct": false,
+        "rationale": "Budgets tracks costs and does not train models."
+      },
+      {
+        "text": "Amazon Bedrock",
+        "correct": true,
+        "rationale": "Bedrock can fine-tune supported models without the customer managing servers."
+      }
+    ],
+    "explanation": "'No servers' points to Amazon Bedrock. SageMaker AI with JumpStart suits teams that want more control over hyperparameters such as epochs and learning rate.",
+    "services": [
+      "bedrock",
+      "sagemaker-jumpstart"
+    ],
+    "sourceLinks": [
+      "https://docs.aws.amazon.com/bedrock/latest/userguide/custom-model-fine-tuning.html"
+    ]
+  },
+  {
+    "id": "3.3-012",
+    "taskId": "3.3",
+    "kind": "single",
+    "objectives": [
+      "3.3.3"
+    ],
+    "stem": "Before fine-tuning, Cairnway's data steward removes duplicate replies, fixes formatting errors and deletes spam from the training set. Which data-preparation activity is this?",
+    "options": [
+      {
+        "text": "Data governance",
+        "correct": false,
+        "rationale": "Governance covers the rules about rights, privacy and access, not cleaning errors."
+      },
+      {
+        "text": "Data curation",
+        "correct": true,
+        "rationale": "Curation is selecting, cleaning and organizing data: removing duplicates, errors and junk."
+      },
+      {
+        "text": "Data labeling",
+        "correct": false,
+        "rationale": "Labeling attaches the correct answer to each example."
+      },
+      {
+        "text": "Reward modeling",
+        "correct": false,
+        "rationale": "A reward model predicts human scores in RLHF. It is not cleaning data."
+      }
+    ],
+    "explanation": "Removing duplicates, errors and junk is curation. The rule 'garbage in, garbage out' explains why it matters for any method.",
+    "services": [
+      "s3"
+    ]
+  },
+  {
+    "id": "3.3-013",
+    "taskId": "3.3",
+    "kind": "single",
+    "objectives": [
+      "3.3.3"
+    ],
+    "stem": "Cairnway's training replies include customers' names and order numbers. The company also needs to confirm it has the right to use the replies. Which data-preparation aspect covers this?",
+    "options": [
+      {
+        "text": "Size",
+        "correct": false,
+        "rationale": "Size is about having enough examples, not about rights or privacy."
+      },
+      {
+        "text": "Governance",
+        "correct": true,
+        "rationale": "Governance covers the right to use data, removal of personal information, access rules and documented origin."
+      },
+      {
+        "text": "Representativeness",
+        "correct": false,
+        "rationale": "Representativeness means the data reflects real situations, not that it is private or licensed."
+      },
+      {
+        "text": "Curation",
+        "correct": false,
+        "rationale": "Curation cleans errors and duplicates. It does not address legal rights or privacy."
+      }
+    ],
+    "explanation": "Personal data and usage rights are governance issues. Training can bake private data into a model, so these are checked before training."
+  },
+  {
+    "id": "3.3-014",
+    "taskId": "3.3",
+    "kind": "single",
+    "objectives": [
+      "3.3.3"
+    ],
+    "stem": "Cairnway fine-tunes Trailmate only on English jacket questions. After launch it answers German tent questions badly. Which data problem caused this?",
+    "options": [
+      {
+        "text": "The data contained too many labeled examples",
+        "correct": false,
+        "rationale": "Having many labeled examples is not the problem. The coverage was too narrow."
+      },
+      {
+        "text": "The data was stored as JSON Lines in Amazon S3",
+        "correct": false,
+        "rationale": "JSON Lines in S3 is the expected format for Bedrock and does not cause this."
+      },
+      {
+        "text": "The model was pre-trained too recently",
+        "correct": false,
+        "rationale": "Recency of pre-training is not the cause. The fine-tuning data left out German tents."
+      },
+      {
+        "text": "The data was not representative",
+        "correct": true,
+        "rationale": "Training data must reflect the real situations the model meets, such as all languages and product categories."
+      }
+    ],
+    "explanation": "'Only English jackets' is the clue. Skewed data gives a biased, narrow model, so representativeness matters.",
+    "services": [
+      "bedrock"
+    ]
+  },
+  {
+    "id": "3.3-015",
+    "taskId": "3.3",
+    "kind": "single",
+    "objectives": [
+      "3.3.3"
+    ],
+    "stem": "Two Cairnway agents label the same sample of 100 replies and often disagree about which are excellent. What is the risk for fine-tuning?",
+    "options": [
+      {
+        "text": "Inconsistent labels teach the model confusing patterns",
+        "correct": true,
+        "rationale": "Labels must be consistent. If people label the same case differently, the model learns confusion."
+      },
+      {
+        "text": "None, because more labelers always improve accuracy",
+        "correct": false,
+        "rationale": "More labelers do not help if they disagree, so labels still need to be consistent."
+      },
+      {
+        "text": "The model will refuse to train on any labeled data",
+        "correct": false,
+        "rationale": "Training will run, but the results will be poor."
+      },
+      {
+        "text": "The validation dataset will automatically fix the labels",
+        "correct": false,
+        "rationale": "Validation data checks results. It does not repair labels."
+      }
+    ],
+    "explanation": "Consistency is the point of labeling. Cairnway's data steward has agents label a sample independently to check that they agree.",
+    "services": [
+      "sagemaker-ground-truth"
+    ]
+  },
+  {
+    "id": "3.3-016",
+    "taskId": "3.3",
+    "kind": "single",
+    "objectives": [
+      "3.3.3"
+    ],
+    "stem": "Cairnway is preparing a fine-tuning dataset for Amazon Bedrock. In which format and location should the training data be provided?",
+    "options": [
+      {
+        "text": "A single PDF stored on a laptop",
+        "correct": false,
+        "rationale": "Bedrock does not train from PDFs on a laptop. It reads data stored in S3."
+      },
+      {
+        "text": "Screenshots uploaded to the console one by one",
+        "correct": false,
+        "rationale": "Training data is provided as files, not as screenshots."
+      },
+      {
+        "text": "JSON Lines files stored in Amazon S3",
+        "correct": true,
+        "rationale": "Bedrock expects training data as JSON Lines files, one record per line, stored in Amazon S3."
+      },
+      {
+        "text": "A spreadsheet pasted into the prompt",
+        "correct": false,
+        "rationale": "Pasting data into a prompt does not train the model."
+      }
+    ],
+    "explanation": "Bedrock reads JSON Lines files from Amazon S3. For many text models each record holds a prompt and its expected completion.",
+    "services": [
+      "bedrock",
+      "s3"
+    ],
+    "sourceLinks": [
+      "https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-prepare.html"
+    ]
+  },
+  {
+    "id": "3.3-017",
+    "taskId": "3.3",
+    "kind": "multi",
+    "objectives": [
+      "3.3.1"
+    ],
+    "stem": "Which TWO training approaches typically use large amounts of unlabeled data? (Select TWO.)",
+    "select": 2,
+    "options": [
+      {
+        "text": "Instruction tuning",
+        "correct": false,
+        "rationale": "Uses labeled prompt and response pairs."
+      },
+      {
+        "text": "Pre-training",
+        "correct": true,
+        "rationale": "Learns from vast unlabeled general data."
+      },
+      {
+        "text": "Supervised fine-tuning",
+        "correct": false,
+        "rationale": "Uses labeled examples with answers attached."
+      },
+      {
+        "text": "Continued pre-training",
+        "correct": true,
+        "rationale": "Keeps training an existing model on unlabeled domain text."
+      },
+      {
+        "text": "Ranking answers for a reward model",
+        "correct": false,
+        "rationale": "Uses human preference rankings, not raw text."
+      }
+    ],
+    "explanation": "Pre-training and continued pre-training both use unlabeled text. Fine-tuning methods need labels, and RLHF needs human rankings.",
+    "services": [
+      "bedrock"
+    ]
+  },
+  {
+    "id": "3.3-018",
+    "taskId": "3.3",
+    "kind": "multi",
+    "objectives": [
+      "3.3.1"
+    ],
+    "stem": "Which TWO statements describe distillation correctly? (Select TWO.)",
+    "select": 2,
+    "options": [
+      {
+        "text": "The result is cheaper and faster to run.",
+        "correct": true,
+        "rationale": "The goal is a smaller model that keeps most quality for a task."
+      },
+      {
+        "text": "A larger teacher model produces answers used to train a smaller student model.",
+        "correct": true,
+        "rationale": "This is the core of distillation."
+      },
+      {
+        "text": "It trains from scratch on unlabeled data only.",
+        "correct": false,
+        "rationale": "It uses prompts and the teacher's responses."
+      },
+      {
+        "text": "The student model is larger than the teacher.",
+        "correct": false,
+        "rationale": "The student is the smaller model."
+      },
+      {
+        "text": "It adds brand-new knowledge that the teacher never had.",
+        "correct": false,
+        "rationale": "The student learns from the teacher, so it cannot gain what the teacher lacks."
+      }
+    ],
+    "explanation": "Distillation transfers knowledge from a big model to a small one to reduce cost and latency, and it is not about adding knowledge.",
+    "services": [
+      "bedrock"
+    ],
+    "sourceLinks": [
+      "https://docs.aws.amazon.com/bedrock/latest/userguide/model-distillation.html"
+    ]
+  },
+  {
+    "id": "3.3-019",
+    "taskId": "3.3",
+    "kind": "multi",
+    "objectives": [
+      "3.3.2"
+    ],
+    "stem": "Which THREE are methods or concepts used to fine-tune or adapt a foundation model? (Select THREE.)",
+    "select": 3,
+    "options": [
+      {
+        "text": "Instruction tuning",
+        "correct": true,
+        "rationale": "Trains on labeled prompt and response pairs."
+      },
+      {
+        "text": "Domain adaptation",
+        "correct": true,
+        "rationale": "Trains on unlabeled text from a specific field."
+      },
+      {
+        "text": "Prompt caching",
+        "correct": false,
+        "rationale": "Saves cost by reusing prompt content. It does not train a model."
+      },
+      {
+        "text": "Transfer learning",
+        "correct": true,
+        "rationale": "Reuses a pre-trained model as a starting point."
+      },
+      {
+        "text": "Batch inference",
+        "correct": false,
+        "rationale": "Runs many prompts at a lower price. It does not train a model."
+      }
+    ],
+    "explanation": "Instruction tuning, domain adaptation and transfer learning all further train an existing model. Caching and batch inference only change how it is used.",
+    "services": [
+      "sagemaker-jumpstart"
+    ]
+  },
+  {
+    "id": "3.3-020",
+    "taskId": "3.3",
+    "kind": "multi",
+    "objectives": [
+      "3.3.2"
+    ],
+    "stem": "Which TWO needs are good fits for fine-tuning Trailmate? (Select TWO.)",
+    "select": 2,
+    "options": [
+      {
+        "text": "A fixed output format such as three sentences maximum",
+        "correct": true,
+        "rationale": "Fine-tuning teaches format and task behavior."
+      },
+      {
+        "text": "A consistent friendly tone",
+        "correct": true,
+        "rationale": "Fine-tuning teaches style."
+      },
+      {
+        "text": "Answering with the newest product launch details",
+        "correct": false,
+        "rationale": "New facts belong in RAG."
+      },
+      {
+        "text": "Quoting today's stock levels",
+        "correct": false,
+        "rationale": "Live facts belong in RAG or a data lookup."
+      },
+      {
+        "text": "Quoting a return window that changes monthly",
+        "correct": false,
+        "rationale": "Changing facts belong in RAG."
+      }
+    ],
+    "explanation": "Fine-tuning shapes style, format and task behavior. Facts that change should come from retrieval.",
+    "services": [
+      "bedrock"
+    ]
+  },
+  {
+    "id": "3.3-021",
+    "taskId": "3.3",
+    "kind": "multi",
+    "objectives": [
+      "3.3.3"
+    ],
+    "stem": "Which TWO actions are data curation tasks before fine-tuning? (Select TWO.)",
+    "select": 2,
+    "options": [
+      {
+        "text": "Removing duplicate and erroneous examples",
+        "correct": true,
+        "rationale": "Cleaning out duplicates and errors."
+      },
+      {
+        "text": "Skipping validation data to save time",
+        "correct": false,
+        "rationale": "A validation set is a good practice, and skipping it is not curation."
+      },
+      {
+        "text": "Fixing formatting problems in the records",
+        "correct": true,
+        "rationale": "Organizing data so it is consistent."
+      },
+      {
+        "text": "Keeping spam in the set to increase its size",
+        "correct": false,
+        "rationale": "Spam harms results."
+      },
+      {
+        "text": "Adding more raw data without reviewing it",
+        "correct": false,
+        "rationale": "This adds noise rather than curating."
+      }
+    ],
+    "explanation": "Curation means selecting, cleaning and organizing data. More data is not better if it is noisy.",
+    "services": [
+      "glue-databrew"
+    ]
+  },
+  {
+    "id": "3.3-022",
+    "taskId": "3.3",
+    "kind": "multi",
+    "objectives": [
+      "3.3.3"
+    ],
+    "stem": "Which TWO actions address data governance before training? (Select TWO.)",
+    "select": 2,
+    "options": [
+      {
+        "text": "Splitting off a validation set",
+        "correct": false,
+        "rationale": "A validation set checks results and is not a governance action."
+      },
+      {
+        "text": "Adding more examples of the same product",
+        "correct": false,
+        "rationale": "This is about size and balance, not governance."
+      },
+      {
+        "text": "Masking customer names and order numbers",
+        "correct": true,
+        "rationale": "Governance covers removal of personal and confidential information."
+      },
+      {
+        "text": "Labeling examples consistently",
+        "correct": false,
+        "rationale": "Labeling is a separate aspect."
+      },
+      {
+        "text": "Confirming Cairnway has the right to use the data",
+        "correct": true,
+        "rationale": "Governance covers rights to use data."
+      }
+    ],
+    "explanation": "Governance is about rights, privacy, access and origin. Training can bake private data into a model."
+  },
+  {
+    "id": "3.3-023",
+    "taskId": "3.3",
+    "kind": "multi",
+    "objectives": [
+      "3.3.3"
+    ],
+    "stem": "Which THREE statements describe reinforcement learning from human feedback (RLHF)? (Select THREE.)",
+    "select": 3,
+    "options": [
+      {
+        "text": "It needs no human involvement.",
+        "correct": false,
+        "rationale": "Human feedback is the key input."
+      },
+      {
+        "text": "The language model is optimized to earn high reward scores.",
+        "correct": true,
+        "rationale": "The final step uses the reward model to guide the language model."
+      },
+      {
+        "text": "People rank several answers to the same prompt.",
+        "correct": true,
+        "rationale": "These rankings are the human feedback."
+      },
+      {
+        "text": "A reward model learns to predict how a human would score an answer.",
+        "correct": true,
+        "rationale": "AWS calls this the core of RLHF."
+      },
+      {
+        "text": "It uses only unlabeled raw text from manuals.",
+        "correct": false,
+        "rationale": "It uses human rankings and preferences."
+      }
+    ],
+    "explanation": "RLHF uses human rankings to train a reward model, which then guides the language model toward preferred answers.",
+    "services": [
+      "bedrock"
+    ],
+    "sourceLinks": [
+      "https://aws.amazon.com/what-is/reinforcement-learning-from-human-feedback/"
+    ]
+  },
+  {
+    "id": "3.3-024",
+    "taskId": "3.3",
+    "kind": "multi",
+    "objectives": [
+      "3.3.3"
+    ],
+    "stem": "Which TWO choices help make Cairnway's fine-tuning data representative? (Select TWO.)",
+    "select": 2,
+    "options": [
+      {
+        "text": "Include easy and hard questions across tents, boots and jackets",
+        "correct": true,
+        "rationale": "Covers the product mix and the range of difficulty."
+      },
+      {
+        "text": "Remove every unusual case",
+        "correct": false,
+        "rationale": "Edge cases are part of real life."
+      },
+      {
+        "text": "Include German, Spanish and English questions",
+        "correct": true,
+        "rationale": "Covers the languages customers use."
+      },
+      {
+        "text": "Use only the most recent week",
+        "correct": false,
+        "rationale": "This could miss other situations."
+      },
+      {
+        "text": "Use only the replies from one agent",
+        "correct": false,
+        "rationale": "This narrows the range of styles and cases."
+      }
+    ],
+    "explanation": "Representative data reflects the situations the model will meet. Skewed data produces a biased model.",
+    "services": [
+      "bedrock"
+    ]
+  },
+  {
+    "id": "3.3-025",
+    "taskId": "3.3",
+    "kind": "order",
+    "objectives": [
+      "3.3.3"
+    ],
+    "stem": "Cairnway's steps for RLHF are listed below. Put them in the correct order.",
+    "steps": [
+      "Collect prompts and good answers written by people",
+      "Fine-tune the base model on those examples",
+      "Have people rank several answers and train a reward model",
+      "Optimize the language model to earn high reward scores"
+    ],
+    "explanation": "AWS describes RLHF as collecting data, supervised fine-tuning, building a reward model from human rankings and then optimizing. The reward model must exist before the model can be optimized against it.",
+    "services": [
+      "bedrock"
+    ]
+  },
+  {
+    "id": "3.3-026",
+    "taskId": "3.3",
+    "kind": "order",
+    "objectives": [
+      "3.3.3"
+    ],
+    "stem": "Cairnway is preparing 1,500 support replies for fine-tuning on Amazon Bedrock. Put the steps in the correct order.",
+    "steps": [
+      "Collect past replies with the customer questions",
+      "Remove duplicates and mask personal details",
+      "Check that the labels are consistent",
+      "Set aside part of the data for validation",
+      "Save the files as JSON Lines in Amazon S3"
+    ],
+    "explanation": "The data is gathered, cleaned and protected first, labels are verified, a validation set is held out, and the files are saved in the format Bedrock expects. Splitting before cleaning would let duplicates leak across sets.",
+    "services": [
+      "bedrock",
+      "s3"
+    ]
+  },
+  {
+    "id": "3.3-027",
+    "taskId": "3.3",
+    "kind": "match",
+    "objectives": [
+      "3.3.1",
+      "3.3.2"
+    ],
+    "stem": "Match each Cairnway situation to the training concept that fits best.",
+    "pairs": [
+      {
+        "prompt": "Labeled question and ideal-reply pairs teach Trailmate a style",
+        "answer": "Instruction tuning"
+      },
+      {
+        "prompt": "Unlabeled gear manuals teach niche vocabulary",
+        "answer": "Domain adaptation"
+      },
+      {
+        "prompt": "A large model's answers train a smaller, cheaper model",
+        "answer": "Distillation"
+      },
+      {
+        "prompt": "A pre-trained model is reused as the starting point",
+        "answer": "Transfer learning"
+      }
+    ],
+    "explanation": "Instruction tuning uses labeled pairs, domain adaptation uses unlabeled domain text, distillation moves knowledge from a teacher to a student, and transfer learning is the idea of reuse.",
+    "distractors": [
+      "Pre-training from scratch"
+    ],
+    "services": [
+      "bedrock",
+      "sagemaker-jumpstart"
+    ]
+  },
+  {
+    "id": "3.3-028",
+    "taskId": "3.3",
+    "kind": "match",
+    "objectives": [
+      "3.3.3"
+    ],
+    "stem": "Match each problem in Cairnway's training data to the data-preparation aspect it belongs to.",
+    "pairs": [
+      {
+        "prompt": "Duplicate and junk records",
+        "answer": "Data curation"
+      },
+      {
+        "prompt": "Customer names left in the replies",
+        "answer": "Data governance"
+      },
+      {
+        "prompt": "Only tents appear, no boots or jackets",
+        "answer": "Representativeness"
+      },
+      {
+        "prompt": "Two agents label the same reply differently",
+        "answer": "Labeling consistency"
+      }
+    ],
+    "explanation": "Duplicates and junk are curation, personal data is governance, narrow coverage is representativeness, and disagreeing labelers are a labeling problem.",
+    "distractors": [
+      "Dataset size"
+    ],
+    "services": [
+      "bedrock"
+    ]
+  },
+  {
+    "id": "3.3-029",
+    "taskId": "3.3",
+    "kind": "case",
+    "scenario": "Cairnway Outfitters wants to improve Trailmate after a quarter of use. Its tone is stiff, and it sometimes ignores the 'three sentences maximum' rule. Return windows already come from RAG. The team has 1,500 support replies rated excellent, each paired with its customer question, plus thousands of unlabeled gear manuals. A data steward, Amir, will prepare the data and the team will use Amazon Bedrock.",
+    "parts": [
+      {
+        "kind": "single",
+        "objectives": [
+          "3.3.2"
+        ],
+        "stem": "Which method best fixes Trailmate's tone and length problem using the rated replies?",
+        "options": [
+          {
+            "text": "Pre-training a new foundation model",
+            "correct": false,
+            "rationale": "Far too costly and not needed for a style change."
+          },
+          {
+            "text": "Domain adaptation on the unlabeled manuals",
+            "correct": false,
+            "rationale": "The manuals have no replies, so they do not teach the style."
+          },
+          {
+            "text": "Instruction tuning on the labeled pairs",
+            "correct": true,
+            "rationale": "Labeled prompt and reply pairs teach the model a style and format."
+          },
+          {
+            "text": "Moving return policies out of RAG into the model",
+            "correct": false,
+            "rationale": "Facts belong in RAG, and the problem is style."
+          }
+        ],
+        "explanation": "The issue is tone and format, and labeled pairs exist. That points to instruction-style fine-tuning, not new knowledge."
+      },
+      {
+        "kind": "single",
+        "objectives": [
+          "3.3.1"
+        ],
+        "stem": "The team also wants a smaller, cheaper model for the high-volume description job. Which technique fits?",
+        "options": [
+          {
+            "text": "Distillation",
+            "correct": true,
+            "rationale": "A larger teacher's answers train a smaller student that is cheaper and faster."
+          },
+          {
+            "text": "Pre-training",
+            "correct": false,
+            "rationale": "Pre-training builds a model from scratch and is very expensive."
+          },
+          {
+            "text": "RAG with a vector store",
+            "correct": false,
+            "rationale": "RAG adds facts to the prompt and does not shrink the model."
+          },
+          {
+            "text": "Prompt versioning",
+            "correct": false,
+            "rationale": "Versioning tracks prompt changes and does not train a model."
+          }
+        ],
+        "explanation": "Smaller, cheaper and faster for one task is the purpose of distillation."
+      },
+      {
+        "kind": "multi",
+        "objectives": [
+          "3.3.3"
+        ],
+        "stem": "Which TWO steps should Amir take when preparing the replies? (Select TWO.)",
+        "select": 2,
+        "options": [
+          {
+            "text": "Keep all refund disputes with angry wording",
+            "correct": false,
+            "rationale": "They would teach the wrong tone."
+          },
+          {
+            "text": "Remove duplicate replies",
+            "correct": true,
+            "rationale": "Curation removes duplicates and junk."
+          },
+          {
+            "text": "Skip checking label agreement",
+            "correct": false,
+            "rationale": "Consistent labels matter."
+          },
+          {
+            "text": "Mask customer names and order numbers",
+            "correct": true,
+            "rationale": "Governance removes personal information."
+          },
+          {
+            "text": "Add unreviewed replies from any source",
+            "correct": false,
+            "rationale": "Unreviewed data can add noise."
+          }
+        ],
+        "explanation": "Governance protects personal data and curation cleans duplicates and junk."
+      }
+    ],
+    "services": [
+      "bedrock"
+    ]
+  }
+]
