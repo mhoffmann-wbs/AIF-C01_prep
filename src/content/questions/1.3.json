@@ -1,0 +1,1676 @@
+[
+  {
+    "id": "1.3-001",
+    "taskId": "1.3",
+    "kind": "single",
+    "objectives": [
+      "1.3.1"
+    ],
+    "stem": "Cairnway Outfitters has collected five years of order history for a new model. Before training, the data team wants charts and summary statistics that reveal missing values and skewed columns. Which pipeline stage is this?",
+    "options": [
+      {
+        "text": "Hyperparameter tuning",
+        "correct": false,
+        "rationale": "Tuning adjusts settings chosen before training to improve a model. It needs a model to exist first, so it comes later."
+      },
+      {
+        "text": "Model deployment to the website",
+        "correct": false,
+        "rationale": "Deployment makes a trained model available to applications. No model exists yet at this point."
+      },
+      {
+        "text": "Exploratory data analysis",
+        "correct": true,
+        "rationale": "Exploratory data analysis (EDA) means looking at the data with charts and statistics to understand patterns and problems, such as gaps and skew, before any training."
+      },
+      {
+        "text": "Model monitoring",
+        "correct": false,
+        "rationale": "Monitoring watches a live model in production. This data has not even been used for training."
+      }
+    ],
+    "explanation": "The deciding clue is looking at the data with charts and statistics to find missing values and skew. That is exploratory data analysis, which sits between data preparation and feature engineering. Tuning, deployment and monitoring all come after a model has been trained."
+  },
+  {
+    "id": "1.3-002",
+    "taskId": "1.3",
+    "kind": "single",
+    "objectives": [
+      "1.3.1"
+    ],
+    "stem": "A Cairnway data scientist turns raw order timestamps into a new input called \"days since last order\" for a repeat-purchase model. Which pipeline stage does this work belong to?",
+    "options": [
+      {
+        "text": "Feature engineering",
+        "correct": true,
+        "rationale": "Feature engineering turns raw data into useful inputs (features), such as days since last order. Good features often help more than a fancier algorithm."
+      },
+      {
+        "text": "Data collection",
+        "correct": false,
+        "rationale": "Collection is gathering the raw data from databases, files and logs. The raw timestamps already exist here."
+      },
+      {
+        "text": "Model evaluation",
+        "correct": false,
+        "rationale": "Evaluation tests a trained model on unseen data. It does not create new inputs for the model."
+      },
+      {
+        "text": "Model re-training",
+        "correct": false,
+        "rationale": "Re-training repeats training on fresh data after quality drops. It is not the step that builds new input columns."
+      }
+    ],
+    "explanation": "The clue is creating a new input from raw data. Creating useful inputs (features) is feature engineering. Collection gathers the data, evaluation judges a trained model, and re-training refreshes a deployed model."
+  },
+  {
+    "id": "1.3-003",
+    "taskId": "1.3",
+    "kind": "single",
+    "objectives": [
+      "1.3.1"
+    ],
+    "stem": "A Cairnway returns model scores very well on its training data but poorly on orders it has never seen. Which pipeline stage is designed to reveal this problem before launch?",
+    "options": [
+      {
+        "text": "Data collection",
+        "correct": false,
+        "rationale": "Collecting more raw data may help later, but collection does not measure how well the model handles unseen data."
+      },
+      {
+        "text": "Feature engineering for the model inputs",
+        "correct": false,
+        "rationale": "This builds the inputs for the model. It does not test the trained model's results on new data."
+      },
+      {
+        "text": "Model deployment",
+        "correct": false,
+        "rationale": "Deployment puts the model in front of users. Doing it before evaluation would expose customers to the weak model."
+      },
+      {
+        "text": "Evaluation on held-out test data",
+        "correct": true,
+        "rationale": "Testing on data the model never saw shows whether it will work in the real world, and exposes overfitting (memorizing the training data)."
+      }
+    ],
+    "explanation": "Good scores on training data and poor scores on new data is overfitting. Evaluation on data the model has never seen is the stage built to catch it, so it belongs before deployment."
+  },
+  {
+    "id": "1.3-004",
+    "taskId": "1.3",
+    "kind": "single",
+    "objectives": [
+      "1.3.1"
+    ],
+    "stem": "A Cairnway manager says, \"Let's use AI to improve returns.\" Nothing else has been decided. According to the stages of an AI/ML pipeline, what should the team do FIRST?",
+    "options": [
+      {
+        "text": "Gather every dataset the company owns",
+        "correct": false,
+        "rationale": "Collection comes after the goal is clear. Without a goal, the team cannot know which data matters."
+      },
+      {
+        "text": "Define the business goal and how success will be measured",
+        "correct": true,
+        "rationale": "Every project starts by defining the problem and a measure of success. Without a clear goal, no model can succeed."
+      },
+      {
+        "text": "Choose an algorithm and start training right away on whatever data exists",
+        "correct": false,
+        "rationale": "Training needs a defined problem, prepared data and features first. Starting here is guessing."
+      },
+      {
+        "text": "Build a prototype endpoint for the website",
+        "correct": false,
+        "rationale": "Deployment is a late stage. There is no trained, tested model to deploy yet."
+      }
+    ],
+    "explanation": "No problem has been defined yet, so the first stage is to set the business goal and the measure of success. Data collection, training and deployment all depend on that decision."
+  },
+  {
+    "id": "1.3-005",
+    "taskId": "1.3",
+    "kind": "single",
+    "objectives": [
+      "1.3.2"
+    ],
+    "stem": "Cairnway wants Trailmate to use a text foundation model quickly. The team does not want to manage any infrastructure and wants a choice of models from several providers behind a single API. Which source of models meets these requirements?",
+    "options": [
+      {
+        "text": "A foundation model trained from scratch on Cairnway data",
+        "correct": false,
+        "rationale": "Training a foundation model needs huge data and compute, so it is very costly and slow. It is the opposite of a quick start."
+      },
+      {
+        "text": "Proprietary and partner models offered through Amazon Bedrock",
+        "correct": true,
+        "rationale": "Bedrock is a managed service that gives access to models from several providers, including Amazon's own, behind one API, with nothing to host."
+      },
+      {
+        "text": "An open-weight model downloaded and hosted on Amazon EC2",
+        "correct": false,
+        "rationale": "This gives control, but the team would have to size, secure and run the servers, which the requirements rule out."
+      },
+      {
+        "text": "A model built by hand-labeling thousands of support chats from the help desk",
+        "correct": false,
+        "rationale": "Labeling is only the data step of classic ML. It produces no ready foundation model."
+      }
+    ],
+    "explanation": "The clues are quick start, no infrastructure and several providers behind one API. That describes models used through a managed service, Amazon Bedrock. Training from scratch or self-hosting adds cost and operational work.",
+    "services": [
+      "bedrock"
+    ]
+  },
+  {
+    "id": "1.3-006",
+    "taskId": "1.3",
+    "kind": "single",
+    "objectives": [
+      "1.3.2"
+    ],
+    "stem": "Cairnway's data scientists want one hub where they can compare open-weight foundation models from providers such as Meta and Mistral AI, fine-tune one with their own data, and deploy it. Which AWS offering is this?",
+    "options": [
+      {
+        "text": "Amazon SageMaker Canvas",
+        "correct": false,
+        "rationale": "Canvas lets business users build ML models and get predictions without code. It is not a hub for comparing foundation models."
+      },
+      {
+        "text": "Amazon SageMaker Feature Store",
+        "correct": false,
+        "rationale": "Feature Store keeps features for training and live scoring. It does not offer models."
+      },
+      {
+        "text": "Amazon SageMaker Model Registry",
+        "correct": false,
+        "rationale": "The registry catalogs the versions of models you already have. It does not supply pre-trained models."
+      },
+      {
+        "text": "Amazon SageMaker JumpStart",
+        "correct": true,
+        "rationale": "JumpStart is an ML hub with pre-trained and foundation models that you can evaluate, fine-tune with your own data and deploy."
+      }
+    ],
+    "explanation": "A hub of pre-trained and foundation models that you can compare, fine-tune and deploy is SageMaker JumpStart. Canvas, Feature Store and Model Registry each serve other pipeline stages.",
+    "services": [
+      "sagemaker-jumpstart"
+    ]
+  },
+  {
+    "id": "1.3-007",
+    "taskId": "1.3",
+    "kind": "single",
+    "objectives": [
+      "1.3.2",
+      "1.3.6"
+    ],
+    "stem": "Cairnway wants to score each order for fraud. The signal is unique to its own transactions, and no other company has this data. Which model source is MOST appropriate?",
+    "options": [
+      {
+        "text": "Train a custom model on Cairnway's labeled transactions",
+        "correct": true,
+        "rationale": "A narrow task with data nobody else has is where a custom model fits best. For classic ML such as fraud scoring, training your own is common."
+      },
+      {
+        "text": "Prompt a general-purpose text foundation model with each transaction",
+        "correct": false,
+        "rationale": "A text model has never seen Cairnway's fraud patterns and gives nothing measurable like recall. It is a weak fit for scoring."
+      },
+      {
+        "text": "Download a pre-trained open-weight image model",
+        "correct": false,
+        "rationale": "An image model works on pictures, but the data here is transaction records."
+      },
+      {
+        "text": "Use a pre-trained translation model",
+        "correct": false,
+        "rationale": "A translation model converts between languages. It cannot score transactions."
+      }
+    ],
+    "explanation": "The deciding clue is data unique to Cairnway for a narrow task. That is the case for training a custom model. General foundation models and unrelated pre-trained models do not know this data."
+  },
+  {
+    "id": "1.3-008",
+    "taskId": "1.3",
+    "kind": "single",
+    "objectives": [
+      "1.3.3"
+    ],
+    "stem": "Trailmate needs a text model in production. The team is small and wants the LEAST operational effort, with no servers to size, patch or scale. Which approach meets this requirement?",
+    "options": [
+      {
+        "text": "Host an open-source model on Amazon EC2 GPU instances",
+        "correct": false,
+        "rationale": "The team would choose instances, scale, secure and update them. This is the heaviest operational option."
+      },
+      {
+        "text": "Deploy the model to a SageMaker AI real-time endpoint",
+        "correct": false,
+        "rationale": "Better than raw servers, but the team still picks instance types and sizes the endpoint."
+      },
+      {
+        "text": "Call a model through a managed API such as Amazon Bedrock",
+        "correct": true,
+        "rationale": "With a managed API the provider hosts and runs the model. There is nothing to size, patch or scale, so operational work is minimal."
+      },
+      {
+        "text": "Run the model on servers in Cairnway's own office",
+        "correct": false,
+        "rationale": "This adds hardware, security and maintenance on top of everything else."
+      }
+    ],
+    "explanation": "Least operational effort and no servers point to a managed API. Self-hosted choices, on EC2, a SageMaker endpoint or in an office, all leave the team responsible for sizing, securing and updating.",
+    "services": [
+      "bedrock"
+    ]
+  },
+  {
+    "id": "1.3-009",
+    "taskId": "1.3",
+    "kind": "single",
+    "objectives": [
+      "1.3.3"
+    ],
+    "stem": "A Cairnway team must run one specific open-source model at an exact version, on hardware it chooses, with full control over the software around it. Which method of using the model in production fits?",
+    "options": [
+      {
+        "text": "A managed API that offers only the provider's chosen models",
+        "correct": false,
+        "rationale": "A managed API is least effort, but you can use only the models and settings the service offers, so exact control is lost."
+      },
+      {
+        "text": "Amazon Quick, the AI workspace for business users",
+        "correct": false,
+        "rationale": "Quick helps people create reports and dashboards from their data. It is not a place to host a chosen model."
+      },
+      {
+        "text": "A self-hosted API on a SageMaker AI endpoint",
+        "correct": true,
+        "rationale": "Self-hosting gives full control over the model, its version, the software and where it runs, in return for managing the endpoint."
+      },
+      {
+        "text": "Kiro, the agentic engineering system for developers",
+        "correct": false,
+        "rationale": "Kiro helps build software, with spec-driven development. It does not host models."
+      }
+    ],
+    "explanation": "Full control over an exact model version and hardware is the mark of a self-hosted API. A managed API trades that control for convenience, and Quick and Kiro are not hosting options.",
+    "services": [
+      "sagemaker-ai"
+    ]
+  },
+  {
+    "id": "1.3-010",
+    "taskId": "1.3",
+    "kind": "single",
+    "objectives": [
+      "1.3.3"
+    ],
+    "stem": "A Cairnway team adds a summarization feature with low, unpredictable traffic. Some days it gets almost no requests. The team wants to avoid paying for idle servers. Which approach is MOST cost-effective?",
+    "options": [
+      {
+        "text": "A managed API that charges per use, such as per token",
+        "correct": true,
+        "rationale": "Pay-per-use pricing costs little when traffic is low and nothing when it is zero, so no idle servers are paid for."
+      },
+      {
+        "text": "A large EC2 instance running around the clock",
+        "correct": false,
+        "rationale": "The instance is billed while it runs, even on a day with no requests."
+      },
+      {
+        "text": "A real-time endpoint sized for the busiest day",
+        "correct": false,
+        "rationale": "Servers sized for peak sit mostly idle on quiet days, and are billed the whole time."
+      },
+      {
+        "text": "Two servers kept running in case one fails",
+        "correct": false,
+        "rationale": "Redundancy doubles the idle cost, and the traffic does not require it."
+      }
+    ],
+    "explanation": "Low, unpredictable traffic and a wish to avoid idle cost point to pay-per-use pricing of a managed API. Self-hosted servers are billed while they run, whether or not anyone is using them.",
+    "services": [
+      "bedrock"
+    ]
+  },
+  {
+    "id": "1.3-011",
+    "taskId": "1.3",
+    "kind": "single",
+    "objectives": [
+      "1.3.4"
+    ],
+    "stem": "A Cairnway analyst wants to import, clean, transform and analyze order data for training with little to no code. Which SageMaker feature is built for this?",
+    "options": [
+      {
+        "text": "SageMaker Model Registry",
+        "correct": false,
+        "rationale": "The registry catalogs model versions and approvals. It does not prepare data."
+      },
+      {
+        "text": "SageMaker Data Wrangler",
+        "correct": true,
+        "rationale": "Data Wrangler imports, prepares, transforms, featurizes and analyzes data with little to no code. AWS notes it is now integrated into SageMaker Canvas."
+      },
+      {
+        "text": "SageMaker Pipelines",
+        "correct": false,
+        "rationale": "Pipelines automates the steps of a workflow. It does not provide the interactive data preparation itself."
+      },
+      {
+        "text": "SageMaker Model Cards",
+        "correct": false,
+        "rationale": "Model cards document a model's purpose, training and risks. They are documentation, not data preparation."
+      }
+    ],
+    "explanation": "Importing, transforming and analyzing data with little to no code is the data-preparation job of SageMaker Data Wrangler. The registry, Pipelines and model cards belong to later stages.",
+    "services": [
+      "sagemaker-data-wrangler"
+    ]
+  },
+  {
+    "id": "1.3-012",
+    "taskId": "1.3",
+    "kind": "single",
+    "objectives": [
+      "1.3.4"
+    ],
+    "stem": "Cairnway needs thousands of customer review texts labeled by people as positive, neutral or negative to create training data. Which SageMaker feature builds labeled data with a human workforce?",
+    "options": [
+      {
+        "text": "SageMaker Data Wrangler",
+        "correct": false,
+        "rationale": "Data Wrangler prepares and transforms data. It does not provide people who label examples."
+      },
+      {
+        "text": "SageMaker Clarify",
+        "correct": false,
+        "rationale": "Clarify detects bias and explains predictions. It does not label data."
+      },
+      {
+        "text": "SageMaker Feature Store",
+        "correct": false,
+        "rationale": "Feature Store stores and shares features. The labels must exist before features are stored."
+      },
+      {
+        "text": "SageMaker Ground Truth",
+        "correct": true,
+        "rationale": "Ground Truth builds labeled training data with a human workforce and ML help. AWS notes it is closed to new customers, but the exam tests what it is for."
+      }
+    ],
+    "explanation": "Human labeling to create training data is the job of Ground Truth. Data Wrangler transforms data, Clarify checks bias, and Feature Store keeps features.",
+    "services": [
+      "sagemaker-ground-truth"
+    ]
+  },
+  {
+    "id": "1.3-013",
+    "taskId": "1.3",
+    "kind": "single",
+    "objectives": [
+      "1.3.4"
+    ],
+    "stem": "The Cairnway fraud team wants training and live scoring to use exactly the same feature definitions. It needs fast reads for real-time scoring and a larger store for training. Which feature should they use?",
+    "options": [
+      {
+        "text": "SageMaker Pipelines",
+        "correct": false,
+        "rationale": "Pipelines orchestrates workflow steps. It does not store features for reuse."
+      },
+      {
+        "text": "SageMaker Model Monitor",
+        "correct": false,
+        "rationale": "Model Monitor watches production models for drift. It is not a store for features."
+      },
+      {
+        "text": "SageMaker Ground Truth",
+        "correct": false,
+        "rationale": "Ground Truth produces labels with human workers. It does not serve features to live scoring."
+      },
+      {
+        "text": "SageMaker Feature Store",
+        "correct": true,
+        "rationale": "Feature Store creates, stores and shares features, with an online store for fast real-time reads and an offline store for training."
+      }
+    ],
+    "explanation": "One shared set of features with a fast online store and an offline training store is exactly what SageMaker Feature Store provides. The other three do orchestration, monitoring and labeling.",
+    "services": [
+      "sagemaker-feature-store"
+    ]
+  },
+  {
+    "id": "1.3-014",
+    "taskId": "1.3",
+    "kind": "single",
+    "objectives": [
+      "1.3.4"
+    ],
+    "stem": "Cairnway wants the processing, training, evaluation and deployment steps of its fraud model to rerun automatically, in order, whenever new data arrives. Which feature orchestrates this workflow?",
+    "options": [
+      {
+        "text": "SageMaker Model Registry",
+        "correct": false,
+        "rationale": "The registry stores model versions with approval status. It does not run the steps."
+      },
+      {
+        "text": "SageMaker Pipelines",
+        "correct": true,
+        "rationale": "Pipelines orchestrates the ML workflow steps, from processing through training and evaluation to deployment, automatically and repeatably."
+      },
+      {
+        "text": "SageMaker Model Cards",
+        "correct": false,
+        "rationale": "Model cards record what a model is for and its risks. They do not run any workflow."
+      },
+      {
+        "text": "SageMaker Canvas",
+        "correct": false,
+        "rationale": "Canvas lets business users build models without code. It is not the workflow orchestrator."
+      }
+    ],
+    "explanation": "Running the stages automatically and in order is orchestration, which is SageMaker Pipelines. The registry tracks versions, cards document, and Canvas is a no-code builder.",
+    "services": [
+      "sagemaker-pipelines"
+    ]
+  },
+  {
+    "id": "1.3-015",
+    "taskId": "1.3",
+    "kind": "single",
+    "objectives": [
+      "1.3.4"
+    ],
+    "stem": "After each training run, Cairnway wants every model version cataloged with an approval status, so only an approved version is deployed. Which SageMaker feature provides this?",
+    "options": [
+      {
+        "text": "SageMaker Feature Store",
+        "correct": false,
+        "rationale": "Feature Store holds input features, not model versions."
+      },
+      {
+        "text": "SageMaker Data Wrangler",
+        "correct": false,
+        "rationale": "Data Wrangler prepares data before training. It has no notion of model approval."
+      },
+      {
+        "text": "SageMaker Model Registry",
+        "correct": true,
+        "rationale": "The Model Registry catalogs model versions, tracks their approval status and deploys approved ones."
+      },
+      {
+        "text": "SageMaker Ground Truth",
+        "correct": false,
+        "rationale": "Ground Truth labels data. It does not track models."
+      }
+    ],
+    "explanation": "Cataloging versions with an approval status that gates deployment is the job of the SageMaker Model Registry.",
+    "services": [
+      "sagemaker-model-registry"
+    ]
+  },
+  {
+    "id": "1.3-016",
+    "taskId": "1.3",
+    "kind": "single",
+    "objectives": [
+      "1.3.4"
+    ],
+    "stem": "Cairnway's developers want an agentic AI engineering system whose spec-driven development writes down what they intend before code is created and checks the results afterwards. Which tool from the exam guide fits?",
+    "options": [
+      {
+        "text": "Kiro",
+        "correct": true,
+        "rationale": "Kiro is an agentic AI engineering system for developers, available through an IDE, CLI and more, with spec-driven development."
+      },
+      {
+        "text": "Amazon Quick",
+        "correct": false,
+        "rationale": "Quick is an AI workspace for business users to chat, research and build reports. It is not a software engineering tool."
+      },
+      {
+        "text": "SageMaker Canvas",
+        "correct": false,
+        "rationale": "Canvas lets business users build ML models without code. It does not write software from specs."
+      },
+      {
+        "text": "Amazon Bedrock",
+        "correct": false,
+        "rationale": "Bedrock gives access to foundation models through an API. It is a model service, not a developer workspace."
+      }
+    ],
+    "explanation": "Spec-driven development for developers is the signature of Kiro. Quick serves business users, Canvas builds no-code models, and Bedrock supplies models.",
+    "services": [
+      "kiro"
+    ]
+  },
+  {
+    "id": "1.3-017",
+    "taskId": "1.3",
+    "kind": "single",
+    "objectives": [
+      "1.3.4",
+      "1.3.5"
+    ],
+    "stem": "A model is already live on Cairnway's site. The team wants a feature that watches production models for drift in data quality and model quality. Which SageMaker feature does this?",
+    "options": [
+      {
+        "text": "SageMaker Model Monitor",
+        "correct": true,
+        "rationale": "Model Monitor watches production models for drift in data quality, model quality, bias and feature attribution. AWS notes it is closed to new customers, but the exam tests its purpose."
+      },
+      {
+        "text": "SageMaker Feature Store",
+        "correct": false,
+        "rationale": "Feature Store keeps features for training and scoring. It does not watch live quality."
+      },
+      {
+        "text": "SageMaker Canvas",
+        "correct": false,
+        "rationale": "Canvas builds models for business users. It is not a monitoring tool."
+      },
+      {
+        "text": "SageMaker Ground Truth",
+        "correct": false,
+        "rationale": "Ground Truth labels data for training. It does not observe a production model."
+      }
+    ],
+    "explanation": "Watching a deployed model for drift is monitoring, which is the purpose of SageMaker Model Monitor. The other features act before deployment.",
+    "services": [
+      "sagemaker-model-monitor"
+    ]
+  },
+  {
+    "id": "1.3-018",
+    "taskId": "1.3",
+    "kind": "single",
+    "objectives": [
+      "1.3.5"
+    ],
+    "stem": "Three months after launch, the recall of Cairnway's fraud model falls because fraudsters changed their tactics. What is happening, and what is the right response?",
+    "options": [
+      {
+        "text": "A coding bug: rebuild the model manually from scratch",
+        "correct": false,
+        "rationale": "Falling quality after launch is typically drift, not a bug. A manual rebuild is also slow and not repeatable."
+      },
+      {
+        "text": "Too little capacity: add more endpoint instances",
+        "correct": false,
+        "rationale": "More servers would change speed, not accuracy. Accuracy fell because the world changed."
+      },
+      {
+        "text": "Drift: monitor it and retrain on fresh data through the pipeline",
+        "correct": true,
+        "rationale": "The world changed, so the model's inputs and right answers shifted. Monitoring detects it and the pipeline retrains and redeploys."
+      },
+      {
+        "text": "A metric problem: switch to reporting accuracy only",
+        "correct": false,
+        "rationale": "Accuracy hides missed fraud when classes are unbalanced. Changing the metric hides the problem."
+      }
+    ],
+    "explanation": "A model that was good at launch and slowly worsens as behavior changes is a case of drift. The MLOps answer is monitoring plus retraining on fresh data, run through the same automated pipeline.",
+    "services": [
+      "sagemaker-model-monitor",
+      "sagemaker-pipelines"
+    ]
+  },
+  {
+    "id": "1.3-019",
+    "taskId": "1.3",
+    "kind": "single",
+    "objectives": [
+      "1.3.5"
+    ],
+    "stem": "Cairnway can only retrain its demand model by running one data scientist's personal notebook by hand, and nobody else can reproduce the result. Which MLOps concept does the team need to adopt?",
+    "options": [
+      {
+        "text": "Scalable systems, by buying larger servers",
+        "correct": false,
+        "rationale": "Scalability is about growing with data and traffic. The problem here is reproducibility, not size."
+      },
+      {
+        "text": "Model monitoring, by adding quality dashboards",
+        "correct": false,
+        "rationale": "Monitoring watches live quality. It does not make retraining reproducible."
+      },
+      {
+        "text": "Production readiness, by writing a launch checklist",
+        "correct": false,
+        "rationale": "A checklist helps before launch but does not remove dependence on one person's manual steps."
+      },
+      {
+        "text": "Repeatable processes, by automating the pipeline",
+        "correct": true,
+        "rationale": "Automating the steps, for example with SageMaker Pipelines, lets anyone re-run them and get the same steps instead of relying on one person's notebook."
+      }
+    ],
+    "explanation": "A process that depends on one person's manual notebook is not repeatable. Automating the workflow as a pipeline is the MLOps fix. Scale, monitoring and checklists address different problems.",
+    "services": [
+      "sagemaker-pipelines"
+    ]
+  },
+  {
+    "id": "1.3-020",
+    "taskId": "1.3",
+    "kind": "single",
+    "objectives": [
+      "1.3.5"
+    ],
+    "stem": "A Cairnway team has hand-run steps, undocumented data sources and tangled code. Every new change to its model now takes longer than the last. Which MLOps concept describes this situation?",
+    "options": [
+      {
+        "text": "Experimentation that tracks each trial",
+        "correct": false,
+        "rationale": "Experimentation means tracking trials so they can be compared and reproduced. It is a good habit, not a cause of slow changes."
+      },
+      {
+        "text": "Technical debt that builds up and slows later changes",
+        "correct": true,
+        "rationale": "Quick hacks pile up like debt. It is paid down with versioning, documentation and automation."
+      },
+      {
+        "text": "Model drift caused by changing customer behavior",
+        "correct": false,
+        "rationale": "Drift is about live data changing and quality falling. Here the slowness comes from messy engineering."
+      },
+      {
+        "text": "Scalable systems that grow with traffic",
+        "correct": false,
+        "rationale": "Scalability concerns capacity. It says nothing about messy code or undocumented data."
+      }
+    ],
+    "explanation": "Hand-run steps, undocumented data and tangled code that slow every later change are technical debt. The remedy is to version, document and automate."
+  },
+  {
+    "id": "1.3-021",
+    "taskId": "1.3",
+    "kind": "single",
+    "objectives": [
+      "1.3.5"
+    ],
+    "stem": "A Cairnway data science team tries many feature sets and settings and logs each trial, so results can be compared and repeated later. Which MLOps concept is the team practicing?",
+    "options": [
+      {
+        "text": "Model re-training",
+        "correct": false,
+        "rationale": "Re-training repeats training on fresh data after quality falls. It is not the tracking of trials."
+      },
+      {
+        "text": "Experimentation",
+        "correct": true,
+        "rationale": "Experimentation means trying many data sets, features and settings, and tracking each trial so results can be compared and reproduced."
+      },
+      {
+        "text": "Production readiness",
+        "correct": false,
+        "rationale": "This means being tested, secured and approved before launch. It is not about comparing trials."
+      },
+      {
+        "text": "Managing technical debt",
+        "correct": false,
+        "rationale": "This is about paying down shortcuts. Logging trials helps, but it is not what the concept names."
+      }
+    ],
+    "explanation": "Trying many options and tracking each one so it can be compared and reproduced is experimentation. The others cover retraining, launch checks and engineering shortcuts."
+  },
+  {
+    "id": "1.3-022",
+    "taskId": "1.3",
+    "kind": "single",
+    "objectives": [
+      "1.3.6"
+    ],
+    "stem": "Cairnway's fraud model was tested on 1,000 transactions, of which 50 were truly fraud. It flagged 60 transactions as fraud, and 40 of those flags were correct. What is the model's precision?",
+    "options": [
+      {
+        "text": "About 67%",
+        "correct": true,
+        "rationale": "Precision is the true positives divided by everything flagged: 40 out of 60, about 67%."
+      },
+      {
+        "text": "Exactly 80%",
+        "correct": false,
+        "rationale": "This is 40 of the 50 real fraud cases, which is recall, not precision."
+      },
+      {
+        "text": "About 97%",
+        "correct": false,
+        "rationale": "This is overall accuracy: 970 right out of 1,000. It is not precision."
+      },
+      {
+        "text": "Roughly 4%",
+        "correct": false,
+        "rationale": "This does not come from either calculation. The flags are 40 out of 60 correct."
+      }
+    ],
+    "explanation": "Precision answers: when the model says fraud, how often is it right? That is 40 divided by 60. Recall divides by the 50 real frauds, and accuracy counts all correct predictions."
+  },
+  {
+    "id": "1.3-023",
+    "taskId": "1.3",
+    "kind": "single",
+    "objectives": [
+      "1.3.6"
+    ],
+    "stem": "Cairnway's risk team says a missed fraudulent order costs far more than an occasional false alarm. Which model performance metric should the team prioritize?",
+    "options": [
+      {
+        "text": "Precision",
+        "correct": false,
+        "rationale": "Precision matters when false alarms are the costly mistake, which is the opposite here."
+      },
+      {
+        "text": "Cost per user",
+        "correct": false,
+        "rationale": "This is a business metric about running cost. It does not measure how much fraud is caught."
+      },
+      {
+        "text": "Latency",
+        "correct": false,
+        "rationale": "Latency is response time, not how well the model finds fraud."
+      },
+      {
+        "text": "Recall",
+        "correct": true,
+        "rationale": "Recall shows how much of the real fraud the model catches, so it is the metric to raise when missing real cases is costly."
+      }
+    ],
+    "explanation": "When missing a real case is the expensive mistake, you focus on recall. Precision is for costly false alarms, and cost per user and latency are not prediction-quality metrics."
+  },
+  {
+    "id": "1.3-024",
+    "taskId": "1.3",
+    "kind": "single",
+    "objectives": [
+      "1.3.6"
+    ],
+    "stem": "Cairnway's fraud model blocks many legitimate customers, and each wrongly blocked order costs a sale and creates a complaint. Which metric should the team watch most closely?",
+    "options": [
+      {
+        "text": "Recall",
+        "correct": false,
+        "rationale": "Recall measures how much real fraud is caught. It can rise even while false alarms grow."
+      },
+      {
+        "text": "Accuracy",
+        "correct": false,
+        "rationale": "With rare fraud, accuracy can look high even when many flags are wrong."
+      },
+      {
+        "text": "Precision",
+        "correct": true,
+        "rationale": "Precision tells how often a fraud flag is right. Raising it cuts the false alarms that block good customers."
+      },
+      {
+        "text": "Development cost",
+        "correct": false,
+        "rationale": "This is the cost of building the model. It does not say whether flags are correct."
+      }
+    ],
+    "explanation": "The costly mistake here is the false alarm, so precision is the metric to watch. Recall and accuracy can look fine while false alarms rise."
+  },
+  {
+    "id": "1.3-025",
+    "taskId": "1.3",
+    "kind": "single",
+    "objectives": [
+      "1.3.6"
+    ],
+    "stem": "A Cairnway test set has 950 legitimate orders and 50 fraudulent ones. A model that labels every order as legitimate scores 95% accuracy. Which statement is correct?",
+    "options": [
+      {
+        "text": "The model is excellent because 95% is a high score",
+        "correct": false,
+        "rationale": "The score looks high only because most orders are legitimate. The model never finds a single fraud."
+      },
+      {
+        "text": "The model has perfect precision because it never flags anything",
+        "correct": false,
+        "rationale": "It makes no fraud predictions, so precision is meaningless, and it still misses every real fraud."
+      },
+      {
+        "text": "Accuracy is misleading here because fraud is rare",
+        "correct": true,
+        "rationale": "The model catches no fraud at all (recall 0%), yet scores 95%. With unbalanced classes accuracy hides this."
+      },
+      {
+        "text": "The model is useful because it creates no false alarms",
+        "correct": false,
+        "rationale": "No false alarms is true, but it misses 100% of the fraud, so it does not solve the problem."
+      }
+    ],
+    "explanation": "The 95% comes from the 950 legitimate orders. Recall is 0%, so no fraud is found. That is why accuracy misleads on unbalanced data, and why recall, precision or F1 are used."
+  },
+  {
+    "id": "1.3-026",
+    "taskId": "1.3",
+    "kind": "single",
+    "objectives": [
+      "1.3.6"
+    ],
+    "stem": "Cairnway's fraud model has an excellent F1 score. The cost of running it, plus the wrongly held orders, now exceeds the fraud losses it prevents. Which kind of metric shows that the project is not worthwhile?",
+    "options": [
+      {
+        "text": "A second model metric such as AUC-ROC",
+        "correct": false,
+        "rationale": "This is another technical measure of prediction quality. It does not include costs."
+      },
+      {
+        "text": "A business metric such as return on investment",
+        "correct": true,
+        "rationale": "ROI compares the benefit with the total cost. A model can score well technically and still lose money."
+      },
+      {
+        "text": "A higher accuracy percentage",
+        "correct": false,
+        "rationale": "Higher accuracy still says nothing about running costs or losses."
+      },
+      {
+        "text": "A faster training time",
+        "correct": false,
+        "rationale": "Training speed is an engineering detail and does not show the project's value."
+      }
+    ],
+    "explanation": "Whether a project is worth having is a business question, answered by ROI, cost per user, development costs and customer feedback. Technical metrics say if the model works, not if it pays off."
+  },
+  {
+    "id": "1.3-027",
+    "taskId": "1.3",
+    "kind": "multi",
+    "select": 3,
+    "objectives": [
+      "1.3.1"
+    ],
+    "stem": "A Cairnway team is planning the work that must happen BEFORE a fraud model can be trained. Which stages come before training in an AI/ML pipeline? (Select THREE.)",
+    "options": [
+      {
+        "text": "Data preparation",
+        "correct": true,
+        "rationale": "Cleaning, transforming and labeling the data must happen before training."
+      },
+      {
+        "text": "Hyperparameter tuning",
+        "correct": false,
+        "rationale": "Tuning adjusts settings of a model that already exists, so it comes after training starts."
+      },
+      {
+        "text": "Model monitoring",
+        "correct": false,
+        "rationale": "Monitoring watches a live model, long after training."
+      },
+      {
+        "text": "Model deployment",
+        "correct": false,
+        "rationale": "Deployment is a production stage after the model is built and tested."
+      },
+      {
+        "text": "Feature engineering",
+        "correct": true,
+        "rationale": "Features such as days since last order are built before training begins."
+      },
+      {
+        "text": "Data collection",
+        "correct": true,
+        "rationale": "Gathering the raw data is the first data stage."
+      }
+    ],
+    "explanation": "Data collection, data preparation and feature engineering all supply the model with what it learns from, so they come before training. Tuning, deployment and monitoring need a model to exist."
+  },
+  {
+    "id": "1.3-028",
+    "taskId": "1.3",
+    "kind": "multi",
+    "select": 2,
+    "objectives": [
+      "1.3.1"
+    ],
+    "stem": "Which TWO stages of an AI/ML pipeline are production stages, after a model has been built and tested? (Select TWO.)",
+    "options": [
+      {
+        "text": "Monitoring",
+        "correct": true,
+        "rationale": "Monitoring watches quality, data and cost in production, because models degrade over time."
+      },
+      {
+        "text": "Hyperparameter tuning",
+        "correct": false,
+        "rationale": "Tuning is part of building the model, before deployment."
+      },
+      {
+        "text": "Exploratory data analysis",
+        "correct": false,
+        "rationale": "This looks at data before training, not in production."
+      },
+      {
+        "text": "Deployment",
+        "correct": true,
+        "rationale": "Deployment makes the model available to applications, which is where value appears."
+      },
+      {
+        "text": "Feature engineering",
+        "correct": false,
+        "rationale": "Features are built before training."
+      }
+    ],
+    "explanation": "Deployment and monitoring are the production stages. Exploring data, engineering features and tuning all belong to building and judging the model."
+  },
+  {
+    "id": "1.3-029",
+    "taskId": "1.3",
+    "kind": "multi",
+    "select": 2,
+    "objectives": [
+      "1.3.2",
+      "1.3.4"
+    ],
+    "stem": "Cairnway's data scientists use Amazon SageMaker JumpStart as an ML hub. Which TWO things can they do with it? (Select TWO.)",
+    "options": [
+      {
+        "text": "Orchestrate the steps of an ML workflow automatically",
+        "correct": false,
+        "rationale": "That is SageMaker Pipelines."
+      },
+      {
+        "text": "Chat to create business dashboards without code",
+        "correct": false,
+        "rationale": "That is Amazon Quick, an AI workspace for business users."
+      },
+      {
+        "text": "Evaluate and compare foundation models from several providers",
+        "correct": true,
+        "rationale": "JumpStart lists models from providers such as Meta, Mistral AI, Cohere and Hugging Face to compare."
+      },
+      {
+        "text": "Label training data with a human workforce",
+        "correct": false,
+        "rationale": "That is Ground Truth, which builds labeled data."
+      },
+      {
+        "text": "Fine-tune a pre-trained model with their own data and deploy it",
+        "correct": true,
+        "rationale": "JumpStart supports fine-tuning pre-trained models and then deploying them."
+      }
+    ],
+    "explanation": "JumpStart is a hub for evaluating, fine-tuning and deploying pre-trained and foundation models. Labeling, workflow orchestration and business dashboards are done by other services.",
+    "services": [
+      "sagemaker-jumpstart"
+    ]
+  },
+  {
+    "id": "1.3-030",
+    "taskId": "1.3",
+    "kind": "multi",
+    "select": 2,
+    "objectives": [
+      "1.3.2"
+    ],
+    "stem": "Cairnway is deciding whether to train its own model for fraud scoring. Which TWO statements support training a custom model for this use case? (Select TWO.)",
+    "options": [
+      {
+        "text": "Training a foundation model from scratch is cheap and quick",
+        "correct": false,
+        "rationale": "The opposite is true: foundation models are very costly to train, so it is rarely the right choice."
+      },
+      {
+        "text": "Cairnway holds labeled transaction data that no other company has",
+        "correct": true,
+        "rationale": "Unique data is the advantage: the model can learn patterns nobody else can."
+      },
+      {
+        "text": "A managed API always gives the best accuracy for any task",
+        "correct": false,
+        "rationale": "No service is best at every task, and it knows nothing about Cairnway's fraud patterns."
+      },
+      {
+        "text": "The task is narrow and specific to Cairnway's business",
+        "correct": true,
+        "rationale": "A narrow task unique to the business is a good reason to build a custom model."
+      },
+      {
+        "text": "A custom model needs no training data",
+        "correct": false,
+        "rationale": "Every custom model needs data to learn from."
+      }
+    ],
+    "explanation": "A narrow task and unique data justify a custom model. Cost and data claims that say otherwise are untrue."
+  },
+  {
+    "id": "1.3-031",
+    "taskId": "1.3",
+    "kind": "multi",
+    "select": 2,
+    "objectives": [
+      "1.3.3"
+    ],
+    "stem": "Cairnway compares a managed API service such as Amazon Bedrock with self-hosting. Which TWO statements about a managed API service are correct? (Select TWO.)",
+    "options": [
+      {
+        "text": "The team has full control over the model version and software",
+        "correct": false,
+        "rationale": "Control is greater with self-hosting. A managed API offers only the models and settings the service provides."
+      },
+      {
+        "text": "It is typically priced per use, for example per token",
+        "correct": true,
+        "rationale": "Costs follow usage instead of running servers around the clock."
+      },
+      {
+        "text": "The provider hosts and runs the model, so there is little operational work",
+        "correct": true,
+        "rationale": "This is the main benefit: no servers to manage."
+      },
+      {
+        "text": "The team pays for servers while they run, even when idle",
+        "correct": false,
+        "rationale": "That is a feature of self-hosting, not of pay-per-use APIs."
+      },
+      {
+        "text": "The team chooses the instance types and scales the servers",
+        "correct": false,
+        "rationale": "That describes a self-hosted API, where the team runs the infrastructure."
+      }
+    ],
+    "explanation": "A managed API means little operational work and typically pay-per-use pricing. Choosing instances, full control and idle server costs describe self-hosting.",
+    "services": [
+      "bedrock"
+    ]
+  },
+  {
+    "id": "1.3-032",
+    "taskId": "1.3",
+    "kind": "multi",
+    "select": 2,
+    "objectives": [
+      "1.3.3"
+    ],
+    "stem": "Which TWO situations favor a self-hosted API over a managed API service? (Select TWO.)",
+    "options": [
+      {
+        "text": "The workload needs special hardware or tight control over the runtime",
+        "correct": true,
+        "rationale": "Self-hosting allows choosing instance types and software."
+      },
+      {
+        "text": "The team wants the fastest possible time to market",
+        "correct": false,
+        "rationale": "A managed API usually gets to market faster because nothing has to be set up."
+      },
+      {
+        "text": "The team wants the least operational effort",
+        "correct": false,
+        "rationale": "Managed APIs need the least effort. Self-hosting means sizing, securing and updating."
+      },
+      {
+        "text": "The team wants to pay only for what it uses with no idle cost",
+        "correct": false,
+        "rationale": "Pay-per-use pricing is typical for managed APIs. A self-hosted server costs money while it runs."
+      },
+      {
+        "text": "The team needs a specific open-source model it has chosen",
+        "correct": true,
+        "rationale": "A managed service offers its own list of models, but self-hosting can run any suitable model."
+      }
+    ],
+    "explanation": "Self-hosting trades effort for control, so it fits a specific chosen model and special hardware. Speed, low effort and pure pay-per-use favor a managed API.",
+    "services": [
+      "sagemaker-ai",
+      "ec2"
+    ]
+  },
+  {
+    "id": "1.3-033",
+    "taskId": "1.3",
+    "kind": "multi",
+    "select": 3,
+    "objectives": [
+      "1.3.4"
+    ],
+    "stem": "Cairnway's team is working on the data stage of its pipeline. Which THREE SageMaker features help in that stage? (Select THREE.)",
+    "options": [
+      {
+        "text": "SageMaker Feature Store",
+        "correct": true,
+        "rationale": "It stores and shares features for training and live scoring."
+      },
+      {
+        "text": "Amazon Bedrock Evaluations",
+        "correct": false,
+        "rationale": "This compares foundation models. It is not a data-preparation tool."
+      },
+      {
+        "text": "SageMaker Ground Truth",
+        "correct": true,
+        "rationale": "It builds labeled training data with a human workforce."
+      },
+      {
+        "text": "SageMaker Model Registry",
+        "correct": false,
+        "rationale": "This catalogs finished model versions, after training."
+      },
+      {
+        "text": "SageMaker Model Monitor",
+        "correct": false,
+        "rationale": "This watches models in production."
+      },
+      {
+        "text": "SageMaker Data Wrangler",
+        "correct": true,
+        "rationale": "It imports, prepares, transforms and analyzes data."
+      }
+    ],
+    "explanation": "Data Wrangler, Ground Truth and Feature Store each act on data and features. The registry, Model Monitor and Bedrock evaluation work on models after they exist.",
+    "services": [
+      "sagemaker-data-wrangler",
+      "sagemaker-ground-truth",
+      "sagemaker-feature-store"
+    ]
+  },
+  {
+    "id": "1.3-034",
+    "taskId": "1.3",
+    "kind": "multi",
+    "select": 2,
+    "objectives": [
+      "1.3.4"
+    ],
+    "stem": "Which TWO statements about Amazon Quick and Kiro are correct? (Select TWO.)",
+    "options": [
+      {
+        "text": "Kiro is the managed API that hosts foundation models",
+        "correct": false,
+        "rationale": "That describes Amazon Bedrock."
+      },
+      {
+        "text": "Amazon Quick trains custom ML models on a labeled data set",
+        "correct": false,
+        "rationale": "Quick is for business users to work with their data. Training is done in SageMaker AI."
+      },
+      {
+        "text": "Kiro is an agentic AI engineering system for developers, with spec-driven development",
+        "correct": true,
+        "rationale": "Kiro helps build the software around models."
+      },
+      {
+        "text": "Kiro labels training data with a human workforce",
+        "correct": false,
+        "rationale": "Labeling is Ground Truth, not Kiro."
+      },
+      {
+        "text": "Amazon Quick is an AI workspace where business users can chat to create reports and dashboards",
+        "correct": true,
+        "rationale": "This is how Quick is used: to consume AI and data."
+      }
+    ],
+    "explanation": "Quick serves business users and Kiro serves developers. Neither trains models, labels data or hosts foundation models.",
+    "services": [
+      "quick",
+      "kiro"
+    ]
+  },
+  {
+    "id": "1.3-035",
+    "taskId": "1.3",
+    "kind": "multi",
+    "select": 3,
+    "objectives": [
+      "1.3.5"
+    ],
+    "stem": "Cairnway wants to pay down the technical debt in its ML project. Which THREE actions help? (Select THREE.)",
+    "options": [
+      {
+        "text": "Automate the hand-run steps in a pipeline",
+        "correct": true,
+        "rationale": "Automation removes manual, error-prone steps."
+      },
+      {
+        "text": "Version the data, code and models",
+        "correct": true,
+        "rationale": "Versioning makes changes traceable and reproducible."
+      },
+      {
+        "text": "Add quick fixes directly to the production model",
+        "correct": false,
+        "rationale": "Quick hacks are how debt builds up."
+      },
+      {
+        "text": "Skip testing to ship each change faster",
+        "correct": false,
+        "rationale": "Skipping tests adds debt rather than paying it down."
+      },
+      {
+        "text": "Keep the model details in one engineer's head",
+        "correct": false,
+        "rationale": "Knowledge held by one person is a risk, not a fix."
+      },
+      {
+        "text": "Document data sources and how the model is built",
+        "correct": true,
+        "rationale": "Documentation means the model can be rebuilt by anyone."
+      }
+    ],
+    "explanation": "Versioning, documentation and automation pay down technical debt. Skipping tests, keeping knowledge private and patching production are how debt grows."
+  },
+  {
+    "id": "1.3-036",
+    "taskId": "1.3",
+    "kind": "multi",
+    "select": 2,
+    "objectives": [
+      "1.3.5"
+    ],
+    "stem": "Which TWO situations should trigger the re-training of a deployed Cairnway model? (Select TWO.)",
+    "options": [
+      {
+        "text": "The marketing team asked about the project",
+        "correct": false,
+        "rationale": "Interest from another team is not an MLOps signal."
+      },
+      {
+        "text": "The model scored well at launch",
+        "correct": false,
+        "rationale": "Good launch scores say nothing about quality months later."
+      },
+      {
+        "text": "A large amount of fresh data arrives",
+        "correct": true,
+        "rationale": "New data reflects the current world, so retraining can improve results."
+      },
+      {
+        "text": "The team wants to rename the model",
+        "correct": false,
+        "rationale": "A name change has no effect on quality."
+      },
+      {
+        "text": "Monitoring shows drift or a drop in model quality",
+        "correct": true,
+        "rationale": "Falling quality is the main signal that the model needs retraining."
+      }
+    ],
+    "explanation": "Retraining is triggered by drift or falling quality, or by fresh data, on a schedule or by an alert. Past results, renaming or questions do not trigger it.",
+    "services": [
+      "sagemaker-model-monitor"
+    ]
+  },
+  {
+    "id": "1.3-037",
+    "taskId": "1.3",
+    "kind": "multi",
+    "select": 2,
+    "objectives": [
+      "1.3.6"
+    ],
+    "stem": "Cairnway's project sponsor wants to judge whether the fraud project is worth the investment. Which TWO are business metrics for evaluating an ML model? (Select TWO.)",
+    "options": [
+      {
+        "text": "Precision",
+        "correct": false,
+        "rationale": "This is a model performance metric."
+      },
+      {
+        "text": "Cost per user",
+        "correct": true,
+        "rationale": "It shows the running cost compared with the number of people served."
+      },
+      {
+        "text": "F1 score",
+        "correct": false,
+        "rationale": "This is a model performance metric as well."
+      },
+      {
+        "text": "Recall",
+        "correct": false,
+        "rationale": "This is also a model performance metric."
+      },
+      {
+        "text": "Return on investment (ROI)",
+        "correct": true,
+        "rationale": "It compares the benefit gained with the total cost."
+      }
+    ],
+    "explanation": "Cost per user and ROI are business metrics. Precision, recall and F1 are model performance metrics, which show whether it predicts well, not whether it pays off."
+  },
+  {
+    "id": "1.3-038",
+    "taskId": "1.3",
+    "kind": "multi",
+    "select": 2,
+    "objectives": [
+      "1.3.6"
+    ],
+    "stem": "Which TWO statements about classification metrics are correct? (Select TWO.)",
+    "options": [
+      {
+        "text": "Precision divides true positives by all real positives",
+        "correct": false,
+        "rationale": "That is the formula for recall."
+      },
+      {
+        "text": "Recall is true positives divided by true positives plus false negatives",
+        "correct": true,
+        "rationale": "It looks at the real positives and asks how many were found."
+      },
+      {
+        "text": "Accuracy ignores true negatives",
+        "correct": false,
+        "rationale": "Accuracy counts right predictions of both kinds, including true negatives."
+      },
+      {
+        "text": "Precision is true positives divided by true positives plus false positives",
+        "correct": true,
+        "rationale": "It looks at the model's positive predictions and asks how many were right."
+      },
+      {
+        "text": "F1 is the average of accuracy and cost",
+        "correct": false,
+        "rationale": "F1 balances precision and recall (their harmonic mean). It does not involve cost."
+      }
+    ],
+    "explanation": "The denominators are the anchor: precision uses positive predictions, recall uses real positives. F1 combines those two, and accuracy counts every correct prediction."
+  },
+  {
+    "id": "1.3-039",
+    "taskId": "1.3",
+    "kind": "order",
+    "objectives": [
+      "1.3.1"
+    ],
+    "stem": "Place the stages of a new AI/ML project in the order they normally happen.",
+    "steps": [
+      "Define the business problem and how success is measured",
+      "Collect the data",
+      "Prepare and clean the data",
+      "Train the model",
+      "Evaluate it on data it has never seen"
+    ],
+    "explanation": "A project starts with the goal and a success measure, then gathers and prepares data, trains, and finally tests on unseen data. Deployment and monitoring follow evaluation."
+  },
+  {
+    "id": "1.3-040",
+    "taskId": "1.3",
+    "kind": "order",
+    "objectives": [
+      "1.3.1"
+    ],
+    "stem": "Place these stages in the order they normally happen.",
+    "steps": [
+      "Prepare the data",
+      "Explore the data with charts and statistics",
+      "Engineer features",
+      "Train the model",
+      "Tune the hyperparameters"
+    ],
+    "explanation": "Data is prepared, explored (EDA), turned into features, used for training, and then the settings are tuned. EDA comes before feature engineering because it shows what the data needs."
+  },
+  {
+    "id": "1.3-041",
+    "taskId": "1.3",
+    "kind": "order",
+    "objectives": [
+      "1.3.5"
+    ],
+    "services": [
+      "sagemaker-model-monitor",
+      "sagemaker-pipelines",
+      "sagemaker-model-registry"
+    ],
+    "stem": "Cairnway's fraud model starts to drift. Place the steps of the MLOps response in the correct order.",
+    "steps": [
+      "Monitoring detects the drop in quality",
+      "Retrain on fresh data in the pipeline",
+      "Evaluate the new model version",
+      "A person approves the version in the model registry",
+      "Deploy the approved version"
+    ],
+    "explanation": "Monitoring raises the alarm, the pipeline retrains, the new version is evaluated, approved and only then deployed. The approval gate keeps unreviewed models out of production."
+  },
+  {
+    "id": "1.3-042",
+    "taskId": "1.3",
+    "kind": "match",
+    "objectives": [
+      "1.3.4"
+    ],
+    "services": [
+      "sagemaker-ground-truth",
+      "sagemaker-data-wrangler",
+      "sagemaker-feature-store",
+      "sagemaker-pipelines",
+      "sagemaker-clarify"
+    ],
+    "stem": "Match each Cairnway need to the SageMaker feature that meets it.",
+    "pairs": [
+      {
+        "prompt": "Have people label reviews to create training data",
+        "answer": "SageMaker Ground Truth"
+      },
+      {
+        "prompt": "Clean and transform order data with little code",
+        "answer": "SageMaker Data Wrangler"
+      },
+      {
+        "prompt": "Share the same features between training and live scoring",
+        "answer": "SageMaker Feature Store"
+      },
+      {
+        "prompt": "Rerun the training workflow automatically in order",
+        "answer": "SageMaker Pipelines"
+      }
+    ],
+    "explanation": "Ground Truth labels, Data Wrangler prepares, Feature Store shares features and Pipelines orchestrates. Clarify detects bias and explains predictions, and none of these needs does that.",
+    "distractors": [
+      "SageMaker Clarify"
+    ]
+  },
+  {
+    "id": "1.3-043",
+    "taskId": "1.3",
+    "kind": "match",
+    "objectives": [
+      "1.3.6"
+    ],
+    "stem": "Match each question to the metric that answers it, for a fraud model.",
+    "pairs": [
+      {
+        "prompt": "Of all predictions, how many were right?",
+        "answer": "Accuracy"
+      },
+      {
+        "prompt": "When the model says fraud, how often is it right?",
+        "answer": "Precision"
+      },
+      {
+        "prompt": "Of all real fraud, how much did it catch?",
+        "answer": "Recall"
+      },
+      {
+        "prompt": "What single number balances precision and recall?",
+        "answer": "F1 score"
+      }
+    ],
+    "explanation": "Accuracy counts all correct predictions, precision looks at positive predictions, recall at real positives, and F1 balances the last two. ROI is a business metric, not a model metric.",
+    "distractors": [
+      "Return on investment"
+    ]
+  },
+  {
+    "id": "1.3-044",
+    "taskId": "1.3",
+    "kind": "match",
+    "objectives": [
+      "1.3.5"
+    ],
+    "stem": "Match each Cairnway situation to the MLOps concept it shows.",
+    "pairs": [
+      {
+        "prompt": "Every trial of settings and data is logged so results can be compared",
+        "answer": "Experimentation"
+      },
+      {
+        "prompt": "Anyone can re-run the automated pipeline and get the same steps",
+        "answer": "Repeatable processes"
+      },
+      {
+        "prompt": "An alert fires when live accuracy falls",
+        "answer": "Model monitoring"
+      },
+      {
+        "prompt": "A new model is trained on fresh data after drift is found",
+        "answer": "Model re-training"
+      }
+    ],
+    "explanation": "Logging trials is experimentation, automation gives repeatable processes, alerts on live quality are monitoring, and training on fresh data is re-training. Technical debt is about accumulated shortcuts, not any of these.",
+    "distractors": [
+      "Managing technical debt"
+    ]
+  },
+  {
+    "id": "1.3-045",
+    "taskId": "1.3",
+    "kind": "match",
+    "objectives": [
+      "1.3.2",
+      "1.3.3"
+    ],
+    "services": [
+      "bedrock",
+      "sagemaker-jumpstart",
+      "sagemaker-ai"
+    ],
+    "stem": "Match each Cairnway plan to the approach it describes.",
+    "pairs": [
+      {
+        "prompt": "Call a provider-hosted foundation model through one API, with no servers",
+        "answer": "Managed API service"
+      },
+      {
+        "prompt": "Deploy an open-weight model to an endpoint the team sizes and secures",
+        "answer": "Self-hosted API"
+      },
+      {
+        "prompt": "Build and train a fraud model on Cairnway's own transactions",
+        "answer": "Custom model"
+      },
+      {
+        "prompt": "Download a model whose weights are published and adapt it",
+        "answer": "Open-source pre-trained model"
+      }
+    ],
+    "explanation": "A provider-run API is a managed service, a model the team deploys and runs itself is self-hosted, training on own data is a custom model, and published weights are an open-source pre-trained model.",
+    "distractors": [
+      "Rule-based software with no ML"
+    ]
+  },
+  {
+    "id": "1.3-046",
+    "taskId": "1.3",
+    "kind": "case",
+    "services": [
+      "sagemaker-pipelines",
+      "sagemaker-model-registry",
+      "sagemaker-model-monitor"
+    ],
+    "scenario": "Cairnway Outfitters is building a fraud-detection model. The team trained it on 400,000 labeled transactions and tested it on 1,000 new ones, of which 50 were truly fraud. The model flagged 60 orders, and 40 of the flags were correct. Management wants every model version to be reviewed before it reaches production. After launch, the team wants quality to be watched and retraining to be automated.",
+    "parts": [
+      {
+        "kind": "single",
+        "objectives": [
+          "1.3.6"
+        ],
+        "stem": "The risk team says a missed fraud costs far more than a false alarm. Which result from the test is the most important to improve?",
+        "options": [
+          {
+            "text": "Precision of about 67%: 20 false alarms",
+            "correct": false,
+            "rationale": "False alarms cost something, but the risk team has said missed fraud costs far more."
+          },
+          {
+            "text": "Recall of 80%: 10 real frauds were missed",
+            "correct": true,
+            "rationale": "Recall (40 of 50) shows how much real fraud is caught. Missed fraud is the costly mistake, so this is the number to raise."
+          },
+          {
+            "text": "Accuracy of 97%: most predictions were right",
+            "correct": false,
+            "rationale": "Accuracy is inflated by the many legitimate orders and hides missed fraud."
+          },
+          {
+            "text": "Cost per scored order",
+            "correct": false,
+            "rationale": "This is a business metric about running cost, not a test result for catching fraud."
+          }
+        ],
+        "explanation": "The stem says missed fraud is the expensive mistake. Recall measures how much real fraud is caught, so it is the metric to improve. Precision and accuracy do not capture the missed cases as well."
+      },
+      {
+        "kind": "single",
+        "objectives": [
+          "1.3.4",
+          "1.3.5"
+        ],
+        "stem": "Which SageMaker feature should hold each trained version, with an approval status, so only reviewed versions are deployed?",
+        "options": [
+          {
+            "text": "SageMaker Feature Store",
+            "correct": false,
+            "rationale": "Feature Store keeps input features, not model versions."
+          },
+          {
+            "text": "SageMaker Data Wrangler",
+            "correct": false,
+            "rationale": "Data Wrangler prepares data. It has no approval concept."
+          },
+          {
+            "text": "SageMaker Ground Truth",
+            "correct": false,
+            "rationale": "Ground Truth labels training data."
+          },
+          {
+            "text": "SageMaker Model Registry",
+            "correct": true,
+            "rationale": "The registry catalogs versions, tracks approval status and deploys approved ones, which gives the review gate management wants."
+          }
+        ],
+        "explanation": "A catalog of versions with an approval status that gates deployment is the Model Registry. It supports production readiness."
+      },
+      {
+        "kind": "multi",
+        "select": 2,
+        "objectives": [
+          "1.3.5"
+        ],
+        "stem": "After launch, quality starts to fall. Which TWO actions fit the MLOps practice of the team? (Select TWO.)",
+        "options": [
+          {
+            "text": "Remove the evaluation step to save time",
+            "correct": false,
+            "rationale": "Evaluation is how the new version is checked before it is approved."
+          },
+          {
+            "text": "Rerun the SageMaker Pipeline to retrain on fresh data",
+            "correct": true,
+            "rationale": "An automated pipeline makes retraining repeatable."
+          },
+          {
+            "text": "Wait for customers to complain before checking",
+            "correct": false,
+            "rationale": "Monitoring should catch drift before customers do."
+          },
+          {
+            "text": "Use SageMaker Model Monitor to watch the live model for drift",
+            "correct": true,
+            "rationale": "Monitoring detects the drift that makes accuracy fall."
+          },
+          {
+            "text": "Hand-edit the live model's settings",
+            "correct": false,
+            "rationale": "Manual edits are not repeatable and add technical debt."
+          }
+        ],
+        "explanation": "Monitoring plus automated retraining closes the loop. Manual edits, waiting for complaints and skipping evaluation go against MLOps practice."
+      }
+    ]
+  }
+]

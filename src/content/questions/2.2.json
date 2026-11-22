@@ -1,0 +1,1664 @@
+[
+  {
+    "id": "2.2-001",
+    "taskId": "2.2",
+    "kind": "single",
+    "objectives": [
+      "2.2.1"
+    ],
+    "stem": "Cairnway Outfitters uses one foundation model to write product descriptions, summarize reviews and draft email replies, steering it only with different prompts. Which advantage of GenAI does this show?",
+    "options": [
+      {
+        "text": "Interpretability",
+        "correct": false,
+        "rationale": "Interpretability is about explaining why an answer was produced. It is a weakness of GenAI, not what is shown here."
+      },
+      {
+        "text": "Adaptability",
+        "correct": true,
+        "rationale": "One foundation model can handle many tasks and be steered with a prompt instead of being rebuilt for each task."
+      },
+      {
+        "text": "Nondeterminism",
+        "correct": false,
+        "rationale": "This means the same prompt can give different answers. It is a limitation, not a benefit shown here."
+      },
+      {
+        "text": "Inaccuracy",
+        "correct": false,
+        "rationale": "This means answers can be wrong or outdated. Nothing in the scenario describes errors."
+      }
+    ],
+    "explanation": "The clue is one model doing many different jobs, just by changing the prompt. That is adaptability. The other three terms describe limitations of GenAI.",
+    "services": [
+      "bedrock"
+    ]
+  },
+  {
+    "id": "2.2-002",
+    "taskId": "2.2",
+    "kind": "single",
+    "objectives": [
+      "2.2.1"
+    ],
+    "stem": "A shopper asks Trailmate a question at 3 a.m. on a public holiday and gets an answer in seconds. Thousands of other shoppers are chatting at the same time. Which advantage of GenAI does this describe?",
+    "options": [
+      {
+        "text": "Hallucination",
+        "correct": false,
+        "rationale": "This is a disadvantage: confident answers that are false. The scenario describes speed and scale."
+      },
+      {
+        "text": "Interpretability",
+        "correct": false,
+        "rationale": "This is about explaining decisions, not about speed."
+      },
+      {
+        "text": "Customer lifetime value",
+        "correct": false,
+        "rationale": "This is a business metric for the revenue from a customer over time. It is not a capability."
+      },
+      {
+        "text": "Responsiveness",
+        "correct": true,
+        "rationale": "Answers and content arrive in seconds, at any hour, and scale to many users at once."
+      }
+    ],
+    "explanation": "Answers in seconds, at any hour, for many users at the same time describe responsiveness. Hallucination and interpretability are limitations, and lifetime value is a business metric.",
+    "services": [
+      "bedrock"
+    ]
+  },
+  {
+    "id": "2.2-003",
+    "taskId": "2.2",
+    "kind": "single",
+    "objectives": [
+      "2.2.1"
+    ],
+    "stem": "A shopper asks Trailmate, \"Which of these jackets is warmer?\" and then follows up with, \"What about for kids?\" The shopper uses plain language and needs no special search syntax. Which advantage of GenAI does this show?",
+    "options": [
+      {
+        "text": "Conversational capabilities",
+        "correct": true,
+        "rationale": "People use plain language, ask follow-up questions and get natural answers, with no special query language."
+      },
+      {
+        "text": "Nondeterminism",
+        "correct": false,
+        "rationale": "This means answers can vary between runs. The scenario is about natural, back-and-forth language."
+      },
+      {
+        "text": "Model complexity",
+        "correct": false,
+        "rationale": "This is a factor in model selection about size and cost. It is not a benefit seen by the shopper."
+      },
+      {
+        "text": "Cross-domain performance",
+        "correct": false,
+        "rationale": "This means one solution works across different areas. The scenario involves one conversation."
+      }
+    ],
+    "explanation": "Plain-language questions with follow-ups are the conversational capability of GenAI. The other options are a limitation, a selection factor, and a business metric.",
+    "services": [
+      "bedrock"
+    ]
+  },
+  {
+    "id": "2.2-004",
+    "taskId": "2.2",
+    "kind": "single",
+    "objectives": [
+      "2.2.1"
+    ],
+    "stem": "Cairnway's merchandising team needs first drafts of 30,000 product descriptions, which staff will then review and polish. Which advantage of GenAI does this use case rely on?",
+    "options": [
+      {
+        "text": "Lower interpretability of results",
+        "correct": false,
+        "rationale": "Hard-to-explain results are a disadvantage. They do not help produce drafts."
+      },
+      {
+        "text": "Guaranteed identical output on every run",
+        "correct": false,
+        "rationale": "GenAI does not guarantee this. The same prompt can give different answers each time."
+      },
+      {
+        "text": "The ability to generate content",
+        "correct": true,
+        "rationale": "GenAI can draft text, images, audio and code, which speeds up creative and routine work."
+      },
+      {
+        "text": "Automatic fact checking of every claim",
+        "correct": false,
+        "rationale": "GenAI does not look facts up. It predicts likely words, so a human still reviews the drafts."
+      }
+    ],
+    "explanation": "Drafting thousands of descriptions at scale is content generation. Identical output and automatic fact checking are not things GenAI provides, which is why staff review the result.",
+    "services": [
+      "bedrock"
+    ]
+  },
+  {
+    "id": "2.2-005",
+    "taskId": "2.2",
+    "kind": "single",
+    "objectives": [
+      "2.2.1",
+      "2.2.2"
+    ],
+    "stem": "Which Cairnway task is the STRONGEST fit for a GenAI solution?",
+    "options": [
+      {
+        "text": "Calculating the exact sales tax on every order",
+        "correct": false,
+        "rationale": "Exact, repeatable calculations need ordinary software. A model could give different results each time."
+      },
+      {
+        "text": "Producing an identical, auditable decision for each customer",
+        "correct": false,
+        "rationale": "GenAI can vary its answers and is hard to explain, so an audit trail is a poor fit."
+      },
+      {
+        "text": "Drafting varied marketing copy from a short brief",
+        "correct": true,
+        "rationale": "Creative, varied output from natural language is where GenAI is strongest, with staff reviewing the result."
+      },
+      {
+        "text": "Adding up the day's totals in the finance ledger",
+        "correct": false,
+        "rationale": "Totals must be exact. Normal software is the right tool, not a model that predicts words."
+      }
+    ],
+    "explanation": "Creative, varied output from messy natural language is the sweet spot. Exact calculations and fully explainable, identical decisions are a poor fit for GenAI alone."
+  },
+  {
+    "id": "2.2-006",
+    "taskId": "2.2",
+    "kind": "single",
+    "objectives": [
+      "2.2.1"
+    ],
+    "stem": "Cairnway's buyers receive a 40-page supplier safety sheet and want a one-paragraph plain-language version they can check quickly. Which advantage of GenAI supports this?",
+    "options": [
+      {
+        "text": "It simplifies complex or technical material by summarizing and rephrasing it",
+        "correct": true,
+        "rationale": "GenAI can summarize, rephrase and translate long or technical text, saving reading time."
+      },
+      {
+        "text": "It explains the reasoning behind every sentence it writes",
+        "correct": false,
+        "rationale": "Foundation models are hard to interpret, so this is not an advantage they offer."
+      },
+      {
+        "text": "It guarantees the summary contains no errors",
+        "correct": false,
+        "rationale": "Summaries can still be inaccurate, so a person should check important ones."
+      },
+      {
+        "text": "It always produces an identical summary on every run",
+        "correct": false,
+        "rationale": "Output can vary from run to run because the model samples likely words."
+      }
+    ],
+    "explanation": "Condensing and rephrasing long technical text is a core strength. GenAI cannot explain its reasoning, guarantee accuracy or repeat output exactly, so the buyers still check the result.",
+    "services": [
+      "bedrock"
+    ]
+  },
+  {
+    "id": "2.2-007",
+    "taskId": "2.2",
+    "kind": "single",
+    "objectives": [
+      "2.2.2"
+    ],
+    "stem": "During testing, Trailmate confidently tells a customer about a \"90-day free return\" offer that Cairnway does not have. Which disadvantage of GenAI does this show?",
+    "options": [
+      {
+        "text": "Interpretability",
+        "correct": false,
+        "rationale": "This is the difficulty of explaining why an answer was produced. The problem here is an invented fact."
+      },
+      {
+        "text": "Nondeterminism",
+        "correct": false,
+        "rationale": "This is variation between runs. The issue is a false statement, not a different one each time."
+      },
+      {
+        "text": "Latency",
+        "correct": false,
+        "rationale": "Latency is response time. The answer arrived fine, but it was wrong."
+      },
+      {
+        "text": "Hallucination",
+        "correct": true,
+        "rationale": "The model produces fluent, confident answers that are false or invented, because it predicts likely words and does not look facts up."
+      }
+    ],
+    "explanation": "A confident, invented offer is the textbook hallucination. Interpretability and nondeterminism describe other limits, and latency is speed.",
+    "services": [
+      "bedrock"
+    ]
+  },
+  {
+    "id": "2.2-008",
+    "taskId": "2.2",
+    "kind": "single",
+    "objectives": [
+      "2.2.2"
+    ],
+    "stem": "Cairnway wants to reduce the chance that Trailmate invents return policies. Which approach is MOST effective?",
+    "options": [
+      {
+        "text": "Raise the temperature so that the answers become more creative",
+        "correct": false,
+        "rationale": "A higher temperature makes output more varied, which makes invented content more likely."
+      },
+      {
+        "text": "Ground answers in Cairnway's policy documents with RAG, and add human review for refunds",
+        "correct": true,
+        "rationale": "Grounding in trusted documents, with guardrails and review for important decisions, is the usual way to reduce hallucinations."
+      },
+      {
+        "text": "Switch to a much larger model from another provider and leave the rest of the setup exactly as it is today",
+        "correct": false,
+        "rationale": "A bigger model can still hallucinate. It does not know Cairnway's policies unless they are supplied."
+      },
+      {
+        "text": "Remove the policy documents so there is less to confuse the model",
+        "correct": false,
+        "rationale": "Without the documents the model has nothing reliable to base its answer on."
+      }
+    ],
+    "explanation": "Hallucinations are reduced by grounding answers in trusted data (RAG), citations, guardrails and human review. A bigger model or a higher temperature does not solve it.",
+    "services": [
+      "bedrock-knowledge-bases",
+      "bedrock-guardrails"
+    ]
+  },
+  {
+    "id": "2.2-009",
+    "taskId": "2.2",
+    "kind": "single",
+    "objectives": [
+      "2.2.2"
+    ],
+    "stem": "A regulator requires Cairnway to explain exactly why each customer credit application was approved or declined. The team is considering a large foundation model for the decisions. Which disadvantage of GenAI is the main concern?",
+    "options": [
+      {
+        "text": "Responsiveness",
+        "correct": false,
+        "rationale": "Answers arrive quickly, so speed is not the problem."
+      },
+      {
+        "text": "Interpretability",
+        "correct": true,
+        "rationale": "Foundation models have billions of parameters, so it is hard to explain why a specific answer was produced."
+      },
+      {
+        "text": "Adaptability",
+        "correct": false,
+        "rationale": "The ability to handle many tasks is an advantage and does not address explanations."
+      },
+      {
+        "text": "Conversational capabilities",
+        "correct": false,
+        "rationale": "Natural conversation is an advantage, not a reason decisions are hard to justify."
+      }
+    ],
+    "explanation": "The need to justify each decision to a regulator points to interpretability. A simpler, explainable model, or GenAI only for assistance, is the safer design."
+  },
+  {
+    "id": "2.2-010",
+    "taskId": "2.2",
+    "kind": "single",
+    "objectives": [
+      "2.2.2"
+    ],
+    "stem": "A Cairnway tester sends the exact same prompt to the model three times and gets three different answers. Which characteristic of GenAI does this show?",
+    "options": [
+      {
+        "text": "Interpretability",
+        "correct": false,
+        "rationale": "Interpretability is about explaining an answer, not about variation between runs."
+      },
+      {
+        "text": "Adaptability",
+        "correct": false,
+        "rationale": "Adaptability means handling many tasks. It does not explain differing answers."
+      },
+      {
+        "text": "Cross-domain performance",
+        "correct": false,
+        "rationale": "This is a business metric about performing well in several areas. It does not describe varying answers."
+      },
+      {
+        "text": "Nondeterminism",
+        "correct": true,
+        "rationale": "The model samples from likely next tokens, so the same prompt can produce different answers."
+      }
+    ],
+    "explanation": "The same input giving different outputs is nondeterminism. A lower temperature makes the answers more consistent, but some variation remains.",
+    "services": [
+      "bedrock"
+    ]
+  },
+  {
+    "id": "2.2-011",
+    "taskId": "2.2",
+    "kind": "single",
+    "objectives": [
+      "2.2.2"
+    ],
+    "stem": "Cairnway's legal team requires that the same order data always produces exactly the same shipping fee, with no variation. Which approach is MOST appropriate?",
+    "options": [
+      {
+        "text": "Use a foundation model with the temperature set low",
+        "correct": false,
+        "rationale": "A low temperature makes output more consistent but not perfectly identical, so it cannot guarantee the same answer."
+      },
+      {
+        "text": "Use a foundation model and add RAG on shipping rate tables",
+        "correct": false,
+        "rationale": "RAG supplies facts but the model can still word or calculate the result differently."
+      },
+      {
+        "text": "Use ordinary rule-based software for the calculation",
+        "correct": true,
+        "rationale": "Exact, repeatable calculations are a poor fit for GenAI. Normal software gives the same result every time."
+      },
+      {
+        "text": "Use the largest available model for the highest accuracy",
+        "correct": false,
+        "rationale": "A larger model is more capable but still nondeterministic. Size does not give exact repeatability."
+      }
+    ],
+    "explanation": "When identical, exact results are required, GenAI alone is the wrong tool. A low temperature reduces variation but does not remove it. Plain code is the right choice."
+  },
+  {
+    "id": "2.2-012",
+    "taskId": "2.2",
+    "kind": "single",
+    "objectives": [
+      "2.2.2"
+    ],
+    "stem": "Trailmate sometimes recommends products that Cairnway discontinued last year. The model was trained on data that ends before the current catalog existed. Which disadvantage is this, and what is the remedy?",
+    "options": [
+      {
+        "text": "Inaccuracy: supply current data to the model",
+        "correct": true,
+        "rationale": "Answers can be outdated or incomplete because of the training data. Supplying current information (for example with RAG) fixes it."
+      },
+      {
+        "text": "Interpretability: log every answer for later audit",
+        "correct": false,
+        "rationale": "Logging helps audits, but it does not make the answers current."
+      },
+      {
+        "text": "Nondeterminism: lower the temperature to zero",
+        "correct": false,
+        "rationale": "This reduces variation, but the model would still be unaware of the current catalog."
+      },
+      {
+        "text": "Latency: move to a faster model",
+        "correct": false,
+        "rationale": "A faster model answers sooner but is just as out of date."
+      }
+    ],
+    "explanation": "Outdated answers because of the training cut-off are an accuracy problem. The fix is to provide current data, test regularly and measure accuracy.",
+    "services": [
+      "bedrock"
+    ]
+  },
+  {
+    "id": "2.2-013",
+    "taskId": "2.2",
+    "kind": "single",
+    "objectives": [
+      "2.2.2"
+    ],
+    "stem": "Which of these Cairnway tasks should be kept in ordinary software rather than given to a GenAI model alone?",
+    "options": [
+      {
+        "text": "Calculating the exact shipping cost for each order",
+        "correct": true,
+        "rationale": "It must give the same exact answer every time, which a model that samples likely words cannot guarantee."
+      },
+      {
+        "text": "Summarizing hundreds of customer reviews for the product team each week",
+        "correct": false,
+        "rationale": "Summaries do not need to be exact word for word, so GenAI suits it."
+      },
+      {
+        "text": "Answering shoppers' product questions in a chat",
+        "correct": false,
+        "rationale": "A conversational task that suits GenAI, especially grounded in product data."
+      },
+      {
+        "text": "Drafting first versions of product descriptions",
+        "correct": false,
+        "rationale": "Creative drafting is a strength, and staff review the result."
+      }
+    ],
+    "explanation": "Exact, repeatable results are a poor fit for GenAI. Summarizing, chatting and drafting are strong fits."
+  },
+  {
+    "id": "2.2-014",
+    "taskId": "2.2",
+    "kind": "single",
+    "objectives": [
+      "2.2.3"
+    ],
+    "stem": "Cairnway must keep all EU customer data inside the EU. Two of the four candidate models cannot be run in an EU Region. Which factor rules those two models out, whatever their accuracy?",
+    "options": [
+      {
+        "text": "Latency",
+        "correct": false,
+        "rationale": "Latency is how fast an answer arrives. Location rules are about where data is processed, not speed."
+      },
+      {
+        "text": "Model complexity",
+        "correct": false,
+        "rationale": "Complexity is about size and cost. It does not decide where data may go."
+      },
+      {
+        "text": "Compliance",
+        "correct": true,
+        "rationale": "Compliance covers where data may be processed and stored and which regulations apply, such as GDPR for EU customers."
+      },
+      {
+        "text": "Model type",
+        "correct": false,
+        "rationale": "Type is text, image or audio. All four candidates may be the right type."
+      }
+    ],
+    "explanation": "A requirement about where customer data may be processed is a compliance constraint. A model that fails it is out, even if it is the most accurate.",
+    "services": [
+      "bedrock"
+    ]
+  },
+  {
+    "id": "2.2-015",
+    "taskId": "2.2",
+    "kind": "single",
+    "objectives": [
+      "2.2.3"
+    ],
+    "stem": "Cairnway's live chat needs a reply within a couple of seconds, while a nightly report job can wait hours. Which model selection factor makes the two uses choose differently?",
+    "options": [
+      {
+        "text": "Model type",
+        "correct": false,
+        "rationale": "Both uses involve text, so the type does not separate the two."
+      },
+      {
+        "text": "Latency",
+        "correct": true,
+        "rationale": "How fast the answer must arrive. Live chat needs seconds, whereas an overnight job does not."
+      },
+      {
+        "text": "Compliance",
+        "correct": false,
+        "rationale": "The scenario states no data-location or regulation difference between the two uses."
+      },
+      {
+        "text": "Customer lifetime value",
+        "correct": false,
+        "rationale": "This is a business metric, not a factor for choosing a model."
+      }
+    ],
+    "explanation": "The difference between seconds and hours is latency. A larger, slower model may be fine for the nightly job but not for live chat.",
+    "services": [
+      "bedrock"
+    ]
+  },
+  {
+    "id": "2.2-016",
+    "taskId": "2.2",
+    "kind": "single",
+    "objectives": [
+      "2.2.3"
+    ],
+    "stem": "Two candidate models both meet Cairnway's accuracy requirement in tests on 200 real support questions. One is smaller, answers faster and costs a third as much per token. Which model should the team choose?",
+    "options": [
+      {
+        "text": "The larger model, because bigger models are always better",
+        "correct": false,
+        "rationale": "Bigger models cost more per token and respond more slowly. Both meet the requirement, so the extra cost buys nothing here."
+      },
+      {
+        "text": "The larger model, in case needs grow in the future",
+        "correct": false,
+        "rationale": "Choosing for hypothetical needs adds cost now. The team can move up later if results demand it."
+      },
+      {
+        "text": "Neither, because a custom model must be trained",
+        "correct": false,
+        "rationale": "Training a model is far costlier. A suitable model exists already."
+      },
+      {
+        "text": "The smaller model, because it meets the requirement at lower cost",
+        "correct": true,
+        "rationale": "When both meet the requirement, the cheaper and faster model is the better fit. Start small and move up only if results are not good enough."
+      }
+    ],
+    "explanation": "Both models pass the accuracy test, so cost and latency decide. The principle is to use the smallest, cheapest model that meets the requirement and measure before moving up.",
+    "services": [
+      "bedrock"
+    ]
+  },
+  {
+    "id": "2.2-017",
+    "taskId": "2.2",
+    "kind": "single",
+    "objectives": [
+      "2.2.3"
+    ],
+    "stem": "A Cairnway project must accept a product photo together with a customer's typed question, and answer in text. Which model selection factor is the team applying?",
+    "options": [
+      {
+        "text": "Compliance, because photos are personal data",
+        "correct": false,
+        "rationale": "The scenario says nothing about regulation or data location. It describes the kind of input."
+      },
+      {
+        "text": "Latency, because images are large files",
+        "correct": false,
+        "rationale": "Nothing in the stem sets a speed requirement. The issue is what kind of input the model can accept."
+      },
+      {
+        "text": "Cost, because image models are always the most expensive",
+        "correct": false,
+        "rationale": "Price is a factor, but the stated need is about the type of input."
+      },
+      {
+        "text": "Model type, because the job needs mixed image and text input",
+        "correct": true,
+        "rationale": "The type of model must match the input and output: text, images, audio, embeddings or mixed inputs."
+      }
+    ],
+    "explanation": "Photo plus text means the model must handle mixed inputs. Matching the model type to the job is the first selection factor.",
+    "services": [
+      "bedrock"
+    ]
+  },
+  {
+    "id": "2.2-018",
+    "taskId": "2.2",
+    "kind": "single",
+    "objectives": [
+      "2.2.3"
+    ],
+    "stem": "Cairnway is starting a GenAI project and has several candidate models. Which approach to model selection is recommended?",
+    "options": [
+      {
+        "text": "Start with the largest available model and downgrade only if the budget is cut or the monthly bills grow too high",
+        "correct": false,
+        "rationale": "This pays for capability the task may not need and adds latency."
+      },
+      {
+        "text": "Start with the smallest, cheapest model that meets the requirement, measure, and move up only if needed",
+        "correct": true,
+        "rationale": "There is no best model, only a best fit. Starting small controls cost and latency, and testing shows when a bigger model is justified."
+      },
+      {
+        "text": "Choose the model that is most popular in the news this month",
+        "correct": false,
+        "rationale": "Popularity says nothing about Cairnway's requirements, costs or compliance."
+      },
+      {
+        "text": "Pick the model with the most parameters, because complexity means quality",
+        "correct": false,
+        "rationale": "More complex models are often more capable but also slower and more expensive, and not always needed."
+      }
+    ],
+    "explanation": "The common thread in model selection is fit. Starting with the smallest model that passes your own tests, then moving up if it falls short, balances performance, cost and latency.",
+    "services": [
+      "bedrock"
+    ]
+  },
+  {
+    "id": "2.2-019",
+    "taskId": "2.2",
+    "kind": "single",
+    "objectives": [
+      "2.2.3"
+    ],
+    "stem": "Trailmate must answer in German, English and Spanish, follow instructions precisely and accept long customer messages. Which factor are these requirements about?",
+    "options": [
+      {
+        "text": "Capabilities",
+        "correct": true,
+        "rationale": "Capabilities cover what the model can do: follow instructions, handle several languages, use tools and accept long input."
+      },
+      {
+        "text": "Compliance",
+        "correct": false,
+        "rationale": "Compliance concerns regulations and data location. Language support is not one."
+      },
+      {
+        "text": "Cost",
+        "correct": false,
+        "rationale": "Price per token is a separate factor. These requirements describe abilities."
+      },
+      {
+        "text": "Latency",
+        "correct": false,
+        "rationale": "Latency is speed. The listed needs are about what the model can do."
+      }
+    ],
+    "explanation": "Languages, instruction following and long input are what the model can do, so the factor is capabilities.",
+    "services": [
+      "bedrock"
+    ]
+  },
+  {
+    "id": "2.2-020",
+    "taskId": "2.2",
+    "kind": "single",
+    "objectives": [
+      "2.2.3",
+      "2.2.4"
+    ],
+    "stem": "Cairnway wants to know which candidate model meets its performance requirement for Trailmate. What is the BEST way to find out?",
+    "options": [
+      {
+        "text": "Choose the model that happens to give the longest and most detailed answers",
+        "correct": false,
+        "rationale": "Length does not show whether answers are right or useful."
+      },
+      {
+        "text": "Choose the model from the provider with the best marketing",
+        "correct": false,
+        "rationale": "Marketing is not evidence of performance on your task."
+      },
+      {
+        "text": "Test each candidate on a set of real Cairnway customer questions",
+        "correct": true,
+        "rationale": "Testing on your own real examples shows how each model performs on your task."
+      },
+      {
+        "text": "Choose the model with the most parameters",
+        "correct": false,
+        "rationale": "More parameters often means more cost and latency, and it does not prove the model performs best on this task."
+      }
+    ],
+    "explanation": "Performance requirements are checked by testing candidates on your own real examples, for example with 200 real support questions, and measuring accuracy.",
+    "services": [
+      "bedrock-evaluations"
+    ]
+  },
+  {
+    "id": "2.2-021",
+    "taskId": "2.2",
+    "kind": "single",
+    "objectives": [
+      "2.2.4"
+    ],
+    "stem": "Cairnway's board asks whether Trailmate's savings and extra sales have paid off compared with the cost of running it. Which metric answers that question?",
+    "options": [
+      {
+        "text": "Accuracy",
+        "correct": false,
+        "rationale": "Accuracy shows the share of correct answers. It does not include costs or revenue."
+      },
+      {
+        "text": "Customer feedback",
+        "correct": false,
+        "rationale": "Ratings show satisfaction, not the financial return."
+      },
+      {
+        "text": "Return on investment (ROI)",
+        "correct": true,
+        "rationale": "ROI compares the gain from a project with its cost, so it shows whether the investment paid off."
+      },
+      {
+        "text": "Cross-domain performance",
+        "correct": false,
+        "rationale": "This shows how widely a solution works, not whether it returned more than it cost."
+      }
+    ],
+    "explanation": "Comparing benefit to cost is return on investment. Accuracy, feedback and cross-domain performance say whether the tool works well, not whether it paid off."
+  },
+  {
+    "id": "2.2-022",
+    "taskId": "2.2",
+    "kind": "single",
+    "objectives": [
+      "2.2.4"
+    ],
+    "stem": "Cairnway wants to learn whether shoppers who chat with Trailmate are more likely to complete a purchase than shoppers who do not. Which metric should the team compare?",
+    "options": [
+      {
+        "text": "Conversion rate",
+        "correct": true,
+        "rationale": "This is the share of visitors who buy, so it can be compared between chat users and others."
+      },
+      {
+        "text": "Efficiency",
+        "correct": false,
+        "rationale": "Efficiency measures time or effort saved per task, not buying behavior."
+      },
+      {
+        "text": "Cross-domain performance",
+        "correct": false,
+        "rationale": "This asks how well one model works across areas, not how many shoppers buy."
+      },
+      {
+        "text": "Customer lifetime value",
+        "correct": false,
+        "rationale": "This is total revenue over the whole relationship, a longer-term view than a single purchase."
+      }
+    ],
+    "explanation": "The question is whether visitors buy, which is conversion rate. Lifetime value looks at a customer's total over time, and efficiency looks at time saved.",
+    "services": [
+      "bedrock"
+    ]
+  },
+  {
+    "id": "2.2-023",
+    "taskId": "2.2",
+    "kind": "single",
+    "objectives": [
+      "2.2.4"
+    ],
+    "stem": "After adopting GenAI, the time to write a product description at Cairnway falls from 20 minutes to 3 minutes. Which metric does this improvement show?",
+    "options": [
+      {
+        "text": "Conversion rate",
+        "correct": false,
+        "rationale": "This measures the share of visitors who buy. It says nothing about writing time."
+      },
+      {
+        "text": "Efficiency",
+        "correct": true,
+        "rationale": "Efficiency is time or effort saved per task."
+      },
+      {
+        "text": "Average revenue per user",
+        "correct": false,
+        "rationale": "This measures revenue divided by the number of users, not the time spent writing."
+      },
+      {
+        "text": "Customer lifetime value",
+        "correct": false,
+        "rationale": "This is a longer-term revenue measure, not a writing-time measure."
+      }
+    ],
+    "explanation": "Minutes saved per task is efficiency. The other metrics are about revenue and customers.",
+    "services": [
+      "bedrock"
+    ]
+  },
+  {
+    "id": "2.2-024",
+    "taskId": "2.2",
+    "kind": "single",
+    "objectives": [
+      "2.2.4"
+    ],
+    "stem": "Cairnway believes better service and tailored recommendations will make customers keep shopping for years. Which metric measures the total revenue expected from a customer over the whole relationship?",
+    "options": [
+      {
+        "text": "Conversion rate",
+        "correct": false,
+        "rationale": "This measures the share of visitors who buy on a visit, not value over years."
+      },
+      {
+        "text": "Efficiency",
+        "correct": false,
+        "rationale": "This measures effort saved, not revenue per customer."
+      },
+      {
+        "text": "Accuracy",
+        "correct": false,
+        "rationale": "This is the share of correct answers, not revenue."
+      },
+      {
+        "text": "Customer lifetime value (CLV)",
+        "correct": true,
+        "rationale": "CLV is the total revenue expected from a customer over the relationship, so it captures the effect of customers returning."
+      }
+    ],
+    "explanation": "Revenue over the whole relationship is customer lifetime value. Conversion rate looks at a single decision to buy.",
+    "services": [
+      "bedrock"
+    ]
+  },
+  {
+    "id": "2.2-025",
+    "taskId": "2.2",
+    "kind": "single",
+    "objectives": [
+      "2.2.4"
+    ],
+    "stem": "Cairnway wants to test whether personalized recommendation text increases the revenue earned per shopper. Which metric is revenue divided by the number of users?",
+    "options": [
+      {
+        "text": "Average revenue per user (ARPU)",
+        "correct": true,
+        "rationale": "ARPU is revenue divided by the number of users, so it shows whether each shopper is worth more."
+      },
+      {
+        "text": "Return on investment",
+        "correct": false,
+        "rationale": "ROI compares gain with cost. It is not revenue divided by users."
+      },
+      {
+        "text": "Conversion rate",
+        "correct": false,
+        "rationale": "This is the share of visitors who buy, not revenue per user."
+      },
+      {
+        "text": "Customer satisfaction and feedback scores gathered from surveys",
+        "correct": false,
+        "rationale": "Feedback is ratings and complaints, not revenue."
+      }
+    ],
+    "explanation": "Revenue divided by the number of users is ARPU. It is the metric to compare before and after personalized text.",
+    "services": [
+      "bedrock"
+    ]
+  },
+  {
+    "id": "2.2-026",
+    "taskId": "2.2",
+    "kind": "single",
+    "objectives": [
+      "2.2.4"
+    ],
+    "stem": "Cairnway wants to run a pilot of Trailmate and prove the business value to its board. Which approach is MOST convincing?",
+    "options": [
+      {
+        "text": "Show the board an impressive live demo of Trailmate answering a handful of carefully chosen questions, plus a slide of customer quotes",
+        "correct": false,
+        "rationale": "A technically impressive demo is not business value. It is not linked to a measured metric."
+      },
+      {
+        "text": "Report only the number of chat conversations handled",
+        "correct": false,
+        "rationale": "Volume says nothing about outcomes or cost."
+      },
+      {
+        "text": "Record baseline metrics first, run a pilot against a group without the tool, then compare results with the costs",
+        "correct": true,
+        "rationale": "Measuring before and after, comparing with a control group and including costs shows real business value."
+      },
+      {
+        "text": "Ask staff whether they like the new tool",
+        "correct": false,
+        "rationale": "Opinions are useful feedback but do not prove business value."
+      }
+    ],
+    "explanation": "Value is shown by linking the application to a metric the business already tracks, measuring before and after, comparing with a group not using it, and including the costs.",
+    "services": [
+      "bedrock"
+    ]
+  },
+  {
+    "id": "2.2-027",
+    "taskId": "2.2",
+    "kind": "multi",
+    "select": 2,
+    "objectives": [
+      "2.2.1"
+    ],
+    "stem": "Which TWO statements describe advantages of GenAI for Cairnway? (Select TWO.)",
+    "options": [
+      {
+        "text": "Customers can ask follow-up questions in plain language",
+        "correct": true,
+        "rationale": "This is conversational capability."
+      },
+      {
+        "text": "It can fully explain how it reached every answer",
+        "correct": false,
+        "rationale": "This is hard with billions of parameters."
+      },
+      {
+        "text": "It never produces false statements",
+        "correct": false,
+        "rationale": "Hallucinations can occur, so this is untrue."
+      },
+      {
+        "text": "It always gives the same answer to the same question",
+        "correct": false,
+        "rationale": "GenAI can vary its answers. That is nondeterminism."
+      },
+      {
+        "text": "One foundation model can handle many tasks when steered by prompts",
+        "correct": true,
+        "rationale": "This is adaptability."
+      }
+    ],
+    "explanation": "Adaptability and conversational ability are advantages. Identical answers, full explanations and no false statements are things GenAI cannot promise.",
+    "services": [
+      "bedrock"
+    ]
+  },
+  {
+    "id": "2.2-028",
+    "taskId": "2.2",
+    "kind": "multi",
+    "select": 3,
+    "objectives": [
+      "2.2.2"
+    ],
+    "stem": "Cairnway's risk team is listing the known limitations of GenAI solutions. Which THREE belong on the list? (Select THREE.)",
+    "options": [
+      {
+        "text": "Hallucinations",
+        "correct": true,
+        "rationale": "Confident but false or invented answers."
+      },
+      {
+        "text": "Nondeterminism",
+        "correct": true,
+        "rationale": "The same prompt can give different answers."
+      },
+      {
+        "text": "Conversational interaction",
+        "correct": false,
+        "rationale": "This is an advantage."
+      },
+      {
+        "text": "Adaptability to many tasks",
+        "correct": false,
+        "rationale": "This is an advantage."
+      },
+      {
+        "text": "Responsiveness at any hour",
+        "correct": false,
+        "rationale": "This is an advantage."
+      },
+      {
+        "text": "Limited interpretability",
+        "correct": true,
+        "rationale": "It is hard to explain why a specific answer was produced."
+      }
+    ],
+    "explanation": "Hallucinations, limited interpretability and nondeterminism are limitations. Adaptability, responsiveness and conversation are advantages.",
+    "services": [
+      "bedrock"
+    ]
+  },
+  {
+    "id": "2.2-029",
+    "taskId": "2.2",
+    "kind": "multi",
+    "select": 2,
+    "objectives": [
+      "2.2.2"
+    ],
+    "stem": "Which TWO actions help reduce hallucinations in Trailmate's answers? (Select TWO.)",
+    "options": [
+      {
+        "text": "Ground answers in Cairnway's own documents with RAG",
+        "correct": true,
+        "rationale": "Giving the model trusted, current information to base its answer on makes invented facts less likely."
+      },
+      {
+        "text": "Keep a human review step for important decisions such as refunds",
+        "correct": true,
+        "rationale": "A person can catch errors before they affect a customer."
+      },
+      {
+        "text": "Remove the citations from answers",
+        "correct": false,
+        "rationale": "Citations let people check answers, so removing them helps nothing."
+      },
+      {
+        "text": "Raise the temperature for more creative output",
+        "correct": false,
+        "rationale": "More randomness makes invented content more likely."
+      },
+      {
+        "text": "Tell the model to sound as confident as possible",
+        "correct": false,
+        "rationale": "Confident wording does not make it correct and may hide mistakes."
+      }
+    ],
+    "explanation": "Grounding in trusted documents and human review reduce the effect of hallucinations. Raising randomness, removing sources and sounding confident do not.",
+    "services": [
+      "bedrock-knowledge-bases",
+      "bedrock-guardrails"
+    ]
+  },
+  {
+    "id": "2.2-030",
+    "taskId": "2.2",
+    "kind": "multi",
+    "select": 2,
+    "objectives": [
+      "2.2.2"
+    ],
+    "stem": "For which TWO of these tasks would GenAI alone be a poor fit at Cairnway? (Select TWO.)",
+    "options": [
+      {
+        "text": "Drafting the first version of a marketing email",
+        "correct": false,
+        "rationale": "Creative drafting is a strength, with staff review."
+      },
+      {
+        "text": "Approving credit with a fully explainable audit trail for a regulator",
+        "correct": true,
+        "rationale": "Foundation models are hard to explain, so simpler models or human decisions are safer."
+      },
+      {
+        "text": "Calculating the exact tax on each invoice",
+        "correct": true,
+        "rationale": "Exact, repeatable calculations need ordinary software."
+      },
+      {
+        "text": "Summarizing hundreds of customer reviews",
+        "correct": false,
+        "rationale": "Summarizing is a strength of GenAI."
+      },
+      {
+        "text": "Answering product questions in a chat window",
+        "correct": false,
+        "rationale": "Conversational answers are a strength, ideally grounded in product data."
+      }
+    ],
+    "explanation": "Exact calculations and fully explainable decisions are weak spots. Drafting, summarizing and chatting are strong fits."
+  },
+  {
+    "id": "2.2-031",
+    "taskId": "2.2",
+    "kind": "multi",
+    "select": 2,
+    "objectives": [
+      "2.2.3"
+    ],
+    "stem": "Cairnway's requirements are that customer data must stay in the EU and the monthly bill must be predictable at current volume. Which TWO model selection factors do these requirements address? (Select TWO.)",
+    "options": [
+      {
+        "text": "Capabilities",
+        "correct": false,
+        "rationale": "No requirement describes what the model must be able to do."
+      },
+      {
+        "text": "Cost",
+        "correct": true,
+        "rationale": "A predictable monthly bill depends on price per token at your real volume."
+      },
+      {
+        "text": "Compliance",
+        "correct": true,
+        "rationale": "Where data may be processed and stored is a compliance matter."
+      },
+      {
+        "text": "Model type",
+        "correct": false,
+        "rationale": "The requirements do not mention the kind of input or output."
+      },
+      {
+        "text": "Latency",
+        "correct": false,
+        "rationale": "No response-time requirement is given."
+      }
+    ],
+    "explanation": "Data location is compliance, and the budget is cost. Type, latency and capabilities are other factors that the stem does not raise.",
+    "services": [
+      "bedrock"
+    ]
+  },
+  {
+    "id": "2.2-032",
+    "taskId": "2.2",
+    "kind": "multi",
+    "select": 2,
+    "objectives": [
+      "2.2.3"
+    ],
+    "stem": "Which TWO statements about model size and complexity are correct? (Select TWO.)",
+    "options": [
+      {
+        "text": "Larger models are always cheaper at high volume",
+        "correct": false,
+        "rationale": "Larger models cost more per token, not less."
+      },
+      {
+        "text": "A bigger model is never worth considering",
+        "correct": false,
+        "rationale": "Some tasks need the capability of a larger model."
+      },
+      {
+        "text": "Larger models are often slower and cost more per token",
+        "correct": true,
+        "rationale": "The extra capability comes at the price of speed and money."
+      },
+      {
+        "text": "Larger, more complex models are often more capable",
+        "correct": true,
+        "rationale": "More parameters often means more ability on hard tasks."
+      },
+      {
+        "text": "Smaller models can never meet a requirement",
+        "correct": false,
+        "rationale": "A smaller model may be good enough and should be tested first."
+      }
+    ],
+    "explanation": "Bigger is often more capable but slower and costlier, so start small and move up if needed. The other statements are absolutes that do not hold.",
+    "services": [
+      "bedrock"
+    ]
+  },
+  {
+    "id": "2.2-033",
+    "taskId": "2.2",
+    "kind": "multi",
+    "select": 2,
+    "objectives": [
+      "2.2.3"
+    ],
+    "stem": "Cairnway is checking a candidate model for compliance with its EU customer promises. Which TWO questions belong to that check? (Select TWO.)",
+    "options": [
+      {
+        "text": "How many tokens fit in its context window?",
+        "correct": false,
+        "rationale": "This is a constraint on input length."
+      },
+      {
+        "text": "How many languages does the model support?",
+        "correct": false,
+        "rationale": "This is about capabilities."
+      },
+      {
+        "text": "Where may customer data be processed and stored?",
+        "correct": true,
+        "rationale": "Data location is the heart of compliance."
+      },
+      {
+        "text": "Which regulations, such as GDPR, apply to our EU customers?",
+        "correct": true,
+        "rationale": "Regulations decide which models and Regions are allowed."
+      },
+      {
+        "text": "What is the price per token?",
+        "correct": false,
+        "rationale": "This is a cost question."
+      }
+    ],
+    "explanation": "Compliance concerns where data goes and which rules apply. Languages, context window and price are other selection factors."
+  },
+  {
+    "id": "2.2-034",
+    "taskId": "2.2",
+    "kind": "multi",
+    "select": 3,
+    "objectives": [
+      "2.2.4"
+    ],
+    "stem": "Which THREE are business metrics Cairnway can use to show the value of a GenAI application? (Select THREE.)",
+    "options": [
+      {
+        "text": "Number of model parameters",
+        "correct": false,
+        "rationale": "A technical detail of the model, not a business result."
+      },
+      {
+        "text": "Conversion rate",
+        "correct": true,
+        "rationale": "Share of visitors who buy."
+      },
+      {
+        "text": "Customer lifetime value",
+        "correct": true,
+        "rationale": "Total expected revenue per customer."
+      },
+      {
+        "text": "Return on investment",
+        "correct": true,
+        "rationale": "Gain compared with cost."
+      },
+      {
+        "text": "Number of supported languages",
+        "correct": false,
+        "rationale": "A capability, not business value by itself."
+      },
+      {
+        "text": "Size of the context window",
+        "correct": false,
+        "rationale": "A technical limit, not a business metric."
+      }
+    ],
+    "explanation": "ROI, conversion rate and lifetime value tie the application to money and customers. Parameters, context window and languages describe the model."
+  },
+  {
+    "id": "2.2-035",
+    "taskId": "2.2",
+    "kind": "multi",
+    "select": 2,
+    "objectives": [
+      "2.2.4"
+    ],
+    "stem": "Cairnway is calculating the return on investment of Trailmate. Which TWO belong on the COST side of the calculation? (Select TWO.)",
+    "options": [
+      {
+        "text": "Model usage, charged per token",
+        "correct": true,
+        "rationale": "Usage is a running cost."
+      },
+      {
+        "text": "Better customer ratings",
+        "correct": false,
+        "rationale": "This is a benefit."
+      },
+      {
+        "text": "Savings from fewer support tickets",
+        "correct": false,
+        "rationale": "This is a benefit."
+      },
+      {
+        "text": "Higher conversion among chat users",
+        "correct": false,
+        "rationale": "This is a benefit."
+      },
+      {
+        "text": "Staff time spent reviewing answers",
+        "correct": true,
+        "rationale": "Review time is a real cost of the application."
+      }
+    ],
+    "explanation": "Costs are token usage, development and integration, review time and monitoring. Savings, conversion and ratings are benefits."
+  },
+  {
+    "id": "2.2-036",
+    "taskId": "2.2",
+    "kind": "multi",
+    "select": 2,
+    "objectives": [
+      "2.2.4"
+    ],
+    "stem": "Cairnway wants early warning signs that Trailmate has a problem, before the business metrics show it. Which TWO are leading metrics? (Select TWO.)",
+    "options": [
+      {
+        "text": "Thumbs-up rate on answers",
+        "correct": true,
+        "rationale": "Customer reaction signals trouble early."
+      },
+      {
+        "text": "Accuracy rate of answers in a review sample",
+        "correct": true,
+        "rationale": "A drop shows quality problems early."
+      },
+      {
+        "text": "Customer lifetime value",
+        "correct": false,
+        "rationale": "This changes slowly over years."
+      },
+      {
+        "text": "Average revenue per user",
+        "correct": false,
+        "rationale": "This is a business metric that lags."
+      },
+      {
+        "text": "Return on investment",
+        "correct": false,
+        "rationale": "This is calculated after the results are in."
+      }
+    ],
+    "explanation": "Accuracy, response time and thumbs-up rates are leading signals. ROI, ARPU and lifetime value prove the investment later."
+  },
+  {
+    "id": "2.2-037",
+    "taskId": "2.2",
+    "kind": "multi",
+    "select": 2,
+    "objectives": [
+      "2.2.1",
+      "2.2.2"
+    ],
+    "stem": "Which TWO statements about GenAI are correct? (Select TWO.)",
+    "options": [
+      {
+        "text": "It always knows about events after its training cut-off",
+        "correct": false,
+        "rationale": "Models only know their training data up to a cut-off date."
+      },
+      {
+        "text": "It can draft text, images, audio and code",
+        "correct": true,
+        "rationale": "Content generation is a core ability."
+      },
+      {
+        "text": "It can produce fluent answers that are false",
+        "correct": true,
+        "rationale": "Because it predicts likely words, it can invent facts."
+      },
+      {
+        "text": "It gives exactly the same answer every time",
+        "correct": false,
+        "rationale": "Answers can vary."
+      },
+      {
+        "text": "It looks facts up in a database before answering",
+        "correct": false,
+        "rationale": "A model does not do that unless it is connected to your data, for example by RAG."
+      }
+    ],
+    "explanation": "GenAI generates content and can sound right while being wrong. It does not look things up by itself, know recent events, or repeat answers exactly.",
+    "services": [
+      "bedrock"
+    ]
+  },
+  {
+    "id": "2.2-038",
+    "taskId": "2.2",
+    "kind": "multi",
+    "select": 2,
+    "objectives": [
+      "2.2.2"
+    ],
+    "stem": "Cairnway wants more consistent Trailmate answers. Which TWO statements about temperature and consistency are correct? (Select TWO.)",
+    "options": [
+      {
+        "text": "Even at a low temperature some variation can remain",
+        "correct": true,
+        "rationale": "Lower temperature does not guarantee identical output."
+      },
+      {
+        "text": "Raising the temperature improves factual accuracy",
+        "correct": false,
+        "rationale": "It increases randomness, not accuracy."
+      },
+      {
+        "text": "Setting a temperature of zero guarantees identical output",
+        "correct": false,
+        "rationale": "It reduces variation but cannot be relied on to guarantee identical results."
+      },
+      {
+        "text": "Lowering the temperature makes answers more consistent",
+        "correct": true,
+        "rationale": "Less randomness in sampling gives more repeatable output."
+      },
+      {
+        "text": "Temperature controls how many languages the model supports",
+        "correct": false,
+        "rationale": "Temperature is a sampling setting only."
+      }
+    ],
+    "explanation": "A lower temperature increases consistency but is not a guarantee. Where identical output is legally required, GenAI alone is not the right tool.",
+    "services": [
+      "bedrock"
+    ]
+  },
+  {
+    "id": "2.2-039",
+    "taskId": "2.2",
+    "kind": "order",
+    "objectives": [
+      "2.2.4"
+    ],
+    "stem": "Cairnway wants to prove the value of Trailmate. Place the steps in the correct order.",
+    "steps": [
+      "Record baseline metrics before the launch",
+      "Run a pilot with a group of shoppers",
+      "Compare the results with the baseline and a group not using it",
+      "Calculate ROI including all costs"
+    ],
+    "explanation": "Value can only be shown against a baseline, so metrics are recorded first. A pilot follows, the results are compared, and the ROI is calculated with all costs."
+  },
+  {
+    "id": "2.2-040",
+    "taskId": "2.2",
+    "kind": "order",
+    "objectives": [
+      "2.2.3"
+    ],
+    "services": [
+      "bedrock"
+    ],
+    "stem": "Place Cairnway's model selection steps in the correct order.",
+    "steps": [
+      "List the requirements such as compliance, latency and cost",
+      "Remove candidates that fail the compliance requirement",
+      "Test the remaining candidates on real Cairnway questions",
+      "Choose the smallest model that meets the requirement"
+    ],
+    "explanation": "Requirements come first. A compliance failure rules a model out whatever its accuracy. Then candidates are tested and the smallest model that passes is chosen."
+  },
+  {
+    "id": "2.2-041",
+    "taskId": "2.2",
+    "kind": "match",
+    "objectives": [
+      "2.2.1"
+    ],
+    "services": [
+      "bedrock"
+    ],
+    "stem": "Match each Cairnway example to the GenAI advantage it shows.",
+    "pairs": [
+      {
+        "prompt": "One model writes descriptions, summarizes reviews and drafts replies",
+        "answer": "Adaptability"
+      },
+      {
+        "prompt": "Trailmate answers a shopper at 3 a.m. in seconds",
+        "answer": "Responsiveness"
+      },
+      {
+        "prompt": "A shopper asks follow-up questions in plain language",
+        "answer": "Conversational capabilities"
+      },
+      {
+        "prompt": "First drafts of 30,000 product descriptions",
+        "answer": "Ability to generate content"
+      }
+    ],
+    "explanation": "Many tasks from one model is adaptability, fast answers at any hour is responsiveness, natural follow-ups are conversational, and drafts are generated content. Interpretability is a limitation.",
+    "distractors": [
+      "Interpretability"
+    ]
+  },
+  {
+    "id": "2.2-042",
+    "taskId": "2.2",
+    "kind": "match",
+    "objectives": [
+      "2.2.2"
+    ],
+    "services": [
+      "bedrock"
+    ],
+    "stem": "Match each symptom to the GenAI disadvantage.",
+    "pairs": [
+      {
+        "prompt": "Trailmate invents a return policy that does not exist",
+        "answer": "Hallucination"
+      },
+      {
+        "prompt": "A regulator asks why one customer was declined and nobody can say",
+        "answer": "Limited interpretability"
+      },
+      {
+        "prompt": "The same prompt gives different answers",
+        "answer": "Nondeterminism"
+      },
+      {
+        "prompt": "Answers mention products discontinued last year",
+        "answer": "Inaccuracy"
+      }
+    ],
+    "explanation": "Invented content is hallucination, not being able to explain is interpretability, varying output is nondeterminism, and outdated answers are inaccuracy. Responsiveness is an advantage.",
+    "distractors": [
+      "Responsiveness"
+    ]
+  },
+  {
+    "id": "2.2-043",
+    "taskId": "2.2",
+    "kind": "match",
+    "objectives": [
+      "2.2.3"
+    ],
+    "services": [
+      "bedrock"
+    ],
+    "stem": "Match each Cairnway requirement to the model selection factor.",
+    "pairs": [
+      {
+        "prompt": "Customer data must be processed only in the EU",
+        "answer": "Compliance"
+      },
+      {
+        "prompt": "The chat reply must arrive within a few seconds",
+        "answer": "Latency"
+      },
+      {
+        "prompt": "The monthly bill must stay within budget",
+        "answer": "Cost"
+      },
+      {
+        "prompt": "The model must accept both a photo and text",
+        "answer": "Model type"
+      }
+    ],
+    "explanation": "Data location is compliance, response time is latency, budget is cost, and mixed inputs are model type. Complexity is about size and is not stated.",
+    "distractors": [
+      "Model complexity"
+    ]
+  },
+  {
+    "id": "2.2-044",
+    "taskId": "2.2",
+    "kind": "match",
+    "objectives": [
+      "2.2.4"
+    ],
+    "stem": "Match each description to the business metric.",
+    "pairs": [
+      {
+        "prompt": "The share of visitors who buy",
+        "answer": "Conversion rate"
+      },
+      {
+        "prompt": "Revenue divided by the number of users",
+        "answer": "Average revenue per user"
+      },
+      {
+        "prompt": "Total revenue expected from a customer over the relationship",
+        "answer": "Customer lifetime value"
+      },
+      {
+        "prompt": "Gain from the project compared with its cost",
+        "answer": "Return on investment"
+      }
+    ],
+    "explanation": "Each description gives the definition of a metric. Efficiency measures time saved and is not one of the four definitions.",
+    "distractors": [
+      "Efficiency"
+    ]
+  },
+  {
+    "id": "2.2-045",
+    "taskId": "2.2",
+    "kind": "case",
+    "services": [
+      "bedrock"
+    ],
+    "scenario": "Cairnway Outfitters is deciding where to use GenAI first. Candidates are a shipping-fee calculator, first drafts of product descriptions, and Trailmate, the customer chat assistant. EU customer data must stay in the EU. Two candidate models do not meet that rule. Of the other two, both pass the accuracy test on 200 real questions, but one is smaller and costs a third as much. Before launch the team records 11,000 support tickets a month and a 2.1% conversion rate.",
+    "parts": [
+      {
+        "kind": "single",
+        "objectives": [
+          "2.2.2"
+        ],
+        "stem": "Which of the three candidates should stay in ordinary software instead of GenAI?",
+        "options": [
+          {
+            "text": "The product description drafts",
+            "correct": false,
+            "rationale": "Creative drafting is a strength, and staff review the output."
+          },
+          {
+            "text": "Trailmate",
+            "correct": false,
+            "rationale": "Conversational answers are a strength, ideally grounded in policy documents with RAG."
+          },
+          {
+            "text": "The shipping-fee calculator",
+            "correct": true,
+            "rationale": "The fee must be exact and the same every time. GenAI is nondeterministic, so ordinary code is the right tool."
+          },
+          {
+            "text": "None of the three, because GenAI suits every business task",
+            "correct": false,
+            "rationale": "GenAI is a poor fit for exact, repeatable results."
+          }
+        ],
+        "explanation": "The shipping fee needs identical, exact answers, which is a limitation of GenAI (nondeterminism)."
+      },
+      {
+        "kind": "single",
+        "objectives": [
+          "2.2.3"
+        ],
+        "stem": "Which model should Cairnway choose for Trailmate?",
+        "options": [
+          {
+            "text": "The smaller model that passed the accuracy test and meets the EU rule",
+            "correct": true,
+            "rationale": "It meets the requirements at lower cost, so it is the best fit. Compliance already removed two models."
+          },
+          {
+            "text": "One of the two that fail the EU rule, because it is the most accurate",
+            "correct": false,
+            "rationale": "A compliance failure rules a model out whatever its accuracy."
+          },
+          {
+            "text": "The larger, costlier model, because bigger is better",
+            "correct": false,
+            "rationale": "It costs three times as much for no extra benefit on the tests."
+          },
+          {
+            "text": "Neither remaining model until a custom model is trained",
+            "correct": false,
+            "rationale": "Training is much costlier and not needed."
+          }
+        ],
+        "explanation": "Compliance eliminates two models. Of the remaining two, both pass, so the cheaper and smaller one wins."
+      },
+      {
+        "kind": "multi",
+        "select": 2,
+        "objectives": [
+          "2.2.4"
+        ],
+        "stem": "After a six-week pilot, which TWO comparisons best show the business value of Trailmate? (Select TWO.)",
+        "options": [
+          {
+            "text": "The speed of the demo during the board meeting",
+            "correct": false,
+            "rationale": "A demo is not a measured business result."
+          },
+          {
+            "text": "The number of employees who like the interface",
+            "correct": false,
+            "rationale": "Opinions are not business metrics."
+          },
+          {
+            "text": "Conversion rate of chat users compared with the 2.1% baseline",
+            "correct": true,
+            "rationale": "It links the tool to a metric the business already tracks."
+          },
+          {
+            "text": "The monthly cost of tokens and staff review compared with the benefit",
+            "correct": true,
+            "rationale": "Costs belong in the ROI calculation."
+          },
+          {
+            "text": "The number of model parameters",
+            "correct": false,
+            "rationale": "A technical detail, not value."
+          }
+        ],
+        "explanation": "Value is shown by comparing business metrics with the baseline and including all costs."
+      }
+    ]
+  }
+]
