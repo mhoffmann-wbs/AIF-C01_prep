@@ -1,0 +1,1325 @@
+[
+  {
+    "id": "5.2-001",
+    "taskId": "5.2",
+    "services": [
+      "artifact"
+    ],
+    "kind": "single",
+    "objectives": [
+      "5.2.1"
+    ],
+    "stem": "Cairnway Outfitters' EU auditor asks for evidence that AWS itself meets standards such as SOC and ISO. Which AWS service gives Cairnway on-demand access to these reports?",
+    "options": [
+      {
+        "text": "AWS Config",
+        "correct": false,
+        "rationale": "Config records and checks the configuration of Cairnway's own resources. It holds no AWS audit reports."
+      },
+      {
+        "text": "AWS Trusted Advisor",
+        "correct": false,
+        "rationale": "Trusted Advisor recommends improvements to an account. It doesn't hold AWS's audit documents."
+      },
+      {
+        "text": "Amazon Inspector",
+        "correct": false,
+        "rationale": "Inspector scans workloads for vulnerabilities. It doesn't provide AWS's compliance reports."
+      },
+      {
+        "text": "AWS Artifact",
+        "correct": true,
+        "rationale": "Artifact provides on-demand downloads of AWS's security and compliance reports, such as SOC, ISO and PCI."
+      }
+    ],
+    "explanation": "The clue is 'evidence that AWS itself meets standards'. AWS Artifact is the library of AWS's own compliance documents."
+  },
+  {
+    "id": "5.2-002",
+    "taskId": "5.2",
+    "services": [
+      "config",
+      "s3"
+    ],
+    "kind": "single",
+    "objectives": [
+      "5.2.1"
+    ],
+    "stem": "Cairnway Outfitters wants to continuously check that every S3 bucket holding order data is encrypted, flag any that are not, and see how a bucket's settings looked last month. Which service meets these requirements?",
+    "options": [
+      {
+        "text": "AWS CloudTrail",
+        "correct": false,
+        "rationale": "CloudTrail records who called which API. It isn't built to evaluate whether settings follow a rule."
+      },
+      {
+        "text": "AWS Artifact",
+        "correct": false,
+        "rationale": "Artifact provides AWS's compliance reports. It doesn't check Cairnway's buckets."
+      },
+      {
+        "text": "AWS Config",
+        "correct": true,
+        "rationale": "Config records resource configurations and their changes over time, and flags resources that break a rule as noncompliant."
+      },
+      {
+        "text": "Amazon Inspector",
+        "correct": false,
+        "rationale": "Inspector scans for software vulnerabilities, not bucket encryption settings."
+      }
+    ],
+    "explanation": "Configuration history plus rule checks is AWS Config. CloudTrail is the common distractor, because it is about activity rather than settings."
+  },
+  {
+    "id": "5.2-003",
+    "taskId": "5.2",
+    "services": [
+      "cloudtrail",
+      "bedrock"
+    ],
+    "kind": "single",
+    "objectives": [
+      "5.2.1"
+    ],
+    "stem": "A guardrail used by Trailmate was deleted last Tuesday. Cairnway Outfitters wants to find out which user or role made the API call, and when. Which service should it use?",
+    "options": [
+      {
+        "text": "AWS Trusted Advisor",
+        "correct": false,
+        "rationale": "Trusted Advisor gives best-practice recommendations. It doesn't investigate who made a change."
+      },
+      {
+        "text": "Amazon Inspector",
+        "correct": false,
+        "rationale": "Inspector finds software vulnerabilities. It doesn't record API calls."
+      },
+      {
+        "text": "AWS CloudTrail",
+        "correct": true,
+        "rationale": "CloudTrail records actions by users, roles and services as events, so you can see who did what, when and from where."
+      },
+      {
+        "text": "AWS Artifact",
+        "correct": false,
+        "rationale": "Artifact holds AWS's compliance reports and agreements."
+      }
+    ],
+    "explanation": "'Which user or role made the API call' is a CloudTrail question: the activity log of the account."
+  },
+  {
+    "id": "5.2-004",
+    "taskId": "5.2",
+    "services": [
+      "inspector",
+      "lambda"
+    ],
+    "kind": "single",
+    "objectives": [
+      "5.2.1"
+    ],
+    "stem": "Cairnway Outfitters' security team wants continual scanning of the container images and Lambda functions behind Trailmate for known software vulnerabilities. Which service meets this requirement?",
+    "options": [
+      {
+        "text": "AWS Config conformance packs",
+        "correct": false,
+        "rationale": "Config checks resource settings against rules, not code for vulnerabilities."
+      },
+      {
+        "text": "Amazon Inspector",
+        "correct": true,
+        "rationale": "Inspector continually scans EC2 instances, container images in Amazon ECR and Lambda functions for vulnerabilities."
+      },
+      {
+        "text": "AWS CloudTrail",
+        "correct": false,
+        "rationale": "CloudTrail logs API activity. It doesn't scan software."
+      },
+      {
+        "text": "AWS Artifact",
+        "correct": false,
+        "rationale": "Artifact provides AWS compliance reports and agreements."
+      }
+    ],
+    "explanation": "Known software vulnerabilities in containers and Lambda functions are the job of Amazon Inspector."
+  },
+  {
+    "id": "5.2-005",
+    "taskId": "5.2",
+    "services": [
+      "trusted-advisor"
+    ],
+    "kind": "single",
+    "objectives": [
+      "5.2.1"
+    ],
+    "stem": "Cairnway Outfitters' cloud lead wants a regular checklist of recommendations to save money, improve performance and close security gaps across its AWS account. Which service provides these?",
+    "options": [
+      {
+        "text": "AWS CloudTrail event history",
+        "correct": false,
+        "rationale": "CloudTrail records activity. It doesn't produce a to-do list of improvements."
+      },
+      {
+        "text": "AWS Config",
+        "correct": false,
+        "rationale": "Config tracks configuration and rule compliance, not general advice on cost and performance."
+      },
+      {
+        "text": "AWS Artifact",
+        "correct": false,
+        "rationale": "Artifact provides AWS's compliance reports."
+      },
+      {
+        "text": "AWS Trusted Advisor",
+        "correct": true,
+        "rationale": "Trusted Advisor inspects your environment and recommends improvements in cost, performance, availability and security."
+      }
+    ],
+    "explanation": "A best-practice advice checklist covering cost, performance and security is AWS Trusted Advisor."
+  },
+  {
+    "id": "5.2-006",
+    "taskId": "5.2",
+    "services": [
+      "cloudtrail",
+      "bedrock"
+    ],
+    "sourceLinks": [
+      "https://docs.aws.amazon.com/bedrock/latest/userguide/logging-using-cloudtrail.html"
+    ],
+    "kind": "single",
+    "objectives": [
+      "5.2.1"
+    ],
+    "stem": "Cairnway Outfitters turns on an AWS CloudTrail trail and sees Bedrock InvokeModel calls, but no entries for knowledge base retrievals or guardrail checks. What is the most likely reason?",
+    "options": [
+      {
+        "text": "Those are data events, which must be turned on separately",
+        "correct": true,
+        "rationale": "Runtime calls such as InvokeModel are management events, but knowledge base retrieval and guardrail checks are data events that you enable separately."
+      },
+      {
+        "text": "CloudTrail does not record any Amazon Bedrock activity",
+        "correct": false,
+        "rationale": "CloudTrail does record Bedrock API calls, which is why InvokeModel appears."
+      },
+      {
+        "text": "Those calls only show up after the 90-day event history period",
+        "correct": false,
+        "rationale": "Event history length doesn't change which kinds of events are recorded."
+      },
+      {
+        "text": "Amazon Inspector must be turned on first to see those calls",
+        "correct": false,
+        "rationale": "Inspector scans for vulnerabilities and has no role in what CloudTrail records."
+      }
+    ],
+    "explanation": "Management events are on by default, while data events cost extra and must be switched on. That explains the missing entries."
+  },
+  {
+    "id": "5.2-007",
+    "taskId": "5.2",
+    "services": [
+      "cloudtrail",
+      "s3"
+    ],
+    "sourceLinks": [
+      "https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-user-guide.html"
+    ],
+    "kind": "single",
+    "objectives": [
+      "5.2.1"
+    ],
+    "stem": "Cairnway Outfitters' policy requires API activity records to be kept for 7 years, but CloudTrail's default Event history keeps management events for only 90 days. Which solution meets the requirement?",
+    "options": [
+      {
+        "text": "Create a trail that delivers events to Amazon S3",
+        "correct": true,
+        "rationale": "A trail delivers events to S3, where they can be kept as long as needed."
+      },
+      {
+        "text": "Keep relying on Event history and export it each quarter",
+        "correct": false,
+        "rationale": "Event history covers only the last 90 days, so older events would already be gone."
+      },
+      {
+        "text": "Run an AWS Trusted Advisor check every month",
+        "correct": false,
+        "rationale": "Trusted Advisor gives recommendations. It doesn't store activity records."
+      },
+      {
+        "text": "Download AWS reports from AWS Artifact",
+        "correct": false,
+        "rationale": "Artifact holds AWS's own reports, not Cairnway's activity records."
+      }
+    ],
+    "explanation": "For a record longer than 90 days you create a trail that delivers events to S3."
+  },
+  {
+    "id": "5.2-008",
+    "taskId": "5.2",
+    "services": [
+      "s3-lifecycle",
+      "s3",
+      "s3-glacier"
+    ],
+    "kind": "single",
+    "objectives": [
+      "5.2.2"
+    ],
+    "stem": "Cairnway Outfitters' written policy says chat logs in S3 must move to an archive storage class after 90 days and be deleted after 13 months. Which feature automates this?",
+    "options": [
+      {
+        "text": "AWS Config rules",
+        "correct": false,
+        "rationale": "Config evaluates resource settings. It doesn't move or delete objects on a schedule."
+      },
+      {
+        "text": "Amazon Macie jobs",
+        "correct": false,
+        "rationale": "Macie finds sensitive data in S3. It doesn't archive or delete it."
+      },
+      {
+        "text": "S3 Lifecycle rules",
+        "correct": true,
+        "rationale": "Lifecycle rules automatically move objects to other storage classes and delete them after a set time."
+      },
+      {
+        "text": "AWS CloudTrail trails",
+        "correct": false,
+        "rationale": "A trail records API activity. It doesn't manage the life of other data."
+      }
+    ],
+    "explanation": "Moving data to archive and deleting it after set periods is data lifecycle and retention, which S3 Lifecycle automates."
+  },
+  {
+    "id": "5.2-009",
+    "taskId": "5.2",
+    "services": [
+      "bedrock",
+      "bedrock-cross-region-inference"
+    ],
+    "kind": "single",
+    "objectives": [
+      "5.2.2"
+    ],
+    "stem": "Cairnway Outfitters' EU customers' data must stay in the EU. The team runs Trailmate on Amazon Bedrock. Which approach best meets this residency requirement?",
+    "options": [
+      {
+        "text": "Encrypt all data with AWS KMS keys and then use whichever Region is cheapest for the workload",
+        "correct": false,
+        "rationale": "Encryption protects data but doesn't control where it is stored or processed."
+      },
+      {
+        "text": "Download AWS compliance reports from AWS Artifact",
+        "correct": false,
+        "rationale": "Artifact shows what AWS can prove. It doesn't place Cairnway's data in a Region."
+      },
+      {
+        "text": "Add a Guardrails denied topic about data location",
+        "correct": false,
+        "rationale": "A denied topic filters conversation, not where data is stored."
+      },
+      {
+        "text": "Use an EU Region and check features like cross-Region inference for routing elsewhere",
+        "correct": true,
+        "rationale": "Residency depends on the chosen Region and on features that may process requests in other Regions."
+      }
+    ],
+    "explanation": "Residency is about Regions. AWS says Bedrock stores customer content in the Region you use, but cross-Region inference may process requests elsewhere, so check before enabling it."
+  },
+  {
+    "id": "5.2-010",
+    "taskId": "5.2",
+    "services": [
+      "s3-lifecycle"
+    ],
+    "kind": "single",
+    "objectives": [
+      "5.2.2"
+    ],
+    "stem": "Which statement about data retention is correct?",
+    "options": [
+      {
+        "text": "Keep all data forever, so nothing is ever lost",
+        "correct": false,
+        "rationale": "Keeping personal data forever can break privacy rules and adds cost."
+      },
+      {
+        "text": "Keep data as long as law and audits require, and no longer",
+        "correct": true,
+        "rationale": "Retention is a balance: too short fails audits, and personal data kept too long may break privacy rules."
+      },
+      {
+        "text": "Delete all logs immediately to protect privacy",
+        "correct": false,
+        "rationale": "Deleting logs at once would leave nothing for audits or investigations."
+      },
+      {
+        "text": "Let each engineer choose a retention period for the logs they create",
+        "correct": false,
+        "rationale": "Retention periods should come from written policy and law, not individual choice."
+      }
+    ],
+    "explanation": "Retention periods come from policy and law, and lifecycle rules make them automatic."
+  },
+  {
+    "id": "5.2-011",
+    "taskId": "5.2",
+    "services": [
+      "bedrock-invocation-logging",
+      "s3",
+      "kms"
+    ],
+    "kind": "single",
+    "objectives": [
+      "5.2.2"
+    ],
+    "stem": "Cairnway Outfitters stores Trailmate's model invocation logs in S3. A manager says that logs are not personal data, so no special care is needed. What should the security team answer?",
+    "options": [
+      {
+        "text": "The logs hold customer prompts, so encrypt them, limit access and set retention",
+        "correct": true,
+        "rationale": "Invocation logs hold prompts and answers, which can include customer data, so they need protecting like any sensitive data."
+      },
+      {
+        "text": "The manager is right because logs only contain technical metadata",
+        "correct": false,
+        "rationale": "Invocation logs can include the full request and response, not just metadata."
+      },
+      {
+        "text": "Share the logs with every employee for transparency",
+        "correct": false,
+        "rationale": "Open access to logs holding customer prompts would risk exposure."
+      },
+      {
+        "text": "Leave the logs unencrypted so that auditors can open them quickly without any key setup",
+        "correct": false,
+        "rationale": "Auditors can be given access to encrypted logs. Skipping encryption adds risk."
+      }
+    ],
+    "explanation": "Logs are data too. Prompts and answers may hold customer data, so encryption, restricted access and a retention period apply."
+  },
+  {
+    "id": "5.2-012",
+    "taskId": "5.2",
+    "services": [
+      "cloudwatch",
+      "bedrock"
+    ],
+    "kind": "single",
+    "objectives": [
+      "5.2.2"
+    ],
+    "stem": "Cairnway Outfitters wants to be alerted immediately if the number of blocked Trailmate requests suddenly rises, so that it can watch the system continuously. Which solution supports this monitoring and observation need?",
+    "options": [
+      {
+        "text": "AWS Artifact reports",
+        "correct": false,
+        "rationale": "Artifact provides AWS compliance reports, not live monitoring."
+      },
+      {
+        "text": "S3 Lifecycle rules",
+        "correct": false,
+        "rationale": "Lifecycle rules manage storage classes and expiry, not alerts."
+      },
+      {
+        "text": "Amazon CloudWatch alarms and dashboards",
+        "correct": true,
+        "rationale": "CloudWatch collects metrics and logs and can alarm when a value crosses a limit."
+      },
+      {
+        "text": "A monthly review of the AWS Trusted Advisor checks",
+        "correct": false,
+        "rationale": "A monthly review is periodic, not continuous or immediate."
+      }
+    ],
+    "explanation": "Monitoring and observation means watching continuously for problems. CloudWatch alarms and dashboards do that."
+  },
+  {
+    "id": "5.2-013",
+    "taskId": "5.2",
+    "services": [
+      "s3"
+    ],
+    "kind": "single",
+    "objectives": [
+      "5.2.2"
+    ],
+    "stem": "Which statement best describes a data lifecycle strategy?",
+    "options": [
+      {
+        "text": "Give each user or group access only to the columns and rows they need for their job",
+        "correct": false,
+        "rationale": "This describes fine-grained data access control."
+      },
+      {
+        "text": "Plan what happens to data from creation through use to archiving and deletion",
+        "correct": true,
+        "rationale": "A lifecycle covers the whole life of data, and AWS tools such as S3 Lifecycle can automate parts of it."
+      },
+      {
+        "text": "Keep a record of every API call made in the account",
+        "correct": false,
+        "rationale": "This describes logging of activity, as done by CloudTrail."
+      },
+      {
+        "text": "Choose the Region in which workloads run",
+        "correct": false,
+        "rationale": "This describes data residency."
+      }
+    ],
+    "explanation": "Data lifecycle is the plan for the whole life of data. The other statements describe access control, logging and residency."
+  },
+  {
+    "id": "5.2-014",
+    "taskId": "5.2",
+    "services": [
+      "bedrock"
+    ],
+    "kind": "single",
+    "objectives": [
+      "5.2.3"
+    ],
+    "stem": "Under the Generative AI Security Scoping Matrix, Cairnway Outfitters builds Trailmate as an application that calls an existing foundation model in Amazon Bedrock through an API. Which scope is this?",
+    "options": [
+      {
+        "text": "Scope 1: consumer app",
+        "correct": false,
+        "rationale": "Scope 1 is using a public third-party generative AI service."
+      },
+      {
+        "text": "Scope 4: fine-tuned models",
+        "correct": false,
+        "rationale": "Scope 4 means refining a foundation model with your own data."
+      },
+      {
+        "text": "Scope 3: pre-trained models",
+        "correct": true,
+        "rationale": "Building your own application on an existing foundation model through an API is scope 3."
+      },
+      {
+        "text": "Scope 5: self-trained models",
+        "correct": false,
+        "rationale": "Scope 5 means training a model from scratch."
+      }
+    ],
+    "explanation": "An app on a pre-trained model via API, such as an app on Amazon Bedrock, is scope 3."
+  },
+  {
+    "id": "5.2-015",
+    "taskId": "5.2",
+    "services": [
+      "bedrock"
+    ],
+    "kind": "single",
+    "objectives": [
+      "5.2.3"
+    ],
+    "stem": "Cairnway Outfitters plans to fine-tune a foundation model with its own sales data. How does this change its position in the Generative AI Security Scoping Matrix?",
+    "options": [
+      {
+        "text": "It moves to scope 4, and Cairnway owns more, including training data and the custom model",
+        "correct": true,
+        "rationale": "Higher scopes mean more ownership of the work and the security controls."
+      },
+      {
+        "text": "It stays at scope 3, with nothing new to govern",
+        "correct": false,
+        "rationale": "Fine-tuning adds the training data and the resulting model to Cairnway's responsibilities."
+      },
+      {
+        "text": "It moves to scope 1, so the provider handles everything",
+        "correct": false,
+        "rationale": "Scope 1 is a consumer app, where the provider owns most of the work."
+      },
+      {
+        "text": "It moves to scope 2, because a vendor application is involved",
+        "correct": false,
+        "rationale": "Scope 2 is a vendor's business application with built-in AI, not a fine-tuned model."
+      }
+    ],
+    "explanation": "The higher the scope number, the more you own. Fine-tuning with your own data is scope 4."
+  },
+  {
+    "id": "5.2-016",
+    "taskId": "5.2",
+    "services": [
+      "well-architected-tool"
+    ],
+    "kind": "single",
+    "objectives": [
+      "5.2.3"
+    ],
+    "stem": "Cairnway Outfitters' governance committee wants an AWS framework to help it assess and implement security controls across the AI lifecycle, based on how much of the AI stack it owns. Which framework should it use?",
+    "options": [
+      {
+        "text": "AWS Config conformance packs",
+        "correct": false,
+        "rationale": "Conformance packs bundle compliance rules for resources, not a framework for AI scopes."
+      },
+      {
+        "text": "Generative AI Security Scoping Matrix",
+        "correct": true,
+        "rationale": "It sorts generative AI use into five scopes and guides the controls to prioritize at each."
+      },
+      {
+        "text": "Amazon SageMaker Model Cards",
+        "correct": false,
+        "rationale": "Model Cards document one model. They don't scope an organization's AI use."
+      },
+      {
+        "text": "AWS Well-Architected Tool",
+        "correct": false,
+        "rationale": "This reviews general cloud workloads against best practices and isn't built around AI scopes."
+      }
+    ],
+    "explanation": "A governance framework that depends on how much of the AI stack you own is the Generative AI Security Scoping Matrix."
+  },
+  {
+    "id": "5.2-017",
+    "taskId": "5.2",
+    "services": [
+      "sagemaker-model-cards"
+    ],
+    "kind": "single",
+    "objectives": [
+      "5.2.3"
+    ],
+    "stem": "Cairnway Outfitters' governance committee wants higher-risk AI uses, such as automated refunds, to get more scrutiny than low-risk ones, such as drafting product descriptions. Which review strategy is this?",
+    "options": [
+      {
+        "text": "Reviewing only after an incident",
+        "correct": false,
+        "rationale": "Waiting for an incident is reactive and not a planned review strategy."
+      },
+      {
+        "text": "Giving every use case exactly the same review",
+        "correct": false,
+        "rationale": "This ignores differences in risk and wastes effort on low-risk uses."
+      },
+      {
+        "text": "Reviewing only the tools and never the people involved",
+        "correct": false,
+        "rationale": "Governance covers processes and people, not only tools."
+      },
+      {
+        "text": "Risk-based review",
+        "correct": true,
+        "rationale": "Higher-risk uses get more scrutiny. A Model Card's risk rating can feed this."
+      }
+    ],
+    "explanation": "Scaling scrutiny to risk is a risk-based review strategy."
+  },
+  {
+    "id": "5.2-018",
+    "taskId": "5.2",
+    "services": [
+      "bedrock"
+    ],
+    "kind": "single",
+    "objectives": [
+      "5.2.3"
+    ],
+    "stem": "Cairnway Outfitters wants customers to know they are chatting with an AI assistant and to see which document an answer came from. Which governance measure is this?",
+    "options": [
+      {
+        "text": "Review cadence",
+        "correct": false,
+        "rationale": "This is the schedule for revisiting decisions."
+      },
+      {
+        "text": "Data residency",
+        "correct": false,
+        "rationale": "This is about keeping data in specific Regions."
+      },
+      {
+        "text": "Team training requirements",
+        "correct": false,
+        "rationale": "This is about teaching staff the rules."
+      },
+      {
+        "text": "Transparency standards",
+        "correct": true,
+        "rationale": "Telling users that AI is involved and showing sources are transparency commitments."
+      }
+    ],
+    "explanation": "Disclosing AI use, documenting what it does and citing answers are transparency standards."
+  },
+  {
+    "id": "5.2-019",
+    "taskId": "5.2",
+    "kind": "single",
+    "objectives": [
+      "5.2.3"
+    ],
+    "stem": "Several Cairnway Outfitters employees pasted customer details into a public chatbot website. Which governance measure most directly reduces this risk?",
+    "options": [
+      {
+        "text": "Staff training on what data may go into AI tools, backed by a written policy",
+        "correct": true,
+        "rationale": "Policies and training tell people what's allowed and why."
+      },
+      {
+        "text": "Turning on an AWS Config rule",
+        "correct": false,
+        "rationale": "Config checks AWS resource settings and can't see what staff type on public sites."
+      },
+      {
+        "text": "Scanning every Lambda function and container image with Amazon Inspector each week",
+        "correct": false,
+        "rationale": "Inspector scans for software vulnerabilities and has no role in staff behavior."
+      },
+      {
+        "text": "Buying more Provisioned Throughput",
+        "correct": false,
+        "rationale": "Throughput affects capacity, not staff behavior."
+      }
+    ],
+    "explanation": "The risk comes from people's behavior, so the control is a written policy plus team training."
+  },
+  {
+    "id": "5.2-020",
+    "taskId": "5.2",
+    "services": [
+      "artifact",
+      "cloudtrail"
+    ],
+    "kind": "multi",
+    "objectives": [
+      "5.2.1"
+    ],
+    "select": 2,
+    "stem": "Cairnway Outfitters must show its auditor that AWS meets a standard and also find out who changed a Trailmate guardrail. Which services meet these needs? (Select TWO.)",
+    "options": [
+      {
+        "text": "Amazon Inspector",
+        "correct": false,
+        "rationale": "Inspector scans for vulnerabilities and doesn't provide either."
+      },
+      {
+        "text": "AWS Trusted Advisor",
+        "correct": false,
+        "rationale": "Trusted Advisor gives best-practice advice, not audit reports or API history."
+      },
+      {
+        "text": "Amazon Macie",
+        "correct": false,
+        "rationale": "Macie finds sensitive data in S3."
+      },
+      {
+        "text": "AWS CloudTrail, for the record of who called which API",
+        "correct": true,
+        "rationale": "CloudTrail shows who made the change and when."
+      },
+      {
+        "text": "AWS Artifact, for AWS's compliance reports",
+        "correct": true,
+        "rationale": "Artifact provides AWS's own audit reports."
+      }
+    ],
+    "explanation": "Artifact is the library of AWS's compliance papers, and CloudTrail is the activity log."
+  },
+  {
+    "id": "5.2-021",
+    "taskId": "5.2",
+    "services": [
+      "inspector"
+    ],
+    "kind": "multi",
+    "objectives": [
+      "5.2.1"
+    ],
+    "select": 2,
+    "stem": "Which statements about Amazon Inspector are correct? (Select TWO.)",
+    "options": [
+      {
+        "text": "It finds software vulnerabilities in EC2 instances, container images and Lambda functions",
+        "correct": true,
+        "rationale": "This is Inspector's core job."
+      },
+      {
+        "text": "It records which user called which API",
+        "correct": false,
+        "rationale": "This is CloudTrail's job."
+      },
+      {
+        "text": "It recommends ways to reduce cost",
+        "correct": false,
+        "rationale": "This is Trusted Advisor's job."
+      },
+      {
+        "text": "It provides AWS's ISO and SOC reports",
+        "correct": false,
+        "rationale": "These come from AWS Artifact."
+      },
+      {
+        "text": "It also reports unintended network exposure",
+        "correct": true,
+        "rationale": "AWS describes it as scanning for vulnerabilities and unintended network exposure."
+      }
+    ],
+    "explanation": "Inspector is the vulnerability scanner. Reports come from Artifact, API history from CloudTrail and advice from Trusted Advisor."
+  },
+  {
+    "id": "5.2-022",
+    "taskId": "5.2",
+    "services": [
+      "cloudtrail",
+      "bedrock"
+    ],
+    "sourceLinks": [
+      "https://docs.aws.amazon.com/bedrock/latest/userguide/logging-using-cloudtrail.html",
+      "https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-user-guide.html"
+    ],
+    "kind": "multi",
+    "objectives": [
+      "5.2.1"
+    ],
+    "select": 2,
+    "stem": "Which statements about AWS CloudTrail and Amazon Bedrock are correct? (Select TWO.)",
+    "options": [
+      {
+        "text": "CloudTrail records the text of every prompt by default",
+        "correct": false,
+        "rationale": "Prompt text comes from model invocation logging."
+      },
+      {
+        "text": "Event history keeps management events for 90 days by default",
+        "correct": true,
+        "rationale": "For a longer record you create a trail."
+      },
+      {
+        "text": "Event history keeps events forever",
+        "correct": false,
+        "rationale": "Event history covers only 90 days."
+      },
+      {
+        "text": "Runtime calls such as InvokeModel and Converse are logged as management events",
+        "correct": true,
+        "rationale": "AWS says Bedrock runtime calls appear as management events."
+      },
+      {
+        "text": "Knowledge base retrievals are always logged as management events",
+        "correct": false,
+        "rationale": "These are data events, switched on separately."
+      }
+    ],
+    "explanation": "CloudTrail records the fact of API calls, not the prompt text, and data events must be switched on."
+  },
+  {
+    "id": "5.2-023",
+    "taskId": "5.2",
+    "services": [
+      "s3-lifecycle",
+      "bedrock"
+    ],
+    "kind": "multi",
+    "objectives": [
+      "5.2.2"
+    ],
+    "select": 2,
+    "stem": "Cairnway Outfitters' EU customer data must stay in the EU, and chat logs must be deleted after the policy's retention period. Which measures meet these needs? (Select TWO.)",
+    "options": [
+      {
+        "text": "Review AWS Trusted Advisor monthly",
+        "correct": false,
+        "rationale": "Trusted Advisor gives advice, and doesn't control Regions or retention."
+      },
+      {
+        "text": "Use S3 Lifecycle expiration after the retention period",
+        "correct": true,
+        "rationale": "Expiration actions delete objects automatically."
+      },
+      {
+        "text": "Download AWS reports from AWS Artifact",
+        "correct": false,
+        "rationale": "Artifact doesn't place data or delete it."
+      },
+      {
+        "text": "Run Amazon Inspector on the buckets",
+        "correct": false,
+        "rationale": "Inspector scans for vulnerabilities."
+      },
+      {
+        "text": "Run workloads in an EU Region and check features that could route requests elsewhere",
+        "correct": true,
+        "rationale": "Residency depends on the Region and on feature routing."
+      }
+    ],
+    "explanation": "Residency is handled with Regions, and retention with lifecycle expiration driven by policy."
+  },
+  {
+    "id": "5.2-024",
+    "taskId": "5.2",
+    "services": [
+      "bedrock-invocation-logging",
+      "kms",
+      "s3"
+    ],
+    "kind": "multi",
+    "objectives": [
+      "5.2.2"
+    ],
+    "select": 3,
+    "stem": "Cairnway Outfitters stores Trailmate's invocation logs in S3. Which measures protect these logs as data under good data governance? (Select THREE.)",
+    "options": [
+      {
+        "text": "Apply a retention period to the logs",
+        "correct": true,
+        "rationale": "Retention keeps logs as long as policy requires and no longer."
+      },
+      {
+        "text": "Encrypt the logs",
+        "correct": true,
+        "rationale": "Logs can hold customer prompts."
+      },
+      {
+        "text": "Share the bucket with all developers for debugging",
+        "correct": false,
+        "rationale": "This exposes customer prompts."
+      },
+      {
+        "text": "Turn off invocation logging for good",
+        "correct": false,
+        "rationale": "This removes the audit trail."
+      },
+      {
+        "text": "Restrict who can read the log bucket",
+        "correct": true,
+        "rationale": "Least privilege applies to logs too."
+      },
+      {
+        "text": "Keep the logs forever to be safe",
+        "correct": false,
+        "rationale": "Keeping personal data forever may break privacy rules."
+      }
+    ],
+    "explanation": "Logs are data too: encrypt them, restrict access and set retention."
+  },
+  {
+    "id": "5.2-025",
+    "taskId": "5.2",
+    "services": [
+      "cloudwatch",
+      "config"
+    ],
+    "kind": "multi",
+    "objectives": [
+      "5.2.2"
+    ],
+    "select": 2,
+    "stem": "Which measures give Cairnway Outfitters continuous monitoring and observation of its AI environment? (Select TWO.)",
+    "options": [
+      {
+        "text": "A written AI acceptable-use policy",
+        "correct": false,
+        "rationale": "A policy is important, but it doesn't observe systems."
+      },
+      {
+        "text": "Downloading a report from AWS Artifact",
+        "correct": false,
+        "rationale": "This is a one-time document, not continuous monitoring."
+      },
+      {
+        "text": "AWS Config rules that flag configuration drift",
+        "correct": true,
+        "rationale": "Config flags resources that break a rule."
+      },
+      {
+        "text": "CloudWatch alarms and dashboards on Trailmate's metrics",
+        "correct": true,
+        "rationale": "They alert when values cross limits."
+      },
+      {
+        "text": "S3 Lifecycle transitions",
+        "correct": false,
+        "rationale": "These move data to cheaper storage classes."
+      }
+    ],
+    "explanation": "Monitoring and observation means watching continuously: CloudWatch for metrics and alarms, Config for configuration drift."
+  },
+  {
+    "id": "5.2-026",
+    "taskId": "5.2",
+    "services": [
+      "sagemaker-model-cards"
+    ],
+    "kind": "multi",
+    "objectives": [
+      "5.2.3"
+    ],
+    "select": 2,
+    "stem": "Which measures are governance processes Cairnway Outfitters can adopt for Trailmate? (Select TWO.)",
+    "options": [
+      {
+        "text": "A quarterly review of access and guardrail settings",
+        "correct": true,
+        "rationale": "A review cadence keeps controls current."
+      },
+      {
+        "text": "A written acceptable-use policy for AI",
+        "correct": true,
+        "rationale": "Policies set the rules."
+      },
+      {
+        "text": "Raising the temperature setting",
+        "correct": false,
+        "rationale": "Not a governance process."
+      },
+      {
+        "text": "Installing Amazon Inspector",
+        "correct": false,
+        "rationale": "This is a technical control, not a governance process."
+      },
+      {
+        "text": "Switching to a larger foundation model",
+        "correct": false,
+        "rationale": "Model size isn't governance."
+      }
+    ],
+    "explanation": "Governance includes policies, review cadence, frameworks, transparency and training."
+  },
+  {
+    "id": "5.2-027",
+    "taskId": "5.2",
+    "services": [
+      "sagemaker-model-cards",
+      "bedrock-knowledge-bases"
+    ],
+    "kind": "multi",
+    "objectives": [
+      "5.2.3"
+    ],
+    "select": 3,
+    "stem": "Which measures are transparency standards for Cairnway Outfitters' Trailmate? (Select THREE.)",
+    "options": [
+      {
+        "text": "Encrypting the chat logs",
+        "correct": false,
+        "rationale": "Encryption protects data and isn't a transparency measure."
+      },
+      {
+        "text": "Hiding the AI label to avoid confusion",
+        "correct": false,
+        "rationale": "This is the opposite of transparency."
+      },
+      {
+        "text": "Showing source citations with answers",
+        "correct": true,
+        "rationale": "Citations show where answers come from."
+      },
+      {
+        "text": "Creating an AWS Config rule",
+        "correct": false,
+        "rationale": "Config is for resource compliance."
+      },
+      {
+        "text": "Telling customers they are chatting with an AI assistant",
+        "correct": true,
+        "rationale": "Users should know AI is involved."
+      },
+      {
+        "text": "Publishing a Model Card for models Cairnway builds",
+        "correct": true,
+        "rationale": "Documentation shows what a model is for."
+      }
+    ],
+    "explanation": "Transparency means telling people AI is involved, documenting what it does and citing answers."
+  },
+  {
+    "id": "5.2-028",
+    "taskId": "5.2",
+    "kind": "multi",
+    "objectives": [
+      "5.2.3"
+    ],
+    "select": 2,
+    "stem": "Which statements about the Generative AI Security Scoping Matrix are correct? (Select TWO.)",
+    "options": [
+      {
+        "text": "It replaces the need to follow laws",
+        "correct": false,
+        "rationale": "It is a framework to guide controls, not a legal substitute."
+      },
+      {
+        "text": "Scope 1 means the organization owns the most work",
+        "correct": false,
+        "rationale": "Scope 1 is a consumer app, where the provider owns most."
+      },
+      {
+        "text": "It sorts generative AI use into five scopes, from consumer app to self-trained model",
+        "correct": true,
+        "rationale": "These are the five scopes."
+      },
+      {
+        "text": "The higher the scope number, the more security work the organization owns",
+        "correct": true,
+        "rationale": "Ownership grows with the scope."
+      },
+      {
+        "text": "It scans AWS resources for vulnerabilities",
+        "correct": false,
+        "rationale": "Scanning is Inspector's job."
+      }
+    ],
+    "explanation": "AWS describes five scopes. The higher the scope, the more governance and security controls you are responsible for."
+  },
+  {
+    "id": "5.2-029",
+    "taskId": "5.2",
+    "services": [
+      "s3-lifecycle"
+    ],
+    "kind": "order",
+    "objectives": [
+      "5.2.2"
+    ],
+    "stem": "Put these stages of the data lifecycle in order.",
+    "steps": [
+      "Collect the data",
+      "Store the data",
+      "Use the data",
+      "Archive the data",
+      "Delete the data when retention ends"
+    ],
+    "explanation": "A data lifecycle runs from collection through storage and use to archiving and deletion once the retention period ends."
+  },
+  {
+    "id": "5.2-030",
+    "taskId": "5.2",
+    "kind": "order",
+    "objectives": [
+      "5.2.3"
+    ],
+    "stem": "Put the Generative AI Security Scoping Matrix scopes in order, from the least ownership by the customer to the most.",
+    "steps": [
+      "Consumer app",
+      "Enterprise app",
+      "Pre-trained models",
+      "Fine-tuned models",
+      "Self-trained models"
+    ],
+    "explanation": "Scopes run from using a finished public service (scope 1) to training your own model (scope 5), and the customer owns more of the work as the scope number rises."
+  },
+  {
+    "id": "5.2-031",
+    "taskId": "5.2",
+    "services": [
+      "config",
+      "artifact",
+      "cloudtrail",
+      "inspector",
+      "trusted-advisor"
+    ],
+    "kind": "match",
+    "objectives": [
+      "5.2.1"
+    ],
+    "stem": "Match each governance question with the AWS service that answers it.",
+    "pairs": [
+      {
+        "prompt": "Was every bucket encrypted last month?",
+        "answer": "AWS Config"
+      },
+      {
+        "prompt": "Can we show our auditor that AWS meets a standard?",
+        "answer": "AWS Artifact"
+      },
+      {
+        "prompt": "Who changed the guardrail?",
+        "answer": "AWS CloudTrail"
+      },
+      {
+        "prompt": "Do our container images have known flaws?",
+        "answer": "Amazon Inspector"
+      },
+      {
+        "prompt": "Where are we missing AWS best practice?",
+        "answer": "AWS Trusted Advisor"
+      }
+    ],
+    "explanation": "Each service has a one-line job: Config for settings history, Artifact for AWS reports, CloudTrail for activity, Inspector for vulnerabilities, Trusted Advisor for advice.",
+    "distractors": [
+      "Amazon Macie"
+    ]
+  },
+  {
+    "id": "5.2-032",
+    "taskId": "5.2",
+    "services": [
+      "s3-lifecycle",
+      "cloudwatch",
+      "bedrock-invocation-logging"
+    ],
+    "kind": "match",
+    "objectives": [
+      "5.2.2"
+    ],
+    "stem": "Match each data governance strategy with an AWS example.",
+    "pairs": [
+      {
+        "prompt": "Residency",
+        "answer": "Run workloads in a chosen AWS Region"
+      },
+      {
+        "prompt": "Retention",
+        "answer": "S3 Lifecycle expiration after the compliance period"
+      },
+      {
+        "prompt": "Logging",
+        "answer": "Model invocation logging to S3"
+      },
+      {
+        "prompt": "Monitoring",
+        "answer": "CloudWatch alarms and dashboards"
+      }
+    ],
+    "explanation": "Each strategy has a typical AWS tool: Regions for residency, lifecycle expiration for retention, invocation logging for logs and CloudWatch for monitoring.",
+    "distractors": [
+      "Amazon Inspector scans",
+      "Downloading AWS Artifact reports"
+    ]
+  },
+  {
+    "id": "5.2-033",
+    "taskId": "5.2",
+    "kind": "match",
+    "objectives": [
+      "5.2.3"
+    ],
+    "stem": "Match each governance process with its description.",
+    "pairs": [
+      {
+        "prompt": "Policies",
+        "answer": "Written rules, such as an acceptable-use policy for AI"
+      },
+      {
+        "prompt": "Review cadence",
+        "answer": "A schedule for revisiting decisions, such as quarterly"
+      },
+      {
+        "prompt": "Transparency standards",
+        "answer": "Telling people AI is involved and showing sources"
+      },
+      {
+        "prompt": "Team training requirements",
+        "answer": "Teaching staff what data may go into AI tools"
+      }
+    ],
+    "explanation": "These are four of the governance processes in the lesson. Bundling rules is a Config conformance pack, a technical tool.",
+    "distractors": [
+      "Bundling Config rules into one unit"
+    ]
+  },
+  {
+    "id": "5.2-034",
+    "taskId": "5.2",
+    "services": [
+      "config",
+      "cloudtrail",
+      "s3-lifecycle",
+      "bedrock"
+    ],
+    "kind": "case",
+    "scenario": "Cairnway Outfitters is preparing for an audit of Trailmate, which runs on Amazon Bedrock in an EU Region. It is built on an existing foundation model with Cairnway's own policy documents in a knowledge base. The auditor wants proof that the order-data bucket was encrypted in March, evidence of a sensible retention approach for chat logs, and an explanation of where Trailmate sits in AWS's governance framework for generative AI.",
+    "parts": [
+      {
+        "kind": "single",
+        "objectives": [
+          "5.2.1"
+        ],
+        "stem": "Which service can show how the bucket's encryption setting looked in March?",
+        "options": [
+          {
+            "text": "AWS Trusted Advisor",
+            "correct": false,
+            "rationale": "Trusted Advisor gives current recommendations, not a history of settings."
+          },
+          {
+            "text": "AWS Config",
+            "correct": true,
+            "rationale": "Config records resource configurations and how they changed over time."
+          },
+          {
+            "text": "Amazon Inspector",
+            "correct": false,
+            "rationale": "Inspector scans for vulnerabilities."
+          },
+          {
+            "text": "AWS Artifact",
+            "correct": false,
+            "rationale": "Artifact provides AWS's own compliance reports."
+          }
+        ],
+        "explanation": "The history of a resource's configuration is what AWS Config records."
+      },
+      {
+        "kind": "multi",
+        "objectives": [
+          "5.2.2"
+        ],
+        "select": 2,
+        "stem": "Which measures show a sound retention approach for the chat logs? (Select TWO.)",
+        "options": [
+          {
+            "text": "Turning on Amazon Macie",
+            "correct": false,
+            "rationale": "Macie finds sensitive data and doesn't set retention."
+          },
+          {
+            "text": "Keeping every log forever",
+            "correct": false,
+            "rationale": "This can break privacy rules."
+          },
+          {
+            "text": "Deleting every log after one day",
+            "correct": false,
+            "rationale": "This leaves nothing for audits."
+          },
+          {
+            "text": "A written retention period set by policy and law",
+            "correct": true,
+            "rationale": "Retention periods come from policy, not from engineers' choice."
+          },
+          {
+            "text": "S3 Lifecycle rules that archive and then expire the logs",
+            "correct": true,
+            "rationale": "Lifecycle rules apply the retention period automatically."
+          }
+        ],
+        "explanation": "Retention is a balance set by policy and enforced by lifecycle rules."
+      },
+      {
+        "kind": "single",
+        "objectives": [
+          "5.2.3"
+        ],
+        "stem": "Where does Trailmate sit in the Generative AI Security Scoping Matrix?",
+        "options": [
+          {
+            "text": "Scope 3, because it uses a pre-trained model through an API",
+            "correct": true,
+            "rationale": "An app on an existing foundation model through an API is scope 3."
+          },
+          {
+            "text": "Scope 1, because customers chat with it",
+            "correct": false,
+            "rationale": "Scope 1 is using a public third-party service, not building an app."
+          },
+          {
+            "text": "Scope 4, because it uses Cairnway's documents",
+            "correct": false,
+            "rationale": "Using documents in a knowledge base isn't fine-tuning, which defines scope 4."
+          },
+          {
+            "text": "Scope 5, because it handles Cairnway data",
+            "correct": false,
+            "rationale": "Scope 5 means training a model from scratch."
+          }
+        ],
+        "explanation": "Trailmate builds on an existing model, so it is scope 3. Fine-tuning would make it scope 4."
+      }
+    ]
+  }
+]
