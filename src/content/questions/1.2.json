@@ -3,14 +3,37 @@
     "id": "1.2-001",
     "taskId": "1.2",
     "kind": "single",
-    "objectives": ["1.2.5"],
-    "services": ["textract", "comprehend", "rekognition", "transcribe"],
+    "objectives": [
+      "1.2.5"
+    ],
+    "services": [
+      "textract",
+      "comprehend",
+      "rekognition",
+      "transcribe"
+    ],
     "stem": "Cairnway Outfitters receives hundreds of scanned supplier invoices every week. The finance team wants to pull the invoice number, the totals and the table of line items out of each scan automatically. Which AWS service meets this requirement with the LEAST development effort?",
     "options": [
-      { "text": "Amazon Comprehend", "correct": false, "rationale": "Comprehend analyzes text that is already digital (sentiment, entities, key phrases). It can't read text out of a scanned image, and it doesn't understand tables." },
-      { "text": "Amazon Rekognition", "correct": false, "rationale": "Rekognition can detect short pieces of text in images and video, such as signs, but it isn't built to extract forms and tables from documents." },
-      { "text": "Amazon Textract", "correct": true, "rationale": "Textract is built for documents: it extracts printed and handwritten text, key-value pairs from forms, and tables from scans, with no ML model to build." },
-      { "text": "Amazon Transcribe", "correct": false, "rationale": "Transcribe turns speech in audio into text. Invoices are images, not audio." }
+      {
+        "text": "Amazon Comprehend",
+        "correct": false,
+        "rationale": "Comprehend analyzes text that is already digital (sentiment, entities, key phrases). It can't read text out of a scanned image, and it doesn't understand tables."
+      },
+      {
+        "text": "Amazon Rekognition",
+        "correct": false,
+        "rationale": "Rekognition can detect short pieces of text in images and video, such as signs, but it isn't built to extract forms and tables from documents."
+      },
+      {
+        "text": "Amazon Textract",
+        "correct": true,
+        "rationale": "Textract is built for documents: it extracts printed and handwritten text, key-value pairs from forms, and tables from scans, with no ML model to build."
+      },
+      {
+        "text": "Amazon Transcribe",
+        "correct": false,
+        "rationale": "Transcribe turns speech in audio into text. Invoices are images, not audio."
+      }
     ],
     "explanation": "The key words are scanned documents, fields and tables. That is document extraction, which is exactly what Amazon Textract does as a managed service. The other services work on other inputs: digital text, general images, or audio."
   },
@@ -18,15 +41,1533 @@
     "id": "1.2-002",
     "taskId": "1.2",
     "kind": "match",
-    "objectives": ["1.2.5"],
-    "services": ["transcribe", "polly", "translate", "lex"],
+    "objectives": [
+      "1.2.5"
+    ],
+    "services": [
+      "transcribe",
+      "polly",
+      "translate",
+      "lex"
+    ],
     "stem": "Cairnway Outfitters plans several language features. Match each requirement to the AWS service that provides it.",
     "pairs": [
-      { "prompt": "Turn recorded customer-support calls into searchable text", "answer": "Amazon Transcribe" },
-      { "prompt": "Read product descriptions aloud on the mobile app", "answer": "Amazon Polly" },
-      { "prompt": "Offer the help center in Spanish and German", "answer": "Amazon Translate" }
+      {
+        "prompt": "Turn recorded customer-support calls into searchable text",
+        "answer": "Amazon Transcribe"
+      },
+      {
+        "prompt": "Read product descriptions aloud on the mobile app",
+        "answer": "Amazon Polly"
+      },
+      {
+        "prompt": "Offer the help center in Spanish and German",
+        "answer": "Amazon Translate"
+      }
     ],
-    "distractors": ["Amazon Lex"],
+    "distractors": [
+      "Amazon Lex"
+    ],
     "explanation": "Transcribe is speech-to-text, Polly is text-to-speech, and Translate translates text between languages. Lex builds conversational bots; it uses speech and text, but none of these requirements asks for a chatbot."
+  },
+  {
+    "id": "1.2-003",
+    "taskId": "1.2",
+    "kind": "single",
+    "objectives": [
+      "1.2.1"
+    ],
+    "stem": "Cairnway Outfitters has a fraud model that scores every order. Analysts review only the orders with the highest scores and make the final call. Which value of AI/ML does this describe?",
+    "options": [
+      {
+        "text": "Fully replacing human reviewers",
+        "correct": false,
+        "rationale": "People still make the final call here, so the model is not replacing them."
+      },
+      {
+        "text": "Assisting human decision making",
+        "correct": true,
+        "rationale": "The model recommends and flags, and a person decides. That is decision support."
+      },
+      {
+        "text": "Guaranteeing that no fraud occurs",
+        "correct": false,
+        "rationale": "ML predicts with probabilities. It can't guarantee an outcome."
+      },
+      {
+        "text": "Generating new marketing content",
+        "correct": false,
+        "rationale": "Creating content is generative AI. This model scores orders."
+      }
+    ],
+    "explanation": "The deciding clue is that analysts make the final call using the model's scores. That is assisting human decisions."
+  },
+  {
+    "id": "1.2-004",
+    "taskId": "1.2",
+    "kind": "single",
+    "objectives": [
+      "1.2.1"
+    ],
+    "stem": "Cairnway's review volume is expected to grow from a few hundred to hundreds of thousands per month. The company wants every review sorted by sentiment at the same quality and speed without hiring more staff. Which benefit of AI/ML does this describe?",
+    "options": [
+      {
+        "text": "Explainability",
+        "correct": false,
+        "rationale": "Explainability is about showing why a prediction was made. The stem is about volume."
+      },
+      {
+        "text": "Deterministic outcomes",
+        "correct": false,
+        "rationale": "ML does not guarantee identical outcomes. Growth in volume is a different point."
+      },
+      {
+        "text": "Lower data requirements",
+        "correct": false,
+        "rationale": "ML generally needs lots of data. This isn't a benefit named in the stem."
+      },
+      {
+        "text": "Solution scalability",
+        "correct": true,
+        "rationale": "A model handles very large volumes at consistent quality and speed, day or night."
+      }
+    ],
+    "explanation": "Handling a large and growing volume at the same quality is scalability."
+  },
+  {
+    "id": "1.2-005",
+    "taskId": "1.2",
+    "kind": "single",
+    "objectives": [
+      "1.2.1"
+    ],
+    "stem": "Cairnway's finance team spends days typing supplier invoice details into the accounting system. Which benefit of AI/ML would a document-reading solution mainly provide?",
+    "options": [
+      {
+        "text": "Automation of repetitive work",
+        "correct": true,
+        "rationale": "The system reads and enters the data, so people no longer do the repetitive typing."
+      },
+      {
+        "text": "Finding hidden patterns in huge data sets",
+        "correct": false,
+        "rationale": "That is about discovering relationships in data. The stem is about removing manual typing."
+      },
+      {
+        "text": "Personalization for each customer",
+        "correct": false,
+        "rationale": "Personalization tailors content to individuals, which is unrelated to invoices."
+      },
+      {
+        "text": "Guaranteed accuracy of every field",
+        "correct": false,
+        "rationale": "ML gives probabilities, not guarantees."
+      }
+    ],
+    "explanation": "The clue is repetitive manual work. Removing it is automation."
+  },
+  {
+    "id": "1.2-006",
+    "taskId": "1.2",
+    "kind": "single",
+    "objectives": [
+      "1.2.2"
+    ],
+    "stem": "Cairnway's return policy says items can be returned within 30 days of delivery. The company asks whether it should train an ML model to decide each return request. What is the best advice?",
+    "options": [
+      {
+        "text": "Train a classification model, because return decisions are categories",
+        "correct": false,
+        "rationale": "Even though the output is a category, a fixed rule gives a guaranteed outcome without data or training."
+      },
+      {
+        "text": "Use a foundation model, because policies are written in text",
+        "correct": false,
+        "rationale": "A foundation model can vary its answers. A fixed policy needs a guaranteed result."
+      },
+      {
+        "text": "Use ordinary rules or code, because the policy needs the same exact outcome every time",
+        "correct": true,
+        "rationale": "A fixed policy is deterministic, so a rule is cheaper, safer and always consistent."
+      },
+      {
+        "text": "Use a clustering model to group return requests",
+        "correct": false,
+        "rationale": "Clustering finds groups. It doesn't apply a fixed rule."
+      }
+    ],
+    "explanation": "When a specific outcome is needed instead of a prediction, plain code is the right tool. ML adds cost and risk for no benefit."
+  },
+  {
+    "id": "1.2-007",
+    "taskId": "1.2",
+    "kind": "single",
+    "objectives": [
+      "1.2.2"
+    ],
+    "stem": "A Cairnway team proposes an ML project to automate a task that currently saves about 2,000 euros per year. Building, labeling data, hosting and monitoring the model would cost far more than that each year. What does this analysis show?",
+    "options": [
+      {
+        "text": "The project is appropriate because ML always pays for itself",
+        "correct": false,
+        "rationale": "ML does not always pay off. The numbers decide."
+      },
+      {
+        "text": "The project is appropriate because it can be scaled up later",
+        "correct": false,
+        "rationale": "Possible later scale doesn't offset a current loss."
+      },
+      {
+        "text": "The costs outweigh the benefits, so an AI/ML solution is not appropriate",
+        "correct": true,
+        "rationale": "A cost-benefit analysis compares all costs with the savings, and here the savings are smaller."
+      },
+      {
+        "text": "The project needs a bigger model to become profitable",
+        "correct": false,
+        "rationale": "A bigger model would raise costs further."
+      }
+    ],
+    "explanation": "The clue is that savings are smaller than the build and run costs. That is a poor cost-benefit result."
+  },
+  {
+    "id": "1.2-008",
+    "taskId": "1.2",
+    "kind": "single",
+    "objectives": [
+      "1.2.2"
+    ],
+    "stem": "Cairnway must calculate sales tax for every order in several countries, and each result must match the tax rules exactly. Which approach is most appropriate?",
+    "options": [
+      {
+        "text": "Write the tax rules as ordinary software logic",
+        "correct": true,
+        "rationale": "Exact, deterministic calculations belong in code, which returns the same answer for the same input."
+      },
+      {
+        "text": "Train a regression model on past tax amounts",
+        "correct": false,
+        "rationale": "A regression model predicts approximate numbers, and tax must be exact."
+      },
+      {
+        "text": "Prompt a foundation model to compute the tax",
+        "correct": false,
+        "rationale": "A foundation model can give different or wrong answers, and exact results are needed."
+      },
+      {
+        "text": "Use a clustering model to group similar orders",
+        "correct": false,
+        "rationale": "Clustering finds groups. It does not calculate exact amounts."
+      }
+    ],
+    "explanation": "When a specific, guaranteed outcome is required, use rules or code rather than a prediction."
+  },
+  {
+    "id": "1.2-009",
+    "taskId": "1.2",
+    "kind": "single",
+    "objectives": [
+      "1.2.2"
+    ],
+    "stem": "Which situation is an example of when an AI/ML solution is NOT appropriate?",
+    "options": [
+      {
+        "text": "A company has millions of past records with a repeatable pattern and wants to flag unusual cases",
+        "correct": false,
+        "rationale": "Lots of data and a repeatable pattern are signs that ML can help."
+      },
+      {
+        "text": "A company wants a person to review the highest-risk cases flagged by a model",
+        "correct": false,
+        "rationale": "Decision support is a good use of ML."
+      },
+      {
+        "text": "A company wants to personalize recommendations across a large customer base",
+        "correct": false,
+        "rationale": "Personalization at scale is a strong use of ML."
+      },
+      {
+        "text": "The result must be exact and identical every time, such as applying a fixed fee schedule",
+        "correct": true,
+        "rationale": "ML produces predictions with probabilities, so it is the wrong tool when a guaranteed outcome is needed."
+      }
+    ],
+    "explanation": "ML predicts and does not guarantee, so a need for a specific, exact outcome points away from ML."
+  },
+  {
+    "id": "1.2-010",
+    "taskId": "1.2",
+    "kind": "single",
+    "objectives": [
+      "1.2.3"
+    ],
+    "stem": "Cairnway wants to forecast how many rain jackets it will sell next month, using past monthly sales. Which technique fits?",
+    "options": [
+      {
+        "text": "Classification",
+        "correct": false,
+        "rationale": "Classification predicts a category. The answer here is a number."
+      },
+      {
+        "text": "Regression",
+        "correct": true,
+        "rationale": "Regression predicts a number, such as a quantity of jackets."
+      },
+      {
+        "text": "Clustering",
+        "correct": false,
+        "rationale": "Clustering finds groups in unlabeled data. It does not predict a quantity."
+      },
+      {
+        "text": "Reinforcement learning",
+        "correct": false,
+        "rationale": "Reinforcement learning learns by rewards in an environment. It isn't the standard tool for predicting a number from past data."
+      }
+    ],
+    "explanation": "Predicting a number is regression. Forecasting over time is a special case of predicting numbers."
+  },
+  {
+    "id": "1.2-011",
+    "taskId": "1.2",
+    "kind": "single",
+    "objectives": [
+      "1.2.3"
+    ],
+    "stem": "Cairnway wants to label every incoming review as positive, neutral or negative using thousands of reviews already labeled by staff. Which technique fits?",
+    "options": [
+      {
+        "text": "Regression",
+        "correct": false,
+        "rationale": "Regression predicts a number, not a category."
+      },
+      {
+        "text": "Classification",
+        "correct": true,
+        "rationale": "Classification picks from known categories, learning from labeled examples."
+      },
+      {
+        "text": "Clustering",
+        "correct": false,
+        "rationale": "Clustering finds groups without labels. These categories are known and labeled."
+      },
+      {
+        "text": "Time-series forecasting",
+        "correct": false,
+        "rationale": "Forecasting predicts future values over time. It doesn't assign categories to text."
+      }
+    ],
+    "explanation": "A known set of categories and labeled examples point to classification."
+  },
+  {
+    "id": "1.2-012",
+    "taskId": "1.2",
+    "kind": "single",
+    "objectives": [
+      "1.2.3"
+    ],
+    "stem": "Cairnway's marketing team wants to discover natural groups of shoppers from purchase history. There are no predefined segments. Which technique fits?",
+    "options": [
+      {
+        "text": "Classification",
+        "correct": false,
+        "rationale": "Classification needs predefined categories and labeled examples."
+      },
+      {
+        "text": "Regression",
+        "correct": false,
+        "rationale": "Regression predicts a number, not groups."
+      },
+      {
+        "text": "Rule-based filtering",
+        "correct": false,
+        "rationale": "A rule needs segments to be defined in advance, but none exist."
+      },
+      {
+        "text": "Clustering",
+        "correct": true,
+        "rationale": "Clustering finds groups of similar items in data without labels."
+      }
+    ],
+    "explanation": "Finding groups that nobody defined is clustering, an unsupervised technique."
+  },
+  {
+    "id": "1.2-013",
+    "taskId": "1.2",
+    "kind": "single",
+    "objectives": [
+      "1.2.3"
+    ],
+    "stem": "Cairnway wants to predict whether each customer will cancel their subscription: yes or no. Which technique fits?",
+    "options": [
+      {
+        "text": "Classification",
+        "correct": true,
+        "rationale": "Even with only two possible values, yes or no is a category, so this is classification."
+      },
+      {
+        "text": "Regression",
+        "correct": false,
+        "rationale": "Regression predicts a number such as an amount. Yes or no is a category."
+      },
+      {
+        "text": "Clustering",
+        "correct": false,
+        "rationale": "Clustering groups unlabeled data. The outcome here is a known yes or no."
+      },
+      {
+        "text": "Time-series forecasting",
+        "correct": false,
+        "rationale": "Forecasting predicts values over time. This is a yes-or-no label."
+      }
+    ],
+    "explanation": "A two-value answer is still a category. This is a common trap: yes or no is classification."
+  },
+  {
+    "id": "1.2-014",
+    "taskId": "1.2",
+    "kind": "single",
+    "objectives": [
+      "1.2.4"
+    ],
+    "stem": "Cairnway's product pages show a \"You may also like\" section based on what similar shoppers bought. Which real-world AI application is this?",
+    "options": [
+      {
+        "text": "Speech recognition",
+        "correct": false,
+        "rationale": "Speech recognition turns audio into text. No audio is involved."
+      },
+      {
+        "text": "Fraud detection",
+        "correct": false,
+        "rationale": "Fraud detection flags unusual transactions, not product suggestions."
+      },
+      {
+        "text": "Recommendation system",
+        "correct": true,
+        "rationale": "It suggests items based on the behavior of similar users."
+      },
+      {
+        "text": "Computer vision",
+        "correct": false,
+        "rationale": "Computer vision interprets images and video."
+      }
+    ],
+    "explanation": "Suggesting items from similar users' behavior is the classic recommendation system."
+  },
+  {
+    "id": "1.2-015",
+    "taskId": "1.2",
+    "kind": "single",
+    "objectives": [
+      "1.2.4"
+    ],
+    "stem": "Cairnway wants to flag orders that look unusual compared with past behavior so analysts can review them. Which real-world AI application is this?",
+    "options": [
+      {
+        "text": "Recommendation system",
+        "correct": false,
+        "rationale": "Recommendations suggest products to shoppers, not flag suspicious orders."
+      },
+      {
+        "text": "Natural language processing",
+        "correct": false,
+        "rationale": "NLP works with text. The task here is about transactions."
+      },
+      {
+        "text": "Fraud detection",
+        "correct": true,
+        "rationale": "It flags unusual transactions for review or blocking."
+      },
+      {
+        "text": "Speech recognition",
+        "correct": false,
+        "rationale": "Speech recognition transcribes audio."
+      }
+    ],
+    "explanation": "Flagging unusual transactions is fraud detection."
+  },
+  {
+    "id": "1.2-016",
+    "taskId": "1.2",
+    "kind": "single",
+    "objectives": [
+      "1.2.4"
+    ],
+    "stem": "Trailmate answers return-policy questions by using Cairnway's own policy documents as its source of facts. Which real-world AI application does this illustrate?",
+    "options": [
+      {
+        "text": "A knowledge base that lets a generative assistant answer from company documents",
+        "correct": true,
+        "rationale": "The assistant looks up your documents (retrieval-augmented generation) and answers from them."
+      },
+      {
+        "text": "Time-series forecasting of return volumes",
+        "correct": false,
+        "rationale": "Forecasting predicts future numbers. Trailmate is answering questions from documents."
+      },
+      {
+        "text": "Clustering of return documents",
+        "correct": false,
+        "rationale": "Clustering groups unlabeled items and doesn't answer questions."
+      },
+      {
+        "text": "Computer vision on scanned policies",
+        "correct": false,
+        "rationale": "Computer vision interprets images. The stem is about answering from document content."
+      }
+    ],
+    "explanation": "Answering from the company's own documents is the knowledge-base use of generative AI."
+  },
+  {
+    "id": "1.2-017",
+    "taskId": "1.2",
+    "kind": "single",
+    "objectives": [
+      "1.2.4"
+    ],
+    "stem": "Cairnway wants software that checks photos of returned items to see whether the right product was sent back. Which AI application area does this belong to?",
+    "options": [
+      {
+        "text": "Speech recognition",
+        "correct": false,
+        "rationale": "Speech recognition turns spoken audio into text."
+      },
+      {
+        "text": "Natural language processing",
+        "correct": false,
+        "rationale": "NLP reads and generates language, and these inputs are photos."
+      },
+      {
+        "text": "Forecasting",
+        "correct": false,
+        "rationale": "Forecasting predicts future values from past patterns."
+      },
+      {
+        "text": "Computer vision",
+        "correct": true,
+        "rationale": "Computer vision understands images and video, such as recognizing a product in a photo."
+      }
+    ],
+    "explanation": "The input is photos, so this is computer vision."
+  },
+  {
+    "id": "1.2-018",
+    "taskId": "1.2",
+    "kind": "single",
+    "objectives": [
+      "1.2.5"
+    ],
+    "stem": "Cairnway wants to detect the sentiment of customer reviews and find names and addresses so they can be hidden, without building a model. Which AWS service meets this requirement with the LEAST development effort?",
+    "options": [
+      {
+        "text": "Amazon SageMaker AI",
+        "correct": false,
+        "rationale": "SageMaker AI is a platform for building and training your own models, which is much more effort than a ready-made API."
+      },
+      {
+        "text": "Amazon Comprehend",
+        "correct": true,
+        "rationale": "Comprehend is a managed NLP service for sentiment, entities and key phrases, and it can find and redact personal identifiers."
+      },
+      {
+        "text": "Amazon Textract",
+        "correct": false,
+        "rationale": "Textract extracts text, forms and tables from scanned documents. It doesn't analyze sentiment."
+      },
+      {
+        "text": "Amazon Polly",
+        "correct": false,
+        "rationale": "Polly turns text into speech and does not analyze text."
+      }
+    ],
+    "explanation": "Insight from text points to Comprehend. Building your own model in SageMaker AI is more work when a managed service already does the job."
+  },
+  {
+    "id": "1.2-019",
+    "taskId": "1.2",
+    "kind": "single",
+    "objectives": [
+      "1.2.5"
+    ],
+    "stem": "Cairnway wants to detect inappropriate content in photos that shoppers upload with their reviews. Which AWS service meets this requirement with the LEAST development effort?",
+    "options": [
+      {
+        "text": "Amazon Comprehend",
+        "correct": false,
+        "rationale": "Comprehend analyzes text, not images."
+      },
+      {
+        "text": "Amazon Rekognition",
+        "correct": true,
+        "rationale": "Rekognition is a managed image and video analysis service that can detect objects, text and inappropriate content."
+      },
+      {
+        "text": "Amazon Transcribe",
+        "correct": false,
+        "rationale": "Transcribe converts speech in audio to text."
+      },
+      {
+        "text": "Amazon Lex",
+        "correct": false,
+        "rationale": "Lex builds chatbots with voice or text. It does not analyze photos."
+      }
+    ],
+    "explanation": "Pictures or video call for Amazon Rekognition."
+  },
+  {
+    "id": "1.2-020",
+    "taskId": "1.2",
+    "kind": "single",
+    "objectives": [
+      "1.2.5"
+    ],
+    "stem": "Cairnway wants to show shoppers personalized product recommendations based on their browsing and purchase history, with the LEAST machine learning expertise. Which AWS service should it use?",
+    "options": [
+      {
+        "text": "Amazon Rekognition",
+        "correct": false,
+        "rationale": "Rekognition analyzes images and video, not shopper behavior."
+      },
+      {
+        "text": "Amazon Translate",
+        "correct": false,
+        "rationale": "Translate translates text between languages."
+      },
+      {
+        "text": "Amazon Textract",
+        "correct": false,
+        "rationale": "Textract extracts text and data from documents."
+      },
+      {
+        "text": "Amazon Personalize",
+        "correct": true,
+        "rationale": "Personalize is a managed service that builds real-time recommendations from user-interaction data."
+      }
+    ],
+    "explanation": "Recommended-for-you features map to Amazon Personalize."
+  },
+  {
+    "id": "1.2-021",
+    "taskId": "1.2",
+    "kind": "single",
+    "objectives": [
+      "1.2.5"
+    ],
+    "stem": "Cairnway wants a text and voice chatbot that takes phone orders by recognizing what the caller wants (such as \"track my order\") and collecting details. Which AWS service is designed for this?",
+    "options": [
+      {
+        "text": "Amazon Lex",
+        "correct": true,
+        "rationale": "Lex builds conversational voice and text bots using intents and slots."
+      },
+      {
+        "text": "Amazon Polly",
+        "correct": false,
+        "rationale": "Polly only turns text into speech. It doesn't understand requests."
+      },
+      {
+        "text": "Amazon Comprehend",
+        "correct": false,
+        "rationale": "Comprehend analyzes existing text for insight and does not run conversations."
+      },
+      {
+        "text": "Amazon Textract",
+        "correct": false,
+        "rationale": "Textract reads documents, not conversations."
+      }
+    ],
+    "explanation": "Conversational bots with defined intents are built with Amazon Lex. A generative assistant would use Amazon Bedrock instead."
+  },
+  {
+    "id": "1.2-022",
+    "taskId": "1.2",
+    "kind": "single",
+    "objectives": [
+      "1.2.5"
+    ],
+    "stem": "Cairnway needs a model trained on its own three years of sales data to forecast demand, and no managed AI service already does this job. Which AWS service is the best fit?",
+    "options": [
+      {
+        "text": "Amazon Transcribe",
+        "correct": false,
+        "rationale": "Transcribe turns speech into text. It doesn't forecast demand."
+      },
+      {
+        "text": "Amazon Comprehend",
+        "correct": false,
+        "rationale": "Comprehend analyzes text with pre-trained models, not sales history."
+      },
+      {
+        "text": "Amazon SageMaker AI",
+        "correct": true,
+        "rationale": "SageMaker AI is the platform to build, train and deploy your own ML models."
+      },
+      {
+        "text": "Amazon Polly",
+        "correct": false,
+        "rationale": "Polly turns text into speech."
+      }
+    ],
+    "explanation": "When no ready-made service fits and you need your own model on your own data, use SageMaker AI."
+  },
+  {
+    "id": "1.2-023",
+    "taskId": "1.2",
+    "kind": "single",
+    "objectives": [
+      "1.2.5"
+    ],
+    "stem": "Cairnway's chat support receives messages from customers in many languages, and agents read English. Which AWS service should translate the messages automatically?",
+    "options": [
+      {
+        "text": "Amazon Polly",
+        "correct": false,
+        "rationale": "Polly converts text to spoken audio, not between languages."
+      },
+      {
+        "text": "Amazon Lex",
+        "correct": false,
+        "rationale": "Lex builds chatbots and does not translate."
+      },
+      {
+        "text": "Amazon Translate",
+        "correct": true,
+        "rationale": "Translate is a neural machine translation service for text between languages."
+      },
+      {
+        "text": "Amazon Comprehend",
+        "correct": false,
+        "rationale": "Comprehend analyzes text meaning, such as sentiment. It does not translate."
+      }
+    ],
+    "explanation": "Language A to language B is Amazon Translate."
+  },
+  {
+    "id": "1.2-024",
+    "taskId": "1.2",
+    "kind": "single",
+    "objectives": [
+      "1.2.6"
+    ],
+    "stem": "A regulator requires Cairnway to explain to each customer why their pay-later credit application was declined. The data is a labeled table of past applications. Which approach is most appropriate?",
+    "options": [
+      {
+        "text": "A traditional ML model that can show which factors drove each decision",
+        "correct": true,
+        "rationale": "Explainability and regulation favor a purpose-built, explainable model, and tabular labeled data suits it."
+      },
+      {
+        "text": "A foundation model asked to decide through a prompt",
+        "correct": false,
+        "rationale": "Foundation models are flexible but harder to explain, which is a problem when each decision must be justified."
+      },
+      {
+        "text": "A clustering model that groups applicants without labels",
+        "correct": false,
+        "rationale": "Clustering has no labels and gives no per-decision reasons."
+      },
+      {
+        "text": "A chatbot built with Amazon Lex",
+        "correct": false,
+        "rationale": "Lex builds conversation flows. It does not decide credit."
+      }
+    ],
+    "explanation": "The clues are regulatory pressure and an explainability need, which favor traditional ML."
+  },
+  {
+    "id": "1.2-025",
+    "taskId": "1.2",
+    "kind": "single",
+    "objectives": [
+      "1.2.6"
+    ],
+    "stem": "Cairnway wants first drafts of product descriptions for 12,000 items. It has no labeled examples and wants results quickly, with a person reviewing the text. Which approach is most appropriate?",
+    "options": [
+      {
+        "text": "A regression model trained on past descriptions",
+        "correct": false,
+        "rationale": "Regression predicts numbers, not text."
+      },
+      {
+        "text": "A classification model trained on labeled product data",
+        "correct": false,
+        "rationale": "Classification picks categories and does not write text, and no labeled data exists."
+      },
+      {
+        "text": "A rules table with fixed text templates",
+        "correct": false,
+        "rationale": "Fixed templates won't produce varied, item-specific descriptions."
+      },
+      {
+        "text": "A foundation model through Amazon Bedrock",
+        "correct": true,
+        "rationale": "Open-ended writing with little labeled data and fast results suits prompting a foundation model."
+      }
+    ],
+    "explanation": "Open-ended content creation with little labeled data is where foundation models fit."
+  },
+  {
+    "id": "1.2-026",
+    "taskId": "1.2",
+    "kind": "single",
+    "objectives": [
+      "1.2.6"
+    ],
+    "stem": "A small model must run on handheld scanners in Cairnway's warehouse with limited computing power and a low, predictable cost per prediction. The task is to classify scanned labels into a few known categories. Which approach is most appropriate?",
+    "options": [
+      {
+        "text": "A large foundation model hosted for every scan",
+        "correct": false,
+        "rationale": "A large model is costly and slower, and the task is narrow."
+      },
+      {
+        "text": "A purpose-built traditional ML model",
+        "correct": true,
+        "rationale": "A narrow task with tight operational constraints suits a small, fast, purpose-built model."
+      },
+      {
+        "text": "A multi-step agent that plans each scan",
+        "correct": false,
+        "rationale": "An agent adds cost and unpredictability, and it isn't needed for a narrow classification."
+      },
+      {
+        "text": "A clustering model that finds new categories each day",
+        "correct": false,
+        "rationale": "The categories are known, so classification fits and clustering does not."
+      }
+    ],
+    "explanation": "Operational constraints and a narrow, well-defined task favor traditional ML."
+  },
+  {
+    "id": "1.2-027",
+    "taskId": "1.2",
+    "kind": "single",
+    "objectives": [
+      "1.2.6"
+    ],
+    "stem": "Which statement describes a trade-off of using a foundation model compared with a traditional ML model?",
+    "options": [
+      {
+        "text": "A foundation model always gives the same answer for the same input",
+        "correct": false,
+        "rationale": "Foundation model answers can differ from run to run."
+      },
+      {
+        "text": "A foundation model is flexible but can hallucinate, vary its answers and be harder to explain",
+        "correct": true,
+        "rationale": "Those are the typical trade-offs for the flexibility FMs offer."
+      },
+      {
+        "text": "A foundation model is easier to explain than a simple classifier",
+        "correct": false,
+        "rationale": "Foundation models are usually harder to explain."
+      },
+      {
+        "text": "A foundation model can only perform one narrow task",
+        "correct": false,
+        "rationale": "They are general-purpose, which is their strength."
+      }
+    ],
+    "explanation": "FMs trade flexibility for explainability and consistency. Regulated or exact tasks may call for traditional ML."
+  },
+  {
+    "id": "1.2-028",
+    "taskId": "1.2",
+    "kind": "multi",
+    "objectives": [
+      "1.2.1"
+    ],
+    "stem": "Which TWO are benefits of using AI/ML at Cairnway? (Select TWO.)",
+    "select": 2,
+    "options": [
+      {
+        "text": "It can scale decisions across millions of cases at consistent quality and speed.",
+        "correct": true,
+        "rationale": "Models handle volume that people couldn't."
+      },
+      {
+        "text": "It guarantees the same exact result for every input.",
+        "correct": false,
+        "rationale": "ML predicts with probabilities, so it can't guarantee."
+      },
+      {
+        "text": "It removes the need for any data.",
+        "correct": false,
+        "rationale": "ML learns from data."
+      },
+      {
+        "text": "It can assist analysts by flagging the cases that most need review.",
+        "correct": true,
+        "rationale": "The model supports human decision making."
+      },
+      {
+        "text": "It makes costs vanish once built.",
+        "correct": false,
+        "rationale": "Hosting, monitoring and retraining all cost money."
+      }
+    ],
+    "explanation": "AI/ML shines at scale and as decision support. It never offers guarantees and always needs data."
+  },
+  {
+    "id": "1.2-029",
+    "taskId": "1.2",
+    "kind": "multi",
+    "objectives": [
+      "1.2.1"
+    ],
+    "stem": "Which TWO Cairnway ideas are good fits for AI/ML? (Select TWO.)",
+    "select": 2,
+    "options": [
+      {
+        "text": "Applying a fixed 30-day return rule",
+        "correct": false,
+        "rationale": "A fixed rule is code, not ML."
+      },
+      {
+        "text": "Recommending products to millions of shoppers from their browsing and purchase history",
+        "correct": true,
+        "rationale": "Lots of data and a repeatable pattern with value at volume."
+      },
+      {
+        "text": "Calculating exact sales tax for each order",
+        "correct": false,
+        "rationale": "Exact calculations belong in ordinary software."
+      },
+      {
+        "text": "Adding up an order's item prices",
+        "correct": false,
+        "rationale": "Simple arithmetic needs no ML."
+      },
+      {
+        "text": "Flagging unusual orders for analyst review using past fraud examples",
+        "correct": true,
+        "rationale": "A pattern in data and a decision that matters at volume."
+      }
+    ],
+    "explanation": "ML fits patterns in lots of data at volume. Fixed rules and exact math belong in plain code."
+  },
+  {
+    "id": "1.2-030",
+    "taskId": "1.2",
+    "kind": "multi",
+    "objectives": [
+      "1.2.2"
+    ],
+    "stem": "Which TWO situations make an AI/ML solution inappropriate? (Select TWO.)",
+    "select": 2,
+    "options": [
+      {
+        "text": "There is a large amount of high-quality data and a repeatable pattern",
+        "correct": false,
+        "rationale": "That is the setting where ML helps."
+      },
+      {
+        "text": "The task needs to scale to millions of cases",
+        "correct": false,
+        "rationale": "Scale is a strength of ML."
+      },
+      {
+        "text": "The result must be a specific, guaranteed outcome every time",
+        "correct": true,
+        "rationale": "ML gives predictions, not guarantees."
+      },
+      {
+        "text": "A simple rule already solves the problem",
+        "correct": true,
+        "rationale": "A model adds cost and risk when a rule is enough."
+      },
+      {
+        "text": "Analysts want help prioritizing cases to review",
+        "correct": false,
+        "rationale": "Decision support is a strength of ML."
+      }
+    ],
+    "explanation": "Choose ordinary code when you need an exact outcome or when a simple rule works."
+  },
+  {
+    "id": "1.2-031",
+    "taskId": "1.2",
+    "kind": "multi",
+    "objectives": [
+      "1.2.2"
+    ],
+    "stem": "Cairnway is deciding whether to start an ML project. Which THREE findings argue against it? (Select THREE.)",
+    "select": 3,
+    "options": [
+      {
+        "text": "Millions of labeled examples are available.",
+        "correct": false,
+        "rationale": "Plenty of data supports an ML project."
+      },
+      {
+        "text": "The expected savings are smaller than the cost to build, host and monitor the model.",
+        "correct": true,
+        "rationale": "A cost-benefit analysis would be negative."
+      },
+      {
+        "text": "Only a few dozen low-quality examples exist.",
+        "correct": true,
+        "rationale": "Too little or poor data gives a poor model."
+      },
+      {
+        "text": "Reviewers want predictions to help prioritize their work.",
+        "correct": false,
+        "rationale": "Decision support is a good use."
+      },
+      {
+        "text": "A fixed rule would solve the whole problem.",
+        "correct": true,
+        "rationale": "A rule is cheaper and exact."
+      },
+      {
+        "text": "The same decision must be made millions of times a day.",
+        "correct": false,
+        "rationale": "Volume is where ML adds value."
+      }
+    ],
+    "explanation": "Weak economics, weak data and a simple rule all argue against ML."
+  },
+  {
+    "id": "1.2-032",
+    "taskId": "1.2",
+    "kind": "multi",
+    "objectives": [
+      "1.2.3"
+    ],
+    "stem": "Which TWO Cairnway tasks are classification problems? (Select TWO.)",
+    "select": 2,
+    "options": [
+      {
+        "text": "Predicting the number of tents to stock next month",
+        "correct": false,
+        "rationale": "A number: regression."
+      },
+      {
+        "text": "Deciding whether an order is fraud or legitimate",
+        "correct": true,
+        "rationale": "A choice between known categories."
+      },
+      {
+        "text": "Finding natural customer segments with no labels",
+        "correct": false,
+        "rationale": "Groups discovered from data: clustering."
+      },
+      {
+        "text": "Labeling each review as positive, neutral or negative",
+        "correct": true,
+        "rationale": "A choice among known categories."
+      },
+      {
+        "text": "Estimating next quarter's revenue in euros",
+        "correct": false,
+        "rationale": "A number: regression."
+      }
+    ],
+    "explanation": "Classification picks from known categories, even when there are only two."
+  },
+  {
+    "id": "1.2-033",
+    "taskId": "1.2",
+    "kind": "multi",
+    "objectives": [
+      "1.2.3"
+    ],
+    "stem": "Which TWO Cairnway tasks are regression problems? (Select TWO.)",
+    "select": 2,
+    "options": [
+      {
+        "text": "Predicting how many rain jackets will sell next month",
+        "correct": true,
+        "rationale": "The output is a number."
+      },
+      {
+        "text": "Deciding whether a review is positive or negative",
+        "correct": false,
+        "rationale": "A category: classification."
+      },
+      {
+        "text": "Grouping customers into segments no one defined",
+        "correct": false,
+        "rationale": "Discovered groups: clustering."
+      },
+      {
+        "text": "Predicting whether a customer will cancel: yes or no",
+        "correct": false,
+        "rationale": "A category: classification."
+      },
+      {
+        "text": "Estimating how many euros a customer will spend next year",
+        "correct": true,
+        "rationale": "The output is a number."
+      }
+    ],
+    "explanation": "Regression predicts a number, such as a quantity or an amount."
+  },
+  {
+    "id": "1.2-034",
+    "taskId": "1.2",
+    "kind": "multi",
+    "objectives": [
+      "1.2.4"
+    ],
+    "stem": "Which TWO Cairnway uses are examples of natural language processing? (Select TWO.)",
+    "select": 2,
+    "options": [
+      {
+        "text": "Checking returned-item photos for the correct product",
+        "correct": false,
+        "rationale": "Images are computer vision."
+      },
+      {
+        "text": "Forecasting weekly sales from past figures",
+        "correct": false,
+        "rationale": "Predicting numbers from history is forecasting."
+      },
+      {
+        "text": "Finding the sentiment in written customer reviews",
+        "correct": true,
+        "rationale": "Understanding the meaning of text is NLP."
+      },
+      {
+        "text": "Showing similar products based on shoppers' behavior",
+        "correct": false,
+        "rationale": "That is a recommendation system."
+      },
+      {
+        "text": "Translating the help center into German",
+        "correct": true,
+        "rationale": "Working with human language is NLP."
+      }
+    ],
+    "explanation": "NLP covers reading, classifying, translating and generating text and speech."
+  },
+  {
+    "id": "1.2-035",
+    "taskId": "1.2",
+    "kind": "multi",
+    "objectives": [
+      "1.2.4"
+    ],
+    "stem": "Which TWO Cairnway uses are examples of computer vision? (Select TWO.)",
+    "select": 2,
+    "options": [
+      {
+        "text": "Transcribing recorded support calls",
+        "correct": false,
+        "rationale": "Audio to text is speech recognition."
+      },
+      {
+        "text": "Checking that the right item is in a return photo",
+        "correct": true,
+        "rationale": "Understanding images is computer vision."
+      },
+      {
+        "text": "Detecting inappropriate content in uploaded shopper photos",
+        "correct": true,
+        "rationale": "Analyzing images is computer vision."
+      },
+      {
+        "text": "Summarizing long customer emails",
+        "correct": false,
+        "rationale": "Working with text is NLP."
+      },
+      {
+        "text": "Predicting next month's unit sales",
+        "correct": false,
+        "rationale": "Forecasting predicts numbers."
+      }
+    ],
+    "explanation": "Computer vision is AI that understands images and video."
+  },
+  {
+    "id": "1.2-036",
+    "taskId": "1.2",
+    "kind": "multi",
+    "objectives": [
+      "1.2.5"
+    ],
+    "stem": "Cairnway wants to work with spoken audio. Which TWO AWS services handle speech? (Select TWO.)",
+    "select": 2,
+    "options": [
+      {
+        "text": "Amazon Transcribe",
+        "correct": true,
+        "rationale": "It turns speech in audio into text."
+      },
+      {
+        "text": "Amazon Textract",
+        "correct": false,
+        "rationale": "Textract reads scanned documents, not audio."
+      },
+      {
+        "text": "Amazon Rekognition",
+        "correct": false,
+        "rationale": "Rekognition analyzes images and video."
+      },
+      {
+        "text": "Amazon Polly",
+        "correct": true,
+        "rationale": "It turns text into lifelike speech."
+      },
+      {
+        "text": "Amazon Personalize",
+        "correct": false,
+        "rationale": "Personalize creates recommendations."
+      }
+    ],
+    "explanation": "Transcribe is speech to text, and Polly is text to speech."
+  },
+  {
+    "id": "1.2-037",
+    "taskId": "1.2",
+    "kind": "multi",
+    "objectives": [
+      "1.2.5"
+    ],
+    "stem": "Cairnway needs to extract insight from several kinds of content. Which THREE pairings of content and AWS service are correct? (Select THREE.)",
+    "select": 3,
+    "options": [
+      {
+        "text": "Written reviews: Amazon Polly",
+        "correct": false,
+        "rationale": "Polly speaks text aloud and doesn't analyze it."
+      },
+      {
+        "text": "Scanned invoices: Amazon Textract",
+        "correct": true,
+        "rationale": "Textract extracts text, forms and tables from documents."
+      },
+      {
+        "text": "Written reviews: Amazon Comprehend",
+        "correct": true,
+        "rationale": "Comprehend finds sentiment, entities and key phrases in text."
+      },
+      {
+        "text": "Scanned invoices: Amazon Translate",
+        "correct": false,
+        "rationale": "Translate converts between languages, not extracting fields."
+      },
+      {
+        "text": "Uploaded photos: Amazon Rekognition",
+        "correct": true,
+        "rationale": "Rekognition analyzes images and video."
+      },
+      {
+        "text": "Uploaded photos: Amazon Lex",
+        "correct": false,
+        "rationale": "Lex builds chatbots."
+      }
+    ],
+    "explanation": "Match the input to the service: documents to Textract, text to Comprehend, images to Rekognition."
+  },
+  {
+    "id": "1.2-038",
+    "taskId": "1.2",
+    "kind": "multi",
+    "objectives": [
+      "1.2.6"
+    ],
+    "stem": "Which TWO conditions point to a traditional ML model rather than a foundation model? (Select TWO.)",
+    "select": 2,
+    "options": [
+      {
+        "text": "The task is open-ended drafting of marketing text.",
+        "correct": false,
+        "rationale": "Open-ended content points to a foundation model."
+      },
+      {
+        "text": "There is almost no labeled data and results are needed quickly.",
+        "correct": false,
+        "rationale": "That favors prompting a foundation model."
+      },
+      {
+        "text": "Auditors must understand why each prediction was made.",
+        "correct": true,
+        "rationale": "Explainability favors simpler, purpose-built models."
+      },
+      {
+        "text": "The task is narrow and well defined, such as a fraud classifier using labeled tabular data.",
+        "correct": true,
+        "rationale": "Narrow tasks with labeled data suit traditional ML."
+      },
+      {
+        "text": "One model must handle many different language tasks.",
+        "correct": false,
+        "rationale": "General-purpose flexibility favors a foundation model."
+      }
+    ],
+    "explanation": "Explainability, regulation and narrow, well-defined tasks favor traditional ML."
+  },
+  {
+    "id": "1.2-039",
+    "taskId": "1.2",
+    "kind": "multi",
+    "objectives": [
+      "1.2.6"
+    ],
+    "stem": "Which TWO conditions point to a foundation model rather than a traditional ML model? (Select TWO.)",
+    "select": 2,
+    "options": [
+      {
+        "text": "The task is open-ended, such as summarizing or drafting text.",
+        "correct": true,
+        "rationale": "Foundation models are strong at open-ended language tasks."
+      },
+      {
+        "text": "A regulator requires an explanation for each individual decision.",
+        "correct": false,
+        "rationale": "That favors an explainable traditional model."
+      },
+      {
+        "text": "There is little labeled data and the team wants results through prompting.",
+        "correct": true,
+        "rationale": "FMs can work without a custom training set."
+      },
+      {
+        "text": "A tiny model must run on a handheld device at low cost.",
+        "correct": false,
+        "rationale": "Operational constraints favor a small purpose-built model."
+      },
+      {
+        "text": "The task is a narrow yes-or-no classification on a table.",
+        "correct": false,
+        "rationale": "A traditional classifier is a better fit."
+      }
+    ],
+    "explanation": "Open-ended content and little labeled data favor foundation models."
+  },
+  {
+    "id": "1.2-040",
+    "taskId": "1.2",
+    "kind": "order",
+    "objectives": [
+      "1.2.5"
+    ],
+    "stem": "Cairnway wants to analyze recorded Spanish-language support calls. Put the AWS services in the order the data should flow through them.",
+    "steps": [
+      "Amazon Transcribe turns the call audio into Spanish text",
+      "Amazon Translate converts the Spanish text into English",
+      "Amazon Comprehend finds the sentiment in the English text"
+    ],
+    "explanation": "Audio must become text first, the text is then translated, and the translated text is analyzed for sentiment."
+  },
+  {
+    "id": "1.2-041",
+    "taskId": "1.2",
+    "kind": "order",
+    "objectives": [
+      "1.2.5"
+    ],
+    "stem": "Cairnway wants to turn a Spanish-speaking customer's recorded voicemail into spoken English audio. Put the steps in the correct order.",
+    "steps": [
+      "Amazon Transcribe converts the voicemail audio into Spanish text",
+      "Amazon Translate converts the Spanish text into English text",
+      "Amazon Polly turns the English text into spoken audio"
+    ],
+    "explanation": "Speech to text comes first, then translation between languages, then text to speech."
+  },
+  {
+    "id": "1.2-042",
+    "taskId": "1.2",
+    "kind": "order",
+    "objectives": [
+      "1.2.5",
+      "1.2.4"
+    ],
+    "stem": "Cairnway receives scanned supplier price lists in German. Put the steps in the correct order to find the key phrases in English.",
+    "steps": [
+      "Amazon Textract extracts the text from the scanned pages",
+      "Amazon Translate converts the German text into English",
+      "Amazon Comprehend identifies key phrases in the English text"
+    ],
+    "explanation": "Textract reads the scans into text, Translate converts the language, and Comprehend analyzes the resulting text."
+  },
+  {
+    "id": "1.2-043",
+    "taskId": "1.2",
+    "kind": "match",
+    "objectives": [
+      "1.2.3"
+    ],
+    "stem": "Match each Cairnway question to the technique that answers it.",
+    "pairs": [
+      {
+        "prompt": "How many jackets will we sell next month?",
+        "answer": "Regression"
+      },
+      {
+        "prompt": "Is this review positive, neutral or negative?",
+        "answer": "Classification"
+      },
+      {
+        "prompt": "Which shoppers naturally belong together?",
+        "answer": "Clustering"
+      }
+    ],
+    "distractors": [
+      "Reinforcement learning"
+    ],
+    "explanation": "A number is regression, a known category is classification and groups nobody defined are clustering."
+  },
+  {
+    "id": "1.2-044",
+    "taskId": "1.2",
+    "kind": "match",
+    "objectives": [
+      "1.2.5"
+    ],
+    "stem": "Match each Cairnway requirement to the AWS service that meets it with the least effort.",
+    "pairs": [
+      {
+        "prompt": "Find the sentiment of written product reviews",
+        "answer": "Amazon Comprehend"
+      },
+      {
+        "prompt": "Detect inappropriate content in uploaded shopper photos",
+        "answer": "Amazon Rekognition"
+      },
+      {
+        "prompt": "Show \"recommended for you\" products to each shopper",
+        "answer": "Amazon Personalize"
+      },
+      {
+        "prompt": "Build a bot that understands phone requests such as \"track my order\"",
+        "answer": "Amazon Lex"
+      }
+    ],
+    "distractors": [
+      "Amazon Textract",
+      "Amazon Polly"
+    ],
+    "explanation": "Comprehend analyzes text, Rekognition analyzes images, Personalize recommends and Lex builds conversational bots. Textract reads documents and Polly speaks text."
+  },
+  {
+    "id": "1.2-045",
+    "taskId": "1.2",
+    "kind": "match",
+    "objectives": [
+      "1.2.1"
+    ],
+    "stem": "Match each value of AI/ML to the Cairnway example that shows it.",
+    "pairs": [
+      {
+        "prompt": "Assisting human decision making",
+        "answer": "A fraud model scores orders so analysts review the riskiest ones"
+      },
+      {
+        "prompt": "Solution scalability",
+        "answer": "Every review is sorted by sentiment no matter how many arrive"
+      },
+      {
+        "prompt": "Automation",
+        "answer": "Invoice details are read and entered with no one typing"
+      },
+      {
+        "prompt": "Personalization",
+        "answer": "Each shopper sees products tailored to their history"
+      }
+    ],
+    "distractors": [
+      "A guaranteed identical result for every input"
+    ],
+    "explanation": "Decision support, scalability, automation and personalization are the main values. A guaranteed identical result is not something ML promises."
+  },
+  {
+    "id": "1.2-046",
+    "taskId": "1.2",
+    "kind": "case",
+    "scenario": "Cairnway Outfitters is launching pay-later instalments for EU customers. Three ideas are on the table. The first is to apply the 30-day return policy automatically to every return request. The second is to decide which customers qualify for instalment credit; regulators require that each decision be explained, and the company has a labeled table of past applications. The third is to predict, for each approved customer, whether they will repay on time.",
+    "parts": [
+      {
+        "kind": "single",
+        "objectives": [
+          "1.2.2"
+        ],
+        "stem": "Which approach is most appropriate for applying the 30-day return policy?",
+        "options": [
+          {
+            "text": "A classification model trained on past returns",
+            "correct": false,
+            "rationale": "A model predicts rather than guarantees, and the policy is a fixed rule."
+          },
+          {
+            "text": "A foundation model that reads the policy text",
+            "correct": false,
+            "rationale": "A foundation model can vary its answers, and the policy needs an exact result."
+          },
+          {
+            "text": "A clustering model of return requests",
+            "correct": false,
+            "rationale": "Clustering finds groups. It doesn't apply a fixed rule."
+          },
+          {
+            "text": "Ordinary rules or code, because the policy needs the same exact outcome every time",
+            "correct": true,
+            "rationale": "A fixed policy is deterministic, so a rule is cheaper, safer and consistent."
+          }
+        ],
+        "explanation": "A specific outcome is needed instead of a prediction, so plain code beats ML."
+      },
+      {
+        "kind": "single",
+        "objectives": [
+          "1.2.6"
+        ],
+        "stem": "Which approach is most appropriate for the credit qualification decisions?",
+        "options": [
+          {
+            "text": "A traditional ML model that can show which factors drove each decision",
+            "correct": true,
+            "rationale": "Regulation and explainability needs, plus labeled tabular data, favor a purpose-built explainable model."
+          },
+          {
+            "text": "A foundation model prompted to approve or decline",
+            "correct": false,
+            "rationale": "It is flexible but harder to explain, which conflicts with the regulator's requirement."
+          },
+          {
+            "text": "A text-to-speech service to read decisions aloud",
+            "correct": false,
+            "rationale": "Speech output does not make the decisions."
+          },
+          {
+            "text": "A clustering model that finds groups of applicants",
+            "correct": false,
+            "rationale": "Clustering has no labels and gives no per-decision reasons."
+          }
+        ],
+        "explanation": "The regulator's explanation requirement is the deciding clue, and it favors traditional ML."
+      },
+      {
+        "kind": "single",
+        "objectives": [
+          "1.2.3"
+        ],
+        "stem": "Which technique fits predicting whether each customer will repay on time?",
+        "options": [
+          {
+            "text": "Regression",
+            "correct": false,
+            "rationale": "Regression predicts a number, but this outcome is a category."
+          },
+          {
+            "text": "Clustering",
+            "correct": false,
+            "rationale": "Clustering finds groups without labels."
+          },
+          {
+            "text": "Classification",
+            "correct": true,
+            "rationale": "The answer is one of two known categories (on time or not), learned from labeled examples."
+          },
+          {
+            "text": "Time-series forecasting",
+            "correct": false,
+            "rationale": "Forecasting predicts values over time, not a repay-or-not label."
+          }
+        ],
+        "explanation": "Yes-or-no outcomes are classification."
+      }
+    ]
   }
 ]

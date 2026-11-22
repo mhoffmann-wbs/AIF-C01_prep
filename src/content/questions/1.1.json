@@ -1,0 +1,1324 @@
+[
+  {
+    "id": "1.1-001",
+    "taskId": "1.1",
+    "kind": "single",
+    "services": [
+      "sagemaker-ai"
+    ],
+    "objectives": [
+      "1.1.1"
+    ],
+    "stem": "Cairnway Outfitters has trained a fraud model. The team now sends each new order to the model and receives a fraud score within a second. What is this step called?",
+    "options": [
+      {
+        "text": "Training",
+        "correct": false,
+        "rationale": "Training is the earlier step in which the model learns patterns from past data. The model here is already trained."
+      },
+      {
+        "text": "Inferencing",
+        "correct": true,
+        "rationale": "Inferencing is using a trained model to produce an output for new input. Scoring a new order is exactly that."
+      },
+      {
+        "text": "Labeling",
+        "correct": false,
+        "rationale": "Labeling means attaching the correct answer to example data. It prepares training data and does not score new orders."
+      },
+      {
+        "text": "Clustering",
+        "correct": false,
+        "rationale": "Clustering groups similar items without labels. It is a learning task, not the name for using a model on new input."
+      }
+    ],
+    "explanation": "The deciding clue is that an already trained model receives new input and returns a score. Training is learning from data, and inferencing is putting that learning to work."
+  },
+  {
+    "id": "1.1-002",
+    "taskId": "1.1",
+    "kind": "single",
+    "objectives": [
+      "1.1.1"
+    ],
+    "stem": "Cairnway's first fraud model scores 99% on the data it was trained on but performs poorly on last month's orders. Which term describes this problem?",
+    "options": [
+      {
+        "text": "Underfitting",
+        "correct": false,
+        "rationale": "Underfitting means the model is too simple and does badly even on its training data. Here the training score is excellent."
+      },
+      {
+        "text": "Inferencing",
+        "correct": false,
+        "rationale": "Inferencing is the act of using a trained model. It is not a name for a quality problem."
+      },
+      {
+        "text": "Clustering",
+        "correct": false,
+        "rationale": "Clustering is a way of finding groups in unlabeled data. It does not describe a gap between training and new-data performance."
+      },
+      {
+        "text": "Overfitting",
+        "correct": true,
+        "rationale": "The model memorized its training examples, including noise, so it does well on them but badly on new data."
+      }
+    ],
+    "explanation": "Great results on training data and poor results on new data point to overfitting. Underfitting would show poor results on both."
+  },
+  {
+    "id": "1.1-003",
+    "taskId": "1.1",
+    "kind": "single",
+    "objectives": [
+      "1.1.1"
+    ],
+    "stem": "Cairnway's training data for a new recommendation model comes almost entirely from domestic orders. The model works poorly for customers in other countries. Which concern does this illustrate?",
+    "options": [
+      {
+        "text": "Bias, because the training data under-represents some groups of customers",
+        "correct": true,
+        "rationale": "A model learns the patterns in the data it sees. When some groups are missing, its results are skewed against them."
+      },
+      {
+        "text": "Underfitting, because the model has too many layers",
+        "correct": false,
+        "rationale": "Underfitting means the model is too simple. The stem points to missing groups in the data, not to the model's complexity."
+      },
+      {
+        "text": "Inferencing latency, because the endpoint answers too slowly",
+        "correct": false,
+        "rationale": "Latency is about speed of response. The customers get poor results, not slow ones."
+      },
+      {
+        "text": "Overfitting, because the model was trained for too short a time",
+        "correct": false,
+        "rationale": "Overfitting is memorizing the training data, and it is not caused by short training. The issue here is who is in the data."
+      }
+    ],
+    "explanation": "The clue is that nearly all examples came from one group. Unrepresentative training data produces biased results, which is a fairness risk for the groups left out."
+  },
+  {
+    "id": "1.1-004",
+    "taskId": "1.1",
+    "kind": "single",
+    "objectives": [
+      "1.1.1"
+    ],
+    "stem": "Which statement describes a large language model (LLM)?",
+    "options": [
+      {
+        "text": "A rule-based program that follows hand-written if-then statements about words",
+        "correct": false,
+        "rationale": "An LLM is not hand-written rules. It learns patterns from data."
+      },
+      {
+        "text": "A labeled data set that stores the correct answer for every sentence",
+        "correct": false,
+        "rationale": "A data set is training material. An LLM is a model that has learned from data."
+      },
+      {
+        "text": "A very large deep-learning model trained on huge amounts of text that can understand and generate language",
+        "correct": true,
+        "rationale": "That is the definition: size, deep learning and text training give it broad language ability."
+      },
+      {
+        "text": "A small statistical model that predicts a single number from a table",
+        "correct": false,
+        "rationale": "That describes a narrow regression model. An LLM is large and works with language."
+      }
+    ],
+    "explanation": "An LLM combines three ideas: deep learning, very large scale and language data. Rule-based programs and plain data sets are not models that learned from text."
+  },
+  {
+    "id": "1.1-005",
+    "taskId": "1.1",
+    "kind": "single",
+    "objectives": [
+      "1.1.1"
+    ],
+    "stem": "Which statement correctly distinguishes an algorithm from a model in machine learning?",
+    "options": [
+      {
+        "text": "An algorithm is the trained result that makes predictions, and the model is the method used to train it",
+        "correct": false,
+        "rationale": "This reverses the terms. The model is the output of training."
+      },
+      {
+        "text": "An algorithm and a model are the same thing, so the terms can be swapped freely",
+        "correct": false,
+        "rationale": "They are related but different: the method versus the learned result."
+      },
+      {
+        "text": "An algorithm is the step-by-step method for learning from data, and the model is the result of applying it to training data",
+        "correct": true,
+        "rationale": "The algorithm is the recipe. The trained model is what comes out and what you call for predictions."
+      },
+      {
+        "text": "An algorithm is the data set, and the model is the storage location of that data",
+        "correct": false,
+        "rationale": "Neither term means data or storage."
+      }
+    ],
+    "explanation": "Remember recipe versus dish. The algorithm is the recipe for learning, and the model is the learned result you use for inferencing."
+  },
+  {
+    "id": "1.1-006",
+    "taskId": "1.1",
+    "kind": "single",
+    "objectives": [
+      "1.1.1"
+    ],
+    "stem": "Cairnway wants software that reads the text of customer reviews and works out what each customer is asking for. Which field of AI does this describe?",
+    "options": [
+      {
+        "text": "Natural language processing (NLP)",
+        "correct": true,
+        "rationale": "NLP is AI that works with human language: reading, classifying, translating or generating text."
+      },
+      {
+        "text": "Computer vision",
+        "correct": false,
+        "rationale": "Computer vision understands images and video. Reviews are written text."
+      },
+      {
+        "text": "Reinforcement learning",
+        "correct": false,
+        "rationale": "Reinforcement learning is a way of learning from rewards. It is not a field defined by the type of input."
+      },
+      {
+        "text": "Time-series forecasting",
+        "correct": false,
+        "rationale": "Forecasting predicts future values from data recorded over time. It does not interpret the meaning of text."
+      }
+    ],
+    "explanation": "The input is human language in written form, which is the territory of natural language processing."
+  },
+  {
+    "id": "1.1-007",
+    "taskId": "1.1",
+    "kind": "single",
+    "objectives": [
+      "1.1.2"
+    ],
+    "stem": "Cairnway has a rule in its checkout code: orders over 100 euros ship free. A colleague calls this a machine learning model. What is the most accurate response?",
+    "options": [
+      {
+        "text": "It is machine learning, because any software that makes a decision counts",
+        "correct": false,
+        "rationale": "Making a decision is not enough. ML requires learning patterns from data."
+      },
+      {
+        "text": "It is deep learning, because the rule is applied to every order automatically",
+        "correct": false,
+        "rationale": "Deep learning uses many-layered neural networks learned from data. Automation alone does not qualify."
+      },
+      {
+        "text": "It is generative AI, because the rule produces a shipping outcome",
+        "correct": false,
+        "rationale": "Generative AI creates new content such as text or images. A shipping rule does not."
+      },
+      {
+        "text": "It is not machine learning, because nothing is learned from data; it is a fixed rule",
+        "correct": true,
+        "rationale": "ML finds patterns from example data. A hand-written rule applies the same fixed logic every time."
+      }
+    ],
+    "explanation": "The rule was written by a person and is not learned from data, so it is at most AI in a very broad sense and not ML."
+  },
+  {
+    "id": "1.1-008",
+    "taskId": "1.1",
+    "kind": "single",
+    "objectives": [
+      "1.1.2"
+    ],
+    "stem": "Trailmate, Cairnway's support assistant, will now look up a customer's order, check the return policy and start the return on its own after planning those steps. Which term best describes this capability?",
+    "options": [
+      {
+        "text": "Unsupervised clustering",
+        "correct": false,
+        "rationale": "Clustering groups unlabeled data. It does not plan or take actions."
+      },
+      {
+        "text": "Agentic AI",
+        "correct": true,
+        "rationale": "Agentic AI plans steps and uses tools to reach a goal, rather than only answering one question."
+      },
+      {
+        "text": "Computer vision",
+        "correct": false,
+        "rationale": "Computer vision interprets images and video. No images are involved here."
+      },
+      {
+        "text": "A rules-based decision table",
+        "correct": false,
+        "rationale": "A decision table applies fixed rules. Trailmate decides which steps to take and calls tools."
+      }
+    ],
+    "explanation": "The clue is that the system plans and takes actions with tools to reach a goal. That is agentic AI, built on a generative model."
+  },
+  {
+    "id": "1.1-009",
+    "taskId": "1.1",
+    "kind": "single",
+    "objectives": [
+      "1.1.2"
+    ],
+    "stem": "Which statement correctly describes how AI, machine learning and deep learning relate to each other?",
+    "options": [
+      {
+        "text": "Machine learning is a subset of deep learning, which is a subset of AI",
+        "correct": false,
+        "rationale": "This reverses the middle two. Deep learning is the more specific technique."
+      },
+      {
+        "text": "Deep learning is a subset of machine learning, which is a subset of AI",
+        "correct": true,
+        "rationale": "The circles nest: AI is the broadest, ML sits inside it, and deep learning sits inside ML."
+      },
+      {
+        "text": "AI is a subset of machine learning, because ML came first",
+        "correct": false,
+        "rationale": "AI is the umbrella term and contains ML."
+      },
+      {
+        "text": "The three are separate fields that do not overlap",
+        "correct": false,
+        "rationale": "They are nested, not separate."
+      }
+    ],
+    "explanation": "The nesting order is fixed: AI contains ML, and ML contains deep learning. Generative AI builds on deep learning."
+  },
+  {
+    "id": "1.1-010",
+    "taskId": "1.1",
+    "kind": "single",
+    "objectives": [
+      "1.1.2"
+    ],
+    "stem": "Cairnway compares its fraud classifier with Trailmate, which is built on a foundation model. Which statement describes a key difference between the two?",
+    "options": [
+      {
+        "text": "The classifier creates new text, while the foundation model only outputs fraud labels",
+        "correct": false,
+        "rationale": "This swaps them. The foundation model is the one that generates content."
+      },
+      {
+        "text": "Both can perform any task equally well without further work",
+        "correct": false,
+        "rationale": "A narrow classifier can't be prompted to write replies, and a foundation model is not tuned for one narrow job."
+      },
+      {
+        "text": "The classifier is generative AI, and the foundation model is traditional ML",
+        "correct": false,
+        "rationale": "The foundation model is generative AI. The fraud classifier is traditional ML."
+      },
+      {
+        "text": "The classifier usually does one narrow job and outputs a label, while the foundation model can handle many tasks through prompts and create new content",
+        "correct": true,
+        "rationale": "Classic ML models are purpose-built, while foundation models are general and generative."
+      }
+    ],
+    "explanation": "A narrow classifier gives a label for one job. A foundation model is general-purpose and generates content, which is the main contrast on the exam."
+  },
+  {
+    "id": "1.1-011",
+    "taskId": "1.1",
+    "kind": "single",
+    "objectives": [
+      "1.1.2"
+    ],
+    "stem": "Cairnway's data scientists describe their image-recognition approach as using a neural network with many layers that learns from product photos. Which term best describes the approach?",
+    "options": [
+      {
+        "text": "Deep learning",
+        "correct": true,
+        "rationale": "Deep learning is ML that uses neural networks with many layers, and it excels at images."
+      },
+      {
+        "text": "Rules-based programming",
+        "correct": false,
+        "rationale": "Rules are written by hand. This approach learns from photos."
+      },
+      {
+        "text": "Reinforcement learning",
+        "correct": false,
+        "rationale": "Reinforcement learning learns by rewards and penalties. The stem describes the kind of model, not a reward system."
+      },
+      {
+        "text": "Agentic AI",
+        "correct": false,
+        "rationale": "Agentic AI plans and acts with tools. Nothing here involves planning or tool use."
+      }
+    ],
+    "explanation": "Many layered neural networks learning from images define deep learning, a subset of machine learning."
+  },
+  {
+    "id": "1.1-012",
+    "taskId": "1.1",
+    "kind": "single",
+    "services": [
+      "sagemaker-ai"
+    ],
+    "objectives": [
+      "1.1.3"
+    ],
+    "stem": "During checkout, Cairnway must decide within a second whether a payment looks fraudulent, and the model must always be ready for the next request. Which inference type fits?",
+    "options": [
+      {
+        "text": "Batch inference",
+        "correct": false,
+        "rationale": "Batch processes a whole data set at once and stops. The checkout can't wait for a scheduled job."
+      },
+      {
+        "text": "Asynchronous inference",
+        "correct": false,
+        "rationale": "Asynchronous queues requests and returns results later. A checkout needs the answer straight away."
+      },
+      {
+        "text": "Real-time inference",
+        "correct": true,
+        "rationale": "A real-time endpoint is always on and answers each request immediately, which suits a check during payment."
+      },
+      {
+        "text": "Serverless inference",
+        "correct": false,
+        "rationale": "Serverless suits bursty traffic and tolerates a cold start delay. A checkout check must be reliably instant."
+      }
+    ],
+    "explanation": "Interactive, low-latency answers mean real-time inference."
+  },
+  {
+    "id": "1.1-013",
+    "taskId": "1.1",
+    "kind": "single",
+    "services": [
+      "sagemaker-ai"
+    ],
+    "objectives": [
+      "1.1.3"
+    ],
+    "stem": "Every night Cairnway wants to score all 12,000 products for demand. No one waits for the results, and the team doesn't want to keep an endpoint running all day. Which inference type is the best fit?",
+    "options": [
+      {
+        "text": "Real-time inference",
+        "correct": false,
+        "rationale": "Real-time keeps an always-on endpoint. That is unnecessary cost for a nightly job."
+      },
+      {
+        "text": "Asynchronous inference",
+        "correct": false,
+        "rationale": "Asynchronous suits individual large or slow requests. A whole data set scored on a schedule is batch."
+      },
+      {
+        "text": "Batch inference",
+        "correct": true,
+        "rationale": "A batch job runs the model over the whole data set, writes the predictions to storage and stops, with no persistent endpoint."
+      },
+      {
+        "text": "Serverless inference",
+        "correct": false,
+        "rationale": "Serverless fits bursty, request-by-request traffic. It is not designed to score a whole data set at once."
+      }
+    ],
+    "explanation": "The clues are a whole data set, a schedule and no persistent endpoint. That is batch inference."
+  },
+  {
+    "id": "1.1-014",
+    "taskId": "1.1",
+    "kind": "single",
+    "services": [
+      "sagemaker-ai"
+    ],
+    "objectives": [
+      "1.1.3"
+    ],
+    "stem": "Cairnway's catalog team uploads large scanned supplier catalogs that each take several minutes to process. Callers don't need to wait on the line for the answer. Which inference type fits?",
+    "options": [
+      {
+        "text": "Asynchronous inference",
+        "correct": true,
+        "rationale": "Requests go into a queue and are processed in the background, which suits large or slow payloads when no immediate reply is needed."
+      },
+      {
+        "text": "Real-time inference",
+        "correct": false,
+        "rationale": "Real-time is designed for answers in milliseconds to seconds, not minutes-long jobs."
+      },
+      {
+        "text": "Batch inference",
+        "correct": false,
+        "rationale": "Batch scores a whole data set on a schedule. These are individual uploads arriving over time."
+      },
+      {
+        "text": "Serverless inference",
+        "correct": false,
+        "rationale": "Serverless is aimed at bursty traffic with idle gaps. It is not the choice for very large or long-running requests."
+      }
+    ],
+    "explanation": "Large payloads and long processing times with no need for an immediate reply point to asynchronous inference."
+  },
+  {
+    "id": "1.1-015",
+    "taskId": "1.1",
+    "kind": "single",
+    "services": [
+      "sagemaker-ai"
+    ],
+    "objectives": [
+      "1.1.3"
+    ],
+    "stem": "Cairnway's returns-photo checker is used only a few times a day and sits idle the rest of the time. A short delay while the model wakes up is acceptable. Which inference type is the most cost-effective?",
+    "options": [
+      {
+        "text": "Real-time inference with an always-on endpoint",
+        "correct": false,
+        "rationale": "An always-on endpoint keeps running, and paying for it while idle wastes money."
+      },
+      {
+        "text": "Batch inference over the whole day's photos",
+        "correct": false,
+        "rationale": "Batch waits to process a whole data set. The checker needs to respond to individual uploads."
+      },
+      {
+        "text": "Asynchronous inference with a request queue",
+        "correct": false,
+        "rationale": "Asynchronous suits very large or slow requests. These photo checks are small."
+      },
+      {
+        "text": "Serverless inference",
+        "correct": true,
+        "rationale": "Capacity is provided on demand and not kept running, which suits idle periods when a cold start is acceptable."
+      }
+    ],
+    "explanation": "Long idle gaps and tolerance for a cold start are the signature of serverless inference."
+  },
+  {
+    "id": "1.1-016",
+    "taskId": "1.1",
+    "kind": "single",
+    "objectives": [
+      "1.1.4"
+    ],
+    "stem": "Cairnway's risk team has 400,000 past transactions in a spreadsheet. Each row lists order details and is marked either \"fraud\" or \"legitimate\". How is this data best described?",
+    "options": [
+      {
+        "text": "Unlabeled, unstructured text data",
+        "correct": false,
+        "rationale": "The rows have answers attached, and the layout is fixed rather than free text."
+      },
+      {
+        "text": "Labeled, structured, tabular data",
+        "correct": true,
+        "rationale": "Each row has a known correct answer (labeled), and rows and columns make it structured and tabular."
+      },
+      {
+        "text": "Unlabeled time-series data",
+        "correct": false,
+        "rationale": "The transactions carry fraud labels, and the stem doesn't describe values tracked over time."
+      },
+      {
+        "text": "Unstructured image data",
+        "correct": false,
+        "rationale": "The data is in rows and columns, not pixels."
+      }
+    ],
+    "explanation": "A known answer on each row means labeled. Rows and columns mean structured and tabular."
+  },
+  {
+    "id": "1.1-017",
+    "taskId": "1.1",
+    "kind": "single",
+    "objectives": [
+      "1.1.4"
+    ],
+    "stem": "Cairnway keeps three years of weekly sales figures for each product and wants to forecast next season's demand. Which data type is this?",
+    "options": [
+      {
+        "text": "Image data",
+        "correct": false,
+        "rationale": "Image data is made of pixels such as photos. Weekly sales figures are numbers."
+      },
+      {
+        "text": "Time-series data",
+        "correct": true,
+        "rationale": "Values are recorded in order over time, and that order matters for forecasting."
+      },
+      {
+        "text": "Unstructured text data",
+        "correct": false,
+        "rationale": "Text means words such as reviews. The sales data is numeric and ordered by week."
+      },
+      {
+        "text": "Unlabeled audio data",
+        "correct": false,
+        "rationale": "Audio is recorded sound. Nothing in the stem involves audio."
+      }
+    ],
+    "explanation": "Numbers recorded in time order, such as weekly sales, are time-series data."
+  },
+  {
+    "id": "1.1-018",
+    "taskId": "1.1",
+    "kind": "single",
+    "objectives": [
+      "1.1.4"
+    ],
+    "stem": "Cairnway collects customer reviews written in free text and product photos uploaded by shoppers. How should this data be described?",
+    "options": [
+      {
+        "text": "Structured data",
+        "correct": false,
+        "rationale": "Structured data fits neatly into rows and columns, as in a database table."
+      },
+      {
+        "text": "Tabular data",
+        "correct": false,
+        "rationale": "Tabular data has rows and columns of features. Reviews and photos do not."
+      },
+      {
+        "text": "Time-series data",
+        "correct": false,
+        "rationale": "Time-series data is values recorded in order over time. Reviews and photos are not defined by that."
+      },
+      {
+        "text": "Unstructured data",
+        "correct": true,
+        "rationale": "Free text and images have no fixed row-and-column layout, so they are unstructured."
+      }
+    ],
+    "explanation": "Free text and images have no predefined layout, which makes them unstructured."
+  },
+  {
+    "id": "1.1-019",
+    "taskId": "1.1",
+    "kind": "single",
+    "objectives": [
+      "1.1.5"
+    ],
+    "stem": "Cairnway wants a model that learns from historical orders that humans have already marked as fraud or not fraud, so it can classify new orders. Which learning style is this?",
+    "options": [
+      {
+        "text": "Supervised learning",
+        "correct": true,
+        "rationale": "The model learns from labeled examples (input plus the correct answer)."
+      },
+      {
+        "text": "Unsupervised learning",
+        "correct": false,
+        "rationale": "Unsupervised learning has no labels. These orders already carry answers."
+      },
+      {
+        "text": "Reinforcement learning",
+        "correct": false,
+        "rationale": "Reinforcement learning uses rewards from trial and error, not a set of marked examples."
+      },
+      {
+        "text": "Clustering without labels",
+        "correct": false,
+        "rationale": "Clustering finds groups in unlabeled data, but here the groups are already defined and labeled."
+      }
+    ],
+    "explanation": "Labeled examples with known answers define supervised learning."
+  },
+  {
+    "id": "1.1-020",
+    "taskId": "1.1",
+    "kind": "single",
+    "objectives": [
+      "1.1.5"
+    ],
+    "stem": "Marketing at Cairnway wants to find natural groups of customers from purchase history. No groups are defined in advance. Which learning style is this?",
+    "options": [
+      {
+        "text": "Supervised learning",
+        "correct": false,
+        "rationale": "Supervised learning requires labeled examples. No labels exist here."
+      },
+      {
+        "text": "Reinforcement learning",
+        "correct": false,
+        "rationale": "Reinforcement learning needs an environment and rewards."
+      },
+      {
+        "text": "Unsupervised learning",
+        "correct": true,
+        "rationale": "With no labels, the model looks for structure on its own, such as clusters."
+      },
+      {
+        "text": "Supervised regression",
+        "correct": false,
+        "rationale": "Regression predicts a number from labeled examples, not groups."
+      }
+    ],
+    "explanation": "Finding groups with no predefined labels is the classic unsupervised learning task."
+  },
+  {
+    "id": "1.1-021",
+    "taskId": "1.1",
+    "kind": "single",
+    "objectives": [
+      "1.1.5"
+    ],
+    "stem": "Cairnway's warehouse team wants to train software that improves its picking routes by trying routes and receiving a reward when a route is faster. Which learning style is this?",
+    "options": [
+      {
+        "text": "Supervised learning",
+        "correct": false,
+        "rationale": "Supervised learning needs examples with correct answers. Here the system tries actions and gets rewards."
+      },
+      {
+        "text": "Unsupervised learning",
+        "correct": false,
+        "rationale": "Unsupervised learning finds structure in unlabeled data without any reward signal."
+      },
+      {
+        "text": "Reinforcement learning",
+        "correct": true,
+        "rationale": "The system learns by trial and error, gaining rewards for good actions and penalties for bad ones."
+      },
+      {
+        "text": "Batch learning on labeled tables",
+        "correct": false,
+        "rationale": "Batch is a way to serve predictions, not a learning style, and no labeled tables are described."
+      }
+    ],
+    "explanation": "Trial and error with rewards is the definition of reinforcement learning."
+  },
+  {
+    "id": "1.1-022",
+    "taskId": "1.1",
+    "kind": "multi",
+    "objectives": [
+      "1.1.1"
+    ],
+    "stem": "Which TWO statements about training and inferencing are correct? (Select TWO.)",
+    "select": 2,
+    "options": [
+      {
+        "text": "Training is the process in which a model learns patterns from data.",
+        "correct": true,
+        "rationale": "Training means showing the model lots of data so it can learn."
+      },
+      {
+        "text": "Inferencing is the step that builds the model from labeled data.",
+        "correct": false,
+        "rationale": "That is training. Inferencing uses a model that already exists."
+      },
+      {
+        "text": "Training is the step in which customers send requests to an endpoint.",
+        "correct": false,
+        "rationale": "Requests to an endpoint are inferencing."
+      },
+      {
+        "text": "Inferencing is using a trained model to produce an output for new input.",
+        "correct": true,
+        "rationale": "Inferencing is every later use of the model once training is done."
+      },
+      {
+        "text": "Training and inferencing are two names for the same step.",
+        "correct": false,
+        "rationale": "They are separate stages with different goals and costs."
+      }
+    ],
+    "explanation": "Training builds the model from data, and inferencing uses it. Many questions simply test which of the two is described."
+  },
+  {
+    "id": "1.1-023",
+    "taskId": "1.1",
+    "kind": "multi",
+    "objectives": [
+      "1.1.1"
+    ],
+    "stem": "Cairnway's AI governance group is reviewing a new model. Which TWO statements about bias and fairness are correct? (Select TWO.)",
+    "select": 2,
+    "options": [
+      {
+        "text": "Bias can only occur in generative AI, never in traditional ML.",
+        "correct": false,
+        "rationale": "Any model trained on data can inherit bias."
+      },
+      {
+        "text": "Bias can arise when training data under-represents some groups of customers.",
+        "correct": true,
+        "rationale": "A model reflects its data, so missing groups can lead to skewed results."
+      },
+      {
+        "text": "A model with a high training score is guaranteed to be fair.",
+        "correct": false,
+        "rationale": "A high training score says nothing about fairness for groups."
+      },
+      {
+        "text": "Fairness means that the model never makes a wrong prediction.",
+        "correct": false,
+        "rationale": "No model is perfect. Fairness is about equitable outcomes, not zero errors."
+      },
+      {
+        "text": "Fairness is the goal that a model's outcomes do not unjustly favour or harm particular groups.",
+        "correct": true,
+        "rationale": "That is the plain meaning of fairness in AI."
+      }
+    ],
+    "explanation": "Biased data leads to biased results, and fairness is about outcomes not unjustly favouring or harming groups."
+  },
+  {
+    "id": "1.1-024",
+    "taskId": "1.1",
+    "kind": "multi",
+    "objectives": [
+      "1.1.2"
+    ],
+    "stem": "Which TWO statements correctly describe how generative AI and agentic AI relate to other AI concepts? (Select TWO.)",
+    "select": 2,
+    "options": [
+      {
+        "text": "Agentic AI replaces generative AI and does not use it.",
+        "correct": false,
+        "rationale": "Agentic systems commonly rely on generative models."
+      },
+      {
+        "text": "Generative AI is a superset of AI, and AI is a type of generative AI.",
+        "correct": false,
+        "rationale": "AI is the umbrella that contains generative AI."
+      },
+      {
+        "text": "Generative AI is built on deep learning, using models such as LLMs trained on very large data sets.",
+        "correct": true,
+        "rationale": "Generative models are deep-learning models that create new content."
+      },
+      {
+        "text": "Agentic AI usually builds on a generative AI model by adding planning, memory and tool use.",
+        "correct": true,
+        "rationale": "An agent typically uses a generative model to plan steps and take actions."
+      },
+      {
+        "text": "Generative AI is not based on neural networks.",
+        "correct": false,
+        "rationale": "Generative AI uses deep learning, which uses neural networks."
+      }
+    ],
+    "explanation": "GenAI sits on deep learning, and agentic AI adds planning and tool use on top of GenAI."
+  },
+  {
+    "id": "1.1-025",
+    "taskId": "1.1",
+    "kind": "multi",
+    "objectives": [
+      "1.1.2"
+    ],
+    "stem": "Cairnway wants to understand how Trailmate differs from a plain generative chatbot once it becomes agentic. Which TWO statements describe agentic behavior? (Select TWO.)",
+    "select": 2,
+    "options": [
+      {
+        "text": "It decides which steps to take to reach a goal.",
+        "correct": true,
+        "rationale": "Planning is a core trait of agentic AI."
+      },
+      {
+        "text": "It answers one question at a time with no ability to act.",
+        "correct": false,
+        "rationale": "That describes a simple generative assistant."
+      },
+      {
+        "text": "It calls tools, such as an order-lookup system, and checks the results.",
+        "correct": true,
+        "rationale": "Using tools to act is what separates an agent from a model that only answers."
+      },
+      {
+        "text": "It learns only from labeled examples with known answers.",
+        "correct": false,
+        "rationale": "That describes supervised learning, not agentic behavior."
+      },
+      {
+        "text": "It follows a fixed rule table and never varies.",
+        "correct": false,
+        "rationale": "Fixed rules are not agentic. Agents plan their own steps."
+      }
+    ],
+    "explanation": "Agentic AI acts. It plans steps, uses tools and checks results, rather than only generating a single answer."
+  },
+  {
+    "id": "1.1-026",
+    "taskId": "1.1",
+    "kind": "multi",
+    "services": [
+      "sagemaker-ai"
+    ],
+    "objectives": [
+      "1.1.3"
+    ],
+    "stem": "Which TWO Cairnway workloads are the best fit for batch inference? (Select TWO.)",
+    "select": 2,
+    "options": [
+      {
+        "text": "Scoring each payment during checkout",
+        "correct": false,
+        "rationale": "That needs an instant, always-ready answer, so real-time."
+      },
+      {
+        "text": "Scoring demand for all 12,000 products every night",
+        "correct": true,
+        "rationale": "A whole data set processed on a schedule with no persistent endpoint is the batch pattern."
+      },
+      {
+        "text": "Answering live questions from shoppers in the chat window",
+        "correct": false,
+        "rationale": "Live chat needs low-latency responses."
+      },
+      {
+        "text": "Tagging a backlog of 500,000 old product photos in one overnight run",
+        "correct": true,
+        "rationale": "A large pile of records with no one waiting for a reply suits a batch job."
+      },
+      {
+        "text": "Checking returns photos that arrive a few times a day with long gaps",
+        "correct": false,
+        "rationale": "Sparse individual requests with idle gaps suit serverless."
+      }
+    ],
+    "explanation": "Batch is for a whole data set at once, on a schedule, with no one waiting. Interactive tasks need real-time, and sparse traffic suits serverless."
+  },
+  {
+    "id": "1.1-027",
+    "taskId": "1.1",
+    "kind": "multi",
+    "services": [
+      "sagemaker-ai"
+    ],
+    "objectives": [
+      "1.1.3"
+    ],
+    "stem": "Which TWO workloads are the best fit for a real-time inference endpoint? (Select TWO.)",
+    "select": 2,
+    "options": [
+      {
+        "text": "Approving or declining a payment while the customer waits at checkout",
+        "correct": true,
+        "rationale": "A low-latency, interactive check needs an always-on endpoint."
+      },
+      {
+        "text": "Scoring all customers overnight for a monthly campaign",
+        "correct": false,
+        "rationale": "A whole data set scored on a schedule is batch."
+      },
+      {
+        "text": "Processing very large scanned catalogs that take many minutes each",
+        "correct": false,
+        "rationale": "Large, slow requests with no immediate reply needed suit asynchronous inference."
+      },
+      {
+        "text": "Running a photo checker that is idle most of the day",
+        "correct": false,
+        "rationale": "Mostly idle usage is a serverless pattern."
+      },
+      {
+        "text": "Scoring a shopper's behavior while they browse so the page can react at once",
+        "correct": true,
+        "rationale": "An immediate answer to each request is the real-time pattern."
+      }
+    ],
+    "explanation": "Real-time inference answers each request immediately, which suits interactive tasks."
+  },
+  {
+    "id": "1.1-028",
+    "taskId": "1.1",
+    "kind": "multi",
+    "objectives": [
+      "1.1.4"
+    ],
+    "stem": "Which TWO of the following are examples of unstructured data? (Select TWO.)",
+    "select": 2,
+    "options": [
+      {
+        "text": "An orders table with columns for date, item and price",
+        "correct": false,
+        "rationale": "That is structured, tabular data."
+      },
+      {
+        "text": "Weekly sales totals stored per product",
+        "correct": false,
+        "rationale": "Numbers in rows and columns are structured, and ordered by time they are time-series."
+      },
+      {
+        "text": "Customer review text",
+        "correct": true,
+        "rationale": "Free text has no fixed row-and-column layout."
+      },
+      {
+        "text": "A customer table with name, country and age columns",
+        "correct": false,
+        "rationale": "A table with fixed columns is structured."
+      },
+      {
+        "text": "Product photos uploaded by shoppers",
+        "correct": true,
+        "rationale": "Images are unstructured data made of pixels."
+      }
+    ],
+    "explanation": "Free text and images lack a fixed layout, so they are unstructured. Tables are structured."
+  },
+  {
+    "id": "1.1-029",
+    "taskId": "1.1",
+    "kind": "multi",
+    "objectives": [
+      "1.1.4"
+    ],
+    "stem": "Cairnway lists several data sets. Which THREE are examples of labeled data? (Select THREE.)",
+    "select": 3,
+    "options": [
+      {
+        "text": "Raw support-call recordings with no tags",
+        "correct": false,
+        "rationale": "No answers are attached, so they are unlabeled."
+      },
+      {
+        "text": "Transactions each tagged \"fraud\" or \"legitimate\"",
+        "correct": true,
+        "rationale": "Each example has the correct answer attached."
+      },
+      {
+        "text": "A collection of product photos with no tags",
+        "correct": false,
+        "rationale": "Without tags the photos are unlabeled."
+      },
+      {
+        "text": "Photos each tagged with the product name shown in the photo",
+        "correct": true,
+        "rationale": "Tags make these photos labeled."
+      },
+      {
+        "text": "Browsing logs with no outcome recorded",
+        "correct": false,
+        "rationale": "No known answer is attached, so unlabeled."
+      },
+      {
+        "text": "Reviews each marked \"positive\", \"neutral\" or \"negative\"",
+        "correct": true,
+        "rationale": "A sentiment mark is a label."
+      }
+    ],
+    "explanation": "Labeled data pairs each example with its correct answer. Labels are what supervised learning needs."
+  },
+  {
+    "id": "1.1-030",
+    "taskId": "1.1",
+    "kind": "multi",
+    "objectives": [
+      "1.1.5"
+    ],
+    "stem": "Which TWO Cairnway tasks are best solved with supervised learning? (Select TWO.)",
+    "select": 2,
+    "options": [
+      {
+        "text": "Predicting whether a new order is fraud, using past orders marked fraud or legitimate",
+        "correct": true,
+        "rationale": "Labeled examples and a category to predict: supervised classification."
+      },
+      {
+        "text": "Finding customer groups no one has defined",
+        "correct": false,
+        "rationale": "No labels and groups to discover: unsupervised."
+      },
+      {
+        "text": "Teaching a robot to choose picking routes by trial and error",
+        "correct": false,
+        "rationale": "Learning from rewards: reinforcement learning."
+      },
+      {
+        "text": "Predicting next month's sales of a jacket, using past sales as examples",
+        "correct": true,
+        "rationale": "Known past values and a number to predict: supervised regression."
+      },
+      {
+        "text": "Grouping reviews by topic when no topics are defined in advance",
+        "correct": false,
+        "rationale": "Discovering groups without labels is unsupervised."
+      }
+    ],
+    "explanation": "Supervised learning uses labeled examples to predict a category (classification) or a number (regression)."
+  },
+  {
+    "id": "1.1-031",
+    "taskId": "1.1",
+    "kind": "multi",
+    "objectives": [
+      "1.1.5"
+    ],
+    "stem": "Which THREE statements about learning styles are correct? (Select THREE.)",
+    "select": 3,
+    "options": [
+      {
+        "text": "Unsupervised learning requires every example to have a correct label.",
+        "correct": false,
+        "rationale": "That is supervised learning."
+      },
+      {
+        "text": "Supervised learning uses labeled examples of input and correct answer.",
+        "correct": true,
+        "rationale": "Labels are the defining need of supervised learning."
+      },
+      {
+        "text": "Unsupervised learning looks for structure in unlabeled data, such as clusters.",
+        "correct": true,
+        "rationale": "With no labels, it finds patterns by itself."
+      },
+      {
+        "text": "Reinforcement learning requires a labeled table of correct answers.",
+        "correct": false,
+        "rationale": "It uses rewards instead of labels."
+      },
+      {
+        "text": "Reinforcement learning improves through rewards and penalties for actions.",
+        "correct": true,
+        "rationale": "It learns by trial and error in an environment."
+      },
+      {
+        "text": "Supervised learning only works when there are no labels.",
+        "correct": false,
+        "rationale": "It is the reverse: supervised needs labels."
+      }
+    ],
+    "explanation": "Match the signature: labels mean supervised, no labels and groups mean unsupervised, and rewards from trial and error mean reinforcement."
+  },
+  {
+    "id": "1.1-032",
+    "taskId": "1.1",
+    "kind": "order",
+    "objectives": [
+      "1.1.1"
+    ],
+    "stem": "Put the stages of a Cairnway fraud model in the correct order, from first to last.",
+    "steps": [
+      "Collect past orders marked fraud or legitimate",
+      "Train the model on the labeled orders",
+      "Check how well the model performs on data it has not seen",
+      "Use the model to score new orders (inferencing)"
+    ],
+    "explanation": "Data comes first, then training, then a check on unseen data to spot overfitting, and finally inferencing on new orders."
+  },
+  {
+    "id": "1.1-033",
+    "taskId": "1.1",
+    "kind": "order",
+    "objectives": [
+      "1.1.2"
+    ],
+    "stem": "Arrange these terms from the broadest concept to the most specific.",
+    "steps": [
+      "Artificial intelligence",
+      "Machine learning",
+      "Deep learning",
+      "Generative AI"
+    ],
+    "explanation": "AI is the umbrella, ML sits inside it, deep learning sits inside ML, and generative AI is built on deep learning."
+  },
+  {
+    "id": "1.1-034",
+    "taskId": "1.1",
+    "kind": "order",
+    "objectives": [
+      "1.1.5"
+    ],
+    "stem": "Cairnway's warehouse robot learns a faster picking route by reinforcement learning. Put one learning cycle in the correct order.",
+    "steps": [
+      "The robot observes where it is in the warehouse",
+      "The robot chooses and takes an action, such as a route",
+      "The environment returns a reward or a penalty",
+      "The robot adjusts its behavior to earn more reward next time"
+    ],
+    "explanation": "Reinforcement learning is a loop: observe, act, get a reward or penalty, then adjust."
+  },
+  {
+    "id": "1.1-035",
+    "taskId": "1.1",
+    "kind": "match",
+    "services": [
+      "sagemaker-ai"
+    ],
+    "objectives": [
+      "1.1.3"
+    ],
+    "stem": "Cairnway runs several models. Match each workload to the inference type that fits it best.",
+    "pairs": [
+      {
+        "prompt": "Fraud check while the customer is paying",
+        "answer": "Real-time inference"
+      },
+      {
+        "prompt": "Scoring all products overnight with no endpoint kept running",
+        "answer": "Batch inference"
+      },
+      {
+        "prompt": "Large scanned catalogs that take minutes each and need no instant reply",
+        "answer": "Asynchronous inference"
+      },
+      {
+        "prompt": "Returns-photo checker that is idle most of the day",
+        "answer": "Serverless inference"
+      }
+    ],
+    "explanation": "Real-time is instant, batch handles a whole data set, asynchronous handles big or slow jobs that can wait, and serverless suits idle periods."
+  },
+  {
+    "id": "1.1-036",
+    "taskId": "1.1",
+    "kind": "match",
+    "objectives": [
+      "1.1.4"
+    ],
+    "stem": "Match each Cairnway data example to the data type that describes it best.",
+    "pairs": [
+      {
+        "prompt": "Weekly sales per product over three years",
+        "answer": "Time-series data"
+      },
+      {
+        "prompt": "Product photos uploaded by shoppers",
+        "answer": "Image data"
+      },
+      {
+        "prompt": "An orders table with rows and columns",
+        "answer": "Tabular data"
+      },
+      {
+        "prompt": "Written customer reviews",
+        "answer": "Text data"
+      }
+    ],
+    "distractors": [
+      "Audio data"
+    ],
+    "explanation": "Time-ordered values are time-series, pixels are images, rows and columns are tabular and words are text. Nothing here is audio."
+  },
+  {
+    "id": "1.1-037",
+    "taskId": "1.1",
+    "kind": "match",
+    "objectives": [
+      "1.1.1"
+    ],
+    "stem": "Match each term to its plain-language meaning.",
+    "pairs": [
+      {
+        "prompt": "Training",
+        "answer": "A model learns patterns from lots of data"
+      },
+      {
+        "prompt": "Inferencing",
+        "answer": "A trained model produces an output for new input"
+      },
+      {
+        "prompt": "Overfitting",
+        "answer": "A model memorized its training data and does poorly on new data"
+      },
+      {
+        "prompt": "Underfitting",
+        "answer": "A model is too simple and does poorly even on training data"
+      }
+    ],
+    "distractors": [
+      "A model creates new content such as text or images"
+    ],
+    "explanation": "Training is learning, inferencing is using the model, overfitting is memorizing and underfitting is being too simple. Creating new content describes generative AI."
+  },
+  {
+    "id": "1.1-038",
+    "taskId": "1.1",
+    "kind": "case",
+    "scenario": "Cairnway Outfitters is starting three AI projects. The first forecasts demand for each product using three years of weekly sales figures. The second groups customers into segments from their purchase history, with no segments defined in advance. The third scores all 12,000 products every night so the buying team has fresh demand numbers each morning. No one waits for the nightly results, and the company wants to avoid paying for an always-on endpoint.",
+    "parts": [
+      {
+        "kind": "single",
+        "objectives": [
+          "1.1.4"
+        ],
+        "stem": "Which type of data does the demand forecasting project use?",
+        "options": [
+          {
+            "text": "Time-series data",
+            "correct": true,
+            "rationale": "Weekly figures recorded in order over time are time-series data, and their order matters for forecasting."
+          },
+          {
+            "text": "Unstructured image data",
+            "correct": false,
+            "rationale": "Images are photos made of pixels. Sales figures are numbers."
+          },
+          {
+            "text": "Unlabeled audio data",
+            "correct": false,
+            "rationale": "Audio is recorded sound, which the project does not use."
+          },
+          {
+            "text": "Free-text data",
+            "correct": false,
+            "rationale": "Text means words such as reviews. Sales figures are numeric."
+          }
+        ],
+        "explanation": "Numbers recorded week after week are time-series data."
+      },
+      {
+        "kind": "single",
+        "objectives": [
+          "1.1.5"
+        ],
+        "stem": "Which learning style fits the customer segmentation project?",
+        "options": [
+          {
+            "text": "Supervised learning",
+            "correct": false,
+            "rationale": "Supervised learning needs labeled examples, and no segment labels exist."
+          },
+          {
+            "text": "Reinforcement learning",
+            "correct": false,
+            "rationale": "Reinforcement learning learns from rewards in an environment, which segmentation doesn't involve."
+          },
+          {
+            "text": "Supervised regression",
+            "correct": false,
+            "rationale": "Regression predicts a number from labeled examples, not groups."
+          },
+          {
+            "text": "Unsupervised learning",
+            "correct": true,
+            "rationale": "No segments are defined in advance, so there are no labels. The model finds groups by itself."
+          }
+        ],
+        "explanation": "Finding natural groups without predefined labels is unsupervised learning, specifically clustering."
+      },
+      {
+        "kind": "single",
+        "objectives": [
+          "1.1.3"
+        ],
+        "stem": "Which inference type best fits the nightly scoring of all products?",
+        "options": [
+          {
+            "text": "Real-time inference",
+            "correct": false,
+            "rationale": "Real-time keeps an always-on endpoint, which the company wants to avoid."
+          },
+          {
+            "text": "Batch inference",
+            "correct": true,
+            "rationale": "A batch job processes the whole data set, writes predictions to storage and stops, with no persistent endpoint."
+          },
+          {
+            "text": "Asynchronous inference",
+            "correct": false,
+            "rationale": "Asynchronous queues individual large or slow requests rather than scoring a whole data set."
+          },
+          {
+            "text": "Serverless inference",
+            "correct": false,
+            "rationale": "Serverless suits bursty request traffic, not scoring a whole data set in one run."
+          }
+        ],
+        "explanation": "A whole data set scored on a schedule with no endpoint kept running is batch inference."
+      }
+    ]
+  }
+]
