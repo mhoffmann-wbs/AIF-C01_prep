@@ -1,0 +1,183 @@
+export const meta = {
+  taskId: '4.1',
+  updated: '2026-11-23',
+  tldr: 'Responsible AI means building systems that are fair, safe, truthful, robust and accountable. You check this at every stage: choose models with care, use diverse and balanced data, watch for bias and variance, put guardrails around the model, and keep humans in the loop. AWS names eight dimensions of responsible AI, and Amazon Bedrock Guardrails is the tool the exam links to safety.',
+  objectivesCovered: ['4.1.1', '4.1.2', '4.1.3', '4.1.4', '4.1.5', '4.1.6', '4.1.7'],
+  links: [
+    { title: 'AWS: Responsible AI (core dimensions)', url: 'https://aws.amazon.com/ai/responsible-ai/' },
+    { title: 'AWS: Responsible AI resources (AI Service Cards)', url: 'https://aws.amazon.com/ai/responsible-ai/resources/' },
+    { title: 'Amazon Bedrock Guardrails', url: 'https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails.html' },
+    { title: 'Amazon Bedrock evaluations', url: 'https://docs.aws.amazon.com/bedrock/latest/userguide/evaluation.html' },
+    { title: 'Bedrock: model evaluation task types and metrics', url: 'https://docs.aws.amazon.com/bedrock/latest/userguide/model-evaluation-tasks.html' },
+    { title: 'Amazon SageMaker Clarify: fairness and explainability', url: 'https://docs.aws.amazon.com/sagemaker/latest/dg/clarify-configure-processing-jobs.html' },
+    { title: 'Amazon SageMaker Model Monitor: model quality', url: 'https://docs.aws.amazon.com/sagemaker/latest/dg/model-monitor-model-quality.html' },
+    { title: 'Amazon Augmented AI (A2I) human review', url: 'https://docs.aws.amazon.com/sagemaker/latest/dg/a2i-use-augmented-ai-a2i-human-review-loops.html' },
+  ],
+}
+
+## Big idea
+
+**Responsible AI** means designing, building and running AI so that it benefits people and avoids harm. A model that is accurate on average can still treat some groups worse, make things up, leak private data or be tricked into saying something harmful. Responsible AI is the set of habits and tools that catch those problems.
+
+AWS describes eight **core dimensions** of responsible AI. Learn these, because the exam uses them as vocabulary:
+
+| Dimension | AWS's short description |
+|---|---|
+| **Fairness** | Considering impacts on different groups of stakeholders. |
+| **Explainability** | Understanding and evaluating system outputs. |
+| **Privacy and security** | Appropriately obtaining, using and protecting data and models. |
+| **Safety** | Preventing harmful system output and misuse. |
+| **Controllability** | Having mechanisms to monitor and steer AI system behavior. |
+| **Veracity and robustness** | Achieving correct system outputs, even with unexpected or adversarial inputs. |
+| **Governance** | Incorporating best practices into the AI supply chain, including providers and deployers. |
+| **Transparency** | Enabling stakeholders to make informed choices about their engagement with an AI system. |
+
+Responsibility is not a final check before launch. It applies at every stage: choosing the model, collecting the data, training, testing, deploying and monitoring.
+
+## Key concepts
+
+### Features of responsible AI
+
+Here are the terms the exam guide lists, in plain words.
+
+- **Bias**: a systematic tilt in a system's results that favours or disadvantages some people or outcomes. It usually comes from the data (for example, past decisions that were themselves unfair) or from how the problem was set up.
+- **Fairness**: results that don't create unjustified differences between groups, such as gender, age, region or ethnicity. Fairness is the goal; bias is the problem that stands in its way.
+- **Inclusivity**: designing for the full range of people who will use the system, including people with different languages, abilities and backgrounds, and involving them in the design.
+- **Robustness**: giving dependable results even when inputs are unusual, noisy or deliberately adversarial (for example, a customer who misspells every word, or someone trying to trick the model).
+- **Safety**: preventing harmful outputs (such as hateful or dangerous content) and misuse of the system.
+- **Veracity**: truthfulness. The output is correct and not invented. A model that states false facts confidently, called a **hallucination**, has a veracity problem.
+
+The remaining AWS dimensions, such as privacy, controllability, governance and transparency, round out the picture. Note that **explainability** and **transparency** are different. Explainability is about understanding *why* a model produced a result. Transparency is about being open to users and stakeholders that AI is involved and how it works. Lesson 4.2 covers both in depth.
+
+### Tools to identify and enforce responsible AI
+
+**Amazon Bedrock Guardrails** provides configurable safeguards for generative AI applications. A guardrail checks both what users send in and what the model sends back. You can attach it when you call a model on Amazon Bedrock, or call it on its own with the `ApplyGuardrail` API to check text without calling a model. AWS lists these safeguards:
+
+| Safeguard | What it does |
+|---|---|
+| **Content filters** | Detect harmful text or image content in prompts and responses in set categories: Hate, Insults, Sexual, Violence, Misconduct and Prompt Attack. You set the filter strength for each. |
+| **Denied topics** | You define topics that are off limits for your application, and the guardrail helps block them in questions and answers. |
+| **Word filters** | Block custom words or phrases (matched as whole words, ignoring case), such as profanity or competitor names. |
+| **Sensitive information filters** | Block or mask **personally identifiable information** (PII), such as a Social Security number, date of birth or address. You can also add your own patterns with a *regular expression* (a text pattern, such as the shape of an order number). |
+| **Contextual grounding checks** | Detect hallucinations: responses that are not grounded in the source text or are irrelevant to the question. Useful in RAG applications. |
+| **Automated Reasoning checks** | Validate the accuracy of a response against a set of logical rules, to detect hallucinations, suggest corrections and highlight unstated assumptions. |
+
+*Prompt Attack* is a content-filter category aimed at **prompt injection**: user text written to override the model's instructions. When a guardrail blocks something, you configure the message the user sees instead.
+
+Other tools in the same family, each with a different job:
+
+| Tool | Use it to |
+|---|---|
+| **Amazon Bedrock Model Evaluation** | Test a model before you choose it. Automatic evaluations compute metrics such as accuracy, robustness and toxicity on built-in or your own datasets. Human-based evaluations let a team of people rate answers. A second model can also act as the judge. |
+| **Amazon SageMaker Clarify** | Detect bias in data before training, and in a trained model's predictions afterwards. It also explains predictions (lesson 4.2). |
+| **Amazon SageMaker Model Monitor** | Watch a model in production. Model quality monitoring compares predictions with the true outcomes over time. Used with Clarify, it can monitor **bias drift**: bias creeping in as real-world data changes. |
+| **Amazon Augmented AI (A2I)** | Add human review of low-confidence predictions, or of random samples, to a machine learning workflow. |
+| **AI Service Cards** | Read AWS's own documentation of an AWS AI service's intended uses, limitations and responsible AI design choices. |
+
+Be aware that AWS now marks SageMaker Clarify, Model Monitor and A2I as closed to new customers (existing customers continue as normal). They still appear in the exam's concepts, so know what they do.
+
+### Responsible practices for selecting a model
+
+Picking a model is also a responsible-AI decision. Beyond cost, speed and accuracy, ask:
+
+- **Is it right for the risk?** Use a more heavily tested model, and more human oversight, for decisions that affect people's money, jobs or health.
+- **What do we know about it?** Look for documentation such as AI Service Cards or model cards: intended uses, known limits, training data description, evaluation results and licence terms.
+- **How does it behave on our data?** Run an evaluation for accuracy, robustness and toxicity on prompts that look like your own.
+- **Environmental impact and sustainability.** Training and running large models uses a lot of electricity. A responsible choice is **the smallest model that meets the need**, rather than the biggest one by default. Reusing an existing model instead of training a new one, and avoiding unnecessary retraining, also reduce energy use and carbon emissions. Where you run the workload can matter too, since some regions use cleaner energy.
+- **Who is accountable?** Know who provides the model and under which terms you may use it.
+
+### Legal risks of generative AI
+
+These are general concepts, not AWS features. Generative AI creates specific legal and business risks:
+
+| Risk | What it means |
+|---|---|
+| **Intellectual property (IP) infringement claims** | A model's output may resemble copyrighted text, images or code, or the training data may have included protected material without permission. Someone may claim your company copied their work. |
+| **Biased model outputs** | Outputs that treat groups unfairly can break anti-discrimination law, especially in hiring, lending and insurance. |
+| **Loss of customer trust** | One offensive or wrong answer that spreads online can damage a brand much faster than it was built. |
+| **End user risk** | People can be harmed if they act on wrong or unsafe output, for example medical or safety advice, or when private data is exposed. |
+| **Hallucinations** | Confident but false statements. A company can be held to what its chatbot promises, such as an invented refund policy. |
+
+The usual defences are human review, clear disclosure that users are talking to AI, guardrails, grounding answers in company documents (RAG), and checking the licence and data sources of the models you use.
+
+### Characteristics of good datasets
+
+A model learns from its data, so the data decides much of its fairness. Responsible datasets are:
+
+- **Inclusive and diverse**: they cover the range of people, languages, regions and situations the system will meet. A support assistant trained only on English questions will serve German customers badly.
+- **Balanced**: no group or outcome is badly over- or under-represented. If 95% of examples are one group, the model learns that group best.
+- **Curated from reliable sources**: the data was chosen, cleaned and documented, and you know where it came from and that you may use it.
+- **Accurately labelled**: for supervised learning, humans attach labels (such as "fraud" or "not fraud"). If labellers are careless or biased, the model learns their mistakes. Checking **label quality** is part of the job.
+- **Representative of real use**: it matches the people and conditions the model will face in production.
+
+### Effects of bias and variance
+
+These two words describe different ways a model can be wrong.
+
+**Bias (in this technical sense)** means the model is too simple or rests on wrong assumptions, so it misses real patterns. It is wrong in a *consistent* way. **Variance** means the model is too sensitive to the exact data it saw, so it changes a lot with small changes in the data.
+
+A simple example: Cairnway wants to predict which customers will buy a winter jacket.
+
+| Situation | What goes wrong | Name |
+|---|---|---|
+| The model only looks at the customer's country, ignoring everything else. | It is poor on the training data *and* on new customers. | **Underfitting** (high bias) |
+| The model memorizes every detail of last winter's 5,000 customers, even coincidences such as "buyers named Sam in March". | It is excellent on training data but poor on new customers. | **Overfitting** (high variance) |
+| The model captures the real patterns (weather, past purchases) without memorizing noise. | It is good on both. | A good fit |
+
+A useful check is to compare performance on the **training data** with performance on separate **test data** the model never saw. Big gap, suspect overfitting. Poor on both, suspect underfitting.
+
+There is a trade-off: making a model more complex lowers bias but raises variance, and the reverse. The goal is a balance.
+
+Both can hurt people. A model that is underfit, or trained mainly on one group, may be **inaccurate for other demographic groups**: for example, a hiring screener trained on past hires from one background may score equally good candidates from other backgrounds lower. Overall accuracy can look fine while one group's accuracy is poor, which is why you test by group.
+
+### Detecting and monitoring bias, trustworthiness and truthfulness
+
+No single test proves a system is fair, so teams combine methods:
+
+- **Analyzing label quality**: review a sample of labels with several people and check that they agree and are free of stereotypes.
+- **Subgroup analysis**: measure accuracy and error rates separately for each group (for example by age band or region) and compare. A big gap is a fairness warning. SageMaker Clarify computes bias metrics before and after training.
+- **Human audits**: people review samples of outputs, and may test the system on purpose with tricky or hostile prompts (sometimes called *red teaming*). Amazon A2I and human-based Bedrock evaluations are AWS ways to organize this.
+- **Automatic evaluation**: Bedrock Model Evaluation scores robustness and toxicity, and measures accuracy.
+- **Grounding and truthfulness checks**: contextual grounding checks and Automated Reasoning checks in Guardrails flag unsupported claims.
+- **Ongoing monitoring**: models drift as the world changes. Model Monitor and Clarify compare production behaviour with a baseline, and user feedback and complaints are an early warning.
+
+## At Cairnway
+
+Cairnway Outfitters is adopting AI in several places, and each has a different responsible-AI risk.
+
+- **Trailmate, the support assistant.** The team puts an **Amazon Bedrock Guardrails** guardrail around it. Content filters block abusive content and prompt attacks, a denied topic stops it giving medical advice about injuries, a word filter blocks competitor names, sensitive information filters mask card numbers and addresses, and a contextual grounding check flags any answer not supported by the return-policy documents.
+- **Buy now, pay later eligibility.** This decision affects customers' money, so it is high risk. The data science team runs a bias analysis before training and subgroup analysis afterwards. They find the model approves fewer applicants from one region because the training data had few examples from there. They rebalance the data and keep a human reviewer for borderline cases.
+- **Hiring screening.** Past hires at Cairnway were mostly from a few backgrounds. A model trained on them could learn that pattern as if it were merit. Legal sees a biased-output risk and a loss-of-trust risk, so the tool only ranks for a human recruiter and never rejects anyone on its own.
+- **Product descriptions.** Marketing worries about IP claims, so it checks the licence terms of the model and has staff review copy before publishing.
+- **Fraud detection.** An overfit model flags nearly every order from a new region because it memorized last year's patterns. Comparing training and test results reveals the gap.
+- **Choosing a model.** For review sentiment, a small model passes the evaluation, so Cairnway picks it over the largest model: cheaper, faster and less energy used.
+
+## AWS services
+
+<Services ids={['bedrock-guardrails', 'bedrock-evaluations', 'bedrock', 'sagemaker-ai', 'sagemaker-model-cards', 'sagemaker-clarify', 'sagemaker-model-monitor', 'augmented-ai']} />
+
+## Exam traps
+
+<Callout title="Match the Guardrails safeguard to the problem">
+  <p>Harmful categories such as hate or violence: content filters. Topics the app must not discuss: denied topics. Specific banned words: word filters. Hiding PII: sensitive information filters. Answers that aren't supported by the source documents: contextual grounding checks. Logical correctness against rules: Automated Reasoning checks.</p>
+</Callout>
+
+<Callout title="Bias vs. variance, underfitting vs. overfitting">
+  <p>High bias means too simple: underfitting, poor on training and test data. High variance means too sensitive: overfitting, great on training data and poor on new data. Overfitting is the usual answer when a question says the model performs well in training but poorly in production.</p>
+</Callout>
+
+<Callout title="Good overall accuracy does not mean fair">
+  <p>A model can be accurate overall and still unfair to one group. The fix for hidden unfairness is subgroup analysis and more representative, balanced data, not a bigger model.</p>
+</Callout>
+
+<Callout title="Pick the tool by stage">
+  <p>Before choosing a model: Bedrock Model Evaluation. Bias in data and predictions: SageMaker Clarify. Bias drift in production: Model Monitor. Human review of uncertain predictions: Amazon A2I. Runtime safety for a GenAI app: Bedrock Guardrails.</p>
+</Callout>
+
+<Callout title="Sustainability means the right-sized model">
+  <p>When a question asks for the more environmentally responsible choice that still meets the requirement, think smaller model, reuse instead of retraining from scratch, and avoiding unnecessary compute.</p>
+</Callout>
+
+<Callout title="Hallucination is a legal risk, not just a quality issue">
+  <p>Exam lists of generative AI legal risks include IP infringement claims, biased outputs, loss of customer trust, end user risk and hallucinations. Mitigations include RAG grounding, guardrails and human review.</p>
+</Callout>

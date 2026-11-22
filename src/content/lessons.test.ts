@@ -15,6 +15,10 @@ const SOURCES = Object.fromEntries(
     .map((f) => [f.replace(/\.mdx$/, ''), readFileSync(join(dir, f), 'utf8')]),
 )
 
+it('every task has a lesson', () => {
+  expect([...TASK_BY_ID.keys()].filter((id) => !LESSONS.has(id))).toEqual([])
+})
+
 describe.each(Object.entries(SOURCES))('lesson %s', (fileId, source) => {
   const lesson = LESSONS.get(fileId)
 

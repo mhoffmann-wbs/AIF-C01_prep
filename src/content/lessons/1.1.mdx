@@ -1,0 +1,146 @@
+export const meta = {
+  taskId: '1.1',
+  updated: '2026-11-23',
+  tldr: 'AI is the umbrella; machine learning, deep learning, generative AI and agentic AI are nested inside it, each more specific than the last. A model is trained on data (labeled or not, in many shapes), then used for inferencing in one of four ways: real-time, serverless, asynchronous or batch. Learning comes in three styles: supervised, unsupervised and reinforcement.',
+  objectivesCovered: ['1.1.1', '1.1.2', '1.1.3', '1.1.4', '1.1.5'],
+  links: [
+    { title: 'Deploy models for inference (Amazon SageMaker AI)', url: 'https://docs.aws.amazon.com/sagemaker/latest/dg/deploy-model.html' },
+    { title: 'Batch transform for inference (Amazon SageMaker AI)', url: 'https://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform.html' },
+    { title: 'Amazon SageMaker Canvas (custom model types)', url: 'https://docs.aws.amazon.com/sagemaker/latest/dg/canvas.html' },
+    { title: 'Amazon Bedrock overview', url: 'https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html' },
+    { title: 'Amazon SageMaker Clarify: fairness and bias', url: 'https://docs.aws.amazon.com/sagemaker/latest/dg/clarify-configure-processing-jobs.html' },
+  ],
+}
+
+## Big idea
+
+Almost every AI term on the exam sits inside one of two pictures.
+
+**Picture 1: nested circles.** *Artificial intelligence* (AI) is the biggest circle: any technique that lets a computer do something we would call "intelligent". Inside it is *machine learning* (ML), where the computer learns patterns from data instead of following hand-written rules. Inside that is *deep learning*, which uses large neural networks. Inside that is *generative AI* (GenAI), which creates new content. *Agentic AI* builds on GenAI by letting the system plan and act.
+
+**Picture 2: the life of a model.** A model is *trained* on data, then *used* to make predictions. The way you train it (supervised, unsupervised, reinforcement), the kind of data you feed it, and the way you serve its answers (real-time, batch and so on) are separate choices.
+
+If you keep those two pictures in mind, most vocabulary questions answer themselves.
+
+## Key concepts
+
+### Basic AI terms
+
+| Term | Plain-language meaning |
+|---|---|
+| **AI** | Software that performs tasks that normally need human intelligence, such as understanding language or spotting objects in photos. |
+| **Machine learning (ML)** | A way of building AI where a computer finds patterns in example data rather than being given explicit rules. |
+| **Algorithm** | A step-by-step recipe for learning from data, for example "decision tree" or "linear regression". |
+| **Model** | The *result* of training: the algorithm plus everything it learned. You give it new input and it returns an output (a prediction). |
+| **Training** | The process of showing a model lots of data so it learns patterns. |
+| **Inferencing** (inference) | Using a trained model to produce an output for new input. Training is learning; inference is putting the learning to work. |
+| **Neural network** | A model made of layers of simple connected units, loosely inspired by the brain. |
+| **Deep learning** | ML that uses neural networks with many layers. It excels at images, speech and language, but needs lots of data and computing power. |
+| **Computer vision** | AI that understands images and video, such as recognizing a product in a photo. |
+| **Natural language processing (NLP)** | AI that works with human language: reading, classifying, translating or generating text and speech. |
+| **Large language model (LLM)** | A very large deep-learning model trained on huge amounts of text that can understand and write language. |
+| **Generative AI (GenAI)** | AI that creates new content (text, images, audio, code) instead of only labeling or predicting. LLMs are one kind. See [lesson 2.1](/learn/2.1) for the details. |
+| **Agentic AI** | AI that pursues a goal by planning steps and using tools (such as looking up an order), not just answering one question. See [lesson 3.1](/learn/3.1). |
+
+Three more terms are about *quality*:
+
+- **Bias.** Two meanings, so read carefully. In everyday AI talk, bias means a model gives systematically unfair or skewed results, often because its training data under-represents some groups. (In ML maths, "bias" can also mean a model that is too simple: see *fit* below.)
+- **Fairness.** The goal that a model's outcomes do not unjustly favour or harm particular groups. Tools such as Amazon SageMaker Clarify can help detect bias in data and predictions.
+- **Fit.** How well a model matches the data. **Underfitting** means it is too simple and does badly even on its training data. **Overfitting** means it memorized the training examples, including their noise, so it does well in training but badly on new data. A good fit performs well on data it has never seen.
+
+### How AI, ML, deep learning, GenAI and agentic AI relate
+
+| | What it is | Relationship |
+|---|---|---|
+| **AI** | Any technique that makes machines act intelligently, including hand-written rules. | The umbrella term. |
+| **ML** | AI that *learns from data*. | A subset of AI. |
+| **Deep learning** | ML using many-layered neural networks. | A subset of ML. |
+| **GenAI** | Deep-learning models (for example LLMs) that *create* new content. | Built on deep learning, trained on very large data sets. |
+| **Agentic AI** | A system, usually centred on a GenAI model, that plans and takes actions with tools to reach a goal. | Builds on GenAI by adding planning, memory and tool use. |
+
+**Similarities:** all of them aim to make software behave intelligently, and the modern ones all depend on data and computing power.
+
+**Differences that matter on the exam:**
+
+- A classic ML model usually does *one narrow job* (for example, "is this transaction fraud?") and outputs a label or a number. A foundation model can do *many jobs* through prompts and outputs new content.
+- Generative AI *produces* something. Agentic AI *does* something: it decides which steps to take, calls tools and checks results.
+- A rules-based program (if the order is over 100 euros, ship free) is AI in the broad sense only if you stretch the word. It is not ML, because nothing is learned from data.
+
+### Types of inferencing
+
+Once a model is trained you must make it available to answer requests. Amazon SageMaker AI offers several ways to do it. The same four ideas appear in the exam guide.
+
+| Type | How it works | Choose it when… |
+|---|---|---|
+| **Real-time** | The model sits on an always-on *endpoint* (a web address your application calls) and answers each request immediately. | You need answers in milliseconds to seconds, such as a fraud check while a customer pays. AWS describes it as ideal for "interactive, low latency requirements". |
+| **Serverless** | You deploy the model without choosing or managing servers; capacity is provided on demand. | Traffic comes in bursts with quiet gaps and you can tolerate a *cold start*, the short delay when the model has to wake up after sitting idle. |
+| **Asynchronous** | Incoming requests are placed in a queue and processed asynchronously; the result is delivered when ready. | Requests are large (AWS says payloads up to 1 GB) or slow to process (up to one hour) and the caller doesn't need to wait on the line. |
+| **Batch** | A *batch transform* job runs the model over a whole large data set at once, writes the predictions to storage and stops. | You need predictions for lots of records, with no persistent endpoint, such as scoring all customers overnight. AWS lists "get inferences from large datasets" and "run inference when you don't need a persistent endpoint". |
+
+A quick way to remember: **real-time** = instant, **serverless** = bursty and cheap when idle, **asynchronous** = big or slow jobs that can wait a little, **batch** = a whole data set, scheduled.
+
+### Types of data
+
+Models learn from data, and the kind of data shapes the kind of model.
+
+| Dimension | Types | Plain-language meaning |
+|---|---|---|
+| **Labeled or not** | **Labeled** | Each example comes with the right answer (a "label"): a photo tagged "tent", an email marked "spam". Needed for supervised learning. Producing labels often takes human effort. |
+| | **Unlabeled** | Raw examples with no answers attached. Used to find structure on its own. |
+| **Structured or not** | **Structured** | Fits neatly into rows and columns, like a spreadsheet or database table. |
+| | **Unstructured** | No fixed layout: free text, images, audio, video. Most of the world's data is unstructured. |
+| **Format** | **Tabular** | Rows (records) and columns (features), such as an order table. |
+| | **Time-series** | Values recorded over time in order, such as daily sales. The order matters. |
+| | **Image** | Pixels: product photos, scanned receipts. |
+| | **Text** | Words: reviews, emails, chat messages. |
+
+The types overlap. Daily sales are both *structured* and *time-series*. A product review is *unstructured* and *text*, and it becomes *labeled* if someone tags it "positive". Whatever the type, remember the rule *garbage in, garbage out*: a model is only as good as its data.
+
+### Types of learning
+
+| Style | How it learns | Typical tasks | Example |
+|---|---|---|---|
+| **Supervised** | From **labeled** examples: input plus correct answer. It learns to map one to the other. | *Classification* (pick a category) and *regression* (predict a number). | Learn from past transactions marked "fraud" or "not fraud". |
+| **Unsupervised** | From **unlabeled** data: it looks for structure by itself. | *Clustering* (group similar items) and spotting unusual items. | Group customers into segments by buying habits, with no groups defined in advance. |
+| **Reinforcement** | By *trial and error* in an environment, receiving **rewards** for good actions and penalties for bad ones. | Games, robotics, and tuning decisions over time. | A warehouse robot learns the fastest route to pick items. |
+
+Two related ideas you may see: **semi-supervised learning** uses a small labeled set plus a large unlabeled one, and **self-supervised learning**, which is how LLMs are pre-trained, creates its own labels from the data (for example, hiding the next word and predicting it).
+
+## At Cairnway
+
+Cairnway Outfitters is starting its AI journey, and every concept shows up in its first projects:
+
+- **Vocabulary.** Trailmate, the support assistant, is built on an LLM, so it is GenAI. When it later checks an order and starts a return by itself, it becomes agentic AI.
+- **Supervised learning.** The risk team trains a fraud model on 400,000 past transactions, each *labeled* "fraud" or "legitimate". The data is *tabular* and *structured*.
+- **Unsupervised learning.** Marketing runs *clustering* on purchase history and finds a segment nobody had named: "weekend trail-runners".
+- **Reinforcement learning.** Not used yet. Cairnway's warehouse team asks whether a robot could learn to pick routes this way, and the answer is "possible, but later".
+- **Time-series data.** Three years of weekly sales per product feed a demand-forecasting model.
+- **Unstructured data.** Customer reviews are text, and product photos are images: different data, different models.
+- **Inferencing.** The fraud check runs **real-time** on a SageMaker AI endpoint, because it must answer during checkout. Overnight demand scores for all 12,000 products run as a **batch** job. Large scanned supplier catalogs, which take minutes each, go through an **asynchronous** endpoint. A rarely used returns-photo checker runs on a **serverless** endpoint, because it sits idle most of the day.
+- **Fit and bias.** The first fraud model scores 99% on its training data but poorly on last month's orders: **overfitting**. The team also finds that almost all training examples came from domestic orders, a **bias** risk for international customers.
+
+## AWS services
+
+<Services ids={['sagemaker-ai', 'bedrock', 'sagemaker-jumpstart', 's3']} />
+
+## Exam traps
+
+<Callout title="Real-time, serverless, asynchronous, batch: match the clue">
+  <p>"Low latency, interactive" means real-time. "Idle periods, can tolerate cold starts" means serverless. "Large payload or long processing time, no need for an immediate reply" means asynchronous. "Whole data set, no persistent endpoint, scheduled" means batch. Serverless is not the same as batch.</p>
+</Callout>
+
+<Callout title="The nesting order is fixed">
+  <p>AI contains ML, ML contains deep learning, and deep learning underlies GenAI. A statement that ML is a subset of deep learning is wrong. Agentic AI is not a replacement for GenAI: it uses GenAI to plan and act.</p>
+</Callout>
+
+<Callout title="Labeled data means supervised">
+  <p>If the scenario has examples with known correct answers, it is supervised learning. If there are no labels and the goal is to find groups, it is unsupervised. Rewards and penalties from trial and error mean reinforcement learning.</p>
+</Callout>
+
+<Callout title="Overfit vs. underfit">
+  <p>Great on training data but poor on new data is overfitting. Poor on both is underfitting. Do not pick "the model is accurate" just because the training score is high.</p>
+</Callout>
+
+<Callout title="Training is not inferencing">
+  <p>Training builds the model from data, often in a large, costly job. Inferencing is every later use of the model. Many questions are just testing which of the two is being described.</p>
+</Callout>

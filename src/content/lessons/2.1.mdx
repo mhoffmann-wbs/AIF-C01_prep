@@ -1,0 +1,192 @@
+export const meta = {
+  taskId: '2.1',
+  updated: '2026-11-23',
+  tldr: 'Generative AI creates new content (text, images, audio, code) using foundation models, mostly transformer-based large language models that read and write tokens. You pay per token, so prompt length and answer length drive cost and speed. Good results come from good context, and agents add tools, memory and workflows, connected through standards such as MCP.',
+  objectivesCovered: ['2.1.1', '2.1.2', '2.1.3', '2.1.4', '2.1.5', '2.1.6'],
+  links: [
+    { title: 'Amazon Bedrock pricing (on-demand, batch, Provisioned Throughput)', url: 'https://aws.amazon.com/bedrock/pricing/' },
+    { title: 'Amazon Bedrock: Provisioned Throughput', url: 'https://docs.aws.amazon.com/bedrock/latest/userguide/prov-throughput.html' },
+    { title: 'Amazon Bedrock AgentCore: overview', url: 'https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/what-is-bedrock-agentcore.html' },
+    { title: 'Model Context Protocol: what is MCP?', url: 'https://modelcontextprotocol.io/' },
+    { title: 'Strands Agents', url: 'https://strandsagents.com/' },
+  ],
+}
+
+## Big idea
+
+**Generative AI (GenAI)** is AI that *creates* new content: it writes text, paints images, composes audio, drafts code. Older ("traditional") machine learning mostly *predicts* or *classifies*, for example "is this transaction fraud?". GenAI produces something new, for example "write a friendly product description for this tent".
+
+The engine behind it is the **foundation model** (FM): one very large model, trained once on huge amounts of general data, that can then be reused for many tasks. This lesson gives you the vocabulary the rest of the course builds on:
+
+1. The core building blocks: tokens, chunks, embeddings, prompts and the main model types.
+2. What GenAI is used for.
+3. How a foundation model lives, from data to feedback.
+4. How you pay for it (per token).
+5. How you give it the right information (context engineering).
+6. How models become *agents* that use tools, memory and workflows.
+
+Later lessons go deeper: [lesson 3.1](/learn/3.1) covers choosing a model, inference parameters, RAG, vector stores, customization and agents in detail.
+
+## Key concepts
+
+### Foundational GenAI concepts
+
+| Term | In plain words |
+|---|---|
+| **Token** | The small piece of text a model reads and writes. A token can be a whole short word, part of a longer word, or a punctuation mark. "Waterproof" might be two or three tokens. Models count and bill in tokens, not words. |
+| **Chunking** | Splitting a long document into smaller pieces (chunks) so each piece is small enough to search and to fit into a prompt. A 40-page size guide becomes many short chunks. |
+| **Embedding** | A list of numbers that captures the *meaning* of a piece of text (or an image). Texts with similar meaning get similar numbers. |
+| **Vector** | The technical name for that list of numbers. An embedding is stored as a vector, and "closeness" between vectors means closeness in meaning. |
+| **Prompt engineering** | Writing the instructions, examples and context you send to a model so it gives better answers. No model changes, only better input. |
+| **Foundation model (FM)** | A large model trained on broad data that can be adapted to many tasks. |
+| **Large language model (LLM)** | A foundation model that works with language: it reads and writes text. |
+| **Transformer** | The neural-network design behind modern LLMs. Its key trick, called *attention*, lets the model weigh how every token in the input relates to every other token, so it understands context ("it" refers to *the tent*, not *the bag*). A transformer-based LLM generates text one token at a time, each time predicting a likely next token. |
+| **Multi-modal model** | A model that handles more than one type of data ("modality"), such as text plus images in, text out. |
+| **Diffusion model** | A model, common in image generation, that learns to turn random noise into a picture step by step. It starts from noise and gradually removes it, guided by your text prompt. |
+
+Two points to hold on to:
+
+- An LLM does not look facts up. It predicts likely next tokens from patterns it learned, which is why it can sound confident and still be wrong (a *hallucination*, covered in [lesson 2.2](/learn/2.2)).
+- Chunking and embeddings are the preparation steps of RAG, which [lesson 3.1](/learn/3.1) explains in full. A chunk size that is too big mixes topics together; too small loses the surrounding meaning.
+
+### Use cases for GenAI models
+
+| Use case | What the model does | Cairnway example |
+|---|---|---|
+| **Image, video and audio generation** | Creates visuals or sound from a text description | Lifestyle images of a jacket in different settings |
+| **Summarization** | Shortens long text, keeping the key points | A one-paragraph summary of 500 reviews |
+| **AI assistants** | Answers questions in conversation | Trailmate, the support assistant |
+| **Translation** | Converts text between languages | Product pages in English, German and Spanish |
+| **Code generation** | Writes or explains code | Developers drafting scripts faster |
+| **Customer service agents** | Resolve requests end to end by using tools | An agent that checks an order and starts a return |
+| **Search** | Finds results by meaning, not just keywords (embeddings) | "warm sleeping bag for winter camping" finds a "-15 degree mummy bag" |
+| **Recommendation engines** | Suggest items a shopper may like | "Customers who bought this tent also liked..." |
+
+Not every task needs a GenAI model. Sorting transactions into fraud or not fraud is classification, and a traditional ML model is usually the better and cheaper tool.
+
+### The foundation model lifecycle
+
+A foundation model goes through stages, and the lifecycle repeats:
+
+| Stage | What happens |
+|---|---|
+| **1. Data selection** | Choose and prepare the data: gather it, clean it, remove errors, duplicates and sensitive or unwanted content. The quality of the data limits the quality of the model. |
+| **2. Model selection** | Pick the model type and size, or an existing FM, that fits the use case, budget and speed needs. |
+| **3. Pre-training** | Train the model on a huge, mostly *unlabeled* data set so it learns general language or image patterns. This is by far the most expensive stage, so most businesses skip it and start from an existing model. |
+| **4. Fine-tuning** | Train it further on a smaller set of your own examples so it fits a specific task or style. Optional. |
+| **5. Evaluation** | Test it: automatic metrics, human review and benchmarks, to check quality, safety and fit before release. |
+| **6. Deployment** | Make the model available to applications, for example through an API, and integrate it with the rest of the system. |
+| **7. Feedback** | Collect real-world results, such as user ratings and errors, and monitor behaviour. This feedback feeds the next round of data selection, tuning and evaluation. |
+
+If you use a model through Amazon Bedrock, the provider has already done stages 1 to 3 for you. Your work starts at model selection, maybe fine-tuning, then evaluation, deployment and feedback.
+
+### Token-based pricing, cost and performance
+
+Most foundation models on Amazon Bedrock are priced **per token**. AWS describes on-demand inference as "a token-based pricing model that charges based on the number of tokens processed", with separate rates for **input tokens** (what you send) and **output tokens** (what the model writes), usually quoted per one million tokens. Rates depend on the model, the provider and the Region.
+
+Tokens affect cost *and* performance:
+
+- **More input tokens cost more** and take longer to process. Long instructions, big pasted documents and long chat histories all count, on every request.
+- **More output tokens cost more** and take longer, because the model writes one token at a time. Capping answer length (see [lesson 3.1](/learn/3.1)) limits both.
+- **Bigger models** usually charge more per token and answer more slowly than smaller ones.
+- **Context window**: the maximum number of tokens a model can handle at once (input plus output). Hitting it means text gets cut or the request fails.
+
+Other ways to buy capacity on Amazon Bedrock:
+
+| Option | How you pay | Good for |
+|---|---|---|
+| **On-demand** | Per token, no commitment | Unpredictable or low traffic, getting started |
+| **Batch inference** | Many requests processed together, not in real time. AWS lists select models at a 50% lower price than on-demand | Big, non-urgent jobs such as describing the whole catalog overnight |
+| **Provisioned Throughput** | A fixed hourly price per *model unit* (reserved capacity), with no commitment, 1-month or 6-month terms. Longer commitments get a lower hourly price | Steady, high traffic that needs predictable performance. Also required to use a *custom* model |
+
+More on these tradeoffs in [lesson 2.3](/learn/2.3).
+
+### Context engineering
+
+A model only "knows" two things: what it learned in training and what is in the prompt right now. **Context engineering** is the practice of deciding *what goes into that context window* for each request, so the model has exactly the information it needs and little else. It goes beyond writing one good prompt.
+
+What can be placed in the context:
+
+- **Instructions**: role, tone, rules ("you are Trailmate, answer in the customer's language").
+- **Examples** of good answers (in-context learning).
+- **Retrieved knowledge**: chunks of policies and manuals brought in by RAG.
+- **Conversation history**: earlier turns, often summarized when it gets long.
+- **Memory**: facts saved from past sessions, such as a customer's usual size.
+- **Tool results**: the output of an order lookup or a database query.
+
+Why it matters:
+
+- **Quality**: the right facts reduce hallucinations. Missing or conflicting information causes mistakes.
+- **Cost and speed**: every token in the context is billed and takes time, so stuffing in everything is wasteful. Selecting, trimming and summarizing keeps prompts lean.
+- **Limits**: the context window is finite, so something must decide what fits.
+- **Safety**: untrusted text in the context (for example a customer message or a web page) can try to manipulate the model. Keep trusted instructions and untrusted content clearly separated.
+
+### Agentic AI concepts
+
+An **agent** uses a foundation model to decide what to do next, then acts by calling tools until the goal is reached (introduced in [lesson 3.1](/learn/3.1)). The building blocks:
+
+| Concept | In plain words |
+|---|---|
+| **Tool usage** | The agent calls outside functions: APIs, databases, search, code. The model chooses the tool and its inputs; the application runs it and returns the result. |
+| **Memory management** | **Short-term memory** holds the current conversation. **Long-term memory** keeps useful facts across sessions. Because the context window is limited, memory has to be managed: what to keep, summarize or forget. |
+| **Workflow orchestration** | Controlling the order of steps: which step runs first, what happens on failure, when a human must approve. Some workflows are fixed; in others the model decides the path. |
+| **Model Context Protocol (MCP)** | An open standard for connecting AI applications to external systems. Its website compares it to a USB-C port: one standard plug instead of a custom connection for every data source or tool. A tool wrapped as an **MCP server** can be used by any MCP-compatible agent. |
+
+**Multi-agent systems.** Complex tasks are often split among several specialised agents instead of one that does everything. Common patterns:
+
+| Pattern | How it works |
+|---|---|
+| **Agents as tools** (supervisor and specialists) | A main agent receives the request and calls specialist agents like tools: one for orders, one for returns, one for sizing advice. |
+| **Swarm** | A group of agents that hand work to one another, each deciding who should go next. |
+| **Graph** | The path between agents is drawn in advance as a graph of steps, with branches. |
+| **Workflow** | A fixed sequence of agent steps, such as extract, then check, then approve. |
+
+**Multi-agent communication.** Agents need a common way to talk to each other and to tools. MCP covers agent-to-tool connections. Open protocols such as **Agent2Agent (A2A)** cover agent-to-agent messages. Strands Agents lists Agents as Tools, Swarm, Graph and Workflow patterns and supports both MCP and A2A.
+
+On AWS, **Amazon Bedrock AgentCore** provides modular services for production agents: a **Runtime** to host them with isolated sessions, **Memory** (short-term and long-term), a **Gateway** that turns APIs and Lambda functions into MCP-compatible tools, **Identity** for authentication and access, **Observability** to trace each step, and **Policy** to define which tools an agent may use and under what conditions. **Strands Agents** is the open-source toolkit for writing the agent itself.
+
+## At Cairnway
+
+Cairnway Outfitters is starting its GenAI programme, and each concept shows up in a real decision:
+
+- **Tokens and cost.** Trailmate's first prototype sends the full 12-page returns policy with every message. The team measures roughly 4,000 input tokens per request and 150 output tokens. With 20,000 chats a month, that is a visible bill, so they cut the context to only the relevant policy chunks.
+- **Chunking and embeddings.** Manuals are split into chunks of a few paragraphs and turned into embeddings, so "my zipper broke" finds the repair section even though the word "zipper" is not in the heading.
+- **Use cases.** Marketing generates product descriptions and drafts images with a diffusion-based image model. The shop uses summarization for review digests and translation for German and Spanish pages. Fraud detection stays on a traditional ML model, because it is a classification task.
+- **Lifecycle.** Cairnway does not pre-train anything. It selects a model through Amazon Bedrock, evaluates three candidates, deploys one, and reviews customer thumbs-up and thumbs-down ratings each month as feedback.
+- **Batch pricing.** Writing 30,000 catalog descriptions is not urgent, so it runs as an overnight batch job at a lower price. Live chat uses on-demand.
+- **Context engineering.** For each message Trailmate receives: tone rules, the customer's last order (from a tool), the three most relevant policy chunks, and a short summary of earlier turns. Nothing else.
+- **Agentic design.** Phase two splits Trailmate into a supervisor and two specialists, one for orders and one for returns. The order system is exposed as an MCP-compatible tool through an AgentCore Gateway, so any agent the team builds later can reuse it.
+
+## AWS services
+
+<Services ids={['bedrock', 'nova', 'bedrock-knowledge-bases', 'bedrock-agentcore', 'strands-agents', 'translate', 'personalize', 'transcribe', 'polly', 'bedrock-provisioned-throughput']} />
+
+## Exam traps
+
+<Callout title="Tokens are not words">
+  <p>Pricing and limits are counted in tokens, and a token is often a piece of a word. Cost grows with both input tokens and output tokens. If a question asks how to cut cost or latency, shorter prompts, shorter answers or a smaller model are the usual answers.</p>
+</Callout>
+
+<Callout title="Pre-training is not the first step for a business">
+  <p>In the lifecycle, pre-training is the huge, expensive stage that model providers do. A business normally selects an existing foundation model and then adapts it, rather than pre-training its own.</p>
+</Callout>
+
+<Callout title="Embeddings capture meaning, chunking prepares text">
+  <p>Chunking splits documents into pieces. Embeddings turn each piece into a vector that represents its meaning. Do not mix them up, and remember that similar meaning means vectors that are close together.</p>
+</Callout>
+
+<Callout title="Match the model type to the job">
+  <p>LLM or transformer for text, diffusion model for generating images, multi-modal model for mixed inputs such as image plus question, embedding model for search by meaning. Classification and prediction tasks, such as fraud detection, point to traditional ML.</p>
+</Callout>
+
+<Callout title="Prompt engineering vs. context engineering">
+  <p>Prompt engineering is wording the instructions well. Context engineering is the wider job of choosing everything that enters the context window: instructions, retrieved documents, history, memory and tool results. Scenarios about giving the model the right information at the right time point to context engineering.</p>
+</Callout>
+
+<Callout title="MCP connects, it does not think">
+  <p>MCP is a standard way for AI applications to reach tools and data sources, like a universal plug. It is not a model, not a vector store and not an agent. Agent-to-agent messaging is a different concern, handled by protocols such as A2A.</p>
+</Callout>
+
+<Callout title="Steady heavy traffic or a custom model → Provisioned Throughput; big non-urgent jobs → batch">
+  <p>On-demand is pay-per-token with no commitment. Batch is cheaper for work that can wait. Provisioned Throughput is an hourly fee for reserved capacity, and a customized model on Amazon Bedrock requires it.</p>
+</Callout>

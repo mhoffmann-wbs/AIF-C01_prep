@@ -1,0 +1,154 @@
+export const meta = {
+  taskId: '1.2',
+  updated: '2026-11-23',
+  tldr: 'AI/ML helps when you need to scale decisions, automate repetitive work or support people with predictions from data. It is the wrong tool when you need one guaranteed outcome, when simple rules will do or when the costs outweigh the benefits. Match the technique to the question (regression for numbers, classification for categories, clustering for groups) and match the job to the AWS managed service that already does it.',
+  objectivesCovered: ['1.2.1', '1.2.2', '1.2.3', '1.2.4', '1.2.5', '1.2.6'],
+  links: [
+    { title: 'Amazon SageMaker Canvas (custom model types)', url: 'https://docs.aws.amazon.com/sagemaker/latest/dg/canvas.html' },
+    { title: 'Amazon Transcribe', url: 'https://aws.amazon.com/transcribe/' },
+    { title: 'Amazon Translate', url: 'https://aws.amazon.com/translate/' },
+    { title: 'Amazon Comprehend', url: 'https://aws.amazon.com/comprehend/' },
+    { title: 'Amazon Lex', url: 'https://aws.amazon.com/lex/' },
+    { title: 'Amazon Polly', url: 'https://aws.amazon.com/polly/' },
+    { title: 'Amazon Rekognition', url: 'https://aws.amazon.com/rekognition/' },
+    { title: 'Amazon Textract', url: 'https://aws.amazon.com/textract/' },
+    { title: 'Amazon Personalize', url: 'https://aws.amazon.com/personalize/' },
+    { title: 'Amazon SageMaker AI', url: 'https://aws.amazon.com/sagemaker/ai/' },
+    { title: 'Amazon SageMaker Clarify: fairness and explainability', url: 'https://docs.aws.amazon.com/sagemaker/latest/dg/clarify-configure-processing-jobs.html' },
+    { title: 'Amazon Bedrock overview', url: 'https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html' },
+  ],
+}
+
+## Big idea
+
+Knowing *how* AI works is only half the job. The exam also asks *when to use it* and *which tool fits*. Three habits cover it:
+
+1. **Start from the business problem, not the technology.** AI is worth it when a task involves patterns in data, too much volume for humans, or decisions that benefit from prediction.
+2. **Know when to say no.** A prediction is never a guarantee. If you need an exact, always-correct answer, or a rule is enough, plain software is cheaper and safer.
+3. **Do not build what AWS already offers.** For common jobs (speech, translation, images, documents, text analysis, chatbots, recommendations) there is a ready-made managed service. You build your own model only when no service fits.
+
+## Key concepts
+
+### Where AI/ML provides value
+
+| Value | What it means | Example |
+|---|---|---|
+| **Assisting human decisions** | The system recommends or flags; a person decides. | A fraud model scores orders so an analyst reviews only the riskiest ones. |
+| **Scalability** | A model handles millions of cases at the same quality and speed, day or night. | Sorting every incoming review by sentiment, in any volume. |
+| **Automation** | Repetitive work is done without human effort. | Reading invoices and entering their data into the accounting system. |
+| **Personalization** | Each person sees something tailored to them. | "Customers who bought this tent also bought…" |
+| **Finding hidden patterns** | A model spots relationships a person would miss in huge data sets. | Noticing that certain combinations of order details predict fraud. |
+
+AI/ML shines where there is **lots of data**, **a repeatable pattern** and **a decision that matters at volume**.
+
+### When AI/ML is not appropriate
+
+- **A specific outcome is needed, not a prediction.** ML gives probabilities ("92% likely fraud"), never certainty. If the result must be exact every time, such as calculating sales tax or applying a fixed return policy, write a rule or a program. Many *deterministic* tasks (same input, same output, guaranteed) belong in ordinary code.
+- **The costs outweigh the benefits.** Run a **cost-benefit analysis**: data collection and labeling, building, hosting, monitoring and retraining all cost money. If the saving is smaller than the cost, don't do it.
+- **There is not enough good data.** No data, too little, or poor-quality data means a poor model.
+- **A simple rule works.** If "free shipping above 100 euros" solves it, a model adds cost and risk.
+- **Errors are unacceptable or the stakes are high with no human check.** Examples are fully automated decisions that seriously affect people without any review.
+- **Nobody can explain the result and someone must.** When regulators or customers require reasons, a black-box model may not be allowed (more under *Traditional ML or foundation model*, below).
+
+### Choosing the technique: regression, classification, clustering
+
+Most business ML questions boil down to the *shape of the answer*:
+
+| Technique | Learning type | The question it answers | The output is… | Cairnway example |
+|---|---|---|---|---|
+| **Regression** | Supervised | "How much? How many?" | A number | Forecast next month's sales of rain jackets. |
+| **Classification** | Supervised | "Which category?" | A label (two or more classes) | Is this transaction fraud or legitimate? Is this review positive, neutral or negative? |
+| **Clustering** | Unsupervised | "Which items naturally belong together?" | Groups discovered from the data | Segment customers by buying habits. |
+
+Quick test: *predicting a number* is regression, *picking from known categories* is classification, *finding groups nobody defined* is clustering. Forecasting over time (time-series forecasting) is a special case of predicting numbers. Amazon SageMaker Canvas lists these same types of custom model, calling them numeric prediction, categorical prediction and time series forecasting.
+
+### Real-world AI applications
+
+| Application | What it does | Example |
+|---|---|---|
+| **Computer vision** | Understands images and video. | Check product photos for the right item, or scan returned goods. |
+| **Natural language processing (NLP)** | Reads, classifies and generates text. | Find the sentiment of customer reviews. |
+| **Speech recognition** | Turns spoken audio into text. | Transcribe customer-service calls. |
+| **Recommendation systems** | Suggest items based on behavior of similar users. | "You may also like" on a product page. |
+| **Fraud detection** | Flags unusual transactions. | Block or review suspicious orders. |
+| **Forecasting** | Predicts future values from past patterns. | Plan stock for the winter season. |
+| **Knowledge bases** | Let a GenAI assistant answer from your documents (RAG). See [lesson 3.1](/learn/3.1). | Trailmate answers return-policy questions. |
+| **Agentic AI** | A system that plans and takes actions with tools. | An agent that checks an order and starts a return. |
+
+### AWS managed AI services
+
+A **managed AI service** (sometimes called an AI service or pre-trained API) is a ready-made model behind an API. You send data and get results; you don't train or host anything. Quotes below are from AWS's own pages.
+
+| Service | What it does | Typical use |
+|---|---|---|
+| **Amazon Transcribe** | A "fully managed, automatic speech recognition (ASR) service": speech to text. | Call transcripts, subtitles. |
+| **Amazon Translate** | "A neural machine translation service" for translating text between languages. | Translate product pages and support messages. |
+| **Amazon Comprehend** | Gets insights from text: key phrases, topics, sentiment and entities, and can find and redact personal identifiers. | Review sentiment, finding names and addresses to hide. |
+| **Amazon Lex** | An AI chat builder: lets users interact with applications through natural-language voice or chat. | Build a voice or text chatbot. |
+| **Amazon Polly** | Turns text into speech: it "generates voice on demand, converting any text to an audio stream". | Read articles aloud, voice prompts. |
+| **Amazon Rekognition** | Image recognition and video analysis. | Detect objects or inappropriate content in photos. |
+| **Amazon Textract** | Extracts text, handwriting, forms, tables and layout from documents. | Read invoices and receipts (OCR with structure). |
+| **Amazon Personalize** | AI-powered personalization and recommendations for customers. | Recommended products. |
+| **Amazon SageMaker AI** | Not a ready-made model: a platform to *build, train and deploy your own* ML models. | A custom fraud or forecasting model. |
+
+Remember the dividing line: the services above (except SageMaker AI) are for *using* AI with no ML expertise; **SageMaker AI** is for when you need *your own* model. **Amazon Bedrock** (see [lesson 3.1](/learn/3.1)) is the managed choice for *generative* AI.
+
+Mini-guide for the "which service?" questions:
+
+- Audio in, text out → **Transcribe**. Text in, audio out → **Polly**. Language A to language B → **Translate**.
+- Understand the *meaning* of text (sentiment, entities) → **Comprehend**.
+- A chatbot with defined intents → **Lex**. A generative assistant → **Bedrock**.
+- Pictures or video → **Rekognition**. Scanned documents, forms, tables → **Textract**.
+- "Recommended for you" → **Personalize**.
+
+### Traditional ML or foundation model?
+
+| Choose… | When… |
+|---|---|
+| **Traditional ML** (a purpose-built model such as a classifier or forecaster) | The task is narrow and well defined (fraud, churn, demand). You have labeled, tabular data. You need **explainability** (the ability to say *why* a prediction was made), strict **regulatory** compliance, low and predictable cost per prediction, or a small, fast model with tight **operational constraints** (latency, running on a device). |
+| **Foundation model (FM)** | The task is open-ended language or content: summarizing, drafting, chatting, translating, answering questions, creating images. You have little labeled data, want results quickly through prompting, or one model must handle many tasks. |
+
+Trade-offs to remember: FMs are flexible but can hallucinate (give confident wrong answers), give different answers each time and are harder to explain. In regulated settings such as credit or hiring decisions, a simpler, explainable model is often the safer choice. For explainability and bias checks on classic models, AWS offers Amazon SageMaker Clarify, which AWS says can help you "understand why your ML model made a specific prediction". Also: don't use an expensive FM for a task a small model or a ready-made service already does well.
+
+## At Cairnway
+
+Cairnway's leadership has a long wish list. The data team sorts it:
+
+- **Product descriptions for 12,000 items** → *Foundation model.* Open-ended writing, done through Amazon Bedrock with a person reviewing.
+- **Review sentiment** → *Amazon Comprehend.* Ready-made NLP: no model to build.
+- **Support calls** → *Amazon Transcribe* to turn calls into text, then Comprehend to analyze them. Hold-music announcements use *Amazon Polly*.
+- **Selling in Germany and Spain** → *Amazon Translate* for product pages and support replies.
+- **Invoice processing** → *Amazon Textract* reads supplier invoices and extracts the fields.
+- **Return-photo checks** → *Amazon Rekognition* for generic object and content detection.
+- **"You may also like"** → *Amazon Personalize* for recommendations.
+- **Phone ordering bot** → *Amazon Lex*.
+- **Fraud detection** → *Traditional ML* (classification) on SageMaker AI. Auditors need to know why an order was blocked, so explainability matters, and the data is tabular.
+- **Demand forecasting** → *Regression / time-series forecasting* on SageMaker AI, using three years of weekly sales.
+- **Customer segments** → *Clustering*.
+- **Not AI:** "Apply the 30-day return rule." It is a fixed policy that needs the same exact outcome every time, so it is plain code. Another idea, "an AI that predicts what each customer will want ten years from now", is rejected: no reliable data, no measurable benefit.
+
+## AWS services
+
+<Services ids={['sagemaker-ai', 'bedrock', 'transcribe', 'translate', 'comprehend', 'lex', 'polly', 'rekognition', 'textract', 'personalize', 'sagemaker-clarify']} />
+
+## Exam traps
+
+<Callout title="Exact outcome needed means no ML">
+  <p>If the scenario demands a guaranteed, identical result (tax calculations, applying a fixed policy), the answer is rules or ordinary code. ML predicts with probabilities. Watch for "must always" and "specific outcome".</p>
+</Callout>
+
+<Callout title="Number, category, group">
+  <p>Predict a number: regression. Predict a category: classification. Discover groups without labels: clustering. "Will the customer churn: yes or no?" is classification, even though the output is only two values.</p>
+</Callout>
+
+<Callout title="Ready-made service before custom model">
+  <p>When a managed service already does the job (Textract for forms, Transcribe for speech, Translate for languages), it beats building a model in SageMaker AI on cost, speed and effort. SageMaker AI is the answer when you need a custom model.</p>
+</Callout>
+
+<Callout title="Similar-sounding services">
+  <p>Transcribe turns speech into text, and Polly turns text into speech. Comprehend analyzes text, Textract extracts text from documents and Rekognition works on images and video. Lex builds the chatbot, Bedrock gives a generative assistant.</p>
+</Callout>
+
+<Callout title="Explainability or regulation points to traditional ML">
+  <p>If auditors or regulators must understand each decision, prefer a simpler, explainable model over a large foundation model. If the task is open-ended content, with little labeled data, a foundation model fits.</p>
+</Callout>

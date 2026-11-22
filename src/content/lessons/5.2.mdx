@@ -1,0 +1,155 @@
+export const meta = {
+  taskId: '5.2',
+  updated: '2026-11-23',
+  tldr: 'Governance is the set of rules, reviews and records that keep an AI system lawful and accountable. On AWS, five services get confused: Config (resource settings over time), Inspector (software vulnerabilities), Artifact (AWS compliance reports), CloudTrail (who called which API) and Trusted Advisor (best-practice checks). Good data governance covers lifecycle, logging, residency, monitoring and retention, and the Generative AI Security Scoping Matrix helps decide how much of the work is yours.',
+  objectivesCovered: ['5.2.1', '5.2.2', '5.2.3'],
+  links: [
+    { title: 'What is AWS Config?', url: 'https://docs.aws.amazon.com/config/latest/developerguide/WhatIsConfig.html' },
+    { title: 'What is Amazon Inspector?', url: 'https://docs.aws.amazon.com/inspector/latest/user/what-is-inspector.html' },
+    { title: 'What is AWS Artifact?', url: 'https://docs.aws.amazon.com/artifact/latest/ug/what-is-aws-artifact.html' },
+    { title: 'What is AWS CloudTrail?', url: 'https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-user-guide.html' },
+    { title: 'Amazon Bedrock: monitoring API calls with AWS CloudTrail', url: 'https://docs.aws.amazon.com/bedrock/latest/userguide/logging-using-cloudtrail.html' },
+    { title: 'AWS Trusted Advisor', url: 'https://docs.aws.amazon.com/awssupport/latest/user/trusted-advisor.html' },
+    { title: 'Amazon Bedrock: model invocation logging', url: 'https://docs.aws.amazon.com/bedrock/latest/userguide/model-invocation-logging.html' },
+    { title: 'Amazon S3 Lifecycle', url: 'https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lifecycle-mgmt.html' },
+    { title: 'AWS Glue Data Catalog', url: 'https://docs.aws.amazon.com/glue/latest/dg/catalog-and-crawler.html' },
+    { title: 'AWS Lake Formation', url: 'https://docs.aws.amazon.com/lake-formation/latest/dg/what-is-lake-formation.html' },
+    { title: 'Amazon Bedrock FAQs (data stays in Region)', url: 'https://aws.amazon.com/bedrock/faqs/' },
+    { title: 'Amazon Bedrock: data retention', url: 'https://docs.aws.amazon.com/bedrock/latest/userguide/data-retention.html' },
+    { title: 'Amazon SageMaker Model Cards', url: 'https://docs.aws.amazon.com/sagemaker/latest/dg/model-cards.html' },
+    { title: 'Generative AI Security Scoping Matrix', url: 'https://aws.amazon.com/ai/generative-ai/security/scoping-matrix/' },
+  ],
+}
+
+## Big idea
+
+**Governance** means having clear rules for how AI is built and used, and being able to prove you followed them. **Compliance** means meeting outside requirements, such as laws, regulations (for example the EU's data-protection law, GDPR) and industry standards. Regulators and auditors rarely ask "is your AI good?" They ask "show me the policy, show me the records, show me who approved it."
+
+So this task has three parts:
+
+1. **Tools** that record, check and evidence what is happening in your AWS account.
+2. **Data governance**: managing data through its whole life, including where it is stored, how long it is kept and who watched it.
+3. **Processes**: the human side, with written policies, regular reviews, a framework to guide decisions, transparency and training.
+
+The exam does not expect you to be a lawyer. It expects you to match a governance need to the right AWS service, and to recognize sound governance practice.
+
+## Key concepts
+
+### AWS services and features for governance and compliance
+
+Five services show up again and again, and they are easy to mix up. Learn each by its one-line job.
+
+| Service | Its job in one line | Typical governance question it answers |
+|---|---|---|
+| **AWS Config** | Records how your AWS resources are configured and how that changed over time, and checks them against rules. AWS says resources that break a rule are flagged as noncompliant. | "Is every S3 bucket encrypted? What did this setting look like last month?" |
+| **Amazon Inspector** | A vulnerability management service that continually scans EC2 instances, container images in Amazon ECR and Lambda functions for software vulnerabilities and unintended network exposure. | "Do the servers and code behind our AI app have known security flaws?" |
+| **AWS Artifact** | On-demand downloads of AWS's own security and compliance documents, such as ISO, PCI and SOC reports, plus a place to review and accept agreements with AWS. | "Can we show our auditor that AWS meets standard X?" |
+| **AWS CloudTrail** | Records actions taken by a user, role or AWS service as events, so you can see who did what, when and from where. AWS describes it as enabling "operational and risk auditing, governance, and compliance". | "Who called the model, who changed the guardrail, who deleted the knowledge base?" |
+| **AWS Trusted Advisor** | Inspects your AWS environment and recommends improvements to save money, improve availability and performance, and close security gaps. | "Where are we falling short of AWS best practice?" |
+
+**A way to remember them:**
+
+- **Config** is the *settings history* (what is configured).
+- **Inspector** is the *vulnerability scanner* (what is weak).
+- **Artifact** is the *library of AWS's compliance papers* (what AWS can prove).
+- **CloudTrail** is the *activity log* (who did what).
+- **Trusted Advisor** is the *advice checklist* (what to improve).
+
+Details worth knowing:
+
+- **Config** can bundle rules into **conformance packs**, a collection of rules deployed and monitored as one unit, and an *aggregator* gathers results from many accounts and Regions into one view. It is the usual answer for "continuously check that resources comply with our policy".
+- **CloudTrail** keeps 90 days of management events in *Event history* by default; for a longer record you create a *trail* that delivers events to Amazon S3. For Bedrock, AWS says CloudTrail captures Bedrock API calls, and runtime calls such as InvokeModel and Converse are logged as management events. Some other Bedrock calls, such as knowledge base retrieval and guardrail checks, are *data events*, which you must switch on separately and which cost extra.
+- **Artifact** has the shared responsibility angle: AWS notes that customers are still responsible for producing the documents that show *their own* company's compliance. Artifact shows what AWS does, not what you do.
+- **Trusted Advisor**: how many of its checks you see depends on your AWS Support plan.
+
+Related tools from the previous lesson also support governance: **Amazon Macie** (finds sensitive data in S3), **Amazon CloudWatch** (metrics, logs and alarms for monitoring) and **Bedrock model invocation logging** (stores prompts and responses; off by default). **Amazon SageMaker Model Cards** document a model's intended use, risk rating, training and evaluation in one place, and edits create new versions, which gives auditors a stable record.
+
+### Data governance strategies
+
+**Data governance** is how an organization manages its data: who owns it, how it is protected, how long it is kept and how it is used. For AI, it matters twice: once for the data the model learned from or retrieves, and once for the prompts and answers your users generate.
+
+| Strategy | What it means | AWS examples |
+|---|---|---|
+| **Data lifecycle** | Plan what happens to data from creation to deletion: where it is collected, stored, used, archived and destroyed. | **S3 Lifecycle** rules move objects to cheaper storage classes (*transition* actions) or delete them (*expiration* actions) automatically. |
+| **Logging** | Keep records of access and use, so you can investigate and prove compliance. | CloudTrail for API calls; Bedrock model invocation logging to CloudWatch Logs or S3 for prompts and answers; Lake Formation access audit logs via CloudTrail. |
+| **Residency** | Keep data in specific countries or Regions to meet legal requirements. | You choose the AWS **Region** for your workloads. AWS says customer content processed by Bedrock is encrypted and stored at rest in the Region where you use it. |
+| **Monitoring and observation** | Watch continuously for problems, rather than checking once. | CloudWatch alarms and dashboards; Config rules for configuration drift; Macie for sensitive data; Glue Data Quality for data health. |
+| **Retention** | Decide how long each kind of data is kept: long enough to meet the law and audits, no longer than needed for privacy. | S3 Lifecycle expiration (AWS's own example is expiring objects after a regulatory compliance period) and archive classes such as S3 Glacier. Bedrock also has settings and model-specific rules about whether prompts and outputs are retained. |
+| **Cataloging and access control** | Know what data you have and who may use it. | Glue Data Catalog (index of data sets and their lineage); Lake Formation (fine-grained permissions, with audit logging). |
+
+Three points beginners often miss:
+
+- **Retention is a balance.** Keep records too briefly and you fail an audit. Keep personal data too long and you may break privacy rules. Lifecycle rules make both automatic.
+- **Residency also depends on features you turn on.** Some services, for instance when *cross-Region inference* is enabled, may process requests in other Regions. AWS's documentation for Automated Reasoning checks says data stays within a geographic boundary (for example, the EU). Always read how a feature routes data when residency is a hard requirement.
+- **Logs are data too.** Invocation logs can contain customer prompts. Encrypt them, restrict access and apply a retention period.
+
+### Governance protocols and processes
+
+Tools are not governance by themselves. Governance also needs people and routines:
+
+- **Policies.** Written rules, such as an acceptable-use policy for AI, rules about which data may be sent to a model, and who may approve a new AI use case.
+- **Review cadence.** A schedule for revisiting decisions: for example, quarterly reviews of access permissions, guardrail settings and model performance, plus a review whenever something significant changes.
+- **Review strategies.** How reviews are done: a cross-functional committee (security, legal, business, data), risk-based review (higher-risk uses get more scrutiny; a Model Card's risk rating can feed this), pre-launch approval gates, and periodic audits using logs.
+- **Governance frameworks.** A structure that gives you a checklist, so you don't start from nothing. The exam guide names the **Generative AI Security Scoping Matrix**, described below.
+- **Transparency standards.** Commitments to tell users and stakeholders that AI is involved, what data it uses and what it can and can't do; documentation such as Model Cards; and citations for answers.
+- **Team training requirements.** Everyone who builds or uses the system learns the rules: developers on secure design and prompt-attack risks, staff on what not to paste into a model, and reviewers on spotting bad output.
+
+**The Generative AI Security Scoping Matrix** is a framework from AWS that, in AWS's words, is "designed to help organizations assess and implement security controls throughout the AI lifecycle". It sorts generative AI use into five **scopes**, from using someone else's finished product to building everything yourself:
+
+| Scope | What you do | Who owns more of the work |
+|---|---|---|
+| **1. Consumer app** | Use a public third-party generative AI service, free or paid. | The provider; you mainly control what you type in and who uses it. |
+| **2. Enterprise app** | Use a third-party business application that has generative AI built in, under a business agreement. | Mostly the vendor; you manage contracts, access and data you provide. |
+| **3. Pre-trained models** | Build your own application on an existing foundation model through an API (for example, an app on Amazon Bedrock). | Shared: the model is theirs, the app, data and prompts are yours. |
+| **4. Fine-tuned models** | Refine an existing foundation model with your business data. | More is yours: your training data and the resulting model. |
+| **5. Self-trained models** | Build and train a model from scratch with data you own or acquire. | Nearly everything is yours. |
+
+The rule: **the higher the scope number, the more you own and the more governance and security controls you are responsible for.** AWS also lists security disciplines to prioritize at each scope: governance and compliance, legal and privacy, risk management, controls, and resilience.
+
+## At Cairnway
+
+Cairnway Outfitters sells to customers across the EU, so its legal adviser, Ines, insists that Trailmate has an audit-ready story. The team builds it like this:
+
+- **Which scope?** Trailmate is an app built on a pre-trained model in Amazon Bedrock with Cairnway's own data in a knowledge base: **scope 3**. If Cairnway later fine-tunes a model, that moves to scope 4 and the team knows it takes on more responsibility for training data and the custom model.
+- **Config.** AWS Config rules check that the order-data bucket is encrypted and not public, and a conformance pack bundles the checks. A noncompliant bucket triggers an alert.
+- **Inspector.** The Lambda functions and containers that call Trailmate's order API are scanned by Amazon Inspector for known software vulnerabilities.
+- **Artifact.** For its annual audit, Cairnway downloads AWS's compliance reports from AWS Artifact. It still writes its own documents on how it uses AWS.
+- **CloudTrail.** A trail delivers all API activity, including Bedrock calls, to a locked S3 bucket. When a colleague asks who changed a guardrail last Tuesday, the answer takes minutes.
+- **Trusted Advisor.** A monthly look at Trusted Advisor's recommendations catches an unused resource and a security setting that needs attention.
+- **Data lifecycle and retention.** Chat logs delivered by model invocation logging go to S3 with a lifecycle rule: after 90 days they move to an archive storage class, and after 13 months they expire. The retention period is set in the written policy, not picked by an engineer.
+- **Residency.** Everything runs in an EU Region, and the team checks whether any feature (such as cross-Region inference) could route requests elsewhere before turning it on.
+- **Processes.** An AI governance committee (security, legal, support, data) approves new AI features before launch and reviews Trailmate's guardrails and access every quarter. Trailmate tells customers they are chatting with an AI assistant, and every answer cites its source document. New staff take a 30-minute training on what customer data may be pasted into AI tools.
+
+## AWS services
+
+<Services ids={['config', 'inspector', 'artifact', 'cloudtrail', 'trusted-advisor', 'cloudwatch', 's3', 's3-glacier', 'glue', 'lake-formation', 'macie', 'sagemaker-model-cards', 'bedrock', 'glue-data-catalog', 's3-lifecycle', 'bedrock-invocation-logging']} />
+
+## Exam traps
+
+<Callout title="The five look-alikes: match the verb">
+  <p>Config: resource configuration over time and rule compliance. Inspector: vulnerabilities in EC2, containers and Lambda. Artifact: AWS's compliance reports and agreements. CloudTrail: who called which API. Trusted Advisor: best-practice recommendations. Read what the scenario needs to know, then pick the service whose job matches.</p>
+</Callout>
+
+<Callout title="Need AWS's SOC or ISO report → Artifact">
+  <p>Artifact gives you AWS's own audit documents. It does not scan your resources or prove that your application is compliant. That is still your responsibility under the shared responsibility model.</p>
+</Callout>
+
+<Callout title="Who did it → CloudTrail; how was it set up → Config">
+  <p>"Who deleted the guardrail?" is a CloudTrail question. "Was this bucket encrypted last month?" is an AWS Config question. Neither one records the text of prompts and answers: for that you need Bedrock model invocation logging.</p>
+</Callout>
+
+<Callout title="Retention and lifecycle → S3 Lifecycle rules">
+  <p>Automatically archiving or deleting data after a set time is done with S3 Lifecycle configuration (transition and expiration actions). Retention periods come from policy and law, not from the technology.</p>
+</Callout>
+
+<Callout title="Residency is about Regions">
+  <p>To keep data in a country or region, choose that AWS Region and check features that might move processing elsewhere, such as cross-Region inference. Encryption alone does not satisfy a residency requirement.</p>
+</Callout>
+
+<Callout title="Scoping Matrix: higher scope, more responsibility">
+  <p>Scope 1 is a consumer app, scope 5 is a self-trained model. An app on a pre-trained foundation model through an API, such as Bedrock, is scope 3; fine-tuning makes it scope 4. If a question asks who handles more security duties, the answer grows with the scope number.</p>
+</Callout>
+
+<Callout title="Governance is people and process too">
+  <p>Policies, review cadence, a framework, transparency commitments and training are governance measures. A tool alone, however good, is not a governance programme. Pick answers that combine technical controls with documented, regularly reviewed processes.</p>
+</Callout>

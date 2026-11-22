@@ -40,10 +40,10 @@ describe('pages', () => {
     expect(getProgress().lessonsRead).toEqual(['3.1'])
   })
 
-  it('lists every task on the Learn index, linking those with lessons', async () => {
+  it('links every task on the Learn index to its lesson', async () => {
     expect(await renderAt('/learn')).toHaveTextContent('Learn')
     expect(screen.getByRole('link', { name: /3\.1 Describe design considerations/ })).toBeInTheDocument()
-    expect(screen.getAllByText(/coming soon/).length).toBeGreaterThan(0)
+    expect(screen.queryByText(/coming soon/)).not.toBeInTheDocument()
   })
 
   it('lists every domain on the practice picker', async () => {

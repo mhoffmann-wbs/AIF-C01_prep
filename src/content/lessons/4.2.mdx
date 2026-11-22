@@ -1,0 +1,126 @@
+export const meta = {
+  taskId: '4.2',
+  updated: '2026-11-23',
+  tldr: 'A transparent, explainable model lets people see how it was built and why it made a decision. That builds trust and supports audits, but the most accurate models are often the hardest to explain, so teams trade interpretability against performance. Tools such as SageMaker Model Cards, AI Service Cards, SageMaker Clarify and Bedrock Model Evaluation help, and human-centered design keeps people informed and in control.',
+  objectivesCovered: ['4.2.1', '4.2.2', '4.2.3', '4.2.4'],
+  links: [
+    { title: 'AWS: Responsible AI (core dimensions)', url: 'https://aws.amazon.com/ai/responsible-ai/' },
+    { title: 'AWS: Responsible AI resources (AI Service Cards)', url: 'https://aws.amazon.com/ai/responsible-ai/resources/' },
+    { title: 'Amazon SageMaker Model Cards', url: 'https://docs.aws.amazon.com/sagemaker/latest/dg/model-cards.html' },
+    { title: 'Amazon SageMaker Clarify: fairness and explainability', url: 'https://docs.aws.amazon.com/sagemaker/latest/dg/clarify-configure-processing-jobs.html' },
+    { title: 'Amazon Bedrock evaluations', url: 'https://docs.aws.amazon.com/bedrock/latest/userguide/evaluation.html' },
+    { title: 'Bedrock: model evaluation task types and metrics', url: 'https://docs.aws.amazon.com/bedrock/latest/userguide/model-evaluation-tasks.html' },
+    { title: 'Amazon Bedrock Guardrails', url: 'https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails.html' },
+    { title: 'Amazon Augmented AI (A2I) human review', url: 'https://docs.aws.amazon.com/sagemaker/latest/dg/a2i-use-augmented-ai-a2i-human-review-loops.html' },
+  ],
+}
+
+## Big idea
+
+Two ideas sit side by side in this task, and the exam treats them as related but different:
+
+- **Transparency** means being open about the model itself: what it is for, how it was built, what data trained it, how well it performs and where it falls short.
+- **Explainability** means being able to say *why* the model gave a particular result, in terms a person can follow.
+
+Both matter because people affected by an AI decision, and the regulators and auditors who oversee it, need reasons. "The computer said no" is not an acceptable answer to a customer who was refused credit. AWS lists both among its core dimensions of responsible AI: *explainability* ("understanding and evaluating system outputs") and *transparency* ("enabling stakeholders to make informed choices about their engagement with an AI system").
+
+The catch is that capability and clarity often pull in opposite directions. The rest of this lesson is about how to tell the two kinds of model apart, which tools help, what you give up, and how to design for people.
+
+## Key concepts
+
+### Transparent and explainable models vs. those that are not
+
+Some models are easy to look inside. Others are a **black box**: you see inputs and outputs, but the reasoning in between is too complex for a person to follow.
+
+| | Transparent and explainable | Not transparent or explainable (black box) |
+|---|---|---|
+| **Typical examples** | Simple, rule-based models: linear regression, decision trees. | Deep neural networks, including large language models and other foundation models. |
+| **Why it decided** | You can read the logic. A decision tree shows the questions it asked, in order. A linear model shows how much each input counted. | Billions of internal numbers interact. No short, faithful reason exists. |
+| **Documentation** | Training data, intended use, limits and test results are published. | Little is disclosed about the data, design or limits. |
+| **Typical strength** | Easy to audit, debug and defend. | Often more accurate on complex tasks such as language and images. |
+| **Typical weakness** | May be less accurate on complex patterns. | Hard to audit. Can hide bias or errors. Hard to defend in a dispute. |
+
+Two further distinctions help:
+
+- **Interpretability** is how directly a person can understand a model's inner workings. A small decision tree is interpretable. **Explainability** is a broader goal, which can also be met by adding explanations to a black box, even though you can't read its inside.
+- Explaining a black box after the fact uses **feature attributions**: scores that show how much each input (a *feature*, such as income or order history) pushed a single prediction up or down. One common method uses **Shapley values**, an idea from game theory that shares credit for a result fairly among the inputs. **Amazon SageMaker Clarify** can produce these, and also *partial dependence plots*, which show how a prediction would change if you varied one feature. AWS notes that Clarify can generate reports for risk and compliance teams and external regulators.
+
+A black box is not forbidden. It means you need more testing, documentation and human oversight. Use a simple, explainable model where decisions are high stakes and the law demands reasons.
+
+### Tools that help identify transparent and explainable models
+
+You can't judge transparency by looking at the model alone. You judge it by what is documented and what you may inspect.
+
+| Tool or resource | How it supports transparency and explainability |
+|---|---|
+| **Amazon SageMaker Model Cards** | A **model card** documents key details about a machine learning model in one place: intended use and risk rating, training details and metrics, evaluation results and observations, plus considerations and recommendations. AWS says it supports governance and reporting and can be exported to PDF. The risk rating can be unknown, low, medium or high. Edits create new versions, which gives an unchangeable record of changes. |
+| **AWS AI Service Cards** | AWS's own documentation for its AI services and models, giving one place to find intended use cases and limitations, responsible AI design choices and performance optimization best practices. Read them before adopting an AWS AI service. |
+| **Amazon Bedrock Model Evaluation** | Measures how a model behaves on your prompts: automatic metrics for accuracy, robustness and toxicity, human-based evaluations with your own staff or experts, and evaluations that use a second model as judge. The results go into a report you can keep as evidence. |
+| **Amazon SageMaker Clarify** | Explains individual predictions with feature attributions and detects bias in data and predictions. |
+| **Open source models** | Models whose design and weights are published can be inspected, tested and sometimes changed by anyone. That gives more visibility than a closed model, although it does not make the model automatically explainable. |
+| **Data and licensing information** | Documentation of where the training data came from, and the licence terms that say how you may use, change and share the model. Check these before adoption. Some models are called "open" but carry limits on commercial use. |
+
+Remember that a model card is *documentation you write and maintain*. It doesn't make the model explainable by itself. It makes the model's purpose, limits and evidence visible and auditable.
+
+### Trade-offs between model safety and transparency
+
+In practice you rarely get everything at once. These trade-offs are worth knowing:
+
+- **Interpretability vs. performance.** Simple models are easy to explain but may miss complex patterns. Complex models are often more accurate but harder to explain. To balance them, teams measure both: how accurate the model is, and how well its decisions can be explained, then choose by the risk of the use case. A common approach is a simple model for regulated decisions and a more powerful one where the stakes are low.
+- **Transparency vs. security.** Publishing exactly how a safety filter works, or a model's full details, can help attackers find ways around it. Releasing too little hides problems from the public and regulators. Responsible teams share what stakeholders need to make informed choices, such as purpose, limits and evaluation results, while protecting what could be misused.
+- **Transparency vs. privacy.** Explaining a decision shouldn't reveal other people's personal data that the model learned from.
+- **Safety vs. usefulness.** Strict safeguards, such as Bedrock Guardrails with strong filters, make an application safer but may also block some legitimate requests. You tune the filter strength to the use case.
+- **Open vs. closed models.** Open models are more inspectable, but anyone can also remove their safeguards. Closed models may be better protected but are less visible.
+
+There is no single right balance. The decision depends on the risk to people, the legal requirements and the purpose of the system.
+
+### Human-centered design for explainable AI
+
+**Human-centered design** starts from the people who will use or be affected by the system, not from the technology. For explainable AI it means:
+
+- **Explain in the user's language.** Give reasons a customer or staff member can understand, such as "Your application was declined mainly because of recent missed payments", not a list of model weights. Different audiences need different detail: a customer, a loan officer and an auditor.
+- **Be open that AI is involved.** Tell people when they are talking to an AI or when AI informs a decision, and what it can and can't do. This is **AI decision transparency**.
+- **Show uncertainty and sources.** Display confidence levels where useful, and point to the source documents behind an answer so users can check.
+- **Provide user-feedback mechanisms.** Make it easy to flag a wrong or unfair answer, for example with a thumbs-down button and a comment box, and feed that feedback back into evaluation and improvement.
+- **Keep humans in control.** Let people review, correct or appeal an automated decision, and route uncertain cases to a person. Amazon A2I is an AWS service for human review of low-confidence predictions.
+- **Test with real users and diverse groups**, and keep testing after launch.
+
+This connects to AWS's *controllability* dimension: having mechanisms to monitor and steer AI behavior.
+
+## At Cairnway
+
+- **Credit eligibility for buy now, pay later.** Because customers can be refused, Cairnway chooses an explainable model, a simple, tree-based model whose rules can be read, even though a deep neural network scored slightly higher in testing. The team accepts a small accuracy loss for decisions it can explain and defend. Using SageMaker Clarify, they check which inputs drive each decision and confirm that postal code isn't acting as a stand-in for ethnicity.
+- **Model card.** For the eligibility model the team writes a **SageMaker Model Card** covering its intended use (BNPL decisions for adults in selected countries), uses it is not meant for, the training data, test results, and a **high** risk rating. Auditors can see each version.
+- **Trailmate.** Before launching, the team runs **Bedrock Model Evaluation** on three candidate models, scoring accuracy, robustness and toxicity, and adds a human evaluation by support staff. They also read the **AI Service Card** of the AWS services they use, to learn the documented limits.
+- **Customer-facing design.** Trailmate opens with "I'm Cairnway's AI assistant", links the policy page behind each answer, and has a thumbs-down button. A refused eligibility decision comes with plain-language reasons and a link to ask a person to review it.
+- **Open vs. closed.** For product descriptions the team considers an open model, which they can inspect more closely, but checks the licence first. A restriction on commercial use rules one candidate out.
+
+## AWS services
+
+<Services ids={['sagemaker-model-cards', 'bedrock-evaluations', 'bedrock-guardrails', 'sagemaker-ai', 'bedrock', 'sagemaker-jumpstart', 'sagemaker-clarify']} />
+
+## Exam traps
+
+<Callout title="Explainable vs. accurate">
+  <p>When a scenario stresses regulation, audits or the need to give customers reasons, pick the simpler, more interpretable model, even at some cost in accuracy. When it stresses the best possible performance on a complex task, a black-box model is acceptable with extra safeguards.</p>
+</Callout>
+
+<Callout title="Model cards document, they don't explain">
+  <p>SageMaker Model Cards record intended use, risk rating, training details and evaluation results in one place. If the question asks for a documented, auditable description of a model, that is the answer. If it asks why a prediction came out as it did, think SageMaker Clarify and feature attributions.</p>
+</Callout>
+
+<Callout title="AI Service Cards vs. Model Cards">
+  <p>AI Service Cards are published by AWS about its own services. SageMaker Model Cards are created by you for the models you build or deploy.</p>
+</Callout>
+
+<Callout title="Transparency is not the same as explainability">
+  <p>Transparency: openness about the system, its data, purpose and limits. Explainability: understanding why a specific output happened. Questions about disclosing that users are talking to AI are about transparency.</p>
+</Callout>
+
+<Callout title="Open source does not mean explainable or safe">
+  <p>Open models can be inspected, which helps transparency, but they still need evaluation, and their licences must be read. Don't assume open means free of restrictions.</p>
+</Callout>
+
+<Callout title="Human-centered design signals">
+  <p>Look for user feedback mechanisms, plain-language explanations, disclosure of AI use, and a human who can review or override decisions. These are the right answers for design questions, and not a bigger model or more data.</p>
+</Callout>

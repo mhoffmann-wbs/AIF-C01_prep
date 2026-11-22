@@ -1,0 +1,127 @@
+export const meta = {
+  taskId: '2.2',
+  updated: '2026-11-23',
+  tldr: 'GenAI is adaptable, fast, conversational and good at producing content, but it can hallucinate, is hard to explain, can be inaccurate and gives different answers to the same question. Choose models by type, performance, capability, constraints, compliance, cost, latency and complexity, then prove value with business metrics such as ROI, conversion rate and customer lifetime value.',
+  objectivesCovered: ['2.2.1', '2.2.2', '2.2.3', '2.2.4'],
+  links: [
+    { title: 'Amazon Bedrock', url: 'https://aws.amazon.com/bedrock/' },
+    { title: 'Amazon Bedrock pricing', url: 'https://aws.amazon.com/bedrock/pricing/' },
+    { title: 'Amazon Bedrock: data protection', url: 'https://docs.aws.amazon.com/bedrock/latest/userguide/data-protection.html' },
+    { title: 'Amazon Bedrock: security and compliance', url: 'https://aws.amazon.com/bedrock/security-compliance/' },
+  ],
+}
+
+## Big idea
+
+GenAI is a powerful tool, not a magic one. A good practitioner can say, for any business problem:
+
+1. **Where GenAI helps**: its real advantages.
+2. **Where it hurts**: its real disadvantages, and how to reduce them.
+3. **Which model fits**: the factors to weigh when choosing.
+4. **Whether it paid off**: the business metrics that show value.
+
+On the exam and at work, the right answer is often the one that matches the technology to the problem honestly. If a task needs exact, repeatable, explainable results, GenAI alone may be the wrong choice, or it needs safeguards around it.
+
+## Key concepts
+
+### Advantages of GenAI
+
+| Advantage | What it means | Cairnway example |
+|---|---|---|
+| **Adaptability** | One foundation model handles many tasks, and can be steered with a prompt instead of being rebuilt for each task. | The same model writes product descriptions, summarizes reviews and drafts email replies. |
+| **Responsiveness** | Answers and content arrive in seconds, at any hour, and scale to many users at once. | Trailmate answers a customer at 3 a.m. on a holiday. |
+| **Conversational capabilities** | People use plain language, ask follow-up questions and get natural answers, with no special query language. | A shopper asks "which of these is warmer?" and then "what about for kids?" |
+| **Ability to generate content** | It drafts text, images, audio and code, speeding up creative and routine work. | First drafts of 30,000 product descriptions for staff to review. |
+| **Simplification of complex material** | It summarizes, rephrases and translates long or technical text. | A one-line summary of a supplier's 40-page safety sheet. |
+
+### Disadvantages of GenAI
+
+| Disadvantage | What it means | How to reduce it |
+|---|---|---|
+| **Hallucinations** | The model produces confident, fluent answers that are false or invented, because it predicts likely words and does not look facts up. | Ground answers in your own documents with RAG ([lesson 3.1](/learn/3.1)), ask for citations, add guardrails, and keep a human review for important decisions. |
+| **Interpretability** | Foundation models have billions of parameters, so it is hard to explain *why* a specific answer was produced. This matters in regulated decisions that must be justified. | Prefer simpler, explainable models for decisions such as credit or hiring; use GenAI for assistance rather than final judgment; keep logs. |
+| **Inaccuracy** | Answers can be outdated, incomplete, biased or subtly wrong, depending on the training data. | Test with your own examples, evaluate regularly, supply current data, and measure accuracy. |
+| **Nondeterminism** | The same prompt can give different answers each time, because the model samples from likely next tokens. | Lower the temperature for more consistent answers (see [lesson 3.1](/learn/3.1)). Even so, expect some variation and do not use GenAI where identical output is legally required. |
+
+Other limits worth knowing: models only know their training data up to a cut-off date, input and output length is limited by the context window, and models can reflect bias in their training data. Responsible-AI topics such as bias, safety and privacy are covered in Domains 4 and 5 of the course.
+
+A simple test of fit:
+
+| If the task needs... | GenAI is... |
+|---|---|
+| Creative or varied output, natural language, flexible handling of messy input | a strong fit |
+| Facts from company data | a fit, **with RAG** |
+| Exact, repeatable calculations (tax, totals) | a poor fit; use normal software |
+| Fully explainable decisions with an audit trail | a risky fit; consider simpler models or human decisions |
+
+### Factors for selecting GenAI models
+
+Selecting a model means balancing several factors. [Lesson 3.1](/learn/3.1) lists the technical selection criteria in detail. At the business level, think about:
+
+| Factor | The question to ask |
+|---|---|
+| **Model type** | Does the job need text, images, audio, embeddings or mixed inputs? A text model cannot draw, and an image model does not write support answers. |
+| **Performance requirements** | How accurate and how good must the output be? Test candidates on your own real examples. |
+| **Capabilities** | Can it do what you need: follow instructions, handle several languages, use tools, accept long input? |
+| **Constraints** | Limits you must live with: the context window, available Regions, maximum request rate, team skills. |
+| **Compliance** | Where may data be processed and stored? Which regulations apply (for example GDPR for EU customers)? Do your contracts restrict where customer data goes? |
+| **Cost** | What will the model cost at your real volume? Models are priced per token, and bigger models cost more per token. |
+| **Latency** | How fast must the answer arrive? Live chat needs seconds, an overnight job does not. |
+| **Model complexity** | A larger, more complex model is often more capable but slower and more expensive. A smaller model may be good enough. |
+
+The common thread: there is no best model, only the best fit. **Start with the smallest, cheapest model that meets the requirement, measure, and move up only if the results are not good enough.**
+
+### Business value and metrics for GenAI applications
+
+A technically impressive demo is not business value. To show value, link the GenAI application to a metric the business already tracks, measure it before and after, and compare it with the cost.
+
+| Metric | What it measures | GenAI example |
+|---|---|---|
+| **Return on investment (ROI)** | Gain from the project compared with its cost: (benefit minus cost) divided by cost | Support savings and extra sales compared with Trailmate's running cost |
+| **Efficiency** | Time or effort saved per task | Minutes to write a product description drops from 20 to 3 |
+| **Accuracy** | Share of answers that are correct or useful | 94% of Trailmate answers rated correct in a review sample |
+| **Conversion rate** | Share of visitors who buy | Do shoppers who chat with Trailmate buy more often? |
+| **Average revenue per user (ARPU)** | Revenue divided by the number of users | Does personalized recommendation text lift ARPU? |
+| **Customer lifetime value (CLV)** | Total revenue expected from a customer over the relationship | Better service and recommendations keep customers coming back |
+| **Cross-domain performance** | How well one solution works across different areas and tasks | The same model performs well on support, marketing and product search, so one investment serves many teams |
+| **Customer feedback** | Ratings, satisfaction scores, complaints | Thumbs up or down on each Trailmate answer |
+
+Costs belong in the calculation too: model usage (tokens), development and integration, staff review time, and ongoing monitoring. A metric that improves while costs grow faster is not a success.
+
+Use **leading** metrics (accuracy, response time, thumbs-up rate) to catch problems early, and **business** metrics (conversion, ARPU, CLV, ROI) to prove the investment worked. Run a small pilot first and compare it with a group that does not use the tool.
+
+## At Cairnway
+
+The leadership team asks: "Where should we use GenAI first?"
+
+- **Good fits, chosen first.** Product descriptions (creative, reviewed by staff), review summaries and Trailmate (conversational, 24/7, grounded in policy documents with RAG).
+- **Handled with care.** Trailmate once invented a "90-day free return" that does not exist, a hallucination found in testing. The team now grounds answers in the policy documents, asks for citations, sets the temperature low, and sends refund decisions to a human.
+- **Kept away from GenAI.** Shipping-cost calculation stays as ordinary code, because it must give the same exact answer every time. Fraud scoring stays with a traditional ML model, because the risk team must be able to explain each decision.
+- **Model selection.** The team needs German, English and Spanish, answers within a few seconds, and customer data processed only in the EU. That compliance requirement removes two candidate models. Of the remaining two, the smaller one passes the accuracy test on 200 real questions at a third of the cost, so it wins.
+- **Proving value.** Before launch, the team records the baseline: 11,000 support tickets a month and a 2.1% conversion rate. After a six-week pilot they compare tickets handled without a human, answer accuracy, conversion among chat users, and the monthly cost of tokens and staff review. The ROI figure goes to the board.
+
+## AWS services
+
+<Services ids={['bedrock', 'bedrock-evaluations', 'bedrock-guardrails', 'bedrock-knowledge-bases', 'sagemaker-ai']} />
+
+## Exam traps
+
+<Callout title="Hallucination is the classic GenAI disadvantage">
+  <p>If a scenario describes confident but wrong or invented answers, the problem is hallucination. The usual remedies are grounding the answer in trusted data (RAG), guardrails and human review, not simply a bigger model.</p>
+</Callout>
+
+<Callout title="Nondeterminism: same question, different answers">
+  <p>A GenAI model can answer the same prompt differently each time. If a task needs identical, auditable results every time (exact calculations, strict rules), GenAI alone is the wrong tool. A lower temperature makes output more consistent but not perfectly identical.</p>
+</Callout>
+
+<Callout title="Interpretability favours simpler models">
+  <p>When a scenario stresses explaining each decision to a regulator or customer, a large foundation model is a weak fit. Look for the answer that keeps a human in the loop or uses a more explainable model.</p>
+</Callout>
+
+<Callout title="Smallest model that meets the requirement">
+  <p>Bigger is not automatically better. Larger models cost more per token and respond more slowly. When two options both meet the accuracy requirement, the cheaper and faster one is usually correct. When a compliance requirement (such as data location) rules a model out, accuracy does not matter.</p>
+</Callout>
+
+<Callout title="Match the metric to the question">
+  <p>Efficiency, accuracy and customer feedback show whether the application works well. ROI, conversion rate, ARPU and customer lifetime value show whether it creates business value. "Prove the investment paid off" points to ROI or a revenue metric, not to a technical metric.</p>
+</Callout>

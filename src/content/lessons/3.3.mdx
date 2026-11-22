@@ -1,0 +1,123 @@
+export const meta = {
+  taskId: '3.3',
+  updated: '2026-11-23',
+  tldr: 'Training a foundation model has stages: pre-training on huge general data, then optional further steps such as fine-tuning on labeled examples, continued pre-training on unlabeled domain text, and distillation into a smaller model. Fine-tuning methods include instruction tuning and domain adaptation (a form of transfer learning). Results depend on the data: curated, governed, labeled, representative and large enough, and RLHF adds human preferences.',
+  objectivesCovered: ['3.3.1', '3.3.2', '3.3.3'],
+  links: [
+    { title: 'Amazon Bedrock: customizing models', url: 'https://docs.aws.amazon.com/bedrock/latest/userguide/custom-models.html' },
+    { title: 'Amazon Bedrock: fine-tuning', url: 'https://docs.aws.amazon.com/bedrock/latest/userguide/custom-model-fine-tuning.html' },
+    { title: 'Amazon Bedrock: prepare data for fine-tuning', url: 'https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-prepare.html' },
+    { title: 'Amazon Bedrock Model Distillation', url: 'https://docs.aws.amazon.com/bedrock/latest/userguide/model-distillation.html' },
+    { title: 'SageMaker JumpStart: fine-tuning foundation models', url: 'https://docs.aws.amazon.com/sagemaker/latest/dg/jumpstart-foundation-models-fine-tuning.html' },
+    { title: 'SageMaker JumpStart: instruction-based fine-tuning', url: 'https://docs.aws.amazon.com/sagemaker/latest/dg/jumpstart-foundation-models-fine-tuning-instruction-based.html' },
+    { title: 'SageMaker JumpStart: domain adaptation fine-tuning', url: 'https://docs.aws.amazon.com/sagemaker/latest/dg/jumpstart-foundation-models-fine-tuning-domain-adaptation.html' },
+    { title: 'AWS: what is reinforcement learning from human feedback (RLHF)?', url: 'https://aws.amazon.com/what-is/reinforcement-learning-from-human-feedback/' },
+  ],
+}
+
+## Big idea
+
+A foundation model is not built in one go. It goes through **stages**, and each stage changes the model's internal numbers (its **weights**, the values it learned) in a different way.
+
+1. **Pre-training** gives the model broad general knowledge. This is enormously expensive and done by the model provider, not by you.
+2. **Further training** adapts the model to your needs: fine-tuning, continued pre-training or distillation.
+3. **Data quality** decides how well any of that works. The best method with poor data gives a poor model.
+
+Remember the 3.1 rule: try prompting and RAG first, because they change nothing in the model. Everything in this task is the more expensive path, used when those aren't enough.
+
+## Key concepts
+
+### Key elements of training a foundation model
+
+| Stage | What happens | Data | Who usually does it |
+|---|---|---|---|
+| **Pre-training** | The model learns language (or images, or audio) by training from scratch on a huge amount of **unlabeled** data. For a language model the task is typically to predict the next piece of text, which teaches grammar, facts and patterns. | Vast, unlabeled, general. | Model providers, with large compute budgets. |
+| **Fine-tuning** | You take a pre-trained model and train it further on a smaller set of **labeled** examples so it performs a specific task or style better. The weights change. | Labeled prompt and ideal-answer pairs. | You, or a provider on your behalf. |
+| **Continued pre-training** (continuous pre-training) | Same method as pre-training, but you keep going on a model that already exists, using a large set of **unlabeled** text from your own field so it learns the vocabulary. | Large, unlabeled, domain-specific. | You, when prompting and fine-tuning are not enough. |
+| **Distillation** | A large **teacher** model produces answers that are used to train a smaller **student** model. The result is cheaper and faster to run. | Prompts and the teacher's responses. | You. |
+
+Two clarifications:
+
+- **Labeled data** has the correct answer attached to each example (a question plus the ideal reply). **Unlabeled data** is just raw text with no answers attached.
+- Amazon Bedrock describes fine-tuning as training a foundation model to improve its performance on specific tasks. Its list of customization methods currently includes **supervised fine-tuning**, **reinforcement fine-tuning** and **distillation**. **Continued pre-training** is a general machine-learning concept: you will see it in the exam guide, but it is not on that Bedrock list.
+
+AWS describes distillation as transferring knowledge from a larger, more capable model (the teacher) to a smaller, faster, cheaper one (the student).
+
+### Methods for fine-tuning a foundation model
+
+All of these further train an existing model. They differ in *what data you feed it and what you want to change*.
+
+- **Transfer learning.** The umbrella idea: reuse what a model already learned on one task or dataset as the starting point for another. All fine-tuning is transfer learning. It is why you need far less data and money than training from scratch.
+- **Instruction tuning (instruction-based fine-tuning).** You train on **prompt and response pairs phrased as instructions**, so the model gets better at following that kind of instruction. AWS describes this for SageMaker JumpStart as using labeled examples, formatted as prompt and response pairs, to improve a pre-trained model on a specific task. The model's weights are modified.
+- **Adapting a model to a specific domain (domain adaptation).** You train on **unlabeled text from your domain**, such as industry reports or technical manuals, so the model gets comfortable with its jargon. AWS says this suits cases where prompt engineering does not give enough customization, for example industry jargon or technical terms. The training data is plain text files rather than question and answer pairs.
+- **Continued pre-training.** The same idea as domain adaptation at larger scale: more unlabeled text, longer training. Use it when a whole field's language is new to the model.
+- **Reinforcement learning from human feedback (RLHF).** Covered in the next section: people's preferences guide the model.
+
+A simple way to choose: **labeled examples of the task** point to instruction tuning or supervised fine-tuning; **lots of unlabeled domain text** points to domain adaptation or continued pre-training. Fine-tuning teaches style, format and task behaviour, but not fresh facts: for facts that change, use RAG.
+
+Where on AWS: **Amazon Bedrock** can fine-tune supported models without you managing servers (and a customized model is then used through Provisioned Throughput, as in 3.1). **Amazon SageMaker AI** with **SageMaker JumpStart** lets you fine-tune a range of foundation models with more control over settings. Training settings, called **hyperparameters**, include the number of **epochs** (passes through the training data) and the **learning rate** (how big each update to the weights is).
+
+### Preparing data to fine-tune a foundation model
+
+Data work is where most fine-tuning projects succeed or fail. The ideas the exam guide names:
+
+| Aspect | What it means |
+|---|---|
+| **Data curation** | Selecting, cleaning and organising the data: remove duplicates, errors, spam and junk, fix formatting. "Garbage in, garbage out." |
+| **Governance** | Rules for the data: do you have the **right** to use it, is personal or confidential information removed, who may access it, and is its origin documented? Training can bake private data into a model. |
+| **Size** | You need enough examples for the model to learn the pattern. Fine-tuning needs far fewer examples than pre-training but still has minimums that vary by model (for Amazon Bedrock, from a few dozen to a hundred or more records, with upper limits too). Quality beats quantity. |
+| **Labeling** | Attaching the correct answer to each example, often by humans. Labels must be consistent. If two people label the same case differently, the model learns confusion. |
+| **Representativeness** | The data must reflect the real situations the model will meet: all product categories, languages, customer types and edge cases. Skewed data produces a **biased** model. |
+
+On format: Amazon Bedrock expects training data as **JSON Lines** files (one JSON record per line) stored in Amazon S3. For many text models each record has a prompt and its expected completion, for chat models a short conversation. You also provide a validation dataset where the method supports it, to check on data the model did not train on. SageMaker JumpStart uses similar files, and if you give no validation set it can set part of your training data aside.
+
+**RLHF (reinforcement learning from human feedback).** AWS describes RLHF as a technique that uses human feedback to optimise models. It helps with qualities that are hard to define in rules, such as tone or how natural an answer feels. The steps AWS lists:
+
+1. **Collect data:** people write prompts and good answers.
+2. **Supervised fine-tuning:** the base model is tuned on those examples.
+3. **Build a reward model:** people **rank** several answers to the same prompt, and that feedback trains a separate model that predicts how a human would score any answer. AWS calls this the core of RLHF.
+4. **Optimise:** the language model is trained to produce answers that earn high scores from the reward model.
+
+So the *data preparation* for RLHF is human rankings and preferences, not just labeled answers.
+
+## At Cairnway
+
+After a quarter of running Trailmate, the team asks whether to train a model.
+
+- **Stages.** Nobody at Cairnway will pre-train a model: that is a provider's job, with huge cost. The question is only whether to adapt an existing one.
+- **Problem spotted.** Trailmate answers correctly but its tone is stiff and it sometimes ignores the "three sentences maximum" rule. Better prompts help a little. Facts such as return windows already come from RAG, so fine-tuning is for *style and format*, not facts.
+- **Method choice.** The team has labeled examples: 1,500 past support replies that senior agents rated as excellent, each paired with the customer question. That points to **supervised, instruction-style fine-tuning**, run on Amazon Bedrock on a supported model. They note that the result would need Provisioned Throughput.
+- **Another idea.** The product team wants a model that understands niche climbing and mountaineering vocabulary. They have thousands of unlabeled gear manuals and magazine articles, which suits **domain adaptation** or continued pre-training. They decide to test prompting plus RAG first, because the cost is much lower.
+- **Cost saving.** For the high-volume product-description job, they consider **distillation**: a large model writes descriptions, and a smaller student model learns from them to run faster and cheaper.
+- **Data preparation.** Amir, the data steward, curates the 1,500 replies: removes duplicates and refund disputes with angry wording, masks customer names and order numbers (**governance**), and checks the mix covers German, Spanish and English, tents, boots and jackets, and easy and hard questions (**representativeness**). Two agents label a 100-reply sample independently to confirm they agree. He keeps 10 percent aside as validation data.
+- **Human feedback.** To polish tone further, the team collects agent **rankings** of alternative answers, the raw material for an RLHF-style approach.
+
+## AWS services
+
+<Services ids={['bedrock', 'sagemaker-ai', 'sagemaker-jumpstart', 's3', 'nova', 'bedrock-evaluations']} />
+
+## Exam traps
+
+<Callout title="Match the stage to the data">
+  <p>Pre-training and continued pre-training use large amounts of unlabeled data. Fine-tuning and instruction tuning use labeled prompt and answer examples. Domain adaptation uses unlabeled domain text. If the scenario says "labeled examples", think fine-tuning.</p>
+</Callout>
+
+<Callout title="Fine-tuning is for behaviour, not changing facts">
+  <p>Up-to-date or company facts point to RAG. A consistent tone, format or specialised task points to fine-tuning. Training from scratch is almost always a distractor because of the cost.</p>
+</Callout>
+
+<Callout title="Distillation means big teacher, small student">
+  <p>The goal of distillation is a smaller, faster, cheaper model that keeps most of the quality for a specific task. It is not about adding new knowledge.</p>
+</Callout>
+
+<Callout title="Transfer learning is the idea behind fine-tuning">
+  <p>If a question asks which concept lets you reuse a pre-trained model for a new task with little data, the answer is transfer learning (fine-tuning is the practice).</p>
+</Callout>
+
+<Callout title="Data quality traps">
+  <p>Biased or unrepresentative training data gives a biased model. Unconsented or sensitive data is a governance problem. More data is not automatically better if it is noisy or badly labeled. Fine-tuning data needs labels, but pre-training data does not.</p>
+</Callout>
+
+<Callout title="RLHF means humans rank answers">
+  <p>Human feedback is used to train a reward model that scores answers, which then guides the language model. Pick RLHF when the scenario is about aligning answers with human preferences such as helpfulness or tone.</p>
+</Callout>

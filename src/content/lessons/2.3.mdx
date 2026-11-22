@@ -1,0 +1,151 @@
+export const meta = {
+  taskId: '2.3',
+  updated: '2026-11-23',
+  tldr: 'AWS offers GenAI services at several levels: Amazon Bedrock for using foundation models through one managed API, SageMaker AI and JumpStart for building and customizing your own models, Amazon Quick for business users, Kiro and Strands Agents for building, and AgentCore for running agents. Managed services lower the barrier to entry, and AWS infrastructure brings security and compliance. Costs trade off among on-demand, batch, Provisioned Throughput, custom models and Regions.',
+  objectivesCovered: ['2.3.1', '2.3.2', '2.3.3', '2.3.4'],
+  links: [
+    { title: 'Amazon Bedrock', url: 'https://aws.amazon.com/bedrock/' },
+    { title: 'Amazon Bedrock pricing', url: 'https://aws.amazon.com/bedrock/pricing/' },
+    { title: 'Amazon Bedrock: Provisioned Throughput', url: 'https://docs.aws.amazon.com/bedrock/latest/userguide/prov-throughput.html' },
+    { title: 'Amazon Bedrock: cross-Region inference', url: 'https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference.html' },
+    { title: 'Amazon Bedrock: data protection (shared responsibility)', url: 'https://docs.aws.amazon.com/bedrock/latest/userguide/data-protection.html' },
+    { title: 'Amazon Bedrock: security and compliance', url: 'https://aws.amazon.com/bedrock/security-compliance/' },
+    { title: 'Amazon SageMaker AI', url: 'https://aws.amazon.com/sagemaker/ai/' },
+    { title: 'Amazon SageMaker JumpStart', url: 'https://aws.amazon.com/sagemaker/ai/jumpstart/' },
+    { title: 'AWS Quick', url: 'https://aws.amazon.com/quick/' },
+    { title: 'Kiro', url: 'https://kiro.dev/' },
+    { title: 'Strands Agents', url: 'https://strandsagents.com/' },
+    { title: 'Amazon Bedrock AgentCore: overview', url: 'https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/what-is-bedrock-agentcore.html' },
+    { title: 'Amazon Bedrock Agents (Classic)', url: 'https://docs.aws.amazon.com/bedrock/latest/userguide/agents.html' },
+  ],
+}
+
+## Big idea
+
+AWS gives you GenAI tools at different levels of effort. Think of three layers:
+
+1. **Use ready-made AI**: business users work with an AI workspace and never see a model (Amazon Quick).
+2. **Build with managed foundation models**: developers call powerful models through an API and AWS runs the infrastructure (Amazon Bedrock, with Strands Agents and AgentCore for agents, and Kiro as an AI engineering tool for the developers themselves).
+3. **Build and train your own models**: data scientists control training and hosting (Amazon SageMaker AI and JumpStart).
+
+The higher up you go, the faster and easier it is. The lower you go, the more control, and the more work and responsibility. The exam usually rewards the **highest layer that meets the requirement**, and then asks you to weigh cost, security and Region choices.
+
+## Key concepts
+
+### AWS services and features for building GenAI applications
+
+| Service | In plain words | Reach for it when... |
+|---|---|---|
+| **Amazon Bedrock** | AWS describes it as "the platform for building generative AI applications and agents at production scale". It offers many foundation models from leading AI companies, plus tools to evaluate, customize and add safeguards to them. | You want to use or customize a foundation model without managing servers. This is the default answer. |
+| **Amazon SageMaker AI** | A service to "customize, train, and deploy your models into production". You can bring your own models and frameworks, train on clusters, and host models on endpoints. | You need full control: training your own model, custom hosting, or a data science team's workflow. |
+| **Amazon SageMaker JumpStart** | A machine learning hub inside SageMaker AI. You can compare foundation models, customize pretrained models with your own data and deploy them from the console or an SDK. | You want a quick start on a pretrained or open model, but want it running in your own SageMaker environment. |
+| **Amazon Quick** | An AI workspace for business users (the AWS site calls it "AWS Quick"). Staff turn conversations into documents, spreadsheets, decks or dashboards, run research and build simple apps without code. The Quick Sight business-intelligence dashboards are part of it. | Non-technical employees need AI help and dashboards, and you do not want to build an application. |
+| **Kiro** | An agentic AI engineering system built by AWS that helps developers plan, build, review and verify software. It is used through an IDE, a command line, a web interface and more. | Your developers want AI help writing and checking the code of their applications. |
+| **Strands Agents** | An open-source toolkit for building production agents in code, with built-in multi-agent patterns and MCP support. | Developers want to write an agent themselves, with any model. |
+| **Amazon Bedrock AgentCore** | An agentic platform for building, deploying and operating agents securely at scale, using any framework and any foundation model. Its modular services include Runtime, Memory, Gateway, Identity, Observability and Policy. | Your agent is built and now needs to run in production with security, memory and monitoring. |
+
+Notes:
+
+- **Bedrock Knowledge Bases, Guardrails and Evaluations** are features of Bedrock that add RAG, safety filters and model comparison ([lesson 3.1](/learn/3.1)).
+- The original **Amazon Bedrock Agents** is now called *Agents Classic* and no longer takes new sign-ups. New agent work points to AgentCore and Strands Agents.
+- Bedrock vs. SageMaker AI in one line: **Bedrock uses models someone else built and hosts; SageMaker AI is for building, training and hosting your own.**
+
+### Advantages of using AWS GenAI services
+
+| Advantage | What it means |
+|---|---|
+| **Accessibility** | Powerful models are available through a console and an API, without buying hardware or hiring a research team. Many models sit behind one API, so you can try several and switch. |
+| **Lower barrier to entry** | Managed services run the infrastructure. Non-technical staff can use Amazon Quick, and developers can start with a few API calls. |
+| **Efficiency** | AWS handles servers, scaling and updates, so the team spends time on the application, not on infrastructure. |
+| **Cost-effectiveness** | You pay for what you use (for example per token) instead of buying expensive hardware up front, and you can stop at any time. Lighter options exist for light use, reserved capacity for heavy use. |
+| **Speed to market** | Ready-made building blocks such as RAG (Knowledge Bases), guardrails and agent hosting mean a prototype in days, not months. |
+| **Ability to meet business objectives** | A range of models, customization options and integrations lets you fit the tool to the goal, from quick wins to deeply customized solutions. |
+
+The overall principle: **do not build what you can use, and do not host what you can have managed.**
+
+### Benefits of AWS infrastructure for GenAI applications
+
+**Security.** AWS describes Amazon Bedrock data as encrypted in transit and at rest, with customer-managed keys available through AWS KMS, and private connectivity from your VPC (using AWS PrivateLink, so traffic need not cross the public internet). Access is controlled with IAM, and activity can be logged with AWS CloudTrail.
+
+**Data privacy.** AWS states that, in Amazon Bedrock, "your data is not shared with model providers, and is not used to improve the base models". When you tune a model, the result is your own private copy.
+
+**Compliance.** AWS lists Bedrock as in scope for common compliance standards, including ISO, SOC and CSA STAR Level 2, and as HIPAA eligible. It also supports GDPR use.
+
+**Responsibility and safety.** Bedrock includes tools for responsible use. **Guardrails** add safeguards that help block harmful content. **Evaluations** compare models on quality and safety. (Responsible AI is covered in depth in Domain 4.)
+
+**The shared responsibility model.** Security is split between AWS and you. AWS is responsible for protecting the global infrastructure that runs its services. You are responsible for controlling your own content on that infrastructure and for the security configuration of the services you use: who has access, how your data is classified and protected, and what your application does with the model's output.
+
+| AWS is responsible for... | You are responsible for... |
+|---|---|
+| The physical data centres, network and hardware | Your data and what you put into prompts |
+| The managed service itself and its base security | IAM permissions, encryption settings, logging |
+| Maintaining the compliance of its infrastructure | Choosing Regions and configuring the service to meet your own regulations |
+
+### Cost tradeoffs of AWS GenAI services
+
+Every option trades something against cost. The exam guide names these:
+
+| Choice | What you gain | What it costs or risks |
+|---|---|---|
+| **On-demand, token-based pricing** | No commitment, pay only for tokens used. Best for unpredictable or low traffic. | Throughput can vary under heavy load; cost climbs steadily with volume. |
+| **Batch inference** | AWS lists select models at a 50% lower price than on-demand. | Not real time. Only for work that can wait. |
+| **Provisioned Throughput** | Reserved capacity with a fixed hourly price per model unit, for predictable performance and responsiveness at high volume. Longer commitments (1 or 6 months) lower the hourly price. | You pay by the hour whether or not the capacity is used, and billing continues until you delete it. |
+| **Custom models** | A model tailored to your task or style. | A customized model on Bedrock must be used through Provisioned Throughput. Training adds cost too. See the ladder of customization costs in [lesson 3.1](/learn/3.1). |
+| **Bigger models** | Higher capability. | More cost per token and slower answers. |
+
+**Regions, availability and redundancy.** Models and features are not offered in every AWS Region, so regional coverage can limit your choices. **Cross-Region inference** lets Amazon Bedrock route a request to another Region through an *inference profile*, to handle more traffic and improve availability:
+
+- A **geographic** profile keeps processing within a geography such as the US or EU. It uses standard pricing and suits data-residency rules.
+- A **global** profile can route to any supported commercial Region. AWS lists approximately 10% savings, but you give up the geographic boundary.
+- There is no additional routing cost. Price is based on the Region from which you call the profile. Data stays on the AWS network and is encrypted in transit.
+- Inference profiles do not support Provisioned Throughput.
+
+Redundancy (running in more than one place so a failure does not stop you) improves availability but usually adds cost and effort. Match the level of redundancy to how critical the application is.
+
+Other tools to control spending (budgets and cost reports) are covered in the cost and security lessons.
+
+## At Cairnway
+
+Cairnway Outfitters maps its projects onto the AWS options:
+
+- **Trailmate and product copy** use **Amazon Bedrock**. The team wants no servers and a quick launch, so Bedrock beats hosting an open model themselves.
+- **Agent hosting.** Phase two writes the agent with **Strands Agents** and runs it on **Amazon Bedrock AgentCore**, with Gateway to reach the order system and Identity to control access.
+- **Developers** use **Kiro** to speed up writing and checking the shop's own code.
+- **Marketing and finance staff** get **Amazon Quick** to build dashboards and summarize reports without writing any code.
+- **Demand forecasting** needs a custom model trained on three years of sales history. The data science team uses **Amazon SageMaker AI**, because this is not a foundation-model task.
+- **Pricing choices.** Live chat starts on-demand. Overnight catalog descriptions run as batch. If chat traffic becomes steady and high, the team will compare Provisioned Throughput against its monthly token bill.
+- **Regions and privacy.** Customer chats are subject to GDPR, so the team uses a geographic EU inference profile rather than a global one, accepting the lost saving. Under shared responsibility, AWS secures the infrastructure; Cairnway sets IAM permissions, turns on logging and decides what customer data goes into prompts.
+
+## AWS services
+
+<Services ids={['bedrock', 'sagemaker-ai', 'sagemaker-jumpstart', 'quick', 'kiro', 'strands-agents', 'bedrock-agentcore', 'bedrock-guardrails', 'bedrock-knowledge-bases', 'kms', 'privatelink', 'iam', 'cloudtrail', 'bedrock-batch-inference', 'bedrock-provisioned-throughput', 'bedrock-cross-region-inference']} />
+
+## Exam traps
+
+<Callout title="Bedrock vs. SageMaker AI">
+  <p>"Use a foundation model with the least effort" and "no infrastructure to manage" point to Amazon Bedrock. "Train, customize and host our own model with full control" points to SageMaker AI. SageMaker JumpStart is the hub inside SageMaker AI for pretrained models.</p>
+</Callout>
+
+<Callout title="Business users, no code → Amazon Quick">
+  <p>If non-technical employees need AI assistance and dashboards without building anything, the answer is Amazon Quick. Kiro is for software developers, Strands Agents and AgentCore are for building and running agents.</p>
+</Callout>
+
+<Callout title="Build the agent vs. run the agent">
+  <p>Strands Agents is the open-source toolkit used to write an agent. Amazon Bedrock AgentCore is the platform that hosts and operates it in production (runtime, memory, gateway, identity, policy, observability). Older material may mention Amazon Bedrock Agents, now Agents Classic.</p>
+</Callout>
+
+<Callout title="Your data does not train the base models">
+  <p>On Amazon Bedrock your prompts and outputs are not shared with model providers and are not used to improve the base models. A tuned model is a private copy for you. Be wary of answer choices claiming the opposite.</p>
+</Callout>
+
+<Callout title="Shared responsibility: AWS secures the cloud, you secure what you put in it">
+  <p>Even with a fully managed service, you still own access control, data choices and configuration. Do not choose "AWS handles all security" as an answer.</p>
+</Callout>
+
+<Callout title="Custom model on Bedrock → Provisioned Throughput; batch → cheaper but not real time">
+  <p>A customized model needs purchased Provisioned Throughput, billed hourly. On-demand is per token with no commitment. Batch inference is cheaper for non-urgent bulk work. Pick the pricing model that matches the traffic pattern in the scenario.</p>
+</Callout>
+
+<Callout title="Data residency → geographic cross-Region inference">
+  <p>Cross-Region inference improves availability and throughput. A geographic profile keeps processing inside a geography, which is the choice when regulations restrict where data goes. A global profile can be cheaper but may process anywhere.</p>
+</Callout>

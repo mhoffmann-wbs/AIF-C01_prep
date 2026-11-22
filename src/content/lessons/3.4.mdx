@@ -1,0 +1,149 @@
+export const meta = {
+  taskId: '3.4',
+  updated: '2026-11-23',
+  tldr: 'Evaluate a foundation model three ways: people (human-in-the-loop), benchmark datasets with automatic scoring, and another model acting as judge, all available in Amazon Bedrock Model Evaluation. ROUGE, BLEU and BERTScore compare generated text to a reference text. Technical scores are not enough: also measure business results such as task completion, satisfaction and cost per interaction, and evaluate whole applications (RAG, agents), not just the model.',
+  objectivesCovered: ['3.4.1', '3.4.2', '3.4.3', '3.4.4', '3.4.5'],
+  links: [
+    { title: 'Amazon Bedrock evaluations', url: 'https://docs.aws.amazon.com/bedrock/latest/userguide/evaluation.html' },
+    { title: 'Amazon Bedrock: model evaluation task types and built-in datasets', url: 'https://docs.aws.amazon.com/bedrock/latest/userguide/model-evaluation-tasks.html' },
+    { title: 'Amazon Bedrock: LLM-as-a-judge evaluation', url: 'https://docs.aws.amazon.com/bedrock/latest/userguide/evaluation-judge.html' },
+    { title: 'Amazon Bedrock: metrics for judge-based evaluation', url: 'https://docs.aws.amazon.com/bedrock/latest/userguide/model-evaluation-metrics.html' },
+    { title: 'Amazon Bedrock: evaluate RAG sources', url: 'https://docs.aws.amazon.com/bedrock/latest/userguide/evaluation-kb.html' },
+    { title: 'SageMaker AI: evaluation tasks, metrics and human rating methods', url: 'https://docs.aws.amazon.com/sagemaker/latest/dg/clarify-foundation-model-evaluate-overview.html' },
+    { title: 'Amazon Bedrock AgentCore Evaluations', url: 'https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/evaluations.html' },
+  ],
+}
+
+## Big idea
+
+A foundation model can sound confident and still be wrong, slow, biased or too costly. So before launch (and after) you **evaluate** it: measure how well it performs. Evaluation answers two different questions:
+
+1. **Is the model good?** Technical quality such as accuracy, relevance, safety and robustness.
+2. **Is it good *for the business*?** Does it save time, keep customers happy and cost less than the alternative?
+
+A model can pass the first and fail the second, so a complete evaluation uses both. And since real products are more than a model (they retrieve documents, call tools, follow workflows), you evaluate the whole application too.
+
+## Key concepts
+
+### Approaches to evaluating FM performance
+
+| Approach | How it works | Strengths | Weaknesses |
+|---|---|---|---|
+| **Human-in-the-loop evaluation** | People read the model's answers and rate them. | Catches tone, helpfulness and subtle errors that scores miss. Needed for subjective qualities. | Slow, costly and can vary between raters. |
+| **Benchmark datasets** | You run the model on a **benchmark dataset**: a fixed set of prompts, often with reference ("ground truth") answers, and compute scores. | Fast, cheap, repeatable. Lets you compare models fairly on the same test. | A generic benchmark may not look like your real work. Build your own dataset from real questions too. |
+| **LLM-as-a-judge** | A second model scores the first model's answers and explains each score. | Much faster and cheaper than people, and gives written reasons. | The judge is a model too and can be wrong or biased, so spot-check it with humans. |
+
+**Amazon Bedrock Model Evaluation** (part of Amazon Bedrock evaluations) supports all of these. AWS describes four kinds of jobs:
+
+- **Programmatic (automatic) evaluation:** quickly checks how well a model performs a task, using your own prompt dataset or a built-in dataset.
+- **Human-based evaluation:** uses a team of workers, which can be your employees or subject-matter experts, to give ratings and preferences.
+- **LLM-as-a-judge:** a second LLM scores the responses and explains each score.
+- **RAG evaluation:** measures how well a knowledge base retrieves and uses information (see the section on applications below).
+
+You can evaluate foundation models, customized models, imported models and prompt routers, which makes it a good way to compare candidate models on your own data, as the team did in 3.1.
+
+Human raters need clear instructions and a rating method. SageMaker AI documents methods such as **thumbs up/down** (acceptable or not), a **5-point Likert scale** (how strongly the rater approves), **choice buttons** (which of two answers is preferred) and **ordinal rank** (put answers in order).
+
+### Metrics to assess FM performance
+
+Some text tasks have a "right" reference answer to compare with: a human-written summary, a translation, an expected reply. **Reference-based metrics** score how close the model's text is to that reference.
+
+| Metric | What it measures | Typical task |
+|---|---|---|
+| **ROUGE** (Recall-Oriented Understudy for Gisting Evaluation) | How much the model's text **overlaps with the reference** in words and word sequences (**n-grams**, runs of n consecutive words). AWS describes ROUGE-N as computing n-gram overlaps between the reference and the model summary. Recall-oriented: did the model capture what the reference contains? | Summarization. |
+| **BLEU** (Bilingual Evaluation Understudy) | Also word-sequence overlap with reference text, but **precision**-oriented: how much of what the model wrote appears in the reference. It is the classic translation metric. (This is the general definition. BLEU is not one of the metrics in the AWS pages we checked, but you need to know it for the exam guide.) | Machine translation. |
+| **BERTScore** | Compares the **meaning** of the texts using embeddings (the number lists from 3.1) instead of exact words. AWS describes it as computing and comparing sentence embeddings for the summary and the reference. So "cheap" and "inexpensive" count as similar. | Summarization, any task where wording can vary. |
+
+Plain-words rule: **ROUGE and BLEU count matching words; BERTScore compares meaning.** All three need a reference text, and a high score means "similar to the reference", not "true". AWS also lists **Meteor** (word overlap that accounts for rephrasing) and, for question answering, **exact match**, **quasi-exact match** and **F1 over words**. F1 combines two ideas: *precision* (of the answers given, how many were right) and *recall* (of the right answers, how many were found).
+
+Metrics also cover more than text similarity. Amazon Bedrock's automatic evaluations report **accuracy**, **robustness** and **toxicity**. AWS describes semantic robustness as how much the output changes when the input has small, meaning-preserving changes such as typos, and toxicity as checked by toxicity detection models.
+
+**LLM-as-a-judge** metrics don't need word matching. Amazon Bedrock's built-in judge metrics include (as AWS defines them):
+
+- **Correctness:** is the response correct?
+- **Completeness:** does it answer every question in the prompt?
+- **Faithfulness:** does it stick to the context given, without information that isn't there? A key hallucination check.
+- **Helpfulness:** does it follow instructions, make sense, and anticipate implicit needs?
+- **Relevance, logical coherence, following instructions, professional style and tone.**
+- **Harmfulness, stereotyping and refusal.**
+
+You can also define your own custom metrics.
+
+### Does the FM meet business objectives?
+
+A model that scores 0.9 on BERTScore can still be useless. To decide whether it meets the business goal, tie the evaluation to what the business wanted in the first place:
+
+- **Productivity:** does it save time or effort? For example, minutes saved per task, or tasks done per employee per day.
+- **User engagement:** do people actually use it and come back? Usage rate, session length, repeat use, or how often people accept its suggestions.
+- **Task success (the exam guide's "task engineering"):** does it get the job done correctly, such as resolving the question or producing a usable draft? This is also about how well the **task and prompt were designed** for the model.
+- **Quality and risk:** error rates, complaints, safety incidents and compliance.
+- **Cost:** what the AI costs to run compared with the value it creates.
+
+The method: set the goal and success threshold **before** launch, measure a baseline (how things work today), run a pilot, compare, and keep measuring after launch. Models drift and customers change.
+
+### Evaluating applications built with FMs (RAG, agents, workflows)
+
+An application is a chain of steps, and any link can fail. Evaluate the parts, then the whole.
+
+- **RAG applications.** Two things can go wrong: **retrieval** (the wrong documents are found) and **generation** (the model misuses good documents). Amazon Bedrock RAG evaluations have two job types, as AWS describes them: **retrieve only**, which reports on the data retrieved from your RAG source, and **retrieve and generate**, which also scores the generated answers. You supply prompts with expected answers (ground truth), and an evaluator model computes metrics on how relevant the retrieved information is and how useful and appropriate the response is. They can evaluate Amazon Bedrock Knowledge Bases and also RAG sources outside Amazon Bedrock. Faithfulness (above) checks that answers stick to the retrieved text.
+- **Agents.** Besides the final answer, check the **steps**: did it choose the right tool, call it correctly, finish the goal and handle odd inputs? **Amazon Bedrock AgentCore Evaluations** provides automated assessment of how well agents or tools perform tasks, handle edge cases and stay consistent, scoring agent traces using LLM-as-a-judge techniques with built-in or custom evaluators.
+- **Workflows** (several steps or models chained together). Test each step on its own, then run end-to-end tests with realistic cases, and track failures and cost per step.
+
+Whatever you test, use a **test set that looks like real use**, keep it separate from any training data, and re-run it after every change to the prompt, model or documents. This is called **regression testing**: checking that a change didn't break something that used to work.
+
+### Business objective alignment metrics for AI applications
+
+These are measurements you can put on a business dashboard, as opposed to technical scores.
+
+| Metric | What it tells you | Trailmate example |
+|---|---|---|
+| **Task completion rate** | The share of attempts where the user's goal was achieved. | Share of chats where the customer's question was resolved without a human. |
+| **User satisfaction** | How happy users are: thumbs up/down, CSAT surveys, ratings. | Rating after the chat. |
+| **Cost per interaction** | Total AI cost divided by number of interactions (tokens, infrastructure, human follow-up). | Euros per resolved chat compared with a human-handled chat. |
+| **Response time (latency)** | How long users wait. | Seconds to the first answer. |
+| **Escalation or fallback rate** | How often the AI hands over to a person. | Share of chats needing an agent. |
+| **Conversion or revenue impact** | Effect on sales or other money goals. | Orders after a recommendation. |
+| **Error or complaint rate** | How often it goes wrong in ways users notice. | Wrong-policy complaints. |
+
+Look at them together. A cheap assistant that resolves few questions, or a very accurate one that costs more than a human, is not a success.
+
+## At Cairnway
+
+Before Trailmate's launch to all customers, the team builds an evaluation plan.
+
+- **Approaches.** They write 300 real support questions with ideal answers (their own benchmark dataset). They run these through Amazon Bedrock Model Evaluation for three candidate models, using the **LLM-as-a-judge** option to score correctness, faithfulness and tone. Then Lena, the support lead, and four agents rate 100 of the answers with thumbs up/down to check the judge is trustworthy (**human-in-the-loop**).
+- **Metrics.** For the product-description tool, they compare generated text with descriptions the copywriters wrote, using **ROUGE** to see whether key product facts are included and **BERTScore** to allow different wording. The German-to-English translation of reviews is checked with **BLEU**.
+- **Safety.** They also check toxicity and robustness (does Trailmate still answer when a customer makes typos?).
+- **Business objectives.** Technical scores are good, but the board asks whether it is worth it. The team defines: **task completion rate** above 65 percent, **customer satisfaction** at least equal to human chat, **cost per interaction** under half the human cost, and agent handling time down by 20 percent (**productivity**).
+- **Applications.** Because Trailmate uses a knowledge base, they run a **RAG evaluation** on Amazon Bedrock with retrieval and generation scored separately. They find the right return policy is often retrieved, but the model sometimes skips a condition, so they fix the prompt, not the documents. For phase two, the order-status **agent** is evaluated step by step (right tool? right order id?) using **Amazon Bedrock AgentCore Evaluations**.
+- **After launch.** A weekly dashboard tracks completion rate, satisfaction, escalation rate and cost per chat. A drop triggers the same test set again.
+
+## AWS services
+
+<Services ids={['bedrock-evaluations', 'bedrock', 'bedrock-knowledge-bases', 'bedrock-agentcore', 'sagemaker-ai', 'cloudwatch', 's3', 'bedrock-agentcore-evaluations']} />
+
+## Exam traps
+
+<Callout title="Match the metric to the task">
+  <p>ROUGE: summarization (overlap, recall). BLEU: translation (overlap, precision). BERTScore: meaning-based similarity, when wording can differ. If the scenario mentions comparing generated text with a human-written reference, it is one of these three.</p>
+</Callout>
+
+<Callout title="Overlap versus meaning">
+  <p>ROUGE and BLEU count matching words and word sequences. BERTScore compares embeddings, so it recognises a paraphrase. A paraphrase scoring low on ROUGE but high on BERTScore is expected.</p>
+</Callout>
+
+<Callout title="Subjective qualities need humans">
+  <p>For tone, brand voice, creativity or "does it feel helpful", the answer includes human evaluation. For fast, large-scale, repeatable checks use benchmark datasets with automatic metrics. For quick scoring with written reasons, LLM-as-a-judge.</p>
+</Callout>
+
+<Callout title="Compare models on your own data → Bedrock Model Evaluation">
+  <p>Amazon Bedrock Model Evaluation (automatic, human or judge-based) is the managed AWS answer for comparing models or checking a customized model. Amazon Bedrock Guardrails filters content, and Bedrock Prompt Management stores prompts: neither measures model quality.</p>
+</Callout>
+
+<Callout title="Technical score is not business value">
+  <p>If the scenario asks whether the AI achieves a business goal, choose business metrics such as task completion rate, user satisfaction, cost per interaction or productivity, not ROUGE or BERTScore.</p>
+</Callout>
+
+<Callout title="RAG has two things to test">
+  <p>Evaluate retrieval (right documents found?) and generation (faithful, correct, complete answer?). Amazon Bedrock supports retrieve-only and retrieve-and-generate evaluation jobs. Agents add a third check: did it pick and use the right tools?</p>
+</Callout>
