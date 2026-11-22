@@ -6,6 +6,8 @@ import { ITEMS, QUESTION_FILES } from './bank'
 import { QUALITY_CHECKS } from './quality'
 import { itemFileSchema, itemObjectives } from './schema'
 import { SERVICE_BY_ID } from './services'
+import { seededRng } from '../quiz/random'
+import { buildMockExam } from '../quiz/sampler'
 
 describe('question bank', () => {
   it.each(Object.keys(QUESTION_FILES))('%s.json is valid and holds only its own task', (taskId) => {
@@ -30,5 +32,11 @@ describe('question bank', () => {
 
   it.each(Object.entries(QUALITY_CHECKS))('passes %s', (_, check) => {
     expect(check(ITEMS)).toEqual([])
+  })
+
+  it('fills a complete mock exam, with and without the extended kinds', () => {
+    for (const extended of [false, true]) {
+      for (let seed = 0; seed < 5; seed++) expect(buildMockExam(ITEMS, extended, new Set(), seededRng(seed)).shortfall).toBe(0)
+    }
   })
 })
