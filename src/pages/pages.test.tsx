@@ -8,10 +8,13 @@ import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { routes } from '../app/routes'
 import { createDeck, getProgress, resetProgress } from '../progress/store'
 
-/** Renders the real routes at `path` and waits for the lazy page. */
+/**
+ * Renders the real routes at `path` and waits for the lazy page. The first
+ * load of a page (MDX lessons especially) can take seconds on a cold CI runner.
+ */
 async function renderAt(path: string) {
   render(<RouterProvider router={createMemoryRouter(routes, { initialEntries: [path] })} />)
-  return screen.findByRole('heading', { level: 1 })
+  return screen.findByRole('heading', { level: 1 }, { timeout: 10_000 })
 }
 
 beforeEach(() => {

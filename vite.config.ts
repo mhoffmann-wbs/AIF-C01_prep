@@ -15,5 +15,7 @@ export default defineConfig({
     environment: 'node',
     include: ['src/**/*.test.{ts,tsx}'],
     setupFiles: ['src/test/setup.ts'],
+    // Page tests compile lazy pages (MDX lessons) on first load, which is slow on CI.
+    testTimeout: 20_000,
   },
 })
