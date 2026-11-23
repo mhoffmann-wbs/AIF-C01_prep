@@ -49,14 +49,14 @@ describe('progress store', () => {
     expect(getProgress().items).toEqual({})
   })
 
-  it('upgrades version-1 data in storage and in imports', () => {
+  it('upgrades older data in storage and in imports', () => {
     const v1 = { version: 1, extendedInPractice: false, extendedInMock: true, items: {}, mockResults: [], lessonsRead: ['1.1'] }
     localStorage.setItem('aifc01:progress', JSON.stringify(v1))
     reloadProgress()
-    expect(getProgress()).toMatchObject({ version: 2, extendedInPractice: false, lessonsRead: ['1.1'], drills: {}, drillMisses: [] })
+    expect(getProgress()).toMatchObject({ version: 3, extendedInPractice: false, lessonsRead: ['1.1'], drills: {}, drillMisses: [], cards: {}, myCards: [] })
     resetProgress()
     importProgress(JSON.stringify({ app: 'aif-c01-prep', progress: v1 }))
-    expect(getProgress()).toMatchObject({ version: 2, lessonsRead: ['1.1'], drillMisses: [] })
+    expect(getProgress()).toMatchObject({ version: 3, lessonsRead: ['1.1'], drillMisses: [], decks: [] })
   })
 
   it('keeps the best drill round and the cards still missed', () => {
@@ -83,7 +83,7 @@ describe('progress store', () => {
     expect(getProgress().mockResults).toHaveLength(1)
     expect(() => importProgress('nope')).toThrow(/valid JSON/)
     expect(() => importProgress('{"app":"other","progress":{}}')).toThrow(/AIF-C01 Prep/)
-    expect(() => importProgress('{"app":"aif-c01-prep","progress":{"version":3}}')).toThrow(/newer version/)
+    expect(() => importProgress('{"app":"aif-c01-prep","progress":{"version":4}}')).toThrow(/newer version/)
     expect(() => importProgress('{"app":"aif-c01-prep","progress":{"version":1,"items":{"x":{"attempts":-1}}}}')).toThrow(/damaged/)
   })
 

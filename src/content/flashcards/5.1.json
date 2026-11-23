@@ -1,0 +1,110 @@
+[
+  {
+    "id": "5.1-c01",
+    "objectiveId": "5.1.1",
+    "front": "IAM or Guardrails: which controls who may call Bedrock, and which controls what the model says?",
+    "back": "IAM decides who may call a service. Guardrails filter what the model receives and says. They solve different problems."
+  },
+  {
+    "id": "5.1-c02",
+    "objectiveId": "5.1.1",
+    "front": "AgentCore Identity vs. Policy in AgentCore: what question does each answer?",
+    "back": "Identity answers who the agent is and whom it acts for. Policy answers what the agent may do with each tool, checking every request before tool access is allowed."
+  },
+  {
+    "id": "5.1-c03",
+    "objectiveId": "5.1.1",
+    "front": "Cairnway wants Bedrock traffic kept off the public internet. Which service, and which service handles keys?",
+    "back": "AWS PrivateLink creates a private VPC interface endpoint to Bedrock. AWS KMS controls the encryption keys. Mixing the two up is a common distractor."
+  },
+  {
+    "id": "5.1-c04",
+    "objectiveId": "5.1.1",
+    "front": "Under shared responsibility, who secures what for Bedrock?",
+    "back": "AWS secures the infrastructure and the managed service. You control your content: who may call it, what data goes in, IAM permissions and encryption choices."
+  },
+  {
+    "id": "5.1-c05",
+    "objectiveId": "5.1.2",
+    "front": "Citations, data lineage and Model Cards: what does each document?",
+    "back": "Citations show which document produced an answer. Lineage traces where data came from and how it changed. A Model Card documents the model itself."
+  },
+  {
+    "id": "5.1-c06",
+    "objectiveId": "5.1.2",
+    "front": "What does a data catalog such as the Glue Data Catalog provide?",
+    "back": "A central index of metadata: where data sets live, their structure and properties. It lets people find and understand data instead of guessing."
+  },
+  {
+    "id": "5.1-c07",
+    "objectiveId": "5.1.2",
+    "front": "Why does data lineage help when a model gives a wrong answer?",
+    "back": "It lets you trace back through every change to find which source data caused the problem, which also helps auditing and compliance."
+  },
+  {
+    "id": "5.1-c08",
+    "objectiveId": "5.1.3",
+    "front": "List the four secure data engineering practices in order of work.",
+    "back": "Find sensitive data with Macie, limit who can see it with IAM and Lake Formation, protect it with encryption and masking, and check it with data quality checks and logs."
+  },
+  {
+    "id": "5.1-c09",
+    "objectiveId": "5.1.3",
+    "front": "What is the difference between anonymization and pseudonymization?",
+    "back": "Anonymization removes identifying details. Pseudonymization replaces them with codes. Both are privacy-enhancing techniques that expose less about individuals."
+  },
+  {
+    "id": "5.1-c10",
+    "objectiveId": "5.1.3",
+    "front": "Which AWS service gives fine-grained access to data down to columns and rows?",
+    "back": "AWS Lake Formation, with control at database, table, column, row and cell level, managed in one place. IAM and S3 bucket policies work at a coarser level."
+  },
+  {
+    "id": "5.1-c11",
+    "objectiveId": "5.1.3",
+    "front": "Why does data quality matter for security, not just accuracy?",
+    "back": "Bad data in means bad answers out, and poisoned data can be an attack. Cairnway should check completeness, correctness and freshness before data feeds a model."
+  },
+  {
+    "id": "5.1-c12",
+    "objectiveId": "5.1.4",
+    "front": "Cairnway must find customer PII hidden in S3 notes columns. Which service?",
+    "back": "Amazon Macie, which uses machine learning and pattern matching to find sensitive data such as PII in S3. Inspector, Config and Artifact don't read the contents of your data."
+  },
+  {
+    "id": "5.1-c13",
+    "objectiveId": "5.1.4",
+    "front": "What is prompt injection and how do you defend against it?",
+    "back": "User text, or text hidden in a document, that tricks the model into ignoring its instructions. Use layers: the Guardrails prompt attack filter, output validation and least-privilege permissions."
+  },
+  {
+    "id": "5.1-c14",
+    "objectiveId": "5.1.4",
+    "front": "CloudTrail vs. model invocation logging: which records the prompts?",
+    "back": "Model invocation logging records full requests and responses, and is off by default. CloudTrail records who called which API and when, not the prompt text."
+  },
+  {
+    "id": "5.1-c15",
+    "objectiveId": "5.1.4",
+    "front": "Why must invocation logs themselves be protected?",
+    "back": "Prompts and answers may contain customer data. Store logs in an encrypted, access-restricted bucket and apply a retention period."
+  },
+  {
+    "id": "5.1-c16",
+    "objectiveId": "5.1.5",
+    "front": "Contextual grounding check vs. Automated Reasoning check: when use each?",
+    "back": "Use grounding checks for document-based answers that must match a source, usually in RAG. Use Automated Reasoning checks for answers that must follow precise business rules."
+  },
+  {
+    "id": "5.1-c17",
+    "objectiveId": "5.1.5",
+    "front": "What two scores does a contextual grounding check give, and what happens below the threshold?",
+    "back": "Grounding (supported by the source) and relevance (answers the question). Answers scoring below your threshold are treated as hallucinations and blocked."
+  },
+  {
+    "id": "5.1-c18",
+    "objectiveId": "5.1.5",
+    "front": "How does RAG grounding reduce hallucinations?",
+    "back": "The model answers from retrieved company documents instead of from memory alone. That also makes answers citable, so users can check the source."
+  }
+]

@@ -1,0 +1,188 @@
+[
+  {
+    "id": "1.3-c01",
+    "objectiveId": "1.3.1",
+    "front": "List the pipeline stages from data collection to evaluation.",
+    "back": "Data collection, data preparation, exploratory data analysis, feature engineering, training, tuning and evaluation. The problem definition comes first, deployment and monitoring come after."
+  },
+  {
+    "id": "1.3-c02",
+    "objectiveId": "1.3.1",
+    "front": "Which stage turns raw data into useful inputs such as 'days since last order'?",
+    "back": "Feature engineering. Good features often improve a model more than a fancier algorithm does."
+  },
+  {
+    "id": "1.3-c03",
+    "objectiveId": "1.3.1",
+    "front": "What are hyperparameters, and which stage adjusts them?",
+    "back": "Settings you choose before training, such as how long to train. The tuning stage adjusts them to improve results."
+  },
+  {
+    "id": "1.3-c04",
+    "objectiveId": "1.3.1",
+    "front": "What are the three data splits and what is each for?",
+    "back": "Training data to learn from, validation data to tune, and test data for a final honest check on unseen examples."
+  },
+  {
+    "id": "1.3-c05",
+    "objectiveId": "1.3.1",
+    "front": "Why must evaluation use data the model has never seen?",
+    "back": "To show whether it will work in the real world and to guard against overfitting. A high training score alone proves little."
+  },
+  {
+    "id": "1.3-c06",
+    "objectiveId": "1.3.2",
+    "front": "What are the three main sources of a model for a project?",
+    "back": "A proprietary model used through a managed service, an open-source pre-trained model, or a custom model you train yourself on your own data."
+  },
+  {
+    "id": "1.3-c07",
+    "objectiveId": "1.3.2",
+    "front": "Why is training your own foundation model rarely the right choice?",
+    "back": "It is very costly. Adapting a pre-trained model gives a head start. Training your own suits narrow tasks with unique data, like a fraud model."
+  },
+  {
+    "id": "1.3-c08",
+    "objectiveId": "1.3.2",
+    "front": "What advantage do open-source pre-trained models offer over a proprietary managed API?",
+    "back": "More control over hosting and customization, at the price of more work. The weights are published, so you can run and, where allowed, fine-tune them."
+  },
+  {
+    "id": "1.3-c09",
+    "objectiveId": "1.3.2",
+    "front": "Why does Cairnway train its own fraud model but use a Bedrock model for Trailmate?",
+    "back": "Fraud data is unique to Cairnway and the task is narrow. Trailmate needs general language ability, which an existing foundation model already provides."
+  },
+  {
+    "id": "1.3-c10",
+    "objectiveId": "1.3.3",
+    "front": "What is the main difference between a managed API and a self-hosted API for a model?",
+    "back": "With a managed API the provider hosts and runs the model, so you do little operational work. Self-hosting means you deploy, size, secure and update it yourself."
+  },
+  {
+    "id": "1.3-c11",
+    "objectiveId": "1.3.3",
+    "front": "Which clue words point to a managed API such as Amazon Bedrock?",
+    "back": "'Without managing infrastructure', 'fastest to market' and 'least effort'."
+  },
+  {
+    "id": "1.3-c12",
+    "objectiveId": "1.3.3",
+    "front": "Which clue words point to self-hosting a model?",
+    "back": "'Specific open-source model', 'full control' and 'custom hardware'. Self-hosting runs on a SageMaker AI endpoint or EC2."
+  },
+  {
+    "id": "1.3-c13",
+    "objectiveId": "1.3.3",
+    "front": "How do cost patterns differ between managed and self-hosted models?",
+    "back": "Managed APIs are typically pay per use, such as per token. Self-hosted models cost server time while they run, even when idle, unless scaled down."
+  },
+  {
+    "id": "1.3-c14",
+    "objectiveId": "1.3.4",
+    "front": "Which feature builds labeled training data with a human workforce, and what is its status?",
+    "back": "SageMaker Ground Truth. AWS says it is closed to new customers, so the exam tests what it is for."
+  },
+  {
+    "id": "1.3-c15",
+    "objectiveId": "1.3.4",
+    "front": "Which service stores features with an online store for fast reads and an offline store for training?",
+    "back": "SageMaker Feature Store. Using one store keeps training and live scoring on the same feature definitions."
+  },
+  {
+    "id": "1.3-c16",
+    "objectiveId": "1.3.4",
+    "front": "How do SageMaker Pipelines and SageMaker Model Registry differ?",
+    "back": "Pipelines automates the workflow steps from processing to deployment. Model Registry catalogs model versions and tracks approval status."
+  },
+  {
+    "id": "1.3-c17",
+    "objectiveId": "1.3.4",
+    "front": "Which tool prepares data with little to no code, and where is it integrated now?",
+    "back": "SageMaker Data Wrangler, which AWS says is now integrated into SageMaker Canvas."
+  },
+  {
+    "id": "1.3-c18",
+    "objectiveId": "1.3.4",
+    "front": "Which tool checks bias and explains predictions, and which watches a model in production?",
+    "back": "SageMaker Clarify checks bias and explains predictions. SageMaker Model Monitor watches production models for drift. Both are closed to new customers."
+  },
+  {
+    "id": "1.3-c19",
+    "objectiveId": "1.3.4",
+    "front": "How do Amazon Quick and Kiro differ in purpose?",
+    "back": "Quick is an AI workspace for business users to consume AI and data. Kiro is an agentic engineering system for developers to build software around models."
+  },
+  {
+    "id": "1.3-c20",
+    "objectiveId": "1.3.5",
+    "front": "What is MLOps?",
+    "back": "It applies DevOps habits to ML: automate, test and monitor the whole lifecycle so models are delivered and kept healthy reliably."
+  },
+  {
+    "id": "1.3-c21",
+    "objectiveId": "1.3.5",
+    "front": "What is drift, and how does Cairnway's fraud model show it?",
+    "back": "Drift is when the world changes so a model's inputs or right answers shift and accuracy falls. Fraudsters changed tactics and recall dropped."
+  },
+  {
+    "id": "1.3-c22",
+    "objectiveId": "1.3.5",
+    "front": "Accuracy falls after deployment. Is this a training bug?",
+    "back": "Usually not. It is typically drift. The answer is monitoring plus retraining through the automated pipeline."
+  },
+  {
+    "id": "1.3-c23",
+    "objectiveId": "1.3.5",
+    "front": "Why do MLOps teams track experiments?",
+    "back": "So results from different data sets, features and settings can be compared and reproduced later."
+  },
+  {
+    "id": "1.3-c24",
+    "objectiveId": "1.3.5",
+    "front": "What does managing technical debt mean in ML projects?",
+    "back": "Avoiding quick hacks such as hand-run steps and undocumented data that slow every later change. Pay it down with versioning, documentation and automation."
+  },
+  {
+    "id": "1.3-c25",
+    "objectiveId": "1.3.5",
+    "front": "What does production readiness include before a model launches?",
+    "back": "It is tested, secured, documented, approved and cost-checked, with a rollback plan. A registry approval step supports this."
+  },
+  {
+    "id": "1.3-c26",
+    "objectiveId": "1.3.6",
+    "front": "What do precision and recall each measure?",
+    "back": "Precision asks how often a 'positive' prediction is right (TP divided by TP plus FP). Recall asks how many real positives were found (TP divided by TP plus FN)."
+  },
+  {
+    "id": "1.3-c27",
+    "objectiveId": "1.3.6",
+    "front": "Why can high accuracy mislead for fraud detection?",
+    "back": "With rare fraud, a model that always says legitimate can score 95% accuracy yet catch no fraud. Its recall is zero."
+  },
+  {
+    "id": "1.3-c28",
+    "objectiveId": "1.3.6",
+    "front": "When should you focus on recall rather than precision?",
+    "back": "When missing a real case is costly, such as fraud or disease. Focus on precision when false alarms are costly."
+  },
+  {
+    "id": "1.3-c29",
+    "objectiveId": "1.3.6",
+    "front": "When is the F1 score the right metric?",
+    "back": "When precision and recall both matter and classes are unbalanced. It is one number that balances the two."
+  },
+  {
+    "id": "1.3-c30",
+    "objectiveId": "1.3.6",
+    "front": "A model has excellent F1 but loses money. How should you judge it?",
+    "back": "On both model metrics and business metrics. Technical metrics say if it works, and business metrics say if it is worth it."
+  },
+  {
+    "id": "1.3-c31",
+    "objectiveId": "1.3.6",
+    "front": "Name four business metrics for evaluating an ML model.",
+    "back": "Cost per user or prediction, development costs, customer feedback and return on investment (ROI)."
+  }
+]

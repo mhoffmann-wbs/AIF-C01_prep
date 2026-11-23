@@ -1,0 +1,146 @@
+[
+  {
+    "id": "1.1-c01",
+    "objectiveId": "1.1.1",
+    "front": "What is the difference between training and inferencing?",
+    "back": "Training is when a model learns patterns from data, often in a large, costly job. Inferencing is every later use of the trained model to produce an output for new input."
+  },
+  {
+    "id": "1.1-c02",
+    "objectiveId": "1.1.1",
+    "front": "What does it mean to call a model the result of training?",
+    "back": "A model is the algorithm plus everything it learned from the data. You give it new input and it returns an output, such as a prediction. The algorithm is only the recipe."
+  },
+  {
+    "id": "1.1-c03",
+    "objectiveId": "1.1.1",
+    "front": "A model scores 99% on its training data but poorly on last month's orders. What is this called?",
+    "back": "Overfitting. The model memorized the training examples, including their noise, so it fails on new data. A good fit performs well on data it has never seen."
+  },
+  {
+    "id": "1.1-c04",
+    "objectiveId": "1.1.1",
+    "front": "How is underfitting different from overfitting?",
+    "back": "An underfit model is too simple and does badly even on its training data. An overfit model does well on training data but badly on new data."
+  },
+  {
+    "id": "1.1-c05",
+    "objectiveId": "1.1.1",
+    "front": "Cairnway's training data came almost entirely from domestic orders. Which risk does this create?",
+    "back": "Bias. The model may give systematically unfair or skewed results for under-represented groups, such as international customers. Fairness is the goal of avoiding that kind of unjust outcome."
+  },
+  {
+    "id": "1.1-c06",
+    "objectiveId": "1.1.1",
+    "front": "What do computer vision and natural language processing each work with?",
+    "back": "Computer vision works with images and video, such as spotting a product in a photo. Natural language processing works with human language, such as classifying, translating or generating text and speech."
+  },
+  {
+    "id": "1.1-c07",
+    "objectiveId": "1.1.2",
+    "front": "Put these in order from biggest to smallest circle: deep learning, AI, generative AI, machine learning.",
+    "back": "AI, then machine learning, then deep learning, then generative AI. Each is a subset of the one before it. Saying ML is a subset of deep learning is wrong."
+  },
+  {
+    "id": "1.1-c08",
+    "objectiveId": "1.1.2",
+    "front": "What is the difference between generative AI and agentic AI?",
+    "back": "Generative AI produces something, such as text or images. Agentic AI does something: it plans steps, calls tools and checks results to reach a goal."
+  },
+  {
+    "id": "1.1-c09",
+    "objectiveId": "1.1.2",
+    "front": "Is Trailmate, Cairnway's support assistant, agentic AI when it only answers questions?",
+    "back": "No, it is generative AI built on an LLM. It becomes agentic when it also checks an order and starts a return by itself, because it then plans and uses tools."
+  },
+  {
+    "id": "1.1-c10",
+    "objectiveId": "1.1.2",
+    "front": "How does a classic ML model differ from a foundation model in scope?",
+    "back": "A classic ML model usually does one narrow job, such as labeling a transaction as fraud, and outputs a label or number. A foundation model can do many jobs through prompts and create new content."
+  },
+  {
+    "id": "1.1-c11",
+    "objectiveId": "1.1.2",
+    "front": "Is a rule such as 'orders over 100 euros ship free' machine learning?",
+    "back": "No. Nothing is learned from data, so it is not ML. It counts as AI only in the broadest sense of the word."
+  },
+  {
+    "id": "1.1-c12",
+    "objectiveId": "1.1.3",
+    "front": "Which inferencing type fits a fraud check that must answer while a customer is paying?",
+    "back": "Real-time inferencing. The model sits on an always-on endpoint and answers each request immediately, for interactive, low-latency needs."
+  },
+  {
+    "id": "1.1-c13",
+    "objectiveId": "1.1.3",
+    "front": "When is serverless inferencing a good choice, and what is its catch?",
+    "back": "It fits bursty traffic with quiet gaps, since you manage no servers. The catch is a cold start, a short delay when the idle model has to wake up."
+  },
+  {
+    "id": "1.1-c14",
+    "objectiveId": "1.1.3",
+    "front": "Which inferencing type suits large or slow requests where the caller does not need to wait on the line?",
+    "back": "Asynchronous inferencing. Requests go into a queue and the result is delivered when ready. It suits large payloads or long processing times."
+  },
+  {
+    "id": "1.1-c15",
+    "objectiveId": "1.1.3",
+    "front": "Cairnway wants scores for all 12,000 products every night. Which inferencing type fits?",
+    "back": "Batch inferencing. A batch job runs the model over the whole data set, saves the predictions and stops, with no persistent endpoint needed."
+  },
+  {
+    "id": "1.1-c16",
+    "objectiveId": "1.1.3",
+    "front": "Why are serverless and batch inferencing not the same thing?",
+    "back": "Serverless still answers individual requests on demand, just without servers for you to manage. Batch processes a whole data set in one scheduled job."
+  },
+  {
+    "id": "1.1-c17",
+    "objectiveId": "1.1.4",
+    "front": "How do labeled and unlabeled examples differ in what they contain?",
+    "back": "Labeled data has the correct answer attached to each example, such as an email marked spam. Unlabeled data is raw examples with no answers, used to find structure on its own."
+  },
+  {
+    "id": "1.1-c18",
+    "objectiveId": "1.1.4",
+    "front": "What is the difference between structured and unstructured data?",
+    "back": "Structured data fits neatly into rows and columns, like a database table. Unstructured data has no fixed layout, such as free text, images, audio and video."
+  },
+  {
+    "id": "1.1-c19",
+    "objectiveId": "1.1.4",
+    "front": "Why is time-series data treated differently from ordinary tabular data?",
+    "back": "Time-series values are recorded over time and the order matters. Cairnway's weekly sales per product are an example, and they can feed a demand-forecasting model."
+  },
+  {
+    "id": "1.1-c20",
+    "objectiveId": "1.1.4",
+    "front": "A product review is tagged positive by a person. Which data types describe it?",
+    "back": "It is unstructured, text and, once tagged, labeled. The data types overlap, so one data set can fit several descriptions."
+  },
+  {
+    "id": "1.1-c21",
+    "objectiveId": "1.1.5",
+    "front": "Which learning style uses labeled examples, and what are its two typical tasks?",
+    "back": "Supervised learning. It learns to map inputs to the correct answers, and does classification (pick a category) and regression (predict a number)."
+  },
+  {
+    "id": "1.1-c22",
+    "objectiveId": "1.1.5",
+    "front": "Marketing groups customers by buying habits with no groups defined in advance. Which learning style is this?",
+    "back": "Unsupervised learning. It works on unlabeled data and finds structure itself, for example by clustering similar customers."
+  },
+  {
+    "id": "1.1-c23",
+    "objectiveId": "1.1.5",
+    "front": "Which learning style relies on rewards and penalties from trial and error?",
+    "back": "Reinforcement learning. The system acts in an environment and learns which actions earn rewards, as a warehouse robot might learn the fastest picking route."
+  },
+  {
+    "id": "1.1-c24",
+    "objectiveId": "1.1.5",
+    "front": "How is self-supervised learning related to LLMs?",
+    "back": "LLMs are pre-trained this way. The system creates its own labels from the data, for example by hiding the next word and learning to predict it."
+  }
+]

@@ -212,3 +212,22 @@ export const drillDeckSchema = z.discriminatedUnion('kind', [whichDeck, sortDeck
 export type DrillDeck = z.infer<typeof drillDeckSchema>
 export type WhichDeck = Extract<DrillDeck, { kind: 'which' }>
 export type SortDeck = Extract<DrillDeck, { kind: 'sort' }>
+
+// Built-in flashcards (src/content/flashcards/<taskId>.json). Card ids are
+// `<taskId>-cNN` in file order and are stored in progress, so append, never
+// renumber. Service cards are generated from the catalog, not written here.
+export const cardSchema = z
+  .object({
+    id: z.string().regex(/^[1-5]\.[1-4]-c\d{2}$/),
+    objectiveId: z.string().regex(/^[1-5]\.[1-4]\.\d+$/),
+    front: nonEmpty,
+    back: nonEmpty,
+  })
+  .superRefine((card, ctx) => {
+    if (!card.objectiveId.startsWith(`${card.id.split('-')[0]}.`))
+      ctx.addIssue({ code: 'custom', message: 'objectiveId must belong to the task in the id', path: ['objectiveId'] })
+  })
+
+export const cardFileSchema = z.array(cardSchema)
+
+export type Card = z.infer<typeof cardSchema>

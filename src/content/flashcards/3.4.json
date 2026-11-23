@@ -1,0 +1,164 @@
+[
+  {
+    "id": "3.4-c01",
+    "objectiveId": "3.4.1",
+    "front": "What are the three main approaches to evaluating an FM?",
+    "back": "Human-in-the-loop evaluation, benchmark datasets with automatic scoring, and LLM-as-a-judge, where a second model scores the first model's answers."
+  },
+  {
+    "id": "3.4-c02",
+    "objectiveId": "3.4.1",
+    "front": "When is human evaluation the right choice?",
+    "back": "For subjective qualities such as tone, brand voice, creativity or helpfulness. It catches subtle errors that scores miss, but it is slower, costlier and can vary between raters."
+  },
+  {
+    "id": "3.4-c03",
+    "objectiveId": "3.4.1",
+    "front": "What is a benchmark dataset?",
+    "back": "A fixed set of prompts, often with reference answers, used to score models automatically. It is fast, cheap and repeatable, but a generic one may not look like your real work."
+  },
+  {
+    "id": "3.4-c04",
+    "objectiveId": "3.4.1",
+    "front": "Why should Cairnway build its own benchmark from real support questions?",
+    "back": "A generic benchmark may not resemble real work. Cairnway wrote 300 real support questions with ideal answers to compare candidate models fairly on its own data."
+  },
+  {
+    "id": "3.4-c05",
+    "objectiveId": "3.4.1",
+    "front": "What are the four kinds of evaluation jobs in Amazon Bedrock Model Evaluation?",
+    "back": "Programmatic (automatic) evaluation, human-based evaluation, LLM-as-a-judge, and RAG evaluation of a knowledge base."
+  },
+  {
+    "id": "3.4-c06",
+    "objectiveId": "3.4.1",
+    "front": "What is a weakness of LLM-as-a-judge, and how do you handle it?",
+    "back": "The judge is a model too and can be wrong or biased. Spot-check its scores with human raters, as Lena and her agents did with thumbs up/down."
+  },
+  {
+    "id": "3.4-c07",
+    "objectiveId": "3.4.2",
+    "front": "What does ROUGE measure, and which task is it typical for?",
+    "back": "ROUGE measures word and word-sequence overlap with a reference text, and is recall-oriented. It is typical for summarization."
+  },
+  {
+    "id": "3.4-c08",
+    "objectiveId": "3.4.2",
+    "front": "What does BLEU measure, and which task is it typical for?",
+    "back": "BLEU measures word-sequence overlap with a reference text, and is precision-oriented. It is the classic translation metric."
+  },
+  {
+    "id": "3.4-c09",
+    "objectiveId": "3.4.2",
+    "front": "What makes BERTScore different from ROUGE and BLEU?",
+    "back": "ROUGE and BLEU count matching words. BERTScore compares meaning using embeddings, so a paraphrase such as \"cheap\" versus \"inexpensive\" still scores as similar."
+  },
+  {
+    "id": "3.4-c10",
+    "objectiveId": "3.4.2",
+    "front": "A paraphrased summary scores low on ROUGE but high on BERTScore. Is that surprising?",
+    "back": "No, it is expected. The words differ, so overlap is low, but the meaning is the same, so the embedding comparison is high."
+  },
+  {
+    "id": "3.4-c11",
+    "objectiveId": "3.4.2",
+    "front": "Does a high ROUGE, BLEU or BERTScore mean the answer is true?",
+    "back": "No. All three need a reference text and only show similarity to it. A high score means similar to the reference, not correct."
+  },
+  {
+    "id": "3.4-c12",
+    "objectiveId": "3.4.2",
+    "front": "What do the judge metrics faithfulness and completeness check?",
+    "back": "Faithfulness checks that the answer sticks to the given context without invented information, a key hallucination check. Completeness checks that it answers every question in the prompt."
+  },
+  {
+    "id": "3.4-c13",
+    "objectiveId": "3.4.3",
+    "front": "Why can a model with a great BERTScore still fail the business?",
+    "back": "Technical scores show quality, not value. The model may not save time, satisfy customers or cost less than the alternative, so you also evaluate against business goals."
+  },
+  {
+    "id": "3.4-c14",
+    "objectiveId": "3.4.3",
+    "front": "What steps make a business evaluation of an FM sound?",
+    "back": "Set the goal and success threshold before launch, measure a baseline, run a pilot, compare, and keep measuring after launch, because models drift and customers change."
+  },
+  {
+    "id": "3.4-c15",
+    "objectiveId": "3.4.3",
+    "front": "What does task success mean when judging whether an FM meets business goals?",
+    "back": "Whether the model gets the job done correctly, such as resolving the question or producing a usable draft. It also depends on how well the task and prompt were designed."
+  },
+  {
+    "id": "3.4-c16",
+    "objectiveId": "3.4.3",
+    "front": "Give examples of productivity and user engagement measures.",
+    "back": "Productivity: minutes saved per task or tasks done per employee per day. Engagement: usage rate, repeat use, session length, or how often people accept suggestions."
+  },
+  {
+    "id": "3.4-c17",
+    "objectiveId": "3.4.4",
+    "front": "What two things can go wrong in a RAG application?",
+    "back": "Retrieval can find the wrong documents, and generation can misuse good documents. Evaluate both separately, then the whole."
+  },
+  {
+    "id": "3.4-c18",
+    "objectiveId": "3.4.4",
+    "front": "What are the two Amazon Bedrock RAG evaluation job types?",
+    "back": "Retrieve only, which reports on the data retrieved from your RAG source, and retrieve and generate, which also scores the generated answers."
+  },
+  {
+    "id": "3.4-c19",
+    "objectiveId": "3.4.4",
+    "front": "Cairnway finds the right return policy is retrieved but a condition is skipped. What should it fix?",
+    "back": "The prompt, not the documents. Retrieval is working, so the fault is in generation, which is why scoring retrieval and generation separately matters."
+  },
+  {
+    "id": "3.4-c20",
+    "objectiveId": "3.4.4",
+    "front": "How do you evaluate an agent beyond its final answer?",
+    "back": "Check the steps: did it choose the right tool, call it correctly, finish the goal and handle odd inputs? Amazon Bedrock AgentCore Evaluations scores agent traces with LLM-as-a-judge."
+  },
+  {
+    "id": "3.4-c21",
+    "objectiveId": "3.4.4",
+    "front": "How should you test a workflow that chains several steps or models?",
+    "back": "Test each step on its own, then run end-to-end tests with realistic cases, and track failures and cost per step."
+  },
+  {
+    "id": "3.4-c22",
+    "objectiveId": "3.4.4",
+    "front": "What is regression testing for an FM application?",
+    "back": "Re-running the same realistic test set after every change to the prompt, model or documents, to check that nothing that used to work has broken."
+  },
+  {
+    "id": "3.4-c23",
+    "objectiveId": "3.4.5",
+    "front": "What is task completion rate?",
+    "back": "The share of attempts where the user's goal was achieved, such as the share of Trailmate chats resolved without a human."
+  },
+  {
+    "id": "3.4-c24",
+    "objectiveId": "3.4.5",
+    "front": "How is cost per interaction calculated?",
+    "back": "Total AI cost divided by the number of interactions, including tokens, infrastructure and human follow-up, then compared with a human-handled interaction."
+  },
+  {
+    "id": "3.4-c25",
+    "objectiveId": "3.4.5",
+    "front": "What do escalation rate and user satisfaction tell you?",
+    "back": "Escalation rate shows how often the AI hands over to a person. User satisfaction shows how happy users are, through thumbs up/down, CSAT surveys or ratings."
+  },
+  {
+    "id": "3.4-c26",
+    "objectiveId": "3.4.5",
+    "front": "Why look at business metrics together rather than one at a time?",
+    "back": "A cheap assistant that resolves few questions, or an accurate one that costs more than a human, is not a success. The metrics balance each other."
+  },
+  {
+    "id": "3.4-c27",
+    "objectiveId": "3.4.5",
+    "front": "A scenario asks if the AI achieves a business goal. Which metrics do you pick?",
+    "back": "Business metrics such as task completion rate, user satisfaction, cost per interaction or productivity, not ROUGE or BERTScore."
+  }
+]

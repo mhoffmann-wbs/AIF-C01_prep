@@ -1,0 +1,122 @@
+[
+  {
+    "id": "2.2-c01",
+    "objectiveId": "2.2.1",
+    "front": "Why is adaptability a GenAI advantage?",
+    "back": "One foundation model handles many tasks and is steered with a prompt instead of being rebuilt for each. Cairnway uses the same model for product descriptions, review summaries and email drafts."
+  },
+  {
+    "id": "2.2-c02",
+    "objectiveId": "2.2.1",
+    "front": "Which GenAI advantage lets a shopper ask 'which is warmer?' and then 'what about for kids?' in plain language?",
+    "back": "Conversational capabilities. People use natural language, ask follow-up questions and need no special query language."
+  },
+  {
+    "id": "2.2-c03",
+    "objectiveId": "2.2.1",
+    "front": "Trailmate answers a customer at 3 a.m. on a holiday. Which advantage is this?",
+    "back": "Responsiveness. Answers arrive in seconds at any hour and scale to many users at once."
+  },
+  {
+    "id": "2.2-c04",
+    "objectiveId": "2.2.1",
+    "front": "Which advantages cover drafting 30,000 product descriptions and summarizing a 40-page safety sheet?",
+    "back": "Ability to generate content covers the first drafts, which staff then review. Simplification of complex material covers summarizing, rephrasing and translating long or technical text."
+  },
+  {
+    "id": "2.2-c05",
+    "objectiveId": "2.2.2",
+    "front": "What is a hallucination, and why does it happen?",
+    "back": "A confident, fluent answer that is false or invented. The model predicts likely tokens from learned patterns and does not look facts up, so it can sound sure and still be wrong."
+  },
+  {
+    "id": "2.2-c06",
+    "objectiveId": "2.2.2",
+    "front": "Name three ways to reduce hallucinations.",
+    "back": "Ground answers in your own documents with RAG, ask for citations, add guardrails, and keep human review for important decisions. A bigger model alone is not the usual remedy."
+  },
+  {
+    "id": "2.2-c07",
+    "objectiveId": "2.2.2",
+    "front": "Hallucination versus nondeterminism: how do they differ?",
+    "back": "A hallucination is a wrong or invented answer. Nondeterminism means the same prompt can give different answers each time, because the model samples from likely next tokens. Answers can vary and still all be correct."
+  },
+  {
+    "id": "2.2-c08",
+    "objectiveId": "2.2.2",
+    "front": "Does a lower temperature make GenAI output identical every time?",
+    "back": "No. A lower temperature makes output more consistent, but some variation remains. Do not use GenAI alone where identical output is legally required."
+  },
+  {
+    "id": "2.2-c09",
+    "objectiveId": "2.2.2",
+    "front": "Why is interpretability a problem for foundation models in credit or hiring decisions?",
+    "back": "Foundation models have billions of parameters, so it is hard to explain why a specific answer was produced. Regulated decisions must be justified, so simpler explainable models or human judgment fit better."
+  },
+  {
+    "id": "2.2-c10",
+    "objectiveId": "2.2.2",
+    "front": "Cairnway's shipping cost must be exactly the same every time. Is GenAI a good fit?",
+    "back": "No. Exact, repeatable calculations such as totals or tax are a poor fit for GenAI. Ordinary software gives the same answer every time."
+  },
+  {
+    "id": "2.2-c11",
+    "objectiveId": "2.2.3",
+    "front": "Cairnway has two models that both pass the accuracy test. Which should it pick?",
+    "back": "The cheaper, faster one, usually the smaller model. The rule is to start with the smallest, cheapest model that meets the requirement and move up only if results are not good enough."
+  },
+  {
+    "id": "2.2-c12",
+    "objectiveId": "2.2.3",
+    "front": "A model passes every quality test but cannot process data in the EU as required. Does accuracy still decide?",
+    "back": "No. A compliance requirement such as data location can rule a model out regardless of accuracy. Check where data may be processed and stored, and which regulations apply."
+  },
+  {
+    "id": "2.2-c13",
+    "objectiveId": "2.2.3",
+    "front": "How should a team compare candidate models on performance?",
+    "back": "Test each candidate on your own real examples, for instance 200 real customer questions, instead of trusting general claims. Performance requirements say how accurate and good the output must be."
+  },
+  {
+    "id": "2.2-c14",
+    "objectiveId": "2.2.3",
+    "front": "What is the difference between a model's capabilities and its constraints?",
+    "back": "Capabilities are what it can do: follow instructions, handle several languages, use tools, accept long input. Constraints are limits you live with: context window, available Regions, request rate and team skills."
+  },
+  {
+    "id": "2.2-c15",
+    "objectiveId": "2.2.3",
+    "front": "Why does model complexity matter when selecting a model?",
+    "back": "A larger, more complex model is often more capable but slower and more expensive per token. A smaller model may be good enough, so more complexity is not automatically better."
+  },
+  {
+    "id": "2.2-c16",
+    "objectiveId": "2.2.4",
+    "front": "A board asks whether Trailmate 'paid off'. Which kind of metric answers that?",
+    "back": "A business metric such as ROI, conversion rate, average revenue per user or customer lifetime value. Technical metrics like accuracy show the application works, not that it created value."
+  },
+  {
+    "id": "2.2-c17",
+    "objectiveId": "2.2.4",
+    "front": "How is ROI calculated?",
+    "back": "Benefit minus cost, divided by cost. Cost includes token usage, development and integration, staff review time and ongoing monitoring. A metric that improves while costs grow faster is not a success."
+  },
+  {
+    "id": "2.2-c18",
+    "objectiveId": "2.2.4",
+    "front": "Writing a product description drops from 20 minutes to 3. Which metric is this?",
+    "back": "Efficiency, meaning time or effort saved per task. It shows the application works well, and it can feed into ROI."
+  },
+  {
+    "id": "2.2-c19",
+    "objectiveId": "2.2.4",
+    "front": "Conversion rate, ARPU and customer lifetime value: what does each measure?",
+    "back": "Conversion rate is the share of visitors who buy. Average revenue per user is revenue divided by number of users. Customer lifetime value is the total revenue expected from a customer over the relationship."
+  },
+  {
+    "id": "2.2-c20",
+    "objectiveId": "2.2.4",
+    "front": "What does cross-domain performance mean as a GenAI business metric?",
+    "back": "How well one solution works across different areas and tasks. If one model does well on support, marketing and product search, one investment serves many teams."
+  }
+]

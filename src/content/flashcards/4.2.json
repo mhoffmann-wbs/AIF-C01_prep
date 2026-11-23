@@ -1,0 +1,86 @@
+[
+  {
+    "id": "4.2-c01",
+    "objectiveId": "4.2.1",
+    "front": "Why is a decision tree easier to explain than a deep neural network?",
+    "back": "You can read a decision tree's questions in order. A neural network has billions of interacting numbers, so no short, faithful reason for a result exists."
+  },
+  {
+    "id": "4.2-c02",
+    "objectiveId": "4.2.1",
+    "front": "Interpretability vs. explainability: what is the difference?",
+    "back": "Interpretability is how directly a person can understand a model's inner workings. Explainability is broader and can also be met by adding explanations to a black box."
+  },
+  {
+    "id": "4.2-c03",
+    "objectiveId": "4.2.1",
+    "front": "What do feature attributions tell you?",
+    "back": "They score how much each input, such as income or order history, pushed a single prediction up or down. SageMaker Clarify can produce them, for example using Shapley values."
+  },
+  {
+    "id": "4.2-c04",
+    "objectiveId": "4.2.1",
+    "front": "When should a team choose a simple, explainable model over a black box?",
+    "back": "When decisions are high stakes or the law demands reasons, such as refusing credit. Accept a small accuracy loss for decisions you can explain and defend."
+  },
+  {
+    "id": "4.2-c05",
+    "objectiveId": "4.2.2",
+    "front": "A model card or Clarify: which one explains why one prediction came out as it did?",
+    "back": "SageMaker Clarify, through feature attributions. A model card documents intended use, risk rating, training and evaluation, but doesn't explain individual predictions."
+  },
+  {
+    "id": "4.2-c06",
+    "objectiveId": "4.2.2",
+    "front": "AI Service Cards vs. SageMaker Model Cards: who writes each?",
+    "back": "AWS publishes AI Service Cards about its own services. You create SageMaker Model Cards for models you build or deploy."
+  },
+  {
+    "id": "4.2-c07",
+    "objectiveId": "4.2.2",
+    "front": "Does choosing an open source model make it explainable and free of restrictions?",
+    "back": "No. Open models can be inspected, which helps transparency, but they still need evaluation. Licences may limit commercial use, so Cairnway must check them first."
+  },
+  {
+    "id": "4.2-c08",
+    "objectiveId": "4.2.2",
+    "front": "What evidence does Bedrock Model Evaluation add to a transparency story?",
+    "back": "It measures a model's accuracy, robustness and toxicity on your prompts, using automatic metrics, human raters or a second model as judge, and produces a report you can keep as evidence."
+  },
+  {
+    "id": "4.2-c09",
+    "objectiveId": "4.2.3",
+    "front": "What is the trade-off between interpretability and performance?",
+    "back": "Simple models are easy to explain but may miss complex patterns. Complex models are often more accurate but harder to explain. Teams measure both and choose by the use case's risk."
+  },
+  {
+    "id": "4.2-c10",
+    "objectiveId": "4.2.3",
+    "front": "How can transparency conflict with security?",
+    "back": "Publishing exactly how a safety filter works can help attackers get around it. Share purpose, limits and evaluation results, and protect what could be misused."
+  },
+  {
+    "id": "4.2-c11",
+    "objectiveId": "4.2.3",
+    "front": "How can strict safeguards reduce usefulness?",
+    "back": "Strong Guardrails filters make an app safer but may also block some legitimate requests. You tune the filter strength to the use case."
+  },
+  {
+    "id": "4.2-c12",
+    "objectiveId": "4.2.4",
+    "front": "What does explaining in the user's language look like?",
+    "back": "Giving reasons a person can follow, such as declined mainly because of recent missed payments, instead of model weights. Customers, loan officers and auditors need different detail."
+  },
+  {
+    "id": "4.2-c13",
+    "objectiveId": "4.2.4",
+    "front": "Name two features of a human-centered design for Trailmate.",
+    "back": "Opening with a disclosure such as I'm Cairnway's AI assistant, and a thumbs-down feedback button. Links to the source policy and human review of decisions also qualify."
+  },
+  {
+    "id": "4.2-c14",
+    "objectiveId": "4.2.4",
+    "front": "What is AI decision transparency?",
+    "back": "Telling people when they are talking to an AI or when AI informs a decision, and what it can and can't do."
+  }
+]

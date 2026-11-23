@@ -4,6 +4,7 @@ import { Inline } from '../components/Inline'
 import { DOMAINS, DOMAIN_BY_ID, TASKS, TASK_BY_ID, tasksOf } from '../content/blueprint'
 import { ITEMS } from '../content/bank'
 import { DRILL_DECKS } from '../content/drills'
+import { CARDS } from '../content/flashcards'
 import { LESSONS } from '../content/lessons'
 import { lessonComponents } from '../lessons/components'
 import { setLessonRead, useProgress } from '../progress/store'
@@ -140,6 +141,11 @@ function LessonView({ taskId }: { taskId: string }) {
         {practiceCount > 0 && (
           <Link to={`/questions?task=${taskId}`} className="rounded border px-4 py-2">
             Browse its questions
+          </Link>
+        )}
+        {CARDS.some((c) => c.id.startsWith(`${taskId}-`)) && (
+          <Link to={`/explore/flashcards/review?task=${taskId}`} className="rounded border px-4 py-2">
+            Flashcards for this task
           </Link>
         )}
         {DRILL_DECKS.filter((d) => d.tasks.includes(taskId)).map((d) => (

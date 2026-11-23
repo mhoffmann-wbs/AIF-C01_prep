@@ -1,12 +1,12 @@
 // @vitest-environment jsdom
 // UI tests run against the real routes and the real question bank, so keep them
 // independent of item order and pool size.
-import { render, screen, within } from '@testing-library/react'
+import { cleanup, render, screen, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { RouterProvider, createMemoryRouter } from 'react-router'
-import { beforeEach, describe, expect, it } from 'vitest'
+import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { routes } from '../app/routes'
-import { getProgress, resetProgress } from '../progress/store'
+import { createDeck, getProgress, resetProgress } from '../progress/store'
 
 /** Renders the real routes at `path` and waits for the lazy page. */
 async function renderAt(path: string) {
@@ -137,5 +137,53 @@ describe('pages', () => {
     expect(await renderAt('/progress')).toHaveTextContent('Progress')
     expect(screen.getByText('By domain')).toBeInTheDocument()
     expect(screen.getAllByRole('checkbox', { name: /ordering, matching and case-study/ })).toHaveLength(2)
+  })
+})
+
+describe('flashcards', () => {
+  it('reviews a deck: answer hidden until shown, ratings scheduled, misses come back', async () => {
+    const user = userEvent.setup()
+    await renderAt('/explore/flashcards/review?deck=services')
+    expect(screen.getByText(/^Card 1 of 10/)).toBeInTheDocument()
+    expect(screen.queryByRole('region', { name: 'Answer' })).not.toBeInTheDocument()
+    const first = document.querySelector('[data-card-id]')!.getAttribute('data-card-id')!
+    await user.keyboard(' ')
+    expect(screen.getByRole('region', { name: 'Answer' })).toBeInTheDocument()
+    await user.click(screen.getByRole('button', { name: /^Again/ }))
+    expect(getProgress().cards[first]).toMatchObject({ box: 0, reviews: 1 })
+    expect(screen.getByText(/^Card 2 of 11/)).toBeInTheDocument()
+    await user.click(screen.getByRole('button', { name: 'Show answer' }))
+    await user.keyboard('2')
+    expect(Object.values(getProgress().cards).map((c) => c.box)).toEqual([0, 1])
+  })
+
+  it('creates a deck, adds a card, downloads and re-uploads it', async () => {
+    const user = userEvent.setup()
+    const deckId = createDeck('Metrics')
+    await renderAt(`/explore/flashcards/deck/${deckId}`)
+    await user.type(screen.getByRole('textbox', { name: 'Front (the question)' }), 'What does recall measure?')
+    await user.type(screen.getByRole('textbox', { name: 'Back (the answer)' }), 'The share of real positives found.')
+    await user.click(screen.getByRole('button', { name: 'Add card' }))
+    expect(getProgress().myCards).toMatchObject([{ deckId, front: 'What does recall measure?' }])
+    expect(within(screen.getByRole('list', { name: 'Cards' })).getByText('The share of real positives found.')).toBeInTheDocument()
+
+    cleanup()
+    const blobs: Blob[] = []
+    const createObjectURL = vi.fn<(b: Blob) => string>((b) => (blobs.push(b), 'blob:x'))
+    Object.assign(URL, { createObjectURL, revokeObjectURL: vi.fn<() => void>() })
+    await renderAt('/explore/flashcards')
+    await user.click(screen.getByRole('button', { name: 'Download' }))
+    const file = await blobs[0]!.text()
+    expect(JSON.parse(file).decks[0]).toMatchObject({ name: 'Metrics', cards: [{ front: 'What does recall measure?' }] })
+
+    await user.upload(screen.getByLabelText('Upload a deck file'), new File([file], 'metrics.json', { type: 'application/json' }))
+    expect(await screen.findByRole('status')).toHaveTextContent('Added 0 cards (1 you already had were skipped).')
+    await user.upload(screen.getByLabelText('Upload a deck file'), new File(['{"app":"x"}'], 'bad.json', { type: 'application/json' }))
+    expect(await screen.findByRole('status')).toHaveTextContent("isn't an AIF-C01 Prep flashcard file")
+  })
+
+  it('links a lesson to its flashcards', async () => {
+    await renderAt('/learn/3.1')
+    expect(screen.getByRole('link', { name: 'Flashcards for this task' })).toHaveAttribute('href', '/explore/flashcards/review?task=3.1')
   })
 })

@@ -7,6 +7,11 @@ const TOOLS = [
     title: 'Service drills',
     text: 'Quick rounds that match Cairnway tasks to AWS services, and sorters for shared responsibility, learning types, customization and exam scope.',
   },
+  {
+    to: '/explore/flashcards',
+    title: 'Flashcards',
+    text: 'Spaced review of key terms and every in-scope AWS service. Write your own decks and share them as files.',
+  },
 ]
 
 export default function ExplorePage() {

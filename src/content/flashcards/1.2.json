@@ -1,0 +1,182 @@
+[
+  {
+    "id": "1.2-c01",
+    "objectiveId": "1.2.1",
+    "front": "Name three kinds of value AI and ML can add to a business.",
+    "back": "Assisting human decisions, scalability and automation. Other common ones are personalization and finding hidden patterns in huge data sets."
+  },
+  {
+    "id": "1.2-c02",
+    "objectiveId": "1.2.1",
+    "front": "What does assisting human decision making mean in an AI project?",
+    "back": "The system recommends or flags and a person decides. A fraud model that scores orders so analysts review only the riskiest ones is an example."
+  },
+  {
+    "id": "1.2-c03",
+    "objectiveId": "1.2.1",
+    "front": "Which three conditions make a problem a good fit for ML?",
+    "back": "Lots of data, a repeatable pattern, and a decision that matters at volume. Without these, ML usually adds cost without much benefit."
+  },
+  {
+    "id": "1.2-c04",
+    "objectiveId": "1.2.1",
+    "front": "Which value does a model add when it reads every incoming review in any volume?",
+    "back": "Scalability. A model handles millions of cases at the same quality and speed, day or night, which a human team cannot."
+  },
+  {
+    "id": "1.2-c05",
+    "objectiveId": "1.2.2",
+    "front": "Why is ML a poor fit for applying a fixed 30-day return policy?",
+    "back": "The task needs the same exact outcome every time. ML gives probabilities, not guarantees, so a rule or ordinary code is the right tool."
+  },
+  {
+    "id": "1.2-c06",
+    "objectiveId": "1.2.2",
+    "front": "What is a deterministic task, and where does it belong?",
+    "back": "A task where the same input must always give the same output. It belongs in ordinary code, not in an ML model."
+  },
+  {
+    "id": "1.2-c07",
+    "objectiveId": "1.2.2",
+    "front": "What does a cost-benefit analysis for an AI project weigh?",
+    "back": "The cost of data collection, labeling, building, hosting, monitoring and retraining against the expected benefit. If the saving is smaller than the cost, do not do it."
+  },
+  {
+    "id": "1.2-c08",
+    "objectiveId": "1.2.2",
+    "front": "Name situations where AI/ML is not appropriate, besides needing an exact outcome.",
+    "back": "Too little or poor-quality data, a simple rule that already works, costs larger than benefits, and high-stakes decisions with no human check."
+  },
+  {
+    "id": "1.2-c09",
+    "objectiveId": "1.2.2",
+    "front": "An exam scenario says the result must always be identical. Which clue words point away from ML?",
+    "back": "Phrases like 'must always' and 'specific outcome'. They signal a rule or ordinary program rather than a prediction."
+  },
+  {
+    "id": "1.2-c10",
+    "objectiveId": "1.2.3",
+    "front": "Which ML technique predicts a number, such as next month's rain jacket sales?",
+    "back": "Regression, a supervised technique that answers 'how much?' or 'how many?'. Forecasting over time is a special case of predicting numbers."
+  },
+  {
+    "id": "1.2-c11",
+    "objectiveId": "1.2.3",
+    "front": "Which ML technique picks from known categories, such as positive, neutral or negative reviews?",
+    "back": "Classification, a supervised technique whose output is a label. A yes-or-no question like 'will this customer churn?' is also classification."
+  },
+  {
+    "id": "1.2-c12",
+    "objectiveId": "1.2.3",
+    "front": "Which ML technique finds groups nobody defined in advance?",
+    "back": "Clustering, an unsupervised technique. Cairnway could use it to segment customers by buying habits."
+  },
+  {
+    "id": "1.2-c13",
+    "objectiveId": "1.2.3",
+    "front": "Is predicting whether a customer will churn regression or classification?",
+    "back": "Classification. The output is a category, yes or no, even though there are only two possible values."
+  },
+  {
+    "id": "1.2-c14",
+    "objectiveId": "1.2.3",
+    "front": "What does Amazon SageMaker Canvas call regression, classification and forecasting model types?",
+    "back": "Numeric prediction, categorical prediction and time series forecasting. They match regression, classification and time-series forecasting."
+  },
+  {
+    "id": "1.2-c15",
+    "objectiveId": "1.2.4",
+    "front": "Which real-world AI application suggests items based on the behavior of similar users?",
+    "back": "A recommendation system, such as the 'you may also like' block on a Cairnway product page."
+  },
+  {
+    "id": "1.2-c16",
+    "objectiveId": "1.2.4",
+    "front": "Which application flags unusual transactions, and which technique usually powers it?",
+    "back": "Fraud detection. It is usually built as a classification model on labeled, tabular data."
+  },
+  {
+    "id": "1.2-c17",
+    "objectiveId": "1.2.4",
+    "front": "How is a knowledge base used in a GenAI assistant?",
+    "back": "It lets the assistant answer from your own documents, using retrieval-augmented generation (RAG). Trailmate answering return-policy questions is an example."
+  },
+  {
+    "id": "1.2-c18",
+    "objectiveId": "1.2.4",
+    "front": "Which applications are examples of computer vision, NLP and speech recognition?",
+    "back": "Computer vision checks product photos. NLP finds sentiment in reviews. Speech recognition turns support calls into text."
+  },
+  {
+    "id": "1.2-c19",
+    "objectiveId": "1.2.5",
+    "front": "Which service turns speech into text, and which turns text into speech?",
+    "back": "Amazon Transcribe turns audio into text. Amazon Polly turns text into audio."
+  },
+  {
+    "id": "1.2-c20",
+    "objectiveId": "1.2.5",
+    "front": "Cairnway sells in Germany and Spain. Which managed service translates its product pages?",
+    "back": "Amazon Translate, a neural machine translation service. It converts text from one language to another."
+  },
+  {
+    "id": "1.2-c21",
+    "objectiveId": "1.2.5",
+    "front": "How do Amazon Comprehend and Amazon Textract differ?",
+    "back": "Comprehend analyzes the meaning of text, such as sentiment and entities. Textract extracts text, forms and tables from scanned documents like invoices."
+  },
+  {
+    "id": "1.2-c22",
+    "objectiveId": "1.2.5",
+    "front": "Where does Amazon Rekognition fit compared with Textract?",
+    "back": "Rekognition analyzes pictures and video, such as detecting objects in return photos. Textract reads text and structure from documents."
+  },
+  {
+    "id": "1.2-c23",
+    "objectiveId": "1.2.5",
+    "front": "Amazon Lex or Amazon Bedrock: which fits a phone ordering bot with defined intents?",
+    "back": "Amazon Lex, which builds voice or text chatbots with defined intents. Bedrock is the managed choice for a generative assistant."
+  },
+  {
+    "id": "1.2-c24",
+    "objectiveId": "1.2.5",
+    "front": "When is Amazon SageMaker AI the right answer instead of a ready-made AI service?",
+    "back": "When you need a custom model that no managed service provides, such as Cairnway's own fraud or forecasting model. It is a platform to build, train and deploy models."
+  },
+  {
+    "id": "1.2-c25",
+    "objectiveId": "1.2.5",
+    "front": "Which service gives Cairnway 'recommended for you' suggestions?",
+    "back": "Amazon Personalize, which provides AI-powered personalization and recommendations without you building the model."
+  },
+  {
+    "id": "1.2-c26",
+    "objectiveId": "1.2.6",
+    "front": "When is a traditional ML model better than a foundation model?",
+    "back": "When the task is narrow, you have labeled tabular data, and you need explainability, regulatory compliance, low predictable cost or tight operational limits."
+  },
+  {
+    "id": "1.2-c27",
+    "objectiveId": "1.2.6",
+    "front": "When is a foundation model the better choice?",
+    "back": "When the task is open-ended language or content, such as summarizing or drafting, with little labeled data and a need for quick results through prompting."
+  },
+  {
+    "id": "1.2-c28",
+    "objectiveId": "1.2.6",
+    "front": "Why does Cairnway use traditional ML for fraud detection?",
+    "back": "Auditors need to know why an order was blocked, so explainability matters. The data is also tabular and the task is narrow."
+  },
+  {
+    "id": "1.2-c29",
+    "objectiveId": "1.2.6",
+    "front": "Name two trade-offs of foundation models.",
+    "back": "They can hallucinate, giving confident wrong answers, and they can vary between runs. They are also harder to explain than simpler models."
+  },
+  {
+    "id": "1.2-c30",
+    "objectiveId": "1.2.6",
+    "front": "A regulator requires reasons for every credit decision. Which model type is usually safer?",
+    "back": "A simpler, explainable traditional model. Large foundation models are harder to explain."
+  }
+]

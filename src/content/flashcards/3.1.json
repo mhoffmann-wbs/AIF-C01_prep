@@ -1,0 +1,170 @@
+[
+  {
+    "id": "3.1-c01",
+    "objectiveId": "3.1.1",
+    "front": "Cairnway needs answers inside a live chat window. Which model selection criterion matters most?",
+    "back": "Latency. A live chat needs fast answers, while an overnight report does not. Smaller models are usually faster and cheaper than the largest ones."
+  },
+  {
+    "id": "3.1-c02",
+    "objectiveId": "3.1.1",
+    "front": "Cairnway wants to summarise very long supplier contracts in one request. Which model property should it check?",
+    "back": "Input length, also called the context window: how much text the model can read at once. Everything you send counts toward the window and the bill."
+  },
+  {
+    "id": "3.1-c03",
+    "objectiveId": "3.1.1",
+    "front": "What is prompt caching, and when does it pay off?",
+    "back": "It stores a long, repeated part of the prompt, such as fixed instructions, so it can be reused. It cuts latency and input token costs, but only on supported models and only if the cached part is reused many times."
+  },
+  {
+    "id": "3.1-c04",
+    "objectiveId": "3.1.1",
+    "front": "A model must read product photos and write descriptions. Which selection criterion is that?",
+    "back": "Modality: the kinds of input and output a model handles, such as text, images, audio or video. A multi-modal model handles more than one kind."
+  },
+  {
+    "id": "3.1-c05",
+    "objectiveId": "3.1.1",
+    "front": "Why use Amazon Bedrock Model Evaluation when choosing between candidate models?",
+    "back": "It lets you compare candidate models on your own data, such as 200 real Cairnway support questions, instead of choosing by reputation or size alone."
+  },
+  {
+    "id": "3.1-c06",
+    "objectiveId": "3.1.2",
+    "front": "Cairnway wants consistent, factual support answers. Which inference parameter do you change, and which way?",
+    "back": "Lower the temperature. Low temperature favours the most likely tokens, so answers are more predictable. Raise it for creative variety such as slogans."
+  },
+  {
+    "id": "3.1-c07",
+    "objectiveId": "3.1.2",
+    "front": "What does temperature control in a language model?",
+    "back": "Randomness in choosing the next token. Low values favour the most likely token; high values give less likely tokens more chance, so answers vary more."
+  },
+  {
+    "id": "3.1-c08",
+    "objectiveId": "3.1.2",
+    "front": "How do top P and top K differ?",
+    "back": "Top K limits the model to the K most likely tokens. Top P limits it to the most likely tokens whose probabilities add up to P, such as 90%. Both narrow the choices when lowered."
+  },
+  {
+    "id": "3.1-c09",
+    "objectiveId": "3.1.2",
+    "front": "Does a response length limit make answers more consistent?",
+    "back": "No. It only caps how many tokens the answer may have, to limit length and cost. The model does not plan for the cap, so it may stop mid-sentence."
+  },
+  {
+    "id": "3.1-c10",
+    "objectiveId": "3.1.2",
+    "front": "What is a stop sequence?",
+    "back": "Characters that make the model stop writing, for example the end of a list item. Use it when output must end at a known point."
+  },
+  {
+    "id": "3.1-c11",
+    "objectiveId": "3.1.3",
+    "front": "What does RAG stand for, and what are its three steps in plain words?",
+    "back": "Retrieval Augmented Generation. The app retrieves relevant pieces of your documents, augments the prompt with them, and the model generates an answer based on that text."
+  },
+  {
+    "id": "3.1-c12",
+    "objectiveId": "3.1.3",
+    "front": "Why does RAG reduce hallucinations about Cairnway's return policy?",
+    "back": "The model gets the real policy text at question time and answers from it, instead of guessing from general training data it never saw."
+  },
+  {
+    "id": "3.1-c13",
+    "objectiveId": "3.1.3",
+    "front": "Cairnway's policies change every season. Why choose RAG over fine-tuning?",
+    "back": "With RAG you update the document and re-ingest it, and answers stay current without retraining. Fine-tuning teaches behaviour and style and would need new training for every change."
+  },
+  {
+    "id": "3.1-c14",
+    "objectiveId": "3.1.3",
+    "front": "What is an embedding in a RAG system?",
+    "back": "A list of numbers (a vector) that captures the meaning of a chunk of text. Texts with similar meaning get similar vectors, which makes search by meaning possible."
+  },
+  {
+    "id": "3.1-c15",
+    "objectiveId": "3.1.3",
+    "front": "What does Amazon Bedrock Knowledge Bases do for a RAG application?",
+    "back": "It runs the RAG pipeline for you, connecting foundation models and agents to your company data. It can be fully managed, or customer-managed where you run the vector store yourself."
+  },
+  {
+    "id": "3.1-c16",
+    "objectiveId": "3.1.4",
+    "front": "What question does a vector database answer that a normal lookup cannot?",
+    "back": "Which stored vectors are closest in meaning to this one. This is called similarity search or k-nearest-neighbour search."
+  },
+  {
+    "id": "3.1-c17",
+    "objectiveId": "3.1.4",
+    "front": "Name the four AWS services the exam guide lists for storing embeddings.",
+    "back": "Amazon OpenSearch Service, Amazon Aurora, Amazon RDS for PostgreSQL and Amazon Neptune."
+  },
+  {
+    "id": "3.1-c18",
+    "objectiveId": "3.1.4",
+    "front": "How can Aurora and RDS for PostgreSQL act as vector stores?",
+    "back": "Through the pgvector extension, which stores vectors in tables and searches them with SQL. Good for teams already running PostgreSQL."
+  },
+  {
+    "id": "3.1-c19",
+    "objectiveId": "3.1.4",
+    "front": "What is special about Amazon Neptune as a vector store?",
+    "back": "Neptune is a graph database. Neptune Analytics can store vectors and supports GraphRAG, which combines relationships between things with similarity search."
+  },
+  {
+    "id": "3.1-c20",
+    "objectiveId": "3.1.5",
+    "front": "Rank these customization approaches from cheapest to most expensive: fine-tuning, prompt engineering, RAG, pre-training from scratch.",
+    "back": "Prompt engineering, then RAG, then fine-tuning, then pre-training from scratch. Always try the cheapest option that meets the requirement first."
+  },
+  {
+    "id": "3.1-c21",
+    "objectiveId": "3.1.5",
+    "front": "Few-shot prompting versus fine-tuning: how do they differ in cost and effect on the model?",
+    "back": "Few-shot puts examples in the prompt, needs no training and leaves the model unchanged, but costs extra tokens every request. Fine-tuning trains the model, changing its weights, and needs a training job."
+  },
+  {
+    "id": "3.1-c22",
+    "objectiveId": "3.1.5",
+    "front": "Cairnway wants a cheaper, faster model that matches a large model on one task. Which customization method fits?",
+    "back": "Distillation. A large teacher model generates answers that train a smaller student model, which is cheaper and faster to run while keeping good quality for that task."
+  },
+  {
+    "id": "3.1-c23",
+    "objectiveId": "3.1.5",
+    "front": "Which customization methods does Amazon Bedrock currently offer?",
+    "back": "Supervised fine-tuning, reinforcement fine-tuning and distillation."
+  },
+  {
+    "id": "3.1-c24",
+    "objectiveId": "3.1.5",
+    "front": "How do you pay to use a customized model on Amazon Bedrock?",
+    "back": "You buy Provisioned Throughput: reserved capacity at a fixed hourly price. On-demand per-token pricing is for base models."
+  },
+  {
+    "id": "3.1-c25",
+    "objectiveId": "3.1.6",
+    "front": "What is the difference between a chatbot that answers and an AI agent?",
+    "back": "A chatbot only answers. An agent uses a foundation model to plan steps and carries them out by calling tools such as APIs and databases, for example checking an order and starting a return."
+  },
+  {
+    "id": "3.1-c26",
+    "objectiveId": "3.1.6",
+    "front": "A scenario needs the system to update records and complete multi-step tasks. RAG or an agent?",
+    "back": "An agent. If the system only has to answer questions from documents, RAG is enough."
+  },
+  {
+    "id": "3.1-c27",
+    "objectiveId": "3.1.6",
+    "front": "Which AWS offerings are the current answer for building and running agents?",
+    "back": "Amazon Bedrock AgentCore runs agents in production at scale, and Strands Agents is an open-source toolkit for building them in code. Agents Classic accepts no new sign-ups."
+  },
+  {
+    "id": "3.1-c28",
+    "objectiveId": "3.1.6",
+    "front": "Why should Cairnway require human approval for refunds above a limit in its agent?",
+    "back": "An agent takes real actions. Giving it only needed permissions and requiring a human for risky steps limits the damage of mistakes."
+  }
+]

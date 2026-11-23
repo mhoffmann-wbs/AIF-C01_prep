@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project status
 
-Phases 0 (scaffold), 1 (quiz engine), 2 (lessons) and 3 (question bank) are done: tooling, Pages deploy, the blueprint, the service catalog, the item schema, the content tests and scripts, practice, the question bank browser, the mock exam, the progress store and page, all 14 lessons, and the full question bank (650 items, every task at target). Phase 4 (Explore I) is under way: the service drills are built, flashcards are next. **`PLAN.md` is the build plan and sets the order of work.** It records the decisions made, the blueprint → content map, the item kinds, the Explore pillar and the phases. As parts get built, describe them here (commands, file layout, gotchas), and mark phases done in `PLAN.md` §8 with the date.
+Phases 0 (scaffold), 1 (quiz engine), 2 (lessons) and 3 (question bank) are done: tooling, Pages deploy, the blueprint, the service catalog, the item schema, the content tests and scripts, practice, the question bank browser, the mock exam, the progress store and page, all 14 lessons, and the full question bank (650 items, every task at target). Phase 4 (Explore I) is done: the service drills and flashcards. The concept simulators (phase 5) are next. **`PLAN.md` is the build plan and sets the order of work.** It records the decisions made, the blueprint → content map, the item kinds, the Explore pillar and the phases. As parts get built, describe them here (commands, file layout, gotchas), and mark phases done in `PLAN.md` §8 with the date.
 
 ## Purpose
 
@@ -84,8 +84,12 @@ Every scenario uses one invented company, **Cairnway Outfitters**, an online out
   - `src/drills/round.ts` `buildRound()` samples 10 cards, shuffles the four choices, and alternates buckets in sorters so lopsided decks stay balanced.
   - Each deck's `tasks` puts a "Drill:" link on those lessons. `drills.test.ts` checks that services are in-scope catalog entries with a one-liner.
   - `/explore` is the hub; add each Explore tool to `TOOLS` in `ExplorePage.tsx` when it exists.
-- **Progress** (`src/progress/store.ts`, key `aifc01:progress`, version 2; version 1 data is upgraded):
-  - Per-item stats with a `streak` (consecutive correct answers, reset by a wrong one), mock results (with `scaled` and domain rows), `lessonsRead`, `drills` (per deck: rounds, best percent, longest run), `drillMisses` (card ids last answered wrongly), and the toggles `extendedInPractice` and `extendedInMock`, both on by default.
+- **Flashcards** (`/explore/flashcards`, `/explore/flashcards/review?deck=|task=|all=1`, `/explore/flashcards/deck/:deckId`):
+  - Built-in cards are `src/content/flashcards/<taskId>.json` (`cardSchema`: `id` `<taskId>-cNN` in file order, `objectiveId`, `front`, `back`). `flashcards.test.ts` requires at least 3 cards per objective, fronts of at most 30 words and backs of at most 70, and no repeated fronts. Don't write "What is Amazon X?" cards: `src/flashcards/decks.ts` generates the service deck (`svc-<serviceId>`) from the catalog's one-liners.
+  - Decks: one per domain (`d1`…`d5`), `services`, and the learner's own decks. `schedule.ts` is Leitner boxes 0–5 (0/1/3/7/16/35 days), due cards first, then up to 10 new ones. `share.ts` exports and imports own decks as files (`app: 'aif-c01-prep'`, `kind: 'flashcards'`); review state is never shared.
+  - Lessons link to "Flashcards for this task", which goes through all of the task's cards.
+- **Progress** (`src/progress/store.ts`, key `aifc01:progress`, version 3; older versions are upgraded):
+  - Per-item stats with a `streak` (consecutive correct answers, reset by a wrong one), mock results (with `scaled` and domain rows), `lessonsRead`, `drills` (per deck: rounds, best percent, longest run), `drillMisses` (card ids last answered wrongly), flashcard review state (`cards`), own `decks` and `myCards`, and the toggles `extendedInPractice` and `extendedInMock`, both on by default.
   - Components read it with `useProgress()`.
   - `readiness.ts`: task readiness (coverage × accuracy, weighted by task weight), the weak-spot drill and `masteryOf()`.
 - **Tests**:

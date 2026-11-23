@@ -1,0 +1,128 @@
+[
+  {
+    "id": "2.3-c01",
+    "objectiveId": "2.3.1",
+    "front": "Cairnway wants a foundation model with no servers to manage. Amazon Bedrock or SageMaker AI?",
+    "back": "Amazon Bedrock. It uses models someone else built and hosts. SageMaker AI is for building, training and hosting your own model with full control."
+  },
+  {
+    "id": "2.3-c02",
+    "objectiveId": "2.3.1",
+    "front": "Where does Amazon SageMaker JumpStart fit relative to SageMaker AI?",
+    "back": "JumpStart is the machine learning hub inside SageMaker AI. It lets you compare pretrained models, customize them with your data and deploy them into your own SageMaker environment."
+  },
+  {
+    "id": "2.3-c03",
+    "objectiveId": "2.3.1",
+    "front": "Cairnway's marketing and finance staff want AI help and dashboards without writing code. Which AWS option fits?",
+    "back": "Amazon Quick, an AI workspace for business users. Kiro is for developers, and Strands Agents and AgentCore are for building and running agents."
+  },
+  {
+    "id": "2.3-c04",
+    "objectiveId": "2.3.1",
+    "front": "Strands Agents versus Amazon Bedrock AgentCore: which builds the agent and which runs it?",
+    "back": "Strands Agents is the open-source toolkit for writing the agent in code. AgentCore is the platform that hosts and operates it in production, with runtime, memory, gateway, identity, policy and observability."
+  },
+  {
+    "id": "2.3-c05",
+    "objectiveId": "2.3.1",
+    "front": "What is Kiro for, and who uses it?",
+    "back": "Kiro is an agentic AI engineering system that helps developers plan, build, review and verify software. It is aimed at the developers themselves, not at business users."
+  },
+  {
+    "id": "2.3-c06",
+    "objectiveId": "2.3.1",
+    "front": "Cairnway needs a demand-forecasting model trained on three years of sales history. Which service?",
+    "back": "Amazon SageMaker AI. This is training a custom model, not a foundation-model task, so full control over training and hosting is needed."
+  },
+  {
+    "id": "2.3-c07",
+    "objectiveId": "2.3.2",
+    "front": "What does the principle 'do not build what you can use, and do not host what you can have managed' mean?",
+    "back": "Choose the highest layer that meets the requirement. Use a ready-made tool first, then a managed service, and build and host your own model only when you truly need that control."
+  },
+  {
+    "id": "2.3-c08",
+    "objectiveId": "2.3.2",
+    "front": "How do AWS managed services lower the barrier to entry?",
+    "back": "Powerful models come through a console and an API, with no hardware to buy and no research team needed. Developers start with a few API calls, and non-technical staff can use Amazon Quick."
+  },
+  {
+    "id": "2.3-c09",
+    "objectiveId": "2.3.2",
+    "front": "Why do Bedrock features like Knowledge Bases and Guardrails improve speed to market?",
+    "back": "They are ready-made building blocks for RAG and safety filters, so a team can build a prototype in days instead of months."
+  },
+  {
+    "id": "2.3-c10",
+    "objectiveId": "2.3.2",
+    "front": "How are AWS GenAI services cost-effective compared with buying hardware?",
+    "back": "You pay for what you use, for example per token, instead of paying up front for expensive hardware, and you can stop at any time."
+  },
+  {
+    "id": "2.3-c11",
+    "objectiveId": "2.3.3",
+    "front": "What does AWS say happens to your prompts and outputs on Amazon Bedrock?",
+    "back": "They are not shared with model providers and are not used to improve the base models. A model you tune is a private copy for you. Distrust answer choices that claim the opposite."
+  },
+  {
+    "id": "2.3-c12",
+    "objectiveId": "2.3.3",
+    "front": "Name ways Amazon Bedrock supports security.",
+    "back": "Data is encrypted in transit and at rest, with customer-managed keys through AWS KMS. Private connectivity from your VPC uses AWS PrivateLink. IAM controls access and CloudTrail logs activity."
+  },
+  {
+    "id": "2.3-c13",
+    "objectiveId": "2.3.3",
+    "front": "Under shared responsibility, who secures what for a fully managed GenAI service?",
+    "back": "AWS secures the infrastructure that runs the service. You control your own content: IAM permissions, encryption settings, logging, what goes into prompts and what your application does with the output."
+  },
+  {
+    "id": "2.3-c14",
+    "objectiveId": "2.3.3",
+    "front": "Is 'AWS handles all security' a correct answer for a managed service like Bedrock?",
+    "back": "No. Even with a managed service, you still own access control, data choices, Region choices and configuration to meet your own regulations."
+  },
+  {
+    "id": "2.3-c15",
+    "objectiveId": "2.3.3",
+    "front": "Which Bedrock tools support responsible use and safety?",
+    "back": "Guardrails add safeguards that help block harmful content. Evaluations compare models on quality and safety. Responsible AI is covered in depth in Domain 4."
+  },
+  {
+    "id": "2.3-c16",
+    "objectiveId": "2.3.4",
+    "front": "A customized model on Amazon Bedrock needs which pricing option, and how is it billed?",
+    "back": "Provisioned Throughput: reserved capacity at a fixed hourly price per model unit. You pay whether or not it is used, and billing continues until you delete it."
+  },
+  {
+    "id": "2.3-c17",
+    "objectiveId": "2.3.4",
+    "front": "On-demand versus Provisioned Throughput: when does each fit?",
+    "back": "On-demand is pay-per-token with no commitment, best for low or unpredictable traffic. Provisioned Throughput suits steady, high traffic that needs predictable performance. Longer commitments of 1 or 6 months lower the hourly price."
+  },
+  {
+    "id": "2.3-c18",
+    "objectiveId": "2.3.4",
+    "front": "What is the cost of choosing a bigger model?",
+    "back": "Higher capability, but more cost per token and slower answers. If a smaller model meets the requirement, it is usually the right choice."
+  },
+  {
+    "id": "2.3-c19",
+    "objectiveId": "2.3.4",
+    "front": "Cairnway's EU chats must stay in Europe. Which cross-Region inference profile fits?",
+    "back": "A geographic profile, which keeps processing within a geography such as the EU. A global profile can be cheaper, with approximately 10% savings, but may route to any supported Region."
+  },
+  {
+    "id": "2.3-c20",
+    "objectiveId": "2.3.4",
+    "front": "What does cross-Region inference do, and does it cost extra to route?",
+    "back": "Bedrock routes a request to another Region through an inference profile, to handle more traffic and improve availability. There is no additional routing cost. Inference profiles do not support Provisioned Throughput."
+  },
+  {
+    "id": "2.3-c21",
+    "objectiveId": "2.3.4",
+    "front": "Why can regional coverage limit a GenAI design?",
+    "back": "Models and features are not offered in every AWS Region, so the Regions you are allowed or want to use may not have the model you need."
+  }
+]

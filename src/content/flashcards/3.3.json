@@ -1,0 +1,104 @@
+[
+  {
+    "id": "3.3-c01",
+    "objectiveId": "3.3.1",
+    "front": "What is pre-training, and who usually does it?",
+    "back": "Pre-training teaches a model general knowledge by training it from scratch on a huge amount of unlabeled data. It is very expensive, so model providers do it, not companies like Cairnway."
+  },
+  {
+    "id": "3.3-c02",
+    "objectiveId": "3.3.1",
+    "front": "What is fine-tuning in simple terms?",
+    "back": "Fine-tuning means taking a pre-trained model and training it further on a smaller set of labeled examples so it does a specific task or style better. The weights change."
+  },
+  {
+    "id": "3.3-c03",
+    "objectiveId": "3.3.1",
+    "front": "What is continued pre-training?",
+    "back": "It is the same method as pre-training, but applied to an existing model using a large set of unlabeled text from your own field, so it learns that field's vocabulary."
+  },
+  {
+    "id": "3.3-c04",
+    "objectiveId": "3.3.1",
+    "front": "What is distillation, and what is its goal?",
+    "back": "A large teacher model produces answers that are used to train a smaller student model. The goal is a cheaper, faster model that keeps most of the quality for a task, not new knowledge."
+  },
+  {
+    "id": "3.3-c05",
+    "objectiveId": "3.3.1",
+    "front": "Is continued pre-training one of Amazon Bedrock's current customization methods?",
+    "back": "No. Bedrock's current methods are supervised fine-tuning, reinforcement fine-tuning and distillation. Continued pre-training is a general machine-learning concept the exam guide still names."
+  },
+  {
+    "id": "3.3-c06",
+    "objectiveId": "3.3.2",
+    "front": "In fine-tuning terms, how do labeled and unlabeled data differ?",
+    "back": "Labeled data has the correct answer attached to each example, such as a question plus its ideal reply. Unlabeled data is raw text with no answers attached."
+  },
+  {
+    "id": "3.3-c07",
+    "objectiveId": "3.3.2",
+    "front": "What is transfer learning, and how does it relate to fine-tuning?",
+    "back": "Transfer learning means reusing what a model learned on one task as the starting point for another. All fine-tuning is transfer learning, which is why you need far less data than training from scratch."
+  },
+  {
+    "id": "3.3-c08",
+    "objectiveId": "3.3.2",
+    "front": "What is instruction tuning?",
+    "back": "You train on prompt and response pairs phrased as instructions, so the model follows that kind of instruction better. It uses labeled examples and changes the model's weights."
+  },
+  {
+    "id": "3.3-c09",
+    "objectiveId": "3.3.2",
+    "front": "What is domain adaptation, and what data does it use?",
+    "back": "You train on unlabeled text from your domain, such as technical manuals, so the model gets comfortable with the jargon. The data is plain text, not question and answer pairs."
+  },
+  {
+    "id": "3.3-c10",
+    "objectiveId": "3.3.2",
+    "front": "Cairnway has thousands of unlabeled gear manuals and wants the model to know climbing jargon. Which method fits?",
+    "back": "Domain adaptation or continued pre-training, because the data is unlabeled domain text. Labeled prompt and answer pairs would point to instruction tuning instead."
+  },
+  {
+    "id": "3.3-c11",
+    "objectiveId": "3.3.3",
+    "front": "Why does fine-tuning not suit changing company facts like return windows?",
+    "back": "Fine-tuning teaches style, format and task behaviour, not fresh facts. For facts that change, use RAG so the answer comes from current documents."
+  },
+  {
+    "id": "3.3-c12",
+    "objectiveId": "3.3.3",
+    "front": "What does data curation mean when preparing fine-tuning data?",
+    "back": "Selecting, cleaning and organising the data: remove duplicates, errors, spam and junk, and fix formatting. Garbage in, garbage out."
+  },
+  {
+    "id": "3.3-c13",
+    "objectiveId": "3.3.3",
+    "front": "What does data governance cover for training data?",
+    "back": "Whether you have the right to use the data, whether personal or confidential information is removed, who may access it, and whether its origin is documented."
+  },
+  {
+    "id": "3.3-c14",
+    "objectiveId": "3.3.3",
+    "front": "Why does representativeness matter in training data?",
+    "back": "The data must reflect the real situations the model will meet, such as all product categories, languages and customer types. Skewed data produces a biased model."
+  },
+  {
+    "id": "3.3-c15",
+    "objectiveId": "3.3.3",
+    "front": "Why must labels be consistent, and how can Cairnway check this?",
+    "back": "If two people label the same case differently, the model learns confusion. Amir has two agents label the same 100-reply sample independently to confirm they agree."
+  },
+  {
+    "id": "3.3-c16",
+    "objectiveId": "3.3.3",
+    "front": "Does more training data always mean a better model?",
+    "back": "No. Fine-tuning needs enough examples to learn the pattern, but noisy or badly labeled data hurts. Quality beats quantity."
+  },
+  {
+    "id": "3.3-c17",
+    "objectiveId": "3.3.3",
+    "front": "What is RLHF and what data does it need?",
+    "back": "Reinforcement learning from human feedback uses human preferences to guide a model. People rank several answers to the same prompt, and that feedback trains a reward model that scores answers."
+  }
+]

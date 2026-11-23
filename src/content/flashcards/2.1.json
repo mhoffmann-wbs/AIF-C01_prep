@@ -1,0 +1,152 @@
+[
+  {
+    "id": "2.1-c01",
+    "objectiveId": "2.1.1",
+    "front": "What is a token, and why do models count in tokens instead of words?",
+    "back": "A token is a small piece of text a model reads or writes: a short word, part of a longer word or a punctuation mark. Models measure length and bill in tokens, so 'waterproof' may be two or three tokens."
+  },
+  {
+    "id": "2.1-c02",
+    "objectiveId": "2.1.1",
+    "front": "Chunking and embeddings both prepare text for search. What does each one do?",
+    "back": "Chunking splits a long document into smaller pieces. An embedding turns a piece into a vector, a list of numbers that captures its meaning. Chunking prepares the text; embeddings represent meaning."
+  },
+  {
+    "id": "2.1-c03",
+    "objectiveId": "2.1.1",
+    "front": "How can two texts with different words, such as 'zipper broke' and 'repair section', still match in a search?",
+    "back": "Both are turned into embeddings, which are vectors. Texts with similar meaning get vectors that are close together, so the search finds the repair section even though the exact words differ."
+  },
+  {
+    "id": "2.1-c04",
+    "objectiveId": "2.1.1",
+    "front": "What is the key trick of a transformer, and how does an LLM write text with it?",
+    "back": "Attention lets the model weigh how every token relates to every other token, so it understands context. An LLM then generates text one token at a time, each time predicting a likely next token."
+  },
+  {
+    "id": "2.1-c05",
+    "objectiveId": "2.1.1",
+    "front": "Which model type fits each job: writing text, generating images, mixed image-plus-text input?",
+    "back": "A transformer-based LLM fits text. A diffusion model fits image generation, turning random noise into a picture step by step. A multi-modal model fits mixed inputs such as an image plus a question."
+  },
+  {
+    "id": "2.1-c06",
+    "objectiveId": "2.1.1",
+    "front": "Prompt engineering versus context engineering: what is the difference?",
+    "back": "Prompt engineering is wording instructions and examples well. Context engineering is the wider job of choosing everything that enters the context window: instructions, retrieved documents, history, memory and tool results."
+  },
+  {
+    "id": "2.1-c07",
+    "objectiveId": "2.1.2",
+    "front": "Cairnway wants to sort transactions into fraud or not fraud. Is GenAI the right tool?",
+    "back": "Usually not. Sorting into categories is classification, and a traditional ML model is typically the better and cheaper choice. GenAI is for creating new content such as text, images or code."
+  },
+  {
+    "id": "2.1-c08",
+    "objectiveId": "2.1.2",
+    "front": "A shopper types 'warm sleeping bag for winter camping' and finds a '-15 degree mummy bag'. Which GenAI use case is this?",
+    "back": "Search by meaning. Embeddings let the system match the idea behind the query, not only the keywords, so the product is found even though the words do not match."
+  },
+  {
+    "id": "2.1-c09",
+    "objectiveId": "2.1.2",
+    "front": "What is the difference between a GenAI customer service agent and a plain AI assistant?",
+    "back": "An assistant answers questions in conversation. A customer service agent goes further and resolves requests end to end by using tools, for example checking an order and starting a return."
+  },
+  {
+    "id": "2.1-c10",
+    "objectiveId": "2.1.3",
+    "front": "Put the foundation model lifecycle in order, from first stage to last.",
+    "back": "Data selection, model selection, pre-training, fine-tuning, evaluation, deployment, feedback. Feedback from real use then feeds the next round of data selection, tuning and evaluation."
+  },
+  {
+    "id": "2.1-c11",
+    "objectiveId": "2.1.3",
+    "front": "Why does a business using Amazon Bedrock usually skip pre-training?",
+    "back": "Pre-training trains on huge unlabeled data and is by far the most expensive stage. The model provider has already done it, so the business starts at model selection, then maybe fine-tuning."
+  },
+  {
+    "id": "2.1-c12",
+    "objectiveId": "2.1.3",
+    "front": "What is the difference between pre-training and fine-tuning?",
+    "back": "Pre-training teaches general language or image patterns using huge, mostly unlabeled data. Fine-tuning trains further on a smaller set of your own examples so the model fits a specific task or style. It is optional."
+  },
+  {
+    "id": "2.1-c13",
+    "objectiveId": "2.1.3",
+    "front": "What happens in the feedback stage of the lifecycle?",
+    "back": "The team collects real-world results such as user ratings and errors, and monitors behaviour. Cairnway, for example, reviews customer thumbs-up and thumbs-down ratings each month to guide the next round."
+  },
+  {
+    "id": "2.1-c14",
+    "objectiveId": "2.1.4",
+    "front": "Why do more input tokens and more output tokens both raise cost and slow answers?",
+    "back": "Models bill per token, with separate rates for input tokens (what you send) and output tokens (what the model writes). Longer input takes longer to process, and the model writes output one token at a time."
+  },
+  {
+    "id": "2.1-c15",
+    "objectiveId": "2.1.4",
+    "front": "Trailmate sends a 12-page policy with every message. Which change cuts cost and latency?",
+    "back": "Send only the relevant policy chunks. Fewer input tokens per request lowers the bill and speeds up processing. Capping answer length or using a smaller model also helps."
+  },
+  {
+    "id": "2.1-c16",
+    "objectiveId": "2.1.4",
+    "front": "What is a context window?",
+    "back": "The maximum number of tokens a model can handle at once, input plus output. If you exceed it, text gets cut off or the request fails."
+  },
+  {
+    "id": "2.1-c17",
+    "objectiveId": "2.1.4",
+    "front": "Cairnway must describe 30,000 catalog items overnight. Which Bedrock purchase option fits: on-demand, batch or Provisioned Throughput?",
+    "back": "Batch inference. The work is big and not urgent, and AWS lists select models at a 50% lower price than on-demand. On-demand suits unpredictable traffic; Provisioned Throughput suits steady, high traffic."
+  },
+  {
+    "id": "2.1-c18",
+    "objectiveId": "2.1.5",
+    "front": "Name four things that can go into a model's context for one request.",
+    "back": "Instructions, examples, retrieved knowledge (chunks from RAG), conversation history, memory from past sessions and tool results. Context engineering chooses which of these the model gets."
+  },
+  {
+    "id": "2.1-c19",
+    "objectiveId": "2.1.5",
+    "front": "Why should context be lean instead of stuffed with everything available?",
+    "back": "Every token is billed and takes time, the context window is finite, and missing or conflicting information causes mistakes. Selecting, trimming and summarizing keeps quality up and cost down."
+  },
+  {
+    "id": "2.1-c20",
+    "objectiveId": "2.1.5",
+    "front": "Why keep trusted instructions separate from untrusted text, such as a customer message, in the context?",
+    "back": "Untrusted text can try to manipulate the model. Keeping trusted instructions clearly separated from untrusted content is a safety part of context engineering."
+  },
+  {
+    "id": "2.1-c21",
+    "objectiveId": "2.1.6",
+    "front": "What is the Model Context Protocol (MCP), and what is it not?",
+    "back": "MCP is an open standard for connecting AI applications to external tools and data, like a USB-C port. It is not a model, a vector store or an agent, and it does not handle agent-to-agent messages."
+  },
+  {
+    "id": "2.1-c22",
+    "objectiveId": "2.1.6",
+    "front": "Short-term versus long-term agent memory: what is the difference?",
+    "back": "Short-term memory holds the current conversation. Long-term memory keeps useful facts across sessions, such as a customer's usual size. Because the context window is limited, memory must be managed."
+  },
+  {
+    "id": "2.1-c23",
+    "objectiveId": "2.1.6",
+    "front": "Name the four multi-agent patterns and say which fixes the path in advance as branches.",
+    "back": "Agents as tools (a supervisor calls specialists), swarm (agents hand work to each other), graph and workflow. In a graph, the path between agents is drawn in advance as steps with branches."
+  },
+  {
+    "id": "2.1-c24",
+    "objectiveId": "2.1.6",
+    "front": "Which protocol connects an agent to a tool, and which connects agent to agent?",
+    "back": "MCP covers agent-to-tool connections. Open protocols such as Agent2Agent (A2A) cover agent-to-agent messages."
+  },
+  {
+    "id": "2.1-c25",
+    "objectiveId": "2.1.6",
+    "front": "In an agent, who chooses the tool and who actually runs it?",
+    "back": "The model chooses the tool and its inputs. The application runs the tool and returns the result to the model."
+  }
+]

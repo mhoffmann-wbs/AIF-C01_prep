@@ -1,0 +1,74 @@
+[
+  {
+    "id": "5.2-c01",
+    "objectiveId": "5.2.1",
+    "front": "Match the verb: Config, Inspector, Artifact, CloudTrail, Trusted Advisor.",
+    "back": "Config records settings over time, Inspector scans for vulnerabilities, Artifact provides AWS's compliance reports, CloudTrail logs who did what, Trusted Advisor recommends best-practice improvements."
+  },
+  {
+    "id": "5.2-c02",
+    "objectiveId": "5.2.1",
+    "front": "Who deleted the guardrail last Tuesday: CloudTrail or Config?",
+    "back": "CloudTrail. Who did it is an activity question. Config answers how something was set up, such as whether a bucket was encrypted last month."
+  },
+  {
+    "id": "5.2-c03",
+    "objectiveId": "5.2.1",
+    "front": "Cairnway's auditor wants AWS's SOC or ISO report. Where does Cairnway get it, and what remains theirs?",
+    "back": "AWS Artifact provides AWS's own audit documents. Cairnway must still produce documents showing its own compliance, as Artifact shows what AWS does, not what you do."
+  },
+  {
+    "id": "5.2-c04",
+    "objectiveId": "5.2.1",
+    "front": "Which service continuously checks that all S3 buckets are encrypted?",
+    "back": "AWS Config, using rules, which can be bundled in conformance packs. Resources that break a rule are flagged as noncompliant."
+  },
+  {
+    "id": "5.2-c05",
+    "objectiveId": "5.2.2",
+    "front": "Which AWS feature automatically archives or deletes data after a set time?",
+    "back": "S3 Lifecycle rules, using transition actions to move objects to cheaper classes and expiration actions to delete them. The retention period itself comes from policy and law."
+  },
+  {
+    "id": "5.2-c06",
+    "objectiveId": "5.2.2",
+    "front": "Why is retention a balance?",
+    "back": "Keeping records too briefly can fail an audit. Keeping personal data too long may break privacy rules. Lifecycle rules make both automatic."
+  },
+  {
+    "id": "5.2-c07",
+    "objectiveId": "5.2.2",
+    "front": "Does encryption alone satisfy a data residency requirement?",
+    "back": "No. Residency is about Regions. Choose the right Region and check features such as cross-Region inference that might process requests elsewhere."
+  },
+  {
+    "id": "5.2-c08",
+    "objectiveId": "5.2.2",
+    "front": "Why are invocation logs a data governance issue?",
+    "back": "They can contain customer prompts. Encrypt them, restrict access and apply a retention period, like any other sensitive data."
+  },
+  {
+    "id": "5.2-c09",
+    "objectiveId": "5.2.3",
+    "front": "What does the higher scope number mean in the Generative AI Security Scoping Matrix?",
+    "back": "The more you own and the more governance and security controls you are responsible for. Scope 1 is a consumer app and scope 5 is a self-trained model."
+  },
+  {
+    "id": "5.2-c10",
+    "objectiveId": "5.2.3",
+    "front": "Which scope is Trailmate on a Bedrock foundation model, and what changes if Cairnway fine-tunes?",
+    "back": "Scope 3, an app built on a pre-trained model through an API. Fine-tuning moves it to scope 4, where the training data and resulting model are also Cairnway's responsibility."
+  },
+  {
+    "id": "5.2-c11",
+    "objectiveId": "5.2.3",
+    "front": "Is a governance tool alone a governance programme?",
+    "back": "No. Governance also needs policies, a review cadence, review strategies, a framework, transparency standards and team training."
+  },
+  {
+    "id": "5.2-c12",
+    "objectiveId": "5.2.3",
+    "front": "Name two review strategies for AI governance.",
+    "back": "A cross-functional committee of security, legal, business and data staff, and risk-based review where higher-risk uses get more scrutiny. Pre-launch approval gates and periodic log audits also qualify."
+  }
+]

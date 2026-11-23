@@ -1,0 +1,146 @@
+[
+  {
+    "id": "4.1-c01",
+    "objectiveId": "4.1.1",
+    "front": "Fairness and bias: which one is the goal and which one is the problem?",
+    "back": "Fairness is the goal: results that don't create unjustified differences between groups. Bias is the problem that stands in its way, usually coming from the data or from how the problem was set up."
+  },
+  {
+    "id": "4.1-c02",
+    "objectiveId": "4.1.1",
+    "front": "What does robustness mean in responsible AI?",
+    "back": "Giving dependable results even when inputs are unusual, noisy or deliberately adversarial. For example, Trailmate should still answer sensibly when a customer misspells every word."
+  },
+  {
+    "id": "4.1-c03",
+    "objectiveId": "4.1.1",
+    "front": "Which responsible AI feature does a hallucination breach?",
+    "back": "Veracity, meaning truthfulness. A model that confidently states invented facts, such as a made-up refund policy, has a veracity problem."
+  },
+  {
+    "id": "4.1-c04",
+    "objectiveId": "4.1.1",
+    "front": "Explainability vs. transparency: how do they differ?",
+    "back": "Explainability is understanding why a model produced a result. Transparency is being open with users and stakeholders that AI is involved and how it works."
+  },
+  {
+    "id": "4.1-c05",
+    "objectiveId": "4.1.2",
+    "front": "Cairnway's chatbot must never discuss medical advice for injuries. Which Guardrails safeguard fits?",
+    "back": "A denied topic. You define off-limit topics, and the guardrail helps block them in both questions and answers. Content filters cover harmful categories such as hate or violence instead."
+  },
+  {
+    "id": "4.1-c06",
+    "objectiveId": "4.1.2",
+    "front": "Which Guardrails feature flags answers not supported by the source documents in a RAG app?",
+    "back": "Contextual grounding checks. They score each answer for grounding (supported by the source) and relevance (answers the question). Answers below your threshold are treated as hallucinations."
+  },
+  {
+    "id": "4.1-c07",
+    "objectiveId": "4.1.2",
+    "front": "Guardrails or Bedrock Model Evaluation: which one tests a model before you choose it?",
+    "back": "Model Evaluation. It scores accuracy, robustness and toxicity on built-in or your own datasets. Guardrails instead act at runtime, checking what goes into and comes out of the model."
+  },
+  {
+    "id": "4.1-c08",
+    "objectiveId": "4.1.3",
+    "front": "Why is the smallest model that meets the need the more responsible choice?",
+    "back": "Training and running large models uses a lot of electricity. A right-sized model gives the needed quality with lower cost, speed and energy use, and so lower carbon emissions."
+  },
+  {
+    "id": "4.1-c09",
+    "objectiveId": "4.1.3",
+    "front": "Name two ways to cut a model's environmental impact besides picking a smaller one.",
+    "back": "Reuse an existing model instead of training a new one, and avoid unnecessary retraining. Choosing a Region that uses cleaner energy can also matter."
+  },
+  {
+    "id": "4.1-c10",
+    "objectiveId": "4.1.3",
+    "front": "Cairnway's review sentiment task passes evaluation with a small model. Why not pick the largest anyway?",
+    "back": "The small model meets the requirement and is cheaper, faster and uses less energy. Responsible selection means choosing by need and risk, not by size."
+  },
+  {
+    "id": "4.1-c11",
+    "objectiveId": "4.1.4",
+    "front": "List the five generative AI legal and business risks the exam guide names.",
+    "back": "Intellectual property infringement claims, biased model outputs, loss of customer trust, end user risk and hallucinations."
+  },
+  {
+    "id": "4.1-c12",
+    "objectiveId": "4.1.4",
+    "front": "How can a hallucination become a legal risk for Cairnway?",
+    "back": "A company can be held to what its chatbot promises. If Trailmate invents a 90-day return window when the real policy says 30, Cairnway may face a dispute."
+  },
+  {
+    "id": "4.1-c13",
+    "objectiveId": "4.1.4",
+    "front": "Why are biased outputs especially risky in hiring, lending and insurance?",
+    "back": "They can break anti-discrimination law. A model that learned from unfair past decisions may treat equally good candidates or applicants differently by group."
+  },
+  {
+    "id": "4.1-c14",
+    "objectiveId": "4.1.5",
+    "front": "Why does a balanced dataset matter?",
+    "back": "If one group or outcome dominates, such as 95% of examples from one group, the model learns that group best and serves the others worse."
+  },
+  {
+    "id": "4.1-c15",
+    "objectiveId": "4.1.5",
+    "front": "Why is an English-only support dataset a problem for Cairnway's German customers?",
+    "back": "The data is not inclusive or diverse. A model learns from the people, languages and situations it saw, so it will serve missing groups badly."
+  },
+  {
+    "id": "4.1-c16",
+    "objectiveId": "4.1.5",
+    "front": "Why check label quality in a supervised dataset?",
+    "back": "Humans attach the labels, such as fraud or not fraud. If labellers are careless or biased, the model learns their mistakes. Several reviewers should agree and avoid stereotypes."
+  },
+  {
+    "id": "4.1-c17",
+    "objectiveId": "4.1.6",
+    "front": "A model scores very well on training data but poorly on new data. What is the problem?",
+    "back": "Overfitting, also called high variance. The model memorized details and coincidences in the training data instead of the real patterns."
+  },
+  {
+    "id": "4.1-c18",
+    "objectiveId": "4.1.6",
+    "front": "A model performs poorly on both training and test data. What is the problem?",
+    "back": "Underfitting, also called high bias. The model is too simple or rests on wrong assumptions, so it misses real patterns."
+  },
+  {
+    "id": "4.1-c19",
+    "objectiveId": "4.1.6",
+    "front": "How can an overall accurate model still harm a demographic group?",
+    "back": "Overall accuracy can hide poor accuracy for one group, for example when training data under-represents them. That is why you test accuracy by group, not just overall."
+  },
+  {
+    "id": "4.1-c20",
+    "objectiveId": "4.1.6",
+    "front": "What is the bias-variance trade-off?",
+    "back": "Making a model more complex lowers bias but raises variance, and the reverse. The goal is a balance that captures real patterns without memorizing noise."
+  },
+  {
+    "id": "4.1-c21",
+    "objectiveId": "4.1.7",
+    "front": "What is subgroup analysis and what does it reveal?",
+    "back": "You measure accuracy and error rates separately for each group, such as by age band or region, and compare them. A big gap is a fairness warning that overall accuracy hides."
+  },
+  {
+    "id": "4.1-c22",
+    "objectiveId": "4.1.7",
+    "front": "Name three human or process methods to check a system for bias and truthfulness.",
+    "back": "Analyzing label quality, subgroup analysis and human audits, including deliberately testing with tricky or hostile prompts, sometimes called red teaming."
+  },
+  {
+    "id": "4.1-c23",
+    "objectiveId": "4.1.7",
+    "front": "Why must a responsible team keep monitoring a model after launch?",
+    "back": "Models drift as the real world changes, and bias can creep in. Comparing production behaviour with a baseline, plus user feedback and complaints, gives early warning."
+  },
+  {
+    "id": "4.1-c24",
+    "objectiveId": "4.1.7",
+    "front": "Which tool fits each stage: model choice, data bias, bias drift, human review, runtime safety?",
+    "back": "Bedrock Model Evaluation for model choice, SageMaker Clarify for data bias, Model Monitor for bias drift, Amazon A2I for human review and Bedrock Guardrails for runtime safety."
+  }
+]
