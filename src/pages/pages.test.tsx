@@ -1,7 +1,7 @@
 // @vitest-environment jsdom
 // UI tests run against the real routes and the real question bank, so keep them
 // independent of item order and pool size.
-import { cleanup, render, screen, within } from '@testing-library/react'
+import { cleanup, fireEvent, render, screen, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { RouterProvider, createMemoryRouter } from 'react-router'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
@@ -188,5 +188,46 @@ describe('flashcards', () => {
   it('links a lesson to its flashcards', async () => {
     await renderAt('/learn/3.1')
     expect(screen.getByRole('link', { name: 'Flashcards for this task' })).toHaveAttribute('href', '/explore/flashcards/review?task=3.1')
+  })
+})
+
+describe('concept simulators', () => {
+  it('lists the simulators and links lessons to theirs', async () => {
+    expect(await renderAt('/explore/sims')).toHaveTextContent('Concept simulators')
+    expect(screen.getByRole('link', { name: 'Next-token sampler' })).toHaveAttribute('href', '/explore/sims/sampler')
+    cleanup()
+    await renderAt('/learn/3.1')
+    expect(screen.getByRole('link', { name: 'Simulator: Next-token sampler' })).toBeInTheDocument()
+  })
+
+  it('gives the same word every time at temperature 0', async () => {
+    const user = userEvent.setup()
+    expect(await renderAt('/explore/sims/sampler')).toHaveTextContent('Next-token sampler')
+    fireEvent.change(await screen.findByRole('slider', { name: 'Temperature' }), { target: { value: '0' } })
+    await user.click(screen.getByRole('button', { name: /^Generate/ }))
+    expect(screen.getByRole('status')).toHaveTextContent('The same word all 10 times')
+  })
+
+  it('shows the accuracy trap and takes typed counts in the metrics lab', async () => {
+    const user = userEvent.setup()
+    await renderAt('/explore/sims/metrics')
+    fireEvent.change(await screen.findByRole('slider', { name: /Flag orders/ }), { target: { value: '1' } })
+    expect(screen.getByText(/Nothing is flagged/)).toBeInTheDocument()
+    expect(screen.getByText('95.0%')).toBeInTheDocument()
+    await user.click(screen.getByRole('button', { name: 'Type the counts' }))
+    const tp = screen.getByRole('spinbutton', { name: 'True positive' })
+    await user.clear(tp)
+    await user.type(tp, '50')
+    expect(screen.queryByText(/Nothing is flagged/)).not.toBeInTheDocument()
+  })
+
+  it('records a "Now you try" answer like a practice answer', async () => {
+    const user = userEvent.setup()
+    await renderAt('/explore/sims/metrics')
+    const first = screen.getByRole('listitem', { name: 'Question 1 of 3' })
+    await user.click(within(first).getAllByRole('radio')[0]!)
+    await user.click(within(first).getByRole('button', { name: 'Check answer' }))
+    expect(within(first).getByRole('status')).toHaveTextContent(/Correct|Not quite/)
+    expect(getProgress().items['1.3-022']).toMatchObject({ attempts: 1 })
   })
 })

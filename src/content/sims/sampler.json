@@ -1,0 +1,68 @@
+{
+  "id": "sampler",
+  "title": "Next-token sampler",
+  "description": "Move temperature, top K and top P over a toy list of next words and watch the same prompt give predictable or varied answers.",
+  "intro": "A language model writes one token at a time. For each step it gives every possible next token a chance, then picks one. Inference parameters change how it picks. Start with the support answer and generate a few completions at temperature 1, then at 0, then at 2.",
+  "objectives": ["2.2.2", "3.1.2"],
+  "takeaways": [
+    "Lower temperature means more consistent, focused answers: the classic exam answer for \"more deterministic\". Raise it for creative variety, such as slogans.",
+    "Top K keeps only the K likeliest tokens; top P keeps the likeliest tokens whose chances add up to P. Lowering either one also narrows the choice.",
+    "The same prompt can give different answers each run (nondeterminism). A low temperature reduces this but does not make GenAI right for work that must give identical results every time.",
+    "At a high temperature, unlikely and wrong words such as a 90-day return window get picked: randomness can look like a hallucination. Ground factual answers in your documents too.",
+    "Response length (maximum tokens) limits how long an answer is, and so its cost, not how random it is."
+  ],
+  "tryItems": ["3.1-009", "3.1-035", "2.2-010"],
+  "links": [{ "title": "Amazon Bedrock: influence response generation with inference parameters", "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/inference-parameters.html" }],
+  "params": {
+    "samples": 10,
+    "scenarios": [
+      {
+        "id": "support",
+        "label": "Support answer",
+        "prompt": "Trailmate: Unused gear can be returned to Cairnway within",
+        "goal": "Goal: one correct fact. Cairnway's policy says 30 days, so every other word is a wrong answer.",
+        "tokens": [
+          { "text": "30 days", "p": 0.7 },
+          { "text": "60 days", "p": 0.08 },
+          { "text": "14 days", "p": 0.07 },
+          { "text": "90 days", "p": 0.06 },
+          { "text": "45 days", "p": 0.04 },
+          { "text": "a year", "p": 0.03 },
+          { "text": "forever", "p": 0.02 }
+        ]
+      },
+      {
+        "id": "slogan",
+        "label": "Campaign slogan",
+        "prompt": "Cairnway spring campaign: Adventure starts",
+        "goal": "Goal: variety. The marketing team wants many different ideas to choose from.",
+        "tokens": [
+          { "text": "here", "p": 0.35 },
+          { "text": "outside", "p": 0.2 },
+          { "text": "now", "p": 0.15 },
+          { "text": "with you", "p": 0.1 },
+          { "text": "today", "p": 0.08 },
+          { "text": "at dawn", "p": 0.05 },
+          { "text": "uphill", "p": 0.04 },
+          { "text": "anywhere", "p": 0.03 }
+        ]
+      },
+      {
+        "id": "description",
+        "label": "Product description",
+        "prompt": "The Ridgeline 2 tent is light, roomy and",
+        "goal": "Goal: fluent, sensible copy. Some variety is fine, but nonsense is not.",
+        "tokens": [
+          { "text": "waterproof", "p": 0.4 },
+          { "text": "durable", "p": 0.25 },
+          { "text": "easy to pitch", "p": 0.12 },
+          { "text": "affordable", "p": 0.08 },
+          { "text": "stylish", "p": 0.06 },
+          { "text": "quiet", "p": 0.04 },
+          { "text": "delicious", "p": 0.03 },
+          { "text": "purple", "p": 0.02 }
+        ]
+      }
+    ]
+  }
+}

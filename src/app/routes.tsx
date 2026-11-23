@@ -15,6 +15,7 @@ const DrillsPage = lazy(() => import('../pages/DrillsPage'))
 const FlashcardsPage = lazy(() => import('../pages/FlashcardsPage'))
 const FlashcardReviewPage = lazy(() => import('../pages/FlashcardReviewPage'))
 const FlashcardDeckPage = lazy(() => import('../pages/FlashcardDeckPage'))
+const SimPage = lazy(() => import('../pages/SimPage'))
 
 export const routes: RouteObject[] = [
   {
@@ -33,6 +34,8 @@ export const routes: RouteObject[] = [
       { path: 'explore/flashcards', element: <FlashcardsPage /> },
       { path: 'explore/flashcards/review', element: <FlashcardReviewPage /> },
       { path: 'explore/flashcards/deck/:deckId', element: <FlashcardDeckPage /> },
+      { path: 'explore/sims', element: <SimPage /> },
+      { path: 'explore/sims/:simId', element: <SimPage /> },
       { path: 'progress', element: <ProgressPage /> },
       { path: '*', element: <h1 className="text-2xl font-semibold">Page not found</h1> },
     ],

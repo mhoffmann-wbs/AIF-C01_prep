@@ -3,6 +3,11 @@ import { Link } from 'react-router'
 // One entry per Explore tool, added as each gets built (PLAN.md §6).
 const TOOLS = [
   {
+    to: '/explore/sims',
+    title: 'Concept simulators',
+    text: 'Move sliders to see how temperature, thresholds, model complexity, token prices, retrieval and guardrails change the outcome, then answer a few questions.',
+  },
+  {
     to: '/explore/drills',
     title: 'Service drills',
     text: 'Quick rounds that match Cairnway tasks to AWS services, and sorters for shared responsibility, learning types, customization and exam scope.',

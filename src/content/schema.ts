@@ -231,3 +231,27 @@ export const cardSchema = z
 export const cardFileSchema = z.array(cardSchema)
 
 export type Card = z.infer<typeof cardSchema>
+
+// Concept simulators (src/content/sims/<simId>.json). The interactive part is
+// a component in src/sims/, registered in src/sims/registry.ts with a Zod
+// schema for its `params`; the copy and the parameters stay here as data.
+export const simSchema = z.object({
+  id: z.string().regex(/^[a-z][a-z0-9-]*$/),
+  title: nonEmpty,
+  /** One sentence for the simulator list. */
+  description: nonEmpty,
+  /** What to try first, shown above the simulator. */
+  intro: nonEmpty,
+  /** Objective ids the simulator teaches; lessons of their tasks link to it. */
+  objectives: z.array(z.string().regex(/^[1-5]\.[1-4]\.\d+$/)).min(1),
+  /** Exam-relevant points, shown below the simulator. */
+  takeaways: z.array(nonEmpty).min(2),
+  /** 2–3 single or multi bank items for "Now you try"; each tests one of the objectives. */
+  tryItems: z.array(z.string()).min(2).max(3),
+  /** Sources for any AWS fact the simulator states. */
+  links: z.array(z.object({ title: nonEmpty, url: z.url().regex(LESSON_LINK) })).optional(),
+  /** Simulator-specific copy and parameters, validated by the registry's schema. */
+  params: z.unknown(),
+})
+
+export type Sim = z.infer<typeof simSchema>
