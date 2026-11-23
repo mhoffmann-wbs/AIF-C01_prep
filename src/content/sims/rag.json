@@ -1,0 +1,92 @@
+{
+  "id": "rag",
+  "title": "RAG pipeline step-through",
+  "description": "Chunk a Cairnway FAQ, embed it, retrieve the closest chunks for a question and see a grounded answer next to a hallucinated one.",
+  "intro": "Retrieval Augmented Generation (RAG) lets a model answer from your own documents without retraining it. Walk through the six steps with the first question, then go back and try a chunk size of 8 sentences, a top K of 1, and the kayak question, which the FAQ can't answer.",
+  "objectives": ["2.1.1", "3.1.3", "3.1.4", "5.1.5"],
+  "takeaways": [
+    "RAG has two phases. Ahead of time: split documents into chunks, turn each chunk into an embedding (a vector that captures its meaning) and store it in a vector database. For each question: embed the question, find the closest chunks, add them to the prompt, and generate.",
+    "Similar meaning means vectors that are close together. A similarity search finds the closest stored vectors; a normal keyword or key-value lookup can't.",
+    "Chunk size matters: chunks that are too big mix topics and add tokens, chunks that are too small lose the surrounding meaning.",
+    "Vector stores the exam names: Amazon OpenSearch Service, Amazon Aurora PostgreSQL and Amazon RDS for PostgreSQL (with pgvector), and Amazon Neptune (Neptune Analytics). Amazon Bedrock Knowledge Bases runs the whole RAG pipeline for you.",
+    "RAG grounds answers in trusted text, which reduces hallucinations and makes answers citable and current. A Guardrails contextual grounding check can block answers that the source doesn't support."
+  ],
+  "tryItems": ["2.1-009", "3.1-038", "3.1-040"],
+  "links": [
+    { "title": "Amazon Bedrock Knowledge Bases", "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base.html" },
+    { "title": "Knowledge Bases: supported vector stores", "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup.html" },
+    { "title": "Guardrails: contextual grounding check", "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-contextual-grounding-check.html" }
+  ],
+  "params": {
+    "document": "Cairnway customer FAQ",
+    "chunkSizes": [1, 2, 4, 8],
+    "maxTopK": 3,
+    "sentences": [
+      { "text": "Unused gear can be returned within 30 days of delivery for a full refund.", "vector": [0.95, 0.08] },
+      { "text": "Start a return from the Orders page and print the free return label.", "vector": [0.83, 0.18] },
+      { "text": "Refunds go back to the original payment method within 5 business days of the return arriving.", "vector": [0.85, 0.29] },
+      { "text": "Worn or used items can't be returned, except under the warranty.", "vector": [0.72, 0.35] },
+      { "text": "Standard shipping takes 3 to 5 business days.", "vector": [0.61, 0.73] },
+      { "text": "Orders over $75 ship free.", "vector": [0.46, 0.71] },
+      { "text": "Express shipping arrives in 1 to 2 business days for $15.", "vector": [0.39, 0.81] },
+      { "text": "We ship to the United States and Canada only.", "vector": [0.26, 0.76] },
+      { "text": "All Cairnway-brand gear has a 2-year warranty against defects.", "vector": [-0.16, 0.94] },
+      { "text": "Broken zippers and torn seams on tents are repaired for free under the warranty.", "vector": [-0.25, 0.81] },
+      { "text": "To start a warranty claim, send support a photo of the damage.", "vector": [-0.37, 0.82] },
+      { "text": "Damage from misuse, such as cutting or burning, is not covered.", "vector": [-0.41, 0.69] },
+      { "text": "Our hiking boots run small, so order half a size up.", "vector": [-0.82, 0.47] },
+      { "text": "Jackets follow standard US sizes; each product page has a size chart.", "vector": [-0.78, 0.33] },
+      { "text": "Sleeping bags are sized by the sleeper's height, not weight.", "vector": [-0.87, 0.25] },
+      { "text": "Kids' sizes are listed by age and height.", "vector": [-0.79, 0.13] }
+    ],
+    "store": [
+      "Each chunk's vector is saved in a vector database together with the chunk's text, so the closest vectors can be found fast and their text handed to the model. This is a similarity search, also called a k-nearest-neighbour search.",
+      "The exam guide names these AWS options: Amazon OpenSearch Service (built-in vector search, also serverless), Amazon Aurora PostgreSQL-compatible and Amazon RDS for PostgreSQL (both with the pgvector extension), and Amazon Neptune, whose Neptune Analytics stores vectors for GraphRAG.",
+      "Amazon Bedrock Knowledge Bases can run the whole pipeline: it chunks and embeds your documents, stores the vectors and retrieves them at question time. When a document changes, you re-ingest it and answers stay current without retraining the model."
+    ],
+    "instructions": "You are Trailmate, Cairnway's support assistant. Answer only from the context below and say which part you used. If the context doesn't contain the answer, say so.",
+    "notFound": "I can't find that in Cairnway's FAQ, so I won't guess. Please contact Cairnway support.",
+    "questions": [
+      {
+        "id": "return-window",
+        "text": "How long do I have to return a tent I haven't used?",
+        "vector": [0.9, 0.09],
+        "answerSentence": 0,
+        "grounded": "You can return unused gear within 30 days of delivery for a full refund.",
+        "withoutRag": "Most outdoor retailers give you 90 days, so you have 90 days to return your tent."
+      },
+      {
+        "id": "zipper",
+        "text": "The zipper on my tent broke. Can you fix it?",
+        "vector": [-0.28, 0.86],
+        "answerSentence": 9,
+        "grounded": "Yes. Broken zippers on tents are repaired for free under the warranty.",
+        "withoutRag": "Zipper repairs cost $25 and take about two weeks."
+      },
+      {
+        "id": "uk-delivery",
+        "text": "Can you deliver to the United Kingdom?",
+        "vector": [0.28, 0.86],
+        "answerSentence": 7,
+        "grounded": "No. Cairnway ships to the United States and Canada only.",
+        "withoutRag": "Yes, Cairnway ships worldwide, including the UK, in 7 to 10 days."
+      },
+      {
+        "id": "boot-size",
+        "text": "Should I order my usual size in hiking boots?",
+        "vector": [-0.79, 0.44],
+        "answerSentence": 12,
+        "grounded": "Cairnway's hiking boots run small, so order half a size up.",
+        "withoutRag": "Yes, our boots are true to size, so order your usual size."
+      },
+      {
+        "id": "kayaks",
+        "text": "Do you sell kayaks?",
+        "vector": [0.23, -0.87],
+        "answerSentence": null,
+        "grounded": "I can't find that in Cairnway's FAQ, so I won't guess. Please contact Cairnway support.",
+        "withoutRag": "Yes! Cairnway sells a full range of kayaks, starting at $499."
+      }
+    ]
+  }
+}
