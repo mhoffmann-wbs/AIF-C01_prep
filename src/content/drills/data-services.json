@@ -1,0 +1,87 @@
+{
+  "id": "data-services",
+  "kind": "which",
+  "title": "Data, storage and vector stores",
+  "description": "Pick the AWS service that stores, prepares or searches the data behind Cairnway's ML and RAG systems.",
+  "tasks": ["1.3", "3.1"],
+  "cards": [
+    {
+      "id": "data-services-01",
+      "prompt": "Keep millions of product photos and the RAG source documents in cheap, durable object storage.",
+      "answer": "s3",
+      "distractors": ["dynamodb", "redshift", "elasticache"]
+    },
+    {
+      "id": "data-services-02",
+      "prompt": "Run fast vector similarity search over product-description embeddings, alongside keyword search.",
+      "answer": "opensearch",
+      "distractors": ["redshift", "s3-glacier", "glue"]
+    },
+    {
+      "id": "data-services-03",
+      "prompt": "Add embeddings to the PostgreSQL-compatible database the shop already runs, using the pgvector extension.",
+      "answer": "aurora",
+      "distractors": ["dynamodb", "redshift", "neptune"]
+    },
+    {
+      "id": "data-services-04",
+      "prompt": "Run SQL analytics over years of order history in a managed data warehouse.",
+      "answer": "redshift",
+      "distractors": ["dynamodb", "opensearch", "elasticache"]
+    },
+    {
+      "id": "data-services-05",
+      "prompt": "Discover the shop's data sets, catalog them and run serverless ETL jobs to transform them.",
+      "answer": "glue",
+      "distractors": ["emr", "redshift", "lake-formation"]
+    },
+    {
+      "id": "data-services-06",
+      "prompt": "Let a data analyst clean and normalize the returns spreadsheet with a visual, no-code tool.",
+      "answer": "glue-databrew",
+      "distractors": ["glue-data-catalog", "emr", "redshift"]
+    },
+    {
+      "id": "data-services-07",
+      "prompt": "Check the training data against rules such as 'no missing prices' and get a data quality score.",
+      "answer": "glue-data-quality",
+      "distractors": ["macie", "sagemaker-clarify", "glue-data-catalog"]
+    },
+    {
+      "id": "data-services-08",
+      "prompt": "Run Apache Spark jobs on a managed cluster to process terabytes of clickstream data.",
+      "answer": "emr",
+      "distractors": ["glue-databrew", "lambda", "redshift"]
+    },
+    {
+      "id": "data-services-09",
+      "prompt": "Subscribe to a third-party weather data set to improve the demand forecast.",
+      "answer": "data-exchange",
+      "distractors": ["sagemaker-jumpstart", "glue", "s3"]
+    },
+    {
+      "id": "data-services-10",
+      "prompt": "Store shopping-cart sessions in a serverless key-value database with single-digit-millisecond reads.",
+      "answer": "dynamodb",
+      "distractors": ["redshift", "s3-glacier", "emr"]
+    },
+    {
+      "id": "data-services-11",
+      "prompt": "Archive five-year-old training data sets cheaply for compliance, where retrieval can be slow.",
+      "answer": "s3-glacier",
+      "distractors": ["elasticache", "dynamodb", "opensearch"]
+    },
+    {
+      "id": "data-services-12",
+      "prompt": "Store embeddings in a graph database that models how products, brands and customers relate.",
+      "answer": "neptune",
+      "distractors": ["redshift", "s3-glacier", "glue"]
+    },
+    {
+      "id": "data-services-13",
+      "prompt": "Build a secure data lake on S3 with one place to manage who can see which tables.",
+      "answer": "lake-formation",
+      "distractors": ["glue-databrew", "emr", "redshift"]
+    }
+  ]
+}

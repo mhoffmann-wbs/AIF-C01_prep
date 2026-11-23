@@ -1,0 +1,108 @@
+{
+  "id": "ai-services",
+  "kind": "which",
+  "title": "Ready-made AI services",
+  "description": "Match a Cairnway task to the pre-trained AWS AI service that does it, with no model to build.",
+  "tasks": ["1.2"],
+  "cards": [
+    {
+      "id": "ai-services-01",
+      "prompt": "Pull the line items and totals out of scanned supplier invoices, including the tables.",
+      "answer": "textract",
+      "distractors": ["comprehend", "rekognition", "transcribe"]
+    },
+    {
+      "id": "ai-services-02",
+      "prompt": "Score thousands of product reviews as positive, negative, neutral or mixed.",
+      "answer": "comprehend",
+      "distractors": ["textract", "translate", "lex"]
+    },
+    {
+      "id": "ai-services-03",
+      "prompt": "Turn recorded customer-support phone calls into text so they can be searched.",
+      "answer": "transcribe",
+      "distractors": ["polly", "comprehend", "lex"]
+    },
+    {
+      "id": "ai-services-04",
+      "prompt": "Read order-status updates aloud in a natural-sounding voice on the phone line.",
+      "answer": "polly",
+      "distractors": ["transcribe", "lex", "translate"]
+    },
+    {
+      "id": "ai-services-05",
+      "prompt": "Show product descriptions to shoppers in Spanish, French and German.",
+      "answer": "translate",
+      "distractors": ["comprehend", "polly", "textract"]
+    },
+    {
+      "id": "ai-services-06",
+      "prompt": "Build a chatbot that understands intents such as 'track my order' and asks for the order number.",
+      "answer": "lex",
+      "distractors": ["polly", "comprehend", "personalize"]
+    },
+    {
+      "id": "ai-services-07",
+      "prompt": "Recommend products to each shopper based on what they and similar shoppers clicked and bought.",
+      "answer": "personalize",
+      "distractors": ["comprehend", "redshift", "lex"]
+    },
+    {
+      "id": "ai-services-08",
+      "prompt": "Flag customer-uploaded product photos that contain unsafe or inappropriate content.",
+      "answer": "rekognition",
+      "distractors": ["textract", "comprehend", "macie"]
+    },
+    {
+      "id": "ai-services-09",
+      "prompt": "Find people's names and addresses (PII) inside the text of support emails before they are stored.",
+      "answer": "comprehend",
+      "distractors": ["textract", "macie", "translate"],
+      "why": "Comprehend detects PII entities in text you pass to it. Macie finds sensitive data in objects already stored in S3."
+    },
+    {
+      "id": "ai-services-10",
+      "prompt": "Read the handwritten notes on scanned warranty-return forms.",
+      "answer": "textract",
+      "distractors": ["rekognition", "transcribe", "comprehend"]
+    },
+    {
+      "id": "ai-services-11",
+      "prompt": "Detect which objects, such as tents, boots or backpacks, appear in product images to tag the catalog.",
+      "answer": "rekognition",
+      "distractors": ["textract", "personalize", "comprehend"]
+    },
+    {
+      "id": "ai-services-12",
+      "prompt": "Find the key phrases and the language of incoming customer emails, without training a model.",
+      "answer": "comprehend",
+      "distractors": ["translate", "lex", "transcribe"]
+    },
+    {
+      "id": "ai-services-13",
+      "prompt": "Create written captions from the audio of product-demo videos.",
+      "answer": "transcribe",
+      "distractors": ["polly", "rekognition", "translate"]
+    },
+    {
+      "id": "ai-services-14",
+      "prompt": "Sort support emails into Cairnway's own categories (returns, sizing, shipping) with a custom classifier, without managing ML infrastructure.",
+      "answer": "comprehend",
+      "distractors": ["lex", "personalize", "textract"],
+      "why": "Comprehend custom classification trains on your labelled examples and runs as a managed service."
+    },
+    {
+      "id": "ai-services-15",
+      "prompt": "Show 'customers who viewed this also viewed' suggestions that update as a shopper browses.",
+      "answer": "personalize",
+      "distractors": ["rekognition", "opensearch", "comprehend"]
+    },
+    {
+      "id": "ai-services-16",
+      "prompt": "Let a voice assistant on the support line understand what callers ask for and respond.",
+      "answer": "lex",
+      "distractors": ["transcribe", "polly", "translate"],
+      "why": "Lex builds the conversation: it recognizes intents in speech or text. Transcribe only converts speech to text and Polly only speaks."
+    }
+  ]
+}

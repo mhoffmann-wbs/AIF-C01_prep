@@ -6,6 +6,7 @@ import {
   getProgress,
   importProgress,
   recordAnswer,
+  recordDrillRound,
   recordMockResult,
   reloadProgress,
   resetProgress,
@@ -48,6 +49,23 @@ describe('progress store', () => {
     expect(getProgress().items).toEqual({})
   })
 
+  it('upgrades version-1 data in storage and in imports', () => {
+    const v1 = { version: 1, extendedInPractice: false, extendedInMock: true, items: {}, mockResults: [], lessonsRead: ['1.1'] }
+    localStorage.setItem('aifc01:progress', JSON.stringify(v1))
+    reloadProgress()
+    expect(getProgress()).toMatchObject({ version: 2, extendedInPractice: false, lessonsRead: ['1.1'], drills: {}, drillMisses: [] })
+    resetProgress()
+    importProgress(JSON.stringify({ app: 'aif-c01-prep', progress: v1 }))
+    expect(getProgress()).toMatchObject({ version: 2, lessonsRead: ['1.1'], drillMisses: [] })
+  })
+
+  it('keeps the best drill round and the cards still missed', () => {
+    recordDrillRound('d', { correct: 3, total: 4, streak: 2, missed: ['d-01'], hit: ['d-02', 'd-03', 'd-04'] }, 1)
+    recordDrillRound('d', { correct: 1, total: 2, streak: 1, missed: ['d-02'], hit: ['d-01'] }, 2)
+    expect(getProgress().drills.d).toEqual({ rounds: 2, best: 75, bestStreak: 2, lastAt: 2 })
+    expect(getProgress().drillMisses).toEqual(['d-02'])
+  })
+
   it('marks lessons read and unread', () => {
     setLessonRead('2.1', true)
     setLessonRead('3.1', true)
@@ -65,7 +83,7 @@ describe('progress store', () => {
     expect(getProgress().mockResults).toHaveLength(1)
     expect(() => importProgress('nope')).toThrow(/valid JSON/)
     expect(() => importProgress('{"app":"other","progress":{}}')).toThrow(/AIF-C01 Prep/)
-    expect(() => importProgress('{"app":"aif-c01-prep","progress":{"version":2}}')).toThrow(/newer version/)
+    expect(() => importProgress('{"app":"aif-c01-prep","progress":{"version":3}}')).toThrow(/newer version/)
     expect(() => importProgress('{"app":"aif-c01-prep","progress":{"version":1,"items":{"x":{"attempts":-1}}}}')).toThrow(/damaged/)
   })
 

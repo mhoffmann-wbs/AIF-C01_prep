@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router'
 import { Inline } from '../components/Inline'
 import { DOMAINS, DOMAIN_BY_ID, TASKS, TASK_BY_ID, tasksOf } from '../content/blueprint'
 import { ITEMS } from '../content/bank'
+import { DRILL_DECKS } from '../content/drills'
 import { LESSONS } from '../content/lessons'
 import { lessonComponents } from '../lessons/components'
 import { setLessonRead, useProgress } from '../progress/store'
@@ -141,6 +142,11 @@ function LessonView({ taskId }: { taskId: string }) {
             Browse its questions
           </Link>
         )}
+        {DRILL_DECKS.filter((d) => d.tasks.includes(taskId)).map((d) => (
+          <Link key={d.id} to={`/explore/drills/${d.id}`} className="rounded border px-4 py-2">
+            Drill: {d.title}
+          </Link>
+        ))}
       </footer>
 
       <LessonNav taskId={taskId} />

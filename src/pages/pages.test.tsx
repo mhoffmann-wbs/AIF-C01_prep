@@ -112,6 +112,27 @@ describe('pages', () => {
     expect(getProgress().mockResults[0]).toMatchObject({ correct: 0, scaled: 100, passed: false })
   })
 
+  it('plays a drill round to the end and keeps the misses', async () => {
+    const user = userEvent.setup()
+    expect(await renderAt('/explore/drills')).toHaveTextContent('Service drills')
+    await user.click(screen.getByRole('link', { name: /Play a round: Ready-made AI services/ }))
+    await screen.findByRole('heading', { level: 1, name: 'Ready-made AI services' })
+    // Always pick the first choice; with four choices some answers are wrong.
+    while (!screen.queryByText(/Round complete/)) {
+      await user.click(within(screen.getByRole('group', { name: 'Choices' })).getAllByRole('button')[0]!)
+      expect(screen.getByRole('status')).toBeInTheDocument()
+      await user.click(screen.getByRole('button', { name: /^(Next card|Finish)$/ }))
+    }
+    const stat = getProgress().drills['ai-services']
+    expect(stat?.rounds).toBe(1)
+    expect(getProgress().drillMisses.length).toBe(10 - Math.round((stat!.best / 100) * 10))
+  })
+
+  it('links a lesson to its drills', async () => {
+    await renderAt('/learn/5.1')
+    expect(screen.getByRole('link', { name: /Drill: Shared responsibility/ })).toBeInTheDocument()
+  })
+
   it('shows readiness by domain and the extended-kinds toggles on the progress page', async () => {
     expect(await renderAt('/progress')).toHaveTextContent('Progress')
     expect(screen.getByText('By domain')).toBeInTheDocument()

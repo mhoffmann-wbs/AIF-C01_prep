@@ -1,0 +1,86 @@
+{
+  "id": "learning-types",
+  "kind": "sort",
+  "title": "Supervised, unsupervised or reinforcement?",
+  "description": "Sort each Cairnway ML problem by how the model learns: from labeled examples, from unlabeled data, or from rewards.",
+  "tasks": ["1.1"],
+  "buckets": [
+    { "id": "supervised", "label": "Supervised" },
+    { "id": "unsupervised", "label": "Unsupervised" },
+    { "id": "reinforcement", "label": "Reinforcement" }
+  ],
+  "items": [
+    {
+      "id": "learning-types-01",
+      "text": "Predict how many days late an order will arrive, from past orders whose delays are known.",
+      "bucket": "supervised",
+      "why": "Every past order comes with the answer (its actual delay), so the model learns from labeled examples. Predicting a number is regression."
+    },
+    {
+      "id": "learning-types-02",
+      "text": "Group customers into segments by buying habits, with no segments defined in advance.",
+      "bucket": "unsupervised",
+      "why": "Nobody labels the groups; the model finds structure by itself. This is clustering."
+    },
+    {
+      "id": "learning-types-03",
+      "text": "A warehouse robot learns the fastest picking route, getting a reward for each quick pick.",
+      "bucket": "reinforcement",
+      "why": "The robot learns by trial and error from rewards and penalties, not from labeled examples."
+    },
+    {
+      "id": "learning-types-04",
+      "text": "Classify product reviews as spam or not spam, from 10,000 reviews that staff already marked.",
+      "bucket": "supervised",
+      "why": "The marked reviews are labels. Predicting a category is classification."
+    },
+    {
+      "id": "learning-types-05",
+      "text": "Spot unusual card transactions when there are no examples marked as fraud.",
+      "bucket": "unsupervised",
+      "why": "Without labels, the model learns what normal looks like and flags what doesn't fit: anomaly detection."
+    },
+    {
+      "id": "learning-types-06",
+      "text": "Tell tents from backpacks in photos, after training on photos tagged with their category.",
+      "bucket": "supervised",
+      "why": "Each training photo carries its correct category, so this is supervised image classification."
+    },
+    {
+      "id": "learning-types-07",
+      "text": "Find products that are often bought together, from raw order baskets.",
+      "bucket": "unsupervised",
+      "why": "The baskets have no labels; the model discovers patterns in them (association)."
+    },
+    {
+      "id": "learning-types-08",
+      "text": "An agent learns how much to bid for ads by trying bids and being rewarded for each sale that follows.",
+      "bucket": "reinforcement",
+      "why": "It improves its decisions over time from a reward signal, which is reinforcement learning."
+    },
+    {
+      "id": "learning-types-09",
+      "text": "Estimate a product's return rate from past products whose return rates are recorded.",
+      "bucket": "supervised",
+      "why": "The recorded return rates are labels, and the target is a number, so this is supervised regression."
+    },
+    {
+      "id": "learning-types-10",
+      "text": "Discover a customer segment nobody had named, such as 'weekend trail-runners', in purchase history.",
+      "bucket": "unsupervised",
+      "why": "The segment emerges from the data without labels: clustering."
+    },
+    {
+      "id": "learning-types-11",
+      "text": "A scheduling agent picks each day's delivery order, gets a reward when deliveries arrive on time, and improves its choices over time.",
+      "bucket": "reinforcement",
+      "why": "It learns by acting and receiving a score as reward, not from a fixed set of labeled answers."
+    },
+    {
+      "id": "learning-types-12",
+      "text": "Predict whether a customer will cancel their membership, from past members marked as stayed or left.",
+      "bucket": "supervised",
+      "why": "Past members are labeled with the outcome, so the model learns a yes/no classification from examples."
+    }
+  ]
+}

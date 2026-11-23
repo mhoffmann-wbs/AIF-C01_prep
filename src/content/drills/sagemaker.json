@@ -1,0 +1,95 @@
+{
+  "id": "sagemaker",
+  "kind": "which",
+  "title": "SageMaker AI across the ML lifecycle",
+  "description": "Pick the SageMaker AI feature for each stage of building, deploying, monitoring and documenting a model.",
+  "tasks": ["1.3", "4.1", "4.2"],
+  "cards": [
+    {
+      "id": "sagemaker-01",
+      "prompt": "Clean and transform the returns data for a model with little or no code, inside SageMaker.",
+      "answer": "sagemaker-data-wrangler",
+      "distractors": ["sagemaker-feature-store", "sagemaker-model-registry", "sagemaker-clarify"]
+    },
+    {
+      "id": "sagemaker-02",
+      "prompt": "Let a business analyst build a demand-forecasting model without writing any code.",
+      "answer": "sagemaker-canvas",
+      "distractors": ["sagemaker-pipelines", "sagemaker-jumpstart", "sagemaker-model-cards"]
+    },
+    {
+      "id": "sagemaker-03",
+      "prompt": "Have human workers label 50,000 product photos by category to create training data.",
+      "answer": "sagemaker-ground-truth",
+      "distractors": ["augmented-ai", "rekognition", "sagemaker-clarify"],
+      "why": "Ground Truth labels training data before a model exists. A2I sends a live model's low-confidence predictions to people."
+    },
+    {
+      "id": "sagemaker-04",
+      "prompt": "Store customer features once so the training job and the live fraud model read the same values.",
+      "answer": "sagemaker-feature-store",
+      "distractors": ["sagemaker-model-registry", "glue-data-catalog", "sagemaker-data-wrangler"]
+    },
+    {
+      "id": "sagemaker-05",
+      "prompt": "Rerun data preparation, training, evaluation and registration as one repeatable workflow every week.",
+      "answer": "sagemaker-pipelines",
+      "distractors": ["bedrock-flows", "sagemaker-model-registry", "sagemaker-canvas"]
+    },
+    {
+      "id": "sagemaker-06",
+      "prompt": "Keep track of each version of the churn model and whether it has been approved for production.",
+      "answer": "sagemaker-model-registry",
+      "distractors": ["sagemaker-model-cards", "sagemaker-feature-store", "sagemaker-pipelines"],
+      "why": "The Model Registry tracks versions and approval status. Model Cards document what a model is for and how it was evaluated."
+    },
+    {
+      "id": "sagemaker-07",
+      "prompt": "Get an alert when the data reaching the deployed fraud model starts to drift from its training data.",
+      "answer": "sagemaker-model-monitor",
+      "distractors": ["sagemaker-clarify", "cloudtrail", "sagemaker-model-registry"]
+    },
+    {
+      "id": "sagemaker-08",
+      "prompt": "Check whether the credit-approval training data under-represents some age groups before training.",
+      "answer": "sagemaker-clarify",
+      "distractors": ["sagemaker-model-monitor", "glue-data-quality", "macie"]
+    },
+    {
+      "id": "sagemaker-09",
+      "prompt": "Explain which features pushed the fraud model to flag one particular order.",
+      "answer": "sagemaker-clarify",
+      "distractors": ["sagemaker-model-cards", "sagemaker-model-monitor", "cloudwatch"]
+    },
+    {
+      "id": "sagemaker-10",
+      "prompt": "Record the fraud model's intended use, training data, evaluation results and risk rating for auditors.",
+      "answer": "sagemaker-model-cards",
+      "distractors": ["sagemaker-model-registry", "artifact", "cloudtrail"]
+    },
+    {
+      "id": "sagemaker-11",
+      "prompt": "Send the product-image classifier's low-confidence predictions to a person for review.",
+      "answer": "augmented-ai",
+      "distractors": ["sagemaker-ground-truth", "sagemaker-model-monitor", "rekognition"]
+    },
+    {
+      "id": "sagemaker-12",
+      "prompt": "Train and deploy Cairnway's own churn model with full control over the algorithm and the endpoint.",
+      "answer": "sagemaker-ai",
+      "distractors": ["bedrock", "personalize", "sagemaker-canvas"]
+    },
+    {
+      "id": "sagemaker-13",
+      "prompt": "Start from a pre-trained open-weight model and fine-tune it in SageMaker on Cairnway's data.",
+      "answer": "sagemaker-jumpstart",
+      "distractors": ["sagemaker-feature-store", "sagemaker-model-registry", "sagemaker-ground-truth"]
+    },
+    {
+      "id": "sagemaker-14",
+      "prompt": "Watch a deployed model for changes in how much each feature drives its predictions (feature-attribution drift).",
+      "answer": "sagemaker-model-monitor",
+      "distractors": ["sagemaker-model-cards", "sagemaker-data-wrangler", "config"]
+    }
+  ]
+}

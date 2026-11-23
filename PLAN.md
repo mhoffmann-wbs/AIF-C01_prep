@@ -162,5 +162,6 @@ Tooling:
 3. **Question bank** (done 2026-11-23): 650 items, every task at its target and every objective with at least 5 items. Kinds: 359 single, 175 multi, 44 order, 54 match and 18 case sets (18% extended). Single-select keys are A 103, B 103, C 102 and D 100. Written by agents per task from a shared brief, then reviewed: ambiguous match pairs and joke distractors were fixed.
    - *Follow-up:* the key is the strictly longest option in only about 13% of single-select questions, below the 25% chance rate, so "never pick the longest" is a slight hint. A later pass should lengthen some keys, and a lower-bound check would keep it fixed.
 4. **Explore I**: service catalog drills and sorters, then flashcards.
+   - *Drills* (done 2026-11-23): 5 "Which service?" decks (80 cards) and 4 sorters (shared responsibility, learning types, prompt engineering vs. RAG vs. fine-tuning, and the in/out-of-scope sorter generated from the catalog). Buttons replace drag and drop, so sorters work with the keyboard and on phones. Missed cards are kept per learner and can be replayed per deck.
 5. **Explore II**: the concept simulators.
 6. **Walkthroughs and guides**: console walkthroughs, the cheat sheet, the exam-day guide, a mobile pass and accessibility for the order and match items.

@@ -1,0 +1,89 @@
+{
+  "id": "shared-responsibility",
+  "kind": "sort",
+  "title": "Shared responsibility: AWS or Cairnway?",
+  "description": "Sort each security job for Cairnway's Bedrock chatbot: does AWS handle it, or does Cairnway?",
+  "tasks": ["5.1"],
+  "sourceLinks": [
+    "https://aws.amazon.com/compliance/shared-responsibility-model/",
+    "https://docs.aws.amazon.com/bedrock/latest/userguide/data-protection.html"
+  ],
+  "buckets": [
+    { "id": "aws", "label": "AWS" },
+    { "id": "customer", "label": "Cairnway (the customer)" }
+  ],
+  "items": [
+    {
+      "id": "shared-responsibility-01",
+      "text": "Physical security of the data centres that run Amazon Bedrock.",
+      "bucket": "aws",
+      "why": "AWS protects the infrastructure that runs all of its services, including the buildings."
+    },
+    {
+      "id": "shared-responsibility-02",
+      "text": "Deciding which IAM roles may call the Bedrock model.",
+      "bucket": "customer",
+      "why": "Access to your account's resources is your configuration. Least privilege is your job."
+    },
+    {
+      "id": "shared-responsibility-03",
+      "text": "Running and patching the servers behind the Bedrock service itself.",
+      "bucket": "aws",
+      "why": "Bedrock is a managed service, so AWS runs and maintains the servers that host it."
+    },
+    {
+      "id": "shared-responsibility-04",
+      "text": "Choosing to encrypt the knowledge-base data with a KMS key Cairnway manages.",
+      "bucket": "customer",
+      "why": "Encryption choices for your data and resources are part of the security configuration you control."
+    },
+    {
+      "id": "shared-responsibility-05",
+      "text": "Configuring guardrails so the chatbot refuses off-topic or harmful requests.",
+      "bucket": "customer",
+      "why": "Guardrails are a tool AWS provides, but setting them up for your application is your responsibility."
+    },
+    {
+      "id": "shared-responsibility-06",
+      "text": "Checking the documents fed to the chatbot for customers' personal data.",
+      "bucket": "customer",
+      "why": "You control your content: what data goes in and whether it is sensitive."
+    },
+    {
+      "id": "shared-responsibility-07",
+      "text": "Turning on model invocation logging to keep prompts and responses.",
+      "bucket": "customer",
+      "why": "Invocation logging is off by default; enabling it is your choice and configuration."
+    },
+    {
+      "id": "shared-responsibility-08",
+      "text": "Maintaining the global network that connects AWS Regions and data centres.",
+      "bucket": "aws",
+      "why": "The network infrastructure of the AWS Cloud is part of the security of the cloud, which AWS owns."
+    },
+    {
+      "id": "shared-responsibility-09",
+      "text": "Patching the operating system of EC2 instances where Cairnway hosts its own open-source model.",
+      "bucket": "customer",
+      "why": "On EC2 you manage the guest operating system, so its patches are yours. Compare this with Bedrock, where AWS runs the servers."
+    },
+    {
+      "id": "shared-responsibility-10",
+      "text": "Securing the hardware and virtualization layer under every EC2 instance.",
+      "bucket": "aws",
+      "why": "AWS protects the hardware and the software that runs the cloud, whatever you run on top."
+    },
+    {
+      "id": "shared-responsibility-11",
+      "text": "Reviewing whether the chatbot's answers are accurate and fair before launch.",
+      "bucket": "customer",
+      "why": "How you use a model and whether its output fits your purpose are your responsibility."
+    },
+    {
+      "id": "shared-responsibility-12",
+      "text": "Deciding who in the company may read the chatbot's conversation logs.",
+      "bucket": "customer",
+      "why": "Access to your own data, logs included, is controlled by your IAM and bucket policies."
+    }
+  ]
+}

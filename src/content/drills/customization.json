@@ -1,0 +1,86 @@
+{
+  "id": "customization",
+  "kind": "sort",
+  "title": "Prompt engineering, RAG or fine-tuning?",
+  "description": "Sort each Cairnway requirement by the cheapest way to adapt a foundation model that meets it.",
+  "tasks": ["3.1", "3.3"],
+  "buckets": [
+    { "id": "prompt", "label": "Prompt engineering" },
+    { "id": "rag", "label": "RAG" },
+    { "id": "fine-tune", "label": "Fine-tuning" }
+  ],
+  "items": [
+    {
+      "id": "customization-01",
+      "text": "Answers must use today's prices, and the price list changes every day.",
+      "bucket": "rag",
+      "why": "RAG fetches current documents at question time. A fine-tuned model would be out of date by tomorrow."
+    },
+    {
+      "id": "customization-02",
+      "text": "Get the reply formatted as JSON with three fixed fields, starting this afternoon.",
+      "bucket": "prompt",
+      "why": "Clear instructions and an example output in the prompt do this with no training and no extra infrastructure."
+    },
+    {
+      "id": "customization-03",
+      "text": "Write thousands of product descriptions in Cairnway's distinctive brand voice, with 5,000 approved examples to learn from, after prompting alone fell short.",
+      "bucket": "fine-tune",
+      "why": "A consistent style learned from many labeled examples is what fine-tuning is for, once prompting isn't enough."
+    },
+    {
+      "id": "customization-04",
+      "text": "The assistant must cite which policy document each answer came from.",
+      "bucket": "rag",
+      "why": "RAG retrieves passages from your documents, so the answer can point to its source."
+    },
+    {
+      "id": "customization-05",
+      "text": "Show the model two example question-and-answer pairs so it copies their format.",
+      "bucket": "prompt",
+      "why": "That is few-shot prompting: the examples go in the prompt, and the model doesn't change."
+    },
+    {
+      "id": "customization-06",
+      "text": "Answer staff questions from 10,000 internal documents that are updated every week.",
+      "bucket": "rag",
+      "why": "The knowledge is large and changes often, so retrieving it at question time beats baking it into the model."
+    },
+    {
+      "id": "customization-07",
+      "text": "Sort support tickets into Cairnway's 40 internal categories more accurately than prompts can, with 20,000 labeled tickets available.",
+      "bucket": "fine-tune",
+      "why": "A specialized task with plenty of labeled examples, where prompting has hit its limit, suits fine-tuning."
+    },
+    {
+      "id": "customization-08",
+      "text": "Make the chatbot's tone friendlier for a one-week pilot, at the lowest cost.",
+      "bucket": "prompt",
+      "why": "Changing the instructions is the cheapest, fastest lever and is easy to undo."
+    },
+    {
+      "id": "customization-09",
+      "text": "Stop the assistant making up stock levels by giving it the current inventory at question time.",
+      "bucket": "rag",
+      "why": "Grounding answers in retrieved, current data reduces hallucinations about facts the model can't know."
+    },
+    {
+      "id": "customization-10",
+      "text": "Adapt the model to a narrow task, writing gear-repair instructions, using a training set of 3,000 prompt-and-response pairs.",
+      "bucket": "fine-tune",
+      "why": "Labeled prompt-and-response pairs are exactly what supervised fine-tuning trains on; the task is built into the model's weights."
+    },
+    {
+      "id": "customization-11",
+      "text": "Ask the model to think step by step before recommending a sleeping bag for given conditions.",
+      "bucket": "prompt",
+      "why": "Chain-of-thought is a prompting technique; it needs no training and no extra data store."
+    },
+    {
+      "id": "customization-12",
+      "text": "Answer questions about this season's new products, which the model has never seen, with the catalog kept in S3.",
+      "bucket": "rag",
+      "why": "New facts that live in your documents are best brought in by retrieval rather than by retraining."
+    }
+  ]
+}

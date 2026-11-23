@@ -152,3 +152,63 @@ export const lessonMetaSchema = z.object({
 })
 
 export type LessonMeta = z.infer<typeof lessonMetaSchema>
+
+// Service-matcher drills (src/content/drills/<deckId>.json). Card ids are
+// `<deckId>-NN` and are stored in progress, so never renumber or reuse one.
+
+const drillBase = {
+  id: z.string().regex(/^[a-z][a-z0-9-]*$/),
+  title: nonEmpty,
+  /** One sentence on what the deck drills. */
+  description: nonEmpty,
+  /** Tasks whose lessons link to the deck. */
+  tasks: z.array(z.string().regex(TASK_ID)).min(1),
+  sourceLinks: z.array(z.url().regex(LESSON_LINK)).optional(),
+}
+
+/** "Which service?": a scenario and four services to pick from. */
+const whichDeck = z.object({
+  ...drillBase,
+  kind: z.literal('which'),
+  cards: z
+    .array(
+      z.object({
+        id: z.string(),
+        prompt: nonEmpty,
+        /** Service id of the answer. */
+        answer: nonEmpty,
+        /** Exactly three service ids that each miss the scenario. */
+        distractors: z.array(nonEmpty).length(3),
+        /** Optional note on why the answer fits, shown after the pick. */
+        why: nonEmpty.optional(),
+      }),
+    )
+    .min(8),
+})
+
+/** Sorter: put each item into one of 2–4 buckets. */
+const sortDeck = z.object({
+  ...drillBase,
+  kind: z.literal('sort'),
+  buckets: z.array(z.object({ id: nonEmpty, label: nonEmpty })).min(2).max(4),
+  items: z.array(z.object({ id: z.string(), text: nonEmpty, bucket: nonEmpty, why: nonEmpty })).min(8),
+})
+
+export const drillDeckSchema = z.discriminatedUnion('kind', [whichDeck, sortDeck]).superRefine((deck, ctx) => {
+  const ids = deck.kind === 'which' ? deck.cards.map((c) => c.id) : deck.items.map((i) => i.id)
+  ids.forEach((id, i) => {
+    if (id !== `${deck.id}-${String(i + 1).padStart(2, '0')}`)
+      ctx.addIssue({ code: 'custom', message: `card ${i + 1} must have id ${deck.id}-${String(i + 1).padStart(2, '0')}, not ${id}` })
+  })
+  if (deck.kind === 'which')
+    for (const c of deck.cards)
+      if (new Set([c.answer, ...c.distractors]).size !== 4) ctx.addIssue({ code: 'custom', message: `${c.id}: the four services must differ` })
+  if (deck.kind === 'sort') {
+    const buckets = new Set(deck.buckets.map((b) => b.id))
+    for (const i of deck.items) if (!buckets.has(i.bucket)) ctx.addIssue({ code: 'custom', message: `${i.id}: unknown bucket ${i.bucket}` })
+  }
+})
+
+export type DrillDeck = z.infer<typeof drillDeckSchema>
+export type WhichDeck = Extract<DrillDeck, { kind: 'which' }>
+export type SortDeck = Extract<DrillDeck, { kind: 'sort' }>

@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project status
 
-Phases 0 (scaffold), 1 (quiz engine), 2 (lessons) and 3 (question bank) are done: tooling, Pages deploy, the blueprint, the service catalog, the item schema, the content tests and scripts, practice, the question bank browser, the mock exam, the progress store and page, all 14 lessons, and the full question bank (650 items, every task at target). The Explore pillar doesn't exist yet. **`PLAN.md` is the build plan and sets the order of work.** It records the decisions made, the blueprint → content map, the item kinds, the Explore pillar and the phases. As parts get built, describe them here (commands, file layout, gotchas), and mark phases done in `PLAN.md` §8 with the date.
+Phases 0 (scaffold), 1 (quiz engine), 2 (lessons) and 3 (question bank) are done: tooling, Pages deploy, the blueprint, the service catalog, the item schema, the content tests and scripts, practice, the question bank browser, the mock exam, the progress store and page, all 14 lessons, and the full question bank (650 items, every task at target). Phase 4 (Explore I) is under way: the service drills are built, flashcards are next. **`PLAN.md` is the build plan and sets the order of work.** It records the decisions made, the blueprint → content map, the item kinds, the Explore pillar and the phases. As parts get built, describe them here (commands, file layout, gotchas), and mark phases done in `PLAN.md` §8 with the date.
 
 ## Purpose
 
@@ -78,8 +78,14 @@ Every scenario uses one invented company, **Cairnway Outfitters**, an online out
   - `/mock`.
   - `/progress`: readiness by domain, the weakest tasks, both toggles, and export/import.
   - The extended-kinds toggles live in `components/ExtendedKindsToggle.tsx`.
-- **Progress** (`src/progress/store.ts`, key `aifc01:progress`, version 1):
-  - Per-item stats with a `streak` (consecutive correct answers, reset by a wrong one), mock results (with `scaled` and domain rows), `lessonsRead`, and the toggles `extendedInPractice` and `extendedInMock`, both on by default.
+- **Drills** (`/explore/drills`, `/explore/drills/:deckId`, `?misses=1` replays the learner's misses):
+  - Decks are `src/content/drills/<deckId>.json`, validated by `drillDeckSchema`: `which` (a scenario, the answer service id and exactly 3 distractor service ids, optional `why`) or `sort` (2–4 `buckets`, items each with a `bucket` and a `why`). Card ids are `<deckId>-NN` in file order and are stored in progress, so append, never renumber.
+  - `src/content/drills/index.ts` adds the generated `scope` sorter (every in- and out-of-scope catalog service, ids `scope-<serviceId>`).
+  - `src/drills/round.ts` `buildRound()` samples 10 cards, shuffles the four choices, and alternates buckets in sorters so lopsided decks stay balanced.
+  - Each deck's `tasks` puts a "Drill:" link on those lessons. `drills.test.ts` checks that services are in-scope catalog entries with a one-liner.
+  - `/explore` is the hub; add each Explore tool to `TOOLS` in `ExplorePage.tsx` when it exists.
+- **Progress** (`src/progress/store.ts`, key `aifc01:progress`, version 2; version 1 data is upgraded):
+  - Per-item stats with a `streak` (consecutive correct answers, reset by a wrong one), mock results (with `scaled` and domain rows), `lessonsRead`, `drills` (per deck: rounds, best percent, longest run), `drillMisses` (card ids last answered wrongly), and the toggles `extendedInPractice` and `extendedInMock`, both on by default.
   - Components read it with `useProgress()`.
   - `readiness.ts`: task readiness (coverage × accuracy, weighted by task weight), the weak-spot drill and `masteryOf()`.
 - **Tests**:

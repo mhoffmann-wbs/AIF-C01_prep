@@ -1,0 +1,132 @@
+{
+  "id": "genai-on-aws",
+  "kind": "which",
+  "title": "Generative AI on AWS",
+  "description": "Pick the Bedrock feature, agent service or AWS GenAI tool that fits each Cairnway requirement.",
+  "tasks": ["2.3", "3.1", "3.2", "3.4"],
+  "cards": [
+    {
+      "id": "genai-on-aws-01",
+      "prompt": "Try foundation models from several providers through one API, without managing any servers.",
+      "answer": "bedrock",
+      "distractors": ["sagemaker-ai", "ec2", "comprehend"]
+    },
+    {
+      "id": "genai-on-aws-02",
+      "prompt": "Let the shopping assistant answer from Cairnway's own return-policy documents in S3, with managed retrieval (RAG).",
+      "answer": "bedrock-knowledge-bases",
+      "distractors": ["bedrock-guardrails", "bedrock-prompt-management", "sagemaker-feature-store"]
+    },
+    {
+      "id": "genai-on-aws-03",
+      "prompt": "Stop the shopping assistant from giving medical advice and mask customers' phone numbers in its answers.",
+      "answer": "bedrock-guardrails",
+      "distractors": ["bedrock-knowledge-bases", "iam", "macie"]
+    },
+    {
+      "id": "genai-on-aws-04",
+      "prompt": "Run Cairnway's customer-service agent in production with session isolation, memory and identity, whatever framework it was built with.",
+      "answer": "bedrock-agentcore",
+      "distractors": ["strands-agents", "lambda", "bedrock-flows"]
+    },
+    {
+      "id": "genai-on-aws-05",
+      "prompt": "Write an AI agent in code with an open-source toolkit from AWS, where the model decides which tools to call.",
+      "answer": "strands-agents",
+      "distractors": ["bedrock-agentcore", "kiro", "bedrock-flows"],
+      "why": "Strands Agents is the open-source toolkit you build the agent with. AgentCore is where you run and operate it."
+    },
+    {
+      "id": "genai-on-aws-06",
+      "prompt": "Help Cairnway's developers plan, write and review the shop's code with an agentic AI tool used in their IDE and command line.",
+      "answer": "kiro",
+      "distractors": ["strands-agents", "transform", "quick"]
+    },
+    {
+      "id": "genai-on-aws-07",
+      "prompt": "Modernize Cairnway's legacy order-management application with agentic AI.",
+      "answer": "transform",
+      "distractors": ["kiro", "bedrock-agentcore", "sagemaker-pipelines"]
+    },
+    {
+      "id": "genai-on-aws-08",
+      "prompt": "Give the merchandising team BI dashboards and AI agents that answer questions about sales, with no code.",
+      "answer": "quick",
+      "distractors": ["redshift", "sagemaker-canvas", "kiro"]
+    },
+    {
+      "id": "genai-on-aws-09",
+      "prompt": "Pick a pre-trained open model from an ML hub and deploy it to a SageMaker endpoint that Cairnway controls.",
+      "answer": "sagemaker-jumpstart",
+      "distractors": ["bedrock-knowledge-bases", "sagemaker-model-registry", "data-exchange"]
+    },
+    {
+      "id": "genai-on-aws-10",
+      "prompt": "Save the product-description prompt as a template with variables, and keep versions so the team can roll back.",
+      "answer": "bedrock-prompt-management",
+      "distractors": ["bedrock-knowledge-bases", "sagemaker-model-registry", "bedrock-guardrails"]
+    },
+    {
+      "id": "genai-on-aws-11",
+      "prompt": "Compare three foundation models on Cairnway's own support questions, with an LLM-as-a-judge scoring the answers.",
+      "answer": "bedrock-evaluations",
+      "distractors": ["bedrock-prompt-management", "sagemaker-model-monitor", "cloudwatch"]
+    },
+    {
+      "id": "genai-on-aws-12",
+      "prompt": "Write new descriptions for 200,000 catalog items overnight at a lower price than on-demand calls.",
+      "answer": "bedrock-batch-inference",
+      "distractors": ["bedrock-provisioned-throughput", "bedrock-cross-region-inference", "lambda"]
+    },
+    {
+      "id": "genai-on-aws-13",
+      "prompt": "Serve the model that Cairnway fine-tuned in Bedrock to its live chat.",
+      "answer": "bedrock-provisioned-throughput",
+      "distractors": ["bedrock-batch-inference", "bedrock-cross-region-inference", "bedrock-flows"],
+      "why": "The catalog notes that Provisioned Throughput is required to use a custom model in Bedrock."
+    },
+    {
+      "id": "genai-on-aws-14",
+      "prompt": "Handle traffic peaks on Black Friday by routing on-demand requests to other AWS Regions in the same geography.",
+      "answer": "bedrock-cross-region-inference",
+      "distractors": ["bedrock-provisioned-throughput", "cloudfront", "bedrock-batch-inference"]
+    },
+    {
+      "id": "genai-on-aws-15",
+      "prompt": "Use foundation models built by Amazon itself, rather than by another model provider.",
+      "answer": "nova",
+      "distractors": ["sagemaker-jumpstart", "rekognition", "polly"]
+    },
+    {
+      "id": "genai-on-aws-16",
+      "prompt": "Chain a saved prompt, a knowledge-base lookup and a Lambda function into one multi-step generative AI workflow.",
+      "answer": "bedrock-flows",
+      "distractors": ["sagemaker-pipelines", "bedrock-prompt-management", "strands-agents"]
+    },
+    {
+      "id": "genai-on-aws-17",
+      "prompt": "Block the refund agent from calling the refund tool for amounts over 500 dollars, with a rule kept outside the agent's code.",
+      "answer": "bedrock-agentcore-policy",
+      "distractors": ["bedrock-guardrails", "iam", "bedrock-agentcore-identity"]
+    },
+    {
+      "id": "genai-on-aws-18",
+      "prompt": "Check the shipping-policy assistant's answers against the written policy rules with formal logic, to catch incorrect statements.",
+      "answer": "bedrock-automated-reasoning",
+      "distractors": ["bedrock-evaluations", "comprehend", "config"]
+    },
+    {
+      "id": "genai-on-aws-19",
+      "prompt": "Score how well a deployed agent picks and uses its tools, with LLM-as-a-judge evaluators.",
+      "answer": "bedrock-agentcore-evaluations",
+      "distractors": ["bedrock-evaluations", "sagemaker-model-monitor", "cloudtrail"],
+      "why": "Bedrock Model Evaluation compares models. AgentCore Evaluations assesses agents, including their tool use."
+    },
+    {
+      "id": "genai-on-aws-20",
+      "prompt": "Let the order-lookup agent act on behalf of a signed-in customer, with credentials for each tool it calls.",
+      "answer": "bedrock-agentcore-identity",
+      "distractors": ["bedrock-agentcore-policy", "secrets-manager", "bedrock-guardrails"]
+    }
+  ]
+}

@@ -5,7 +5,7 @@ import { z } from 'zod'
 // migration in `load()` and `importProgress()` whenever the shape changes, and
 // keep ProgressSchema in step; never read localStorage elsewhere.
 const STORAGE_KEY = 'aifc01:progress'
-const VERSION = 1
+const VERSION = 2
 
 export interface ItemStat {
   attempts: number
@@ -35,6 +35,25 @@ export interface MockResult {
   domains: ScoreRowRecord[]
 }
 
+/** A learner's record on one drill deck. */
+export interface DrillStat {
+  rounds: number
+  /** Best round score in percent. */
+  best: number
+  /** Longest run of correct answers within one round. */
+  bestStreak: number
+  lastAt: number
+}
+
+export interface DrillRound {
+  correct: number
+  total: number
+  streak: number
+  /** Card ids answered wrongly and rightly in the round. */
+  missed: string[]
+  hit: string[]
+}
+
 export interface Progress {
   version: typeof VERSION
   /** Include ordering, matching and case-study items in practice and the question bank. */
@@ -45,10 +64,14 @@ export interface Progress {
   mockResults: MockResult[]
   /** Task ids whose lesson the learner marked as read. */
   lessonsRead: string[]
+  /** Per drill deck id. */
+  drills: Record<string, DrillStat>
+  /** Drill card ids last answered wrongly; a right answer removes one. */
+  drillMisses: string[]
 }
 
 function empty(): Progress {
-  return { version: VERSION, extendedInPractice: true, extendedInMock: true, items: {}, mockResults: [], lessonsRead: [] }
+  return { version: VERSION, extendedInPractice: true, extendedInMock: true, items: {}, mockResults: [], lessonsRead: [], drills: {}, drillMisses: [] }
 }
 
 function load(): Progress {
@@ -56,8 +79,9 @@ function load(): Progress {
     const raw = localStorage.getItem(STORAGE_KEY)
     if (!raw) return empty()
     const parsed = JSON.parse(raw) as { version?: number }
-    if (parsed.version !== VERSION) return empty()
-    return { ...empty(), ...parsed } as Progress
+    // Version 1 had no drills; the defaults from empty() fill them in.
+    if (typeof parsed.version !== 'number' || parsed.version < 1 || parsed.version > VERSION) return empty()
+    return { ...empty(), ...parsed, version: VERSION } as Progress
   } catch {
     return empty()
   }
@@ -119,6 +143,26 @@ export function setLessonRead(taskId: string, read: boolean) {
   commit({ ...state, lessonsRead: read ? [...others, taskId] : others })
 }
 
+export function recordDrillRound(deckId: string, round: DrillRound, at: number = Date.now()) {
+  const prev = state.drills[deckId] ?? { rounds: 0, best: 0, bestStreak: 0, lastAt: 0 }
+  const percent = round.total ? Math.round((round.correct / round.total) * 100) : 0
+  const hit = new Set(round.hit)
+  const kept = state.drillMisses.filter((id) => !hit.has(id) && !round.missed.includes(id))
+  commit({
+    ...state,
+    drills: {
+      ...state.drills,
+      [deckId]: {
+        rounds: prev.rounds + 1,
+        best: Math.max(prev.best, percent),
+        bestStreak: Math.max(prev.bestStreak, round.streak),
+        lastAt: at,
+      },
+    },
+    drillMisses: [...kept, ...round.missed],
+  })
+}
+
 // Imports come from files people pick, so they are validated in full before replacing anything.
 const count = z.number().int().nonnegative()
 const row = z.object({ id: z.string(), correct: count, total: count })
@@ -143,6 +187,8 @@ const ProgressSchema = z.object({
     }),
   ),
   lessonsRead: z.array(z.string()),
+  drills: z.record(z.string(), z.object({ rounds: count, best: z.number().min(0).max(100), bestStreak: count, lastAt: z.number() })),
+  drillMisses: z.array(z.string()),
 })
 
 const EXPORT_APP = 'aif-c01-prep'
@@ -170,7 +216,9 @@ export function importProgress(json: string) {
   if (typeof version === 'number' && version > VERSION) {
     throw new Error('This export comes from a newer version of the app. Reload the app, then import it again.')
   }
-  const result = ProgressSchema.safeParse({ ...empty(), ...doc.progress })
+  // Older versions lack newer fields; the defaults from empty() fill them in.
+  const older = typeof version === 'number' && version >= 1 && version < VERSION
+  const result = ProgressSchema.safeParse({ ...empty(), ...doc.progress, ...(older ? { version: VERSION } : {}) })
   if (!result.success) throw new Error('This export is damaged or incomplete, so nothing was imported.')
   commit(result.data)
 }
