@@ -1,11 +1,12 @@
 // @vitest-environment jsdom
 // UI tests run against the real routes and the real question bank, so keep them
 // independent of item order and pool size.
-import { cleanup, fireEvent, render, screen, within } from '@testing-library/react'
+import { cleanup, fireEvent, render, screen, waitFor, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { RouterProvider, createMemoryRouter } from 'react-router'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { routes } from '../app/routes'
+import { SIMS } from '../content/sims'
 import { createDeck, getProgress, resetProgress } from '../progress/store'
 
 /**
@@ -192,6 +193,39 @@ describe('flashcards', () => {
 })
 
 describe('concept simulators', () => {
+  it.each(SIMS.map((s) => [s.id, s.title]))('loads the %s simulator', async (id, title) => {
+    expect(await renderAt(`/explore/sims/${id}`)).toHaveTextContent(title)
+    await waitFor(() => expect(screen.queryByText('Loading the simulator…')).not.toBeInTheDocument(), { timeout: 10_000 })
+    expect(screen.queryByText(/data is invalid/)).not.toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: 'Now you try' })).toBeInTheDocument()
+  })
+
+  it("blocks six of nine conversations with Cairnway's guardrail setup", async () => {
+    const user = userEvent.setup()
+    await renderAt('/explore/sims/guardrails')
+    await user.click(await screen.findByRole('button', { name: "Use Cairnway's setup" }))
+    expect(screen.getByRole('heading', { name: /Trailmate conversations/ })).toHaveTextContent('6 of 9 blocked')
+    expect(screen.queryByText(/dana\.reyes@example\.com/)).not.toBeInTheDocument()
+    expect(screen.getByText(/I'm Dana Reyes, \{EMAIL\}, phone \{PHONE\}/)).toBeInTheDocument()
+  })
+
+  it('walks the RAG steps to a grounded answer', async () => {
+    const user = userEvent.setup()
+    await renderAt('/explore/sims/rag')
+    for (let i = 0; i < 5; i++) await user.click(await screen.findByRole('button', { name: /^Next:/ }))
+    expect(screen.getByText('You can return unused gear within 30 days of delivery for a full refund.')).toBeInTheDocument()
+    expect(screen.getByText(/Grounded in chunk 1/)).toBeInTheDocument()
+  })
+
+  it('marks a misplaced workload in the inference chooser', async () => {
+    const user = userEvent.setup()
+    await renderAt('/explore/sims/inference')
+    const group = await screen.findByRole('group', { name: /fraud during checkout/ })
+    await user.click(within(group).getByRole('button', { name: 'Batch' }))
+    expect(screen.getByText(/It's Real-time\./)).toBeInTheDocument()
+    expect(screen.getByText('0 of 1 right')).toBeInTheDocument()
+  })
+
   it('lists the simulators and links lessons to theirs', async () => {
     expect(await renderAt('/explore/sims')).toHaveTextContent('Concept simulators')
     expect(screen.getByRole('link', { name: 'Next-token sampler' })).toHaveAttribute('href', '/explore/sims/sampler')

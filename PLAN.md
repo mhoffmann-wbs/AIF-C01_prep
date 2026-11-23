@@ -104,7 +104,7 @@ The links to the matching simulators, drills, flashcards and walkthroughs are ge
 
 ## 6. Explore: the hands-on replacement
 
-### 6a. Concept simulators (`/explore/sim/:simId`)
+### 6a. Concept simulators (`/explore/sims/:simId`)
 Small interactive widgets, each built as a React component with its copy and parameters kept as data. Each ends with 2–3 "now you try" questions taken from the bank.
 
 | Sim | What the learner does | Objectives |
@@ -164,5 +164,5 @@ Tooling:
 4. **Explore I** (done 2026-11-23): service catalog drills and sorters, then flashcards.
    - *Drills* (done 2026-11-23): 5 "Which service?" decks (80 cards) and 4 sorters (shared responsibility, learning types, prompt engineering vs. RAG vs. fine-tuning, and the in/out-of-scope sorter generated from the catalog). Buttons replace drag and drop, so sorters work with the keyboard and on phones. Missed cards are kept per learner and can be replayed per deck.
    - *Flashcards* (done 2026-11-23): 316 written cards (3–7 per objective, written by agents per task from the lessons, then reviewed) and 78 service cards generated from the catalog (51 services and 27 features), in 5 domain decks and a service deck. Own decks can be written, downloaded and uploaded. Ported spaced repetition: Leitner boxes with Again/Good/Easy.
-5. **Explore II**: the concept simulators.
+5. **Explore II** (done 2026-11-23): nine concept simulators, each with exam takeaways and three bank questions to answer. Built from data plus one component folder each: the next-token sampler, metrics lab (it reproduces lesson 1.3's fraud example), fit explorer, token cost calculator (illustrative rates; only the batch discount and Provisioned Throughput rules are AWS facts), RAG step-through (toy 2-D embeddings), customization ladder, prompt technique compare, Guardrails configurator (filter strengths and PII masking checked against the AWS Guardrails pages) and inference mode chooser.
 6. **Walkthroughs and guides**: console walkthroughs, the cheat sheet, the exam-day guide, a mobile pass and accessibility for the order and match items.
