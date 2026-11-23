@@ -1,0 +1,47 @@
+{
+  "id": "fit",
+  "title": "Fit explorer",
+  "description": "Make a sales model simpler or more complex and watch it underfit, fit well, then memorize the noise and overfit.",
+  "intro": "Cairnway wants to predict how many insulated jackets it sells on a day from the day's average temperature. The model learns from the blue points and is checked on the orange points it never saw. Start at complexity 1, then raise it one step at a time and watch both errors.",
+  "objectives": ["1.1.1", "4.1.6"],
+  "takeaways": [
+    "Underfitting (high bias): the model is too simple and does badly on the training data and on new data.",
+    "Overfitting (high variance): the model memorizes the training data, noise included. Training error keeps falling while error on new data rises.",
+    "A good fit does well on data it has never seen. Always compare training performance with separate validation or test data: a big gap suggests overfitting, poor on both suggests underfitting.",
+    "Making a model more complex lowers bias but raises variance. High variance also means the model changes a lot when the training data changes a little.",
+    "An underfit or overfit model, or one trained mainly on one group, can be inaccurate for some customer groups even when its overall score looks fine. Test by group."
+  ],
+  "tryItems": ["1.1-002", "4.1-013", "4.1-047"],
+  "params": {
+    "xLabel": "Average temperature (°C)",
+    "yLabel": "Jackets sold",
+    "xRange": [-5, 30],
+    "yRange": [0, 100],
+    "maxDegree": 9,
+    "start": 1,
+    "train": [
+      { "x": -4, "y": 85 },
+      { "x": 0, "y": 66 },
+      { "x": 3, "y": 41 },
+      { "x": 7, "y": 41 },
+      { "x": 10, "y": 29 },
+      { "x": 14, "y": 30 },
+      { "x": 18, "y": 25 },
+      { "x": 21, "y": 15 },
+      { "x": 25, "y": 12 },
+      { "x": 28, "y": 23 }
+    ],
+    "validation": [
+      { "x": -2, "y": 64 },
+      { "x": 1, "y": 54 },
+      { "x": 5, "y": 38 },
+      { "x": 8, "y": 30 },
+      { "x": 11, "y": 25 },
+      { "x": 15, "y": 30 },
+      { "x": 18, "y": 21 },
+      { "x": 22, "y": 18 },
+      { "x": 25, "y": 26 },
+      { "x": 28, "y": 21 }
+    ]
+  }
+}
