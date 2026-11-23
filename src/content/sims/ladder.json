@@ -1,0 +1,150 @@
+{
+  "id": "ladder",
+  "title": "Customization ladder",
+  "description": "Tick what a use case needs to see which way of adapting a foundation model fits, then place nine Cairnway use cases on the ladder.",
+  "intro": "A foundation model that doesn't do what you need can be adapted, and every step up the ladder costs more time, data and money. Tick the needs one by one and watch the recommendation climb, then place each Cairnway use case on the cheapest rung that meets it.",
+  "objectives": ["3.1.5", "3.3.1"],
+  "takeaways": [
+    "Always try prompt engineering (in-context learning) first: no training, the model doesn't change, and only the longer prompts cost more tokens.",
+    "RAG gives the model your facts, especially facts that change, without changing the model. Fine-tuning teaches style, format and task behaviour from labeled examples, not fresh facts.",
+    "Distillation trains a smaller student model on a large teacher model's answers: cheaper and faster to run for one task, not a way to add knowledge.",
+    "Continued pre-training uses large amounts of unlabeled domain text to teach a whole field's language. Pre-training from scratch is enormously expensive and almost never the right business or exam answer.",
+    "On Amazon Bedrock, the customization methods are supervised fine-tuning, reinforcement fine-tuning and distillation, and a customized model is used through Provisioned Throughput."
+  ],
+  "tryItems": ["3.1-024", "3.1-029", "3.3-003"],
+  "links": [
+    { "title": "Amazon Bedrock: customizing models", "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/custom-models.html" },
+    { "title": "Amazon Bedrock Model Distillation", "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/model-distillation.html" },
+    { "title": "Amazon Bedrock: Provisioned Throughput", "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/prov-throughput.html" }
+  ],
+  "params": {
+    "rungs": [
+      {
+        "id": "prompting",
+        "name": "Prompt engineering (in-context learning)",
+        "what": "Instructions and examples go into the prompt. The model itself doesn't change.",
+        "data": "A few examples at most.",
+        "costs": "No training. Longer prompts cost more tokens on every request.",
+        "level": 1,
+        "trains": false
+      },
+      {
+        "id": "rag",
+        "name": "RAG",
+        "what": "Relevant documents are retrieved and added to each prompt. The model doesn't change.",
+        "data": "Your documents, kept up to date.",
+        "costs": "A vector store, creating embeddings, and retrieval on each request.",
+        "level": 2,
+        "trains": false
+      },
+      {
+        "id": "fine-tuning",
+        "name": "Fine-tuning",
+        "what": "An existing model is trained further on your labeled examples. Its weights change.",
+        "data": "Labeled prompt and ideal-answer pairs.",
+        "costs": "A training job, a curated data set, and hosting the custom model.",
+        "level": 3,
+        "trains": true
+      },
+      {
+        "id": "distillation",
+        "name": "Distillation",
+        "what": "A large teacher model's answers train a smaller student model for one task.",
+        "data": "Prompts and the teacher's responses.",
+        "costs": "A training job, but the student is cheaper and faster to run.",
+        "level": 3,
+        "trains": true
+      },
+      {
+        "id": "continued",
+        "name": "Continued pre-training",
+        "what": "An existing model keeps training on large amounts of text from your field.",
+        "data": "Large amounts of unlabeled domain text.",
+        "costs": "Large data sets and long training jobs.",
+        "level": 4,
+        "trains": true
+      },
+      {
+        "id": "pretraining",
+        "name": "Pre-training from scratch",
+        "what": "A brand-new foundation model is built.",
+        "data": "Vast amounts of general, unlabeled data.",
+        "costs": "Enormous amounts of data, compute and expertise.",
+        "level": 5,
+        "trains": true
+      }
+    ],
+    "needs": [
+      { "id": "facts", "label": "It needs our own facts, and they change" },
+      { "id": "behaviour", "label": "It needs a consistent style, format or task behaviour that prompting can't achieve, and we have labeled examples" },
+      { "id": "cheaper", "label": "A large model already does the task well, but it is too slow or costly at our volume" },
+      { "id": "domain", "label": "It must learn a whole field's language, and we have lots of unlabeled text from that field" },
+      { "id": "newModel", "label": "We want a brand-new foundation model of our own" }
+    ],
+    "scenarios": [
+      {
+        "id": "seasonal-policy",
+        "text": "Trailmate must answer from the current returns policy, which changes every season, and point to the section it used.",
+        "needs": ["facts"],
+        "answer": "rag",
+        "why": "Changing facts belong in retrieved documents. Retraining every season would be slow and costly, and fine-tuning doesn't reliably teach facts."
+      },
+      {
+        "id": "review-bullets",
+        "text": "Summarize each customer review into three short bullet points. A clear instruction and two examples in the prompt already work well.",
+        "needs": [],
+        "answer": "prompting",
+        "why": "The prompt already does the job, so nothing has to be trained or retrieved."
+      },
+      {
+        "id": "brand-voice",
+        "text": "Every product description must follow Cairnway's brand voice and a fixed format. Careful prompting still gives uneven results, and the team has 2,000 approved descriptions.",
+        "needs": ["behaviour"],
+        "answer": "fine-tuning",
+        "why": "Consistent style and format, with labeled examples to learn from, is what fine-tuning is for."
+      },
+      {
+        "id": "description-volume",
+        "text": "A large model writes excellent product descriptions, but it is too slow and expensive for a million items. The team wants a smaller model that does this one task nearly as well.",
+        "needs": ["cheaper"],
+        "answer": "distillation",
+        "why": "The large model acts as the teacher, and a smaller student learns the task from its answers: cheaper and faster to run."
+      },
+      {
+        "id": "climbing-vocabulary",
+        "text": "The model keeps misunderstanding niche mountaineering terms in every kind of task. Cairnway has thousands of unlabeled gear manuals and magazine articles, and prompting plus RAG were not enough.",
+        "needs": ["domain"],
+        "answer": "continued",
+        "why": "Teaching a whole field's language from lots of unlabeled text is continued pre-training (domain adaptation)."
+      },
+      {
+        "id": "own-model",
+        "text": "A board member suggests Cairnway build its own general-purpose foundation model, trained from nothing, to beat competitors.",
+        "needs": ["newModel"],
+        "answer": "pretraining",
+        "why": "That is pre-training from scratch: enormous data, compute and expertise. It is almost never worth it for a retailer, which is the real lesson here."
+      },
+      {
+        "id": "supplier-handbook",
+        "text": "Buyers want answers about the 300-page supplier handbook, which is revised every month.",
+        "needs": ["facts"],
+        "answer": "rag",
+        "why": "Long, changing documents are retrieved at question time, so answers always use the latest revision."
+      },
+      {
+        "id": "email-categories",
+        "text": "Sort support emails into Cairnway's 12 internal categories with exact labels. Prompting misses edge cases, and the team has 5,000 emails already labeled.",
+        "needs": ["behaviour"],
+        "answer": "fine-tuning",
+        "why": "A specialised task with plenty of labeled examples, after prompting fell short: fine-tune."
+      },
+      {
+        "id": "friendlier-tone",
+        "text": "Make Trailmate's answers sound warmer and friendlier. There is no training data, and the budget is small.",
+        "needs": [],
+        "answer": "prompting",
+        "why": "An instruction such as \"answer in a warm, friendly tone\" is the cheapest fix and needs no data."
+      }
+    ]
+  }
+}
