@@ -1,0 +1,58 @@
+{
+  "id": "cost",
+  "title": "Token cost calculator",
+  "description": "Set tokens per request and traffic, then compare a month of on-demand, batch and Provisioned Throughput, with and without prompt caching.",
+  "intro": "Most foundation models are priced per token, with separate rates for the tokens you send and the tokens the model writes. Pick a Cairnway preset, then move one slider at a time. Try doubling the output tokens, then doubling the input tokens: which costs more? Then turn the cached prefix down to 0 for the chat preset.",
+  "objectives": ["2.1.4", "2.3.4", "3.1.1"],
+  "takeaways": [
+    "On-demand pricing charges per token, with separate input and output rates; output tokens usually cost more. Longer answers also take longer to write.",
+    "Batch inference processes many requests together, not in real time. AWS lists select models at a 50% lower price than on-demand: the answer for big jobs that can wait.",
+    "Provisioned Throughput is a fixed hourly price per model unit, billed whether or not you use it. It pays off for steady, high traffic and is required to use a custom model on Amazon Bedrock.",
+    "Prompt caching reuses a long, repeated start of the prompt to cut input cost and latency. Only supported models offer it, and writing to the cache can cost more, so the savings come from reuse.",
+    "Cut cost by sending fewer tokens (shorter prompts, only the relevant context), capping the response length and choosing a smaller model when it is good enough."
+  ],
+  "tryItems": ["2.1-034", "3.1-007", "2.3-036"],
+  "links": [
+    { "title": "Amazon Bedrock pricing", "url": "https://aws.amazon.com/bedrock/pricing/" },
+    { "title": "Amazon Bedrock: Provisioned Throughput", "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/prov-throughput.html" },
+    { "title": "Amazon Bedrock: prompt caching", "url": "https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-caching.html" }
+  ],
+  "params": {
+    "rates": {
+      "inputPerMillion": 3,
+      "outputPerMillion": 15,
+      "batchDiscount": 0.5,
+      "unitPerHour": 30,
+      "unitTokensPerMinute": 250000,
+      "peakFactor": 2,
+      "cacheRead": 0.1,
+      "cacheWrite": 1.25,
+      "tokensPerSecond": 50
+    },
+    "daysPerMonth": 30,
+    "requestSteps": [100, 300, 1000, 3000, 10000, 30000, 100000, 300000],
+    "presets": [
+      {
+        "id": "chat",
+        "label": "Trailmate live chat",
+        "note": "Every request starts with the same 3,000-token block of tone guidelines and policies, then a short question.",
+        "realtime": true,
+        "workload": { "inputTokens": 3500, "outputTokens": 250, "requestsPerDay": 3000, "cachedPrefix": 3000, "hitRate": 0.95 }
+      },
+      {
+        "id": "catalog",
+        "label": "Overnight catalog descriptions",
+        "note": "30,000 new product descriptions a month, written overnight. Nobody waits for a single one.",
+        "realtime": false,
+        "workload": { "inputTokens": 600, "outputTokens": 300, "requestsPerDay": 1000, "cachedPrefix": 0, "hitRate": 0 }
+      },
+      {
+        "id": "steady",
+        "label": "Steady very high traffic",
+        "note": "A year later: product Q&A on every page, busy around the clock.",
+        "realtime": true,
+        "workload": { "inputTokens": 1500, "outputTokens": 300, "requestsPerDay": 300000, "cachedPrefix": 0, "hitRate": 0 }
+      }
+    ]
+  }
+}
