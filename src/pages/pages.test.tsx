@@ -264,4 +264,15 @@ describe('concept simulators', () => {
     expect(within(first).getByRole('status')).toHaveTextContent(/Correct|Not quite/)
     expect(getProgress().items['1.3-022']).toMatchObject({ attempts: 1 })
   })
+
+  it('renders both guides with the exam facts and their sources', async () => {
+    expect(await renderAt('/guides/exam-day')).toHaveTextContent('Exam day')
+    expect(screen.getByText(/65: 50 scored and 15 unscored/)).toBeInTheDocument()
+    expect(screen.getByText('Performing hyperparameter tuning or model optimization')).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: 'cheat sheet' })).toHaveAttribute('href', '/guides/cheat-sheet')
+    cleanup()
+    expect(await renderAt('/guides/cheat-sheet')).toHaveTextContent('Cheat sheet')
+    expect(screen.getByRole('heading', { name: 'Sources' })).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: 'Lesson 3.1' })).toHaveAttribute('href', '/learn/3.1')
+  })
 })

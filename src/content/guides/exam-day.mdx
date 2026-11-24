@@ -1,0 +1,98 @@
+import { EXAM_FORMAT, GUIDE, OUT_OF_SCOPE_TASKS } from '../blueprint'
+
+export const meta = {
+  slug: 'exam-day',
+  title: 'Exam day',
+  updated: '2026-11-24',
+  summary:
+    'The format of the AIF-C01 exam, how to pace yourself, how to read scenario questions, and what to sort out before the day. Facts come from the AWS pages listed under Sources.',
+  links: [
+    { title: 'AWS Certified AI Practitioner (AIF-C01) exam guide', url: 'https://docs.aws.amazon.com/aws-certification/latest/ai-practitioner-01/ai-practitioner-01.html' },
+    { title: 'Exam guide revisions', url: 'https://docs.aws.amazon.com/aws-certification/latest/ai-practitioner-01/aif-01-revisions.html' },
+    { title: 'AWS Certified AI Practitioner certification page', url: 'https://aws.amazon.com/certification/certified-ai-practitioner/' },
+    { title: 'AWS Certification policies: before testing', url: 'https://aws.amazon.com/certification/policies/before-testing/' },
+  ],
+}
+
+## The format
+
+| | AIF-C01 |
+|---|---|
+| Questions | {EXAM_FORMAT.items}: {EXAM_FORMAT.scoredItems} scored and {EXAM_FORMAT.unscoredItems} unscored |
+| Time | {EXAM_FORMAT.minutes} minutes |
+| Result | pass or fail, with a scaled score from {EXAM_FORMAT.scaleMin} to {EXAM_FORMAT.scaleMax}; you pass at **{EXAM_FORMAT.passScore}** |
+| Question types | multiple choice (one right answer out of four) and multiple response (two or more right answers out of five or more) |
+| Price | 100 USD (AWS lists other currencies on its exam pricing page) |
+| Where | a Pearson VUE test centre, or online with a proctor |
+| Valid for | 3 years |
+
+- **The 15 unscored questions are not marked.** AWS uses them to try out future questions. You can't tell which ones they are, so give every question the same effort.
+- **The score is compensatory.** You don't need to pass each domain, only the exam as a whole. A weak domain can be made up elsewhere, but domain 3 (28%) is the biggest, so it's the worst one to be weak in.
+- **Unanswered questions are scored as wrong, and there is no penalty for guessing.** Never leave a question blank.
+- For multiple-response questions, the question says how many answers to pick, for example "(Select TWO.)". Read that before you read the options.
+- Exam guide v{GUIDE.version} lists only the two types above. The extended kinds in this app (ordering, matching and case studies) are optional extra practice: they test the same knowledge from another angle. Switch them off on the [progress page](/progress) if you want practice that looks only like the guide.
+
+## Pacing
+
+{EXAM_FORMAT.minutes} minutes for {EXAM_FORMAT.items} questions is about **1 minute 23 seconds per question**. Aim for about 1 minute 15 seconds, which leaves around 9 minutes at the end for questions you want to look at again.
+
+| By minute | you should be past question |
+|---|---|
+| 20 | 16 |
+| 40 | 32 |
+| 60 | 48 |
+| 81 | 65, then go back to the ones you were unsure of |
+
+- **If a question takes more than 2 minutes, pick your best answer, note it for review and move on.** A hard question is worth no more than an easy one.
+- Most AIF-C01 questions are short scenarios at Cairnway-like companies. They test whether you can match a need to a concept or a service, not whether you remember numbers.
+- The [mock exam](/mock) uses the real length and time limit. Take at least two under exam conditions: no lessons, no notes, phone away.
+
+## Reading a scenario question
+
+1. **Read the last sentence first.** It tells you what is being asked: a service, a technique, a risk, a metric.
+2. **Underline the constraint.** Most wrong options are good ideas that miss one word in the question. Typical constraints:
+
+| The question says | Usually points to |
+|---|---|
+| "least operational overhead", "fully managed", "no ML expertise" | a managed AI service or Amazon Bedrock, not training your own model on SageMaker AI |
+| "use the company's own, up-to-date documents" | retrieval augmented generation (RAG), for example Bedrock Knowledge Bases, not fine-tuning |
+| "change the model's style or teach it a specialised task with labelled examples" | fine-tuning |
+| "lowest cost" for a model that is good enough | the smallest model that meets the need, prompt engineering before RAG before fine-tuning, batch inference when answers can wait |
+| "block harmful content", "deny a topic", "mask PII in prompts and answers" | Amazon Bedrock Guardrails |
+| "who called which API, and when" | AWS CloudTrail |
+| "find PII in S3 buckets" | Amazon Macie |
+| "AWS's compliance reports" (SOC, ISO) | AWS Artifact |
+| "explain a prediction", "detect bias in data" | SageMaker Clarify |
+| "send low-confidence predictions to a person" | Amazon Augmented AI (A2I) |
+| "document a model's intended use and risks" | SageMaker Model Cards |
+| "keep traffic to Bedrock off the internet" | AWS PrivateLink (VPC endpoints) |
+
+3. **Eliminate before you choose.** Cross out options that are out of scope for the question (a speech service for a text problem), that do more than asked (training a model when a managed service exists), or that are a different stage of the lifecycle.
+4. **Watch for absolutes.** Options with "always", "guarantees" or "eliminates" are usually wrong: no technique removes hallucinations or bias completely.
+5. The [cheat sheet](/guides/cheat-sheet) collects the facts these questions rely on, domain by domain.
+
+## What the exam doesn't test
+
+The exam guide says the target candidate has up to 6 months of exposure to AI and ML on AWS, and **uses** AI solutions but doesn't necessarily **build** them. These job tasks are out of scope, so don't spend time on them:
+
+<ul>
+  {OUT_OF_SCOPE_TASKS.map((t) => (
+    <li key={t}>{t}</li>
+  ))}
+</ul>
+
+You still need to know *what* these things are (for example, what hyperparameter tuning is for), just not how to do them.
+
+## Before the day
+
+- **Book early, and know the 24-hour rule.** You can reschedule or cancel up to 24 hours before your appointment, and reschedule at most twice. Inside those 24 hours you can't, and missing the exam forfeits the fee.
+- **Bring the right ID.** AWS asks for valid government-issued ID, and a second form of ID as well. The rules differ between online and test-centre exams, so read them on the policies page for your option.
+- **Not a native English speaker?** You can request "ESL +30", 30 extra minutes on exams taken in English. Request it once in your AWS Certification account, under Request Exam Accommodations, **before you register**; it then applies to every future exam. With it you have about 1 minute 50 seconds per question.
+- **Taking it online?** You'll need to talk to the proctor to complete the appointment. Test your computer and room against Pearson VUE's online requirements well before the day.
+- **Results** arrive within 5 business days in your AWS Certification account, under Exam History.
+
+## The day before
+
+- Read the cheat sheet once. Don't start new topics.
+- Review your weak tasks on the [progress page](/progress), and do one short [weak-spot practice](/practice?weak=1) set, not a full mock.
+- Sleep. A rested brain reads scenarios more carefully than a crammed one.

@@ -153,6 +153,18 @@ export const lessonMetaSchema = z.object({
 
 export type LessonMeta = z.infer<typeof lessonMetaSchema>
 
+/** A print-ready guide (src/content/guides/<slug>.mdx), e.g. the cheat sheet. */
+export const guideMetaSchema = z.object({
+  slug: z.string().regex(/^[a-z-]+$/),
+  title: nonEmpty,
+  /** Date the guide's facts were last checked against the exam guide and AWS pages. */
+  updated: z.iso.date(),
+  summary: nonEmpty,
+  links: z.array(z.object({ title: nonEmpty, url: z.url().regex(LESSON_LINK) })).min(1),
+})
+
+export type GuideMeta = z.infer<typeof guideMetaSchema>
+
 // Service-matcher drills (src/content/drills/<deckId>.json). Card ids are
 // `<deckId>-NN` and are stored in progress, so never renumber or reuse one.
 

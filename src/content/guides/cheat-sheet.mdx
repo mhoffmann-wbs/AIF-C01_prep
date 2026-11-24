@@ -1,0 +1,157 @@
+export const meta = {
+  slug: 'cheat-sheet',
+  title: 'Cheat sheet',
+  updated: '2026-11-24',
+  summary:
+    'The facts AIF-C01 questions rely on, one part per exam domain, collected from the 14 lessons. Read it the night before; each topic has a full lesson with its sources.',
+  links: [
+    { title: 'AWS Certified AI Practitioner (AIF-C01) exam guide', url: 'https://docs.aws.amazon.com/aws-certification/latest/ai-practitioner-01/ai-practitioner-01.html' },
+    { title: 'Amazon Bedrock pricing', url: 'https://aws.amazon.com/bedrock/pricing/' },
+    { title: 'Amazon Bedrock Guardrails', url: 'https://aws.amazon.com/bedrock/guardrails/' },
+    { title: 'AWS: Responsible AI resources (AI Service Cards)', url: 'https://aws.amazon.com/ai/responsible-ai/resources/' },
+  ],
+}
+
+## 1. Fundamentals of AI and ML (20%)
+
+- **Nesting:** AI ⊃ machine learning ⊃ deep learning ⊃ generative AI. **Agentic AI** uses GenAI to plan and act; it doesn't replace it. [Lesson 1.1](/learn/1.1)
+- **Training** builds the model from data; **inferencing** is every later use of it.
+- **Learning styles:** labelled examples → **supervised**. No labels, find groups → **unsupervised**. Rewards and penalties from trial and error → **reinforcement**.
+- **Techniques:** predict a number → **regression**; a category (even yes/no) → **classification**; groups without labels → **clustering**.
+
+| Inference type | Clue in the question |
+|---|---|
+| Real-time | low latency, interactive |
+| Serverless | idle periods, cold starts are acceptable |
+| Asynchronous | large payloads or long processing, no immediate reply needed |
+| Batch | the whole data set, on a schedule, no persistent endpoint |
+
+- **Fit:** good on training data, poor on new data → **overfitting** (high variance). Poor on both → **underfitting** (high bias).
+- **Don't use ML** when the result must be exact and guaranteed every time (tax, fixed policy rules), when simple rules will do, or when costs outweigh benefits. [Lesson 1.2](/learn/1.2)
+- **Ready-made service before a custom model:** Textract (text, forms and tables from documents), Transcribe (speech → text), Polly (text → speech), Translate, Comprehend (sentiment, entities, PII in text), Rekognition (images and video), Lex (chatbots), Personalize (recommendations). SageMaker AI only when you need your own model.
+- **ML pipeline:** collect → prepare and engineer features → train → tune and evaluate → deploy → monitor → retrain. Falling accuracy after deployment is **drift**: monitor and retrain. [Lesson 1.3](/learn/1.3)
+- **SageMaker AI features by stage:** Ground Truth labels data, Data Wrangler prepares it, Feature Store stores features, Pipelines automates the workflow, Model Registry tracks versions and approvals, Clarify checks bias and explains predictions, Model Monitor watches production.
+
+| Metric | Question it answers | Choose it when |
+|---|---|---|
+| Accuracy | how many predictions were right | classes are balanced |
+| Precision | when it says "yes", how often is it right: TP / (TP + FP) | false alarms are costly |
+| Recall | of the real "yes" cases, how many did it find: TP / (TP + FN) | missing a case is costly (fraud, disease) |
+| F1 | balance of precision and recall | both matter and classes are unbalanced |
+| AUC-ROC | performance across thresholds: 1.0 perfect, 0.5 guessing | comparing classifiers |
+
+- With rare events, a model that never flags anything has high accuracy and **zero recall**.
+- **Business metrics** (ROI, cost per user, customer feedback) say whether the model is worth having.
+
+## 2. Fundamentals of GenAI (24%)
+
+- **Tokens** are pieces of words. You pay per input and output token, so shorter prompts, shorter answers and smaller models cut cost and latency. [Lesson 2.1](/learn/2.1)
+- **Chunking** splits documents; **embeddings** turn each chunk into a vector of its meaning. Similar meaning = vectors close together.
+- **Model types:** LLM / transformer for text, **diffusion** for images, **multi-modal** for mixed inputs, **embedding model** for search by meaning.
+- **Prompt engineering** = wording the instructions. **Context engineering** = choosing everything in the context window: instructions, retrieved documents, history, memory, tool results.
+- **MCP** connects AI applications to tools and data, like a universal plug. It isn't a model or an agent. Agent-to-agent messaging is a separate concern (A2A).
+- **Advantages:** adaptable, fast, conversational, good at content. **Limits:** hallucinations, hard to explain, can be inaccurate, **nondeterministic** (same prompt, different answers). [Lesson 2.2](/learn/2.2)
+- **Choose a model by** type, performance, capability, constraints, compliance, cost, latency and complexity. The **smallest model that meets the requirement** wins.
+- **Business value metrics:** ROI, conversion rate, average revenue per user, customer lifetime value.
+
+| AWS offering | For |
+|---|---|
+| Amazon Bedrock | foundation models from many providers through one managed API |
+| SageMaker AI / JumpStart | building, customizing and hosting your own models; JumpStart is its model hub |
+| Amazon Quick | business users: AI assistance and dashboards, no code |
+| Kiro | developers building software with agentic AI |
+| Strands Agents | open-source toolkit to **write** an agent |
+| Bedrock AgentCore | platform to **run** agents in production (runtime, memory, gateway, identity, policy, observability) |
+
+- On Bedrock, your prompts and outputs aren't shared with model providers or used to improve the base models. [Lesson 2.3](/learn/2.3)
+- **Pricing:** **on-demand** per token, no commitment. **Batch** is cheaper for work that can wait (50% less on selected models). **Provisioned Throughput** is reserved capacity billed hourly, required for a **custom model** on Bedrock.
+- **Cross-Region inference:** more throughput; a **geographic** profile keeps processing inside a geography (residency), a global one may process anywhere.
+
+## 3. Applications of foundation models (28%)
+
+| Inference parameter | Turn it |
+|---|---|
+| Temperature | **down** for consistent, factual answers; **up** for creative variety |
+| Top P / top K | down to keep answers focused |
+| Response length (max tokens) | down to limit cost; the answer just stops at the cap |
+| Stop sequences | to end output at a known point |
+
+- **Cost ladder**, cheapest first: prompt engineering and in-context learning → **RAG** → fine-tuning or distillation → continued pre-training → pre-training from scratch. [Lesson 3.1](/learn/3.1)
+- **Current or company facts → RAG** (Bedrock Knowledge Bases). **Style, format or a specialised task → fine-tuning.** Fine-tuning doesn't keep facts up to date.
+- **Vector stores:** OpenSearch Service, Aurora or RDS for PostgreSQL with pgvector, Neptune, DocumentDB. S3 Glacier stores but can't search by meaning.
+- **Answer vs. act:** answering from documents → RAG; taking actions (call APIs, update records, multi-step tasks) → an **agent**.
+- **Prompting:** no examples = **zero-shot**, one = **single-shot**, several = **few-shot** (in-context learning). Step-by-step reasoning = **chain-of-thought**. None of them changes the model. [Lesson 3.2](/learn/3.2)
+- **Prompt attacks:** override the instructions → **hijacking / prompt injection**; bypass safety rules → **jailbreaking**; reveal the hidden prompt → **exposure** (leakage); corrupt data → **poisoning**. A "do not" line in the prompt is not a security control.
+- **Bedrock Prompt Management** saves, versions and compares prompts, with variables.
+- **Training data:** pre-training and continued pre-training use large **unlabelled** data; fine-tuning and instruction tuning use **labelled** prompt-and-answer pairs. **Transfer learning** is the idea behind fine-tuning. [Lesson 3.3](/learn/3.3)
+- **Distillation:** a big **teacher** model trains a small **student**: cheaper and faster, no new knowledge. **RLHF:** humans rank answers to train a reward model.
+- **Bedrock customization today:** supervised fine-tuning, reinforcement fine-tuning, distillation.
+
+| Evaluation | Use it for |
+|---|---|
+| **ROUGE** | summaries: word overlap with a reference (recall) |
+| **BLEU** | translation: word overlap with a reference (precision) |
+| **BERTScore** | meaning similarity, so paraphrases score well |
+| Human evaluation | tone, brand voice, creativity, helpfulness |
+| Benchmark datasets | fast, repeatable, large-scale checks |
+| LLM-as-a-judge | quick scoring with written reasons |
+
+- **Bedrock Model Evaluation** compares models on your data (automatic, human or judge). For RAG, test **retrieval** and **generation**; for agents, also **tool use**. [Lesson 3.4](/learn/3.4)
+
+## 4. Guidelines for responsible AI (14%)
+
+- **AWS's eight dimensions:** fairness, explainability, privacy and security, safety, controllability, veracity and robustness, governance, transparency. [Lesson 4.1](/learn/4.1)
+- **Transparency** = openness that AI is used and how. **Explainability** = why this particular output happened.
+- Overall accuracy can hide unfairness to a group: check **subgroups** and use representative, balanced data.
+
+| Guardrails safeguard | Stops |
+|---|---|
+| Content filters | hate, violence and other harmful categories; the prompt attack filter catches jailbreaks, injection and leakage |
+| Denied topics | subjects the app must not discuss |
+| Word filters | specific banned words |
+| Sensitive information filters | PII, blocked or masked |
+| Contextual grounding checks | answers not supported by the source text |
+| Automated Reasoning checks | answers that break logical policy rules |
+
+- **Tool by stage:** choose a model → Bedrock Model Evaluation; bias in data and predictions → SageMaker Clarify; bias drift in production → Model Monitor; human review of uncertain predictions → Amazon A2I; runtime safety → Bedrock Guardrails.
+- **GenAI legal risks:** IP infringement, biased outputs, loss of customer trust, end-user risk, hallucinations.
+- **Sustainability:** right-sized model, reuse instead of retraining, no unnecessary compute.
+- **Regulation or audits → the simpler, interpretable model**, even at some cost in accuracy. [Lesson 4.2](/learn/4.2)
+- **SageMaker Model Cards** (you write them) document intended use, risk rating, training and evaluation. **AI Service Cards** are published by AWS about its own services.
+- **Human-centred design:** feedback mechanisms, plain-language explanations, disclosure of AI use, a human who can override.
+
+## 5. Security, compliance and governance (14%)
+
+- **Shared responsibility:** AWS secures the cloud; you secure your data, IAM permissions, encryption choices, prompts, outputs and configuration. "AWS handles all security" is always wrong. [Lesson 5.1](/learn/5.1)
+
+| Need | Service |
+|---|---|
+| who may call a service | IAM (least privilege) |
+| which tool calls an agent may make | Policy in Bedrock AgentCore |
+| identities and credentials for agents | AgentCore Identity |
+| encryption keys | AWS KMS |
+| Bedrock traffic off the public internet | VPC interface endpoint with AWS PrivateLink |
+| find PII in S3 | Amazon Macie |
+| software vulnerabilities in EC2, containers, Lambda | Amazon Inspector |
+| who called which API, when | AWS CloudTrail |
+| the prompts and responses themselves | Bedrock model invocation logging (off by default) |
+| resource settings over time, compliance rules | AWS Config |
+| AWS's SOC and ISO reports | AWS Artifact |
+| best-practice checks (cost, security, performance) | AWS Trusted Advisor |
+| describe and index data sets | Glue Data Catalog |
+| archive or delete data after a set time | S3 Lifecycle rules |
+
+- **Prompt injection needs layers:** an input filter, output validation and least-privilege permissions. Temperature or model size does nothing.
+- **Data residency** is about choosing the Region (and watching cross-Region inference); encryption alone doesn't satisfy it. [Lesson 5.2](/learn/5.2)
+
+| Generative AI Security Scoping Matrix | |
+|---|---|
+| 1. Consumer app | a public third-party GenAI service |
+| 2. Enterprise app | a business app with GenAI built in |
+| 3. Pre-trained models | your app on a foundation model through an API (Bedrock) |
+| 4. Fine-tuned models | a foundation model refined with your data |
+| 5. Self-trained models | a model trained from scratch |
+
+- The higher the scope, the more security and governance work is yours.
+- **Governance** is people and process too: policies, review cadence, transparency commitments, training, not just a tool.
+- **Closed to new customers**, but still on the exam as concepts: SageMaker Clarify, Model Monitor, Ground Truth and Augmented AI. Bedrock Agents is now Agents Classic; AgentCore and Strands Agents are the current answer for agents.
