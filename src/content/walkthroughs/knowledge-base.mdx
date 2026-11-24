@@ -1,0 +1,111 @@
+export const meta = {
+  id: 'knowledge-base',
+  title: 'A Bedrock Knowledge Base over Cairnway’s FAQ',
+  summary: 'Upload a small FAQ to S3, turn it into a knowledge base with Titan embeddings and Amazon S3 Vectors, then ask questions and follow the citations.',
+  updated: '2026-11-24',
+  tasks: ['3.1', '2.1'],
+  minutes: 30,
+  cost: 'Under 0.10 USD if you choose Amazon S3 Vectors and tear down the same day. Titan Text Embeddings V2 costs 0.00002 USD per 1,000 tokens, S3 Vectors bills for the little storage and the queries you use (no minimum charge), and answers use a small model’s tokens.',
+  stayCheap: 'Choose Amazon S3 Vectors as the vector store. Don’t pick OpenSearch Serverless for a test: it can bill for compute capacity every hour the collection exists, even when idle.',
+  steps: [
+    'Put the FAQ in an S3 bucket',
+    'Create the knowledge base',
+    'Choose the embeddings model and the vector store',
+    'Sync the data source',
+    'Retrieve without generating',
+    'Generate an answer with citations',
+    'Ask something the FAQ doesn’t cover',
+    'Delete the knowledge base',
+    'Delete the vector index and the vector bucket',
+    'Empty and delete the S3 bucket',
+    'Delete the service role',
+  ],
+  links: [
+    { title: 'Bedrock Knowledge Bases: create a knowledge base', url: 'https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-create.html' },
+    { title: 'Bedrock Knowledge Bases: supported document formats', url: 'https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-ds.html' },
+    { title: 'Bedrock Knowledge Bases: test with queries and responses', url: 'https://docs.aws.amazon.com/bedrock/latest/userguide/kb-test-retrieve-generate.html' },
+    { title: 'Bedrock Knowledge Bases: delete a knowledge base', url: 'https://docs.aws.amazon.com/bedrock/latest/userguide/kb-delete.html' },
+    { title: 'Bedrock Managed Knowledge Base', url: 'https://docs.aws.amazon.com/bedrock/latest/userguide/kb-build-managed.html' },
+    { title: 'Amazon S3 Vectors: delete a vector bucket', url: 'https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-vectors-buckets-delete.html' },
+    { title: 'Amazon S3 pricing (S3 Vectors)', url: 'https://aws.amazon.com/s3/pricing/' },
+    { title: 'Amazon Bedrock pricing', url: 'https://aws.amazon.com/bedrock/pricing/' },
+  ],
+}
+
+## Before you start
+
+- An AWS account and an **IAM user or role**: you can't create a knowledge base as the root user. It needs permissions for Amazon Bedrock, Amazon S3 and IAM (Bedrock creates a service role for you).
+- Work in **US East (N. Virginia)** throughout: the S3 bucket must be in the same Region as the knowledge base.
+- Cairnway's support assistant keeps getting policy questions the model can't know: the return window, delivery times, the repair service. Rather than fine-tune a model on facts that change, Cairnway gives it the FAQ through **retrieval augmented generation (RAG)**.
+- AWS now also offers a **Bedrock Managed Knowledge Base**, which picks the embeddings model and runs the store for you. This walkthrough uses the customer-managed kind, because it shows the choices the exam asks about: chunking, embeddings and the vector store.
+
+## Steps
+
+### Put the FAQ in an S3 bucket
+
+Save this invented FAQ as `cairnway-faq.txt` (plain text, .md, .html, .docx, .csv, .xlsx and .pdf files also work):
+
+```text
+Cairnway Outfitters customer FAQ
+
+Returns: You can return unused gear within 60 days of delivery for a full refund. Worn footwear can be returned within 14 days if it doesn't fit.
+
+Delivery: Standard delivery takes 3 to 5 working days. Express delivery arrives the next working day if you order before 2 pm.
+
+Repairs: Cairnway repairs tents, jackets and backpacks bought from us for free during the first two years. After that, repairs cost a flat fee of 25 euros.
+
+Rental: Tents and sleeping bags can be rented for a weekend for 30 euros, including cleaning.
+
+Gift cards: Gift cards are valid for three years and can be used online and in our stores.
+```
+
+Open **Amazon S3**, create a general purpose bucket in N. Virginia with a unique name (for example `cairnway-faq-` followed by random digits), and upload the file.
+
+### Create the knowledge base
+
+Open **Amazon Bedrock**, choose **Knowledge bases** in the navigation pane, choose the create button and select a knowledge base **with a vector store**. Keep the default name or call it `cairnway-faq`, let Bedrock **create the service role**, and choose **Amazon S3** as the data source. On the next page, point the data source at your bucket and leave the parsing and chunking settings at their defaults.
+
+### Choose the embeddings model and the vector store
+
+Under **Embeddings model**, choose **Titan Text Embeddings V2**. Under **Vector database**, choose **Quick create a new vector store** and then **Amazon S3 Vectors**: Bedrock creates a vector bucket and a vector index for the embeddings. Choose **Next**, review, and create. Creation takes a few minutes.
+
+### Sync the data source
+
+When the knowledge base is ready, select it and choose **Sync** in the data source section. Syncing reads the file, splits it into **chunks**, turns each chunk into an **embedding** with Titan, and stores the vectors. Sync again whenever the FAQ changes.
+
+### Retrieve without generating
+
+Select the knowledge base and choose **Test knowledge base**. Turn **Generate responses for your query** off, and ask "How long do I have to return a jacket?". You get the matching **chunks** of the FAQ, not an answer: this is the **retrieval** half of RAG, a similarity search by meaning.
+
+### Generate an answer with citations
+
+Turn **Generate responses for your query** on, choose **Select model**, pick a small, low-cost text model from the list (for example **Amazon Nova Micro** or **Nova Lite**) and **Apply**. Ask "Do you fix broken tent poles, and is it free?". The answer cites its sources with footnotes: select one to see the excerpt it came from, or **Show source details** to see the retrieved chunks.
+
+### Ask something the FAQ doesn’t cover
+
+Ask "Do you sell climbing ropes?". A grounded answer should say the information isn't available instead of inventing one. If it invents something, that's a **hallucination**, and the fix in production would be a guardrail with a **contextual grounding check**.
+
+## What this shows for the exam
+
+- **RAG** gives a model company facts at question time without retraining it. When the FAQ changes, you sync again; with fine-tuning you would have to train again.
+- **Chunking** splits documents, an **embeddings model** turns chunks into vectors, and a **vector store** (here S3 Vectors; also OpenSearch Service, Aurora PostgreSQL with pgvector, Neptune Analytics) searches them by meaning.
+- **Bedrock Knowledge Bases** is the managed RAG answer with the least operational overhead, and **citations** make answers traceable.
+- See lessons [3.1](/learn/3.1) and [2.1](/learn/2.1), and the [RAG pipeline step-through](/explore/sims/rag).
+
+## Teardown
+
+### Delete the knowledge base
+
+In **Knowledge bases**, select `cairnway-faq`, choose **Delete**, read the warnings, type **delete** and confirm. The data source's embeddings are deleted by default, but **the vector store itself is not**, so continue below.
+
+### Delete the vector index and the vector bucket
+
+Open **Amazon S3** and choose **Vector buckets**. Open the bucket the quick create made, delete its **vector index** first, then go back, select the vector bucket, choose **Delete**, type **delete** and confirm. A vector bucket can only be deleted once it has no indexes.
+
+### Empty and delete the S3 bucket
+
+In **General purpose buckets**, empty the FAQ bucket, then delete it.
+
+### Delete the service role
+
+Open **IAM**, choose **Roles**, find the service role Bedrock created for the knowledge base (its name was shown on the knowledge base's page), choose **Delete**, enter the role name and confirm.

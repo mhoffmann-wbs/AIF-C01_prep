@@ -165,6 +165,32 @@ export const guideMetaSchema = z.object({
 
 export type GuideMeta = z.infer<typeof guideMetaSchema>
 
+/**
+ * An optional console walkthrough (src/content/walkthroughs/<id>.mdx), done in
+ * the learner's own AWS account. `steps` are the checklist labels: one per `###`
+ * heading under `## Steps` and `## Teardown`, in order. Ticked steps are stored
+ * in progress by index, so append steps rather than reorder them.
+ */
+export const walkthroughMetaSchema = z.object({
+  id: z.string().regex(/^[a-z][a-z0-9-]*$/),
+  title: nonEmpty,
+  /** One sentence on what the learner does and sees. */
+  summary: nonEmpty,
+  /** Date the console steps and prices were last checked against AWS pages. */
+  updated: z.iso.date(),
+  /** Lessons that link to the walkthrough. */
+  tasks: z.array(z.string().regex(TASK_ID)).min(1),
+  minutes: z.number().int().positive(),
+  /** Estimated cost in plain words, e.g. "Under 0.05 USD". */
+  cost: nonEmpty,
+  /** How to keep the cost at the estimate. */
+  stayCheap: nonEmpty,
+  steps: z.array(nonEmpty).min(2),
+  links: z.array(z.object({ title: nonEmpty, url: z.url().regex(LESSON_LINK) })).min(1),
+})
+
+export type WalkthroughMeta = z.infer<typeof walkthroughMetaSchema>
+
 // Service-matcher drills (src/content/drills/<deckId>.json). Card ids are
 // `<deckId>-NN` and are stored in progress, so never renumber or reuse one.
 

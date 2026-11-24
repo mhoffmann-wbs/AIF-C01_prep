@@ -17,6 +17,11 @@ const TOOLS = [
     title: 'Flashcards',
     text: 'Spaced review of key terms and every in-scope AWS service. Write your own decks and share them as files.',
   },
+  {
+    to: '/explore/walkthroughs',
+    title: 'Console walkthroughs',
+    text: 'Optional checklists for trying Bedrock, Guardrails, Knowledge Bases, Comprehend and IAM in your own AWS account, with costs and teardown steps.',
+  },
 ]
 
 export default function ExplorePage() {
@@ -24,7 +29,7 @@ export default function ExplorePage() {
     <div className="space-y-6">
       <h1 className="text-3xl font-bold">Explore</h1>
       <p className="text-slate-600">
-        The exam has no coding, so instead of a lab you get tools that make the concepts stick. None of them needs an AWS account.
+        The exam has no coding, so instead of a lab you get tools that make the concepts stick. Only the optional console walkthroughs need an AWS account.
       </p>
       <ul className="grid gap-4 sm:grid-cols-2">
         {TOOLS.map((t) => (

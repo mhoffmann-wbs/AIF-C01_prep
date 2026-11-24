@@ -1,0 +1,74 @@
+export const meta = {
+  id: 'playground',
+  title: 'Inference parameters in the Bedrock playground',
+  summary: 'Ask Amazon Nova Micro the same questions with different temperature and response-length settings, and see what each parameter changes.',
+  updated: '2026-11-24',
+  tasks: ['3.1', '2.1'],
+  minutes: 15,
+  cost: 'Well under 0.01 USD. Nova Micro costs 0.000035 USD per 1,000 input tokens and 0.00014 USD per 1,000 output tokens on demand in US East (N. Virginia).',
+  stayCheap: 'Use Nova Micro, keep the response length short, and stay in the playground. It creates nothing that keeps running.',
+  steps: [
+    'Open Amazon Bedrock in N. Virginia',
+    'Open Nova Micro in the playground',
+    'Ask the same creative question three times',
+    'Turn the temperature down and ask again',
+    'Cap the response length',
+    'Check that invocation logging is still off',
+    'Look at the bill the next day',
+  ],
+  links: [
+    { title: 'Amazon Bedrock: access foundation models', url: 'https://docs.aws.amazon.com/bedrock/latest/userguide/model-access.html' },
+    { title: 'Amazon Bedrock: inference parameters', url: 'https://docs.aws.amazon.com/bedrock/latest/userguide/inference-parameters.html' },
+    { title: 'Amazon Bedrock: model invocation logging', url: 'https://docs.aws.amazon.com/bedrock/latest/userguide/model-invocation-logging.html' },
+    { title: 'Amazon Bedrock pricing', url: 'https://aws.amazon.com/bedrock/pricing/' },
+  ],
+}
+
+## Before you start
+
+- An AWS account with a payment method, and an IAM user or role that may use Amazon Bedrock (for example with the AWS managed policy `AmazonBedrockFullAccess`).
+- Access to most Bedrock models is enabled on first use, so there's no access request to wait for. Amazon's own Nova models aren't sold through AWS Marketplace, so no subscription is needed either. Using a model for the first time means you accept its licence.
+- Cairnway's marketing team wants product-name ideas, and its support team wants short, consistent answers. You'll see why they need different settings.
+
+## Steps
+
+### Open Amazon Bedrock in N. Virginia
+
+Sign in to the AWS console, switch the Region (top right) to **US East (N. Virginia)**, and open **Amazon Bedrock**.
+
+### Open Nova Micro in the playground
+
+In the navigation pane choose **Model catalog**, find **Amazon Nova Micro**, and open it in the playground. Find the model's settings next to the chat: you should see **Temperature**, **Top P**, **Top K** or some of them, a response length (maximum tokens) and stop sequences. Defaults and ranges depend on the model.
+
+### Ask the same creative question three times
+
+Leave the temperature at its default (or raise it) and send, three times:
+
+> Suggest one name for a lightweight waterproof hiking jacket from an outdoor-gear shop called Cairnway. Answer with the name only.
+
+The names probably differ. That's **nondeterminism**: the model samples the next token, so the same prompt can give different answers.
+
+### Turn the temperature down and ask again
+
+Set the temperature to its lowest value and send the same prompt three more times. The answers should now be the same or nearly the same, because the model almost always picks the most likely token. Low temperature suits support answers; higher temperature suits brainstorming.
+
+### Cap the response length
+
+Ask for something long, such as "Explain how to choose a sleeping bag for winter camping", with a very small response length, for example 30 tokens. The answer stops mid-sentence: the cap cuts the output, the model doesn't plan a shorter answer. Output tokens cost more than input tokens, so a cap also limits cost.
+
+## What this shows for the exam
+
+- **Temperature** controls randomness: lower for consistent, factual answers, higher for creative variety. "More deterministic" in a question means "lower the temperature".
+- **Response length** limits cost and length, not randomness. **Top P** and **top K** narrow which tokens the model may choose from.
+- You pay **per input and output token** on demand, which is why shorter prompts, shorter answers and smaller models are the usual cost answers.
+- Lessons [3.1](/learn/3.1) and [2.1](/learn/2.1) cover these in depth, and the [next-token sampler](/explore/sims/sampler) shows the same effect without an account.
+
+## Teardown
+
+### Check that invocation logging is still off
+
+The playground creates no resources, so there's nothing to delete. Model invocation logging is off by default; if you turned it on, open **Settings** in the Bedrock navigation pane and turn it off, then delete the S3 bucket or CloudWatch log group you chose, because logs are kept until you delete them.
+
+### Look at the bill the next day
+
+Open **Billing and Cost Management** the next day and check that Bedrock charges are a fraction of a cent.

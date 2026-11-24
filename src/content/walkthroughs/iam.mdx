@@ -1,0 +1,86 @@
+export const meta = {
+  id: 'iam',
+  title: 'Least privilege for one Bedrock model',
+  summary: 'Write an IAM policy that lets Cairnway’s support bot call one foundation model and nothing else, then prove it with the IAM policy simulator.',
+  updated: '2026-11-24',
+  tasks: ['5.1'],
+  minutes: 20,
+  cost: 'Free. IAM has no additional charge, and the policy simulator never sends a real request to Bedrock.',
+  stayCheap: 'Nothing here is billed. Still delete the role and the policy afterwards, so no unused access is left in the account.',
+  steps: [
+    'Create a policy for one model',
+    'Create a role with only that policy',
+    'Simulate a call to the allowed model',
+    'Simulate a call to another model',
+    'Simulate an action the bot doesn’t need',
+    'Delete the role',
+    'Delete the policy',
+  ],
+  links: [
+    { title: 'Amazon Bedrock: identity-based policy examples', url: 'https://docs.aws.amazon.com/bedrock/latest/userguide/security_iam_id-based-policy-examples.html' },
+    { title: 'Amazon Nova Micro model card (model ID)', url: 'https://docs.aws.amazon.com/bedrock/latest/userguide/model-card-amazon-nova-micro.html' },
+    { title: 'IAM: simulate policies with the policy simulator', url: 'https://docs.aws.amazon.com/IAM/latest/UserGuide/policies_policy-simulator-how-to.html' },
+    { title: 'IAM: delete a role', url: 'https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_manage_delete.html' },
+    { title: 'Amazon Bedrock: identity and access management', url: 'https://docs.aws.amazon.com/bedrock/latest/userguide/security-iam.html' },
+  ],
+}
+
+## Before you start
+
+- An AWS account and an IAM user or role that may manage IAM (for example an administrator).
+- Cairnway's support bot only ever needs to call one model, Amazon Nova Micro, in US East (N. Virginia). The AWS managed policy `AmazonBedrockFullAccess` would work, but it allows far more than the bot needs. **Least privilege** means granting only the actions and resources a job requires.
+
+## Steps
+
+### Create a policy for one model
+
+Open **IAM**, choose **Policies**, then **Create policy**, and switch the editor to **JSON**. Paste this policy. It follows AWS's advice to restrict model access by naming the specific model's ARN as the resource:
+
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "InvokeNovaMicroOnly",
+      "Effect": "Allow",
+      "Action": ["bedrock:InvokeModel", "bedrock:InvokeModelWithResponseStream"],
+      "Resource": "arn:aws:bedrock:us-east-1::foundation-model/amazon.nova-micro-v1:0"
+    }
+  ]
+}
+```
+
+A foundation model's ARN has no account number (the `::`), because the model belongs to AWS, not to you. Name the policy `cairnway-support-bot-invoke` and create it.
+
+### Create a role with only that policy
+
+Choose **Roles**, then **Create role**. As the trusted entity choose **AWS account** (this account), attach only `cairnway-support-bot-invoke`, name the role `cairnway-support-bot` and create it. In a real application, the service that runs the bot (for example Lambda) would assume this role.
+
+### Simulate a call to the allowed model
+
+In the IAM navigation pane choose **Policy simulator**. Select the role `cairnway-support-bot` as the identity; its one policy appears in the side panel. Add the action **bedrock:InvokeModel** for **Amazon Bedrock**, and as the resource enter the Nova Micro ARN from the policy. Run the simulation: the result is **allowed**.
+
+### Simulate a call to another model
+
+Change the resource to another model, for example `arn:aws:bedrock:us-east-1::foundation-model/amazon.nova-lite-v1:0`, and run again. The result is **implicitly denied**: nothing allows it, and in IAM everything not allowed is denied.
+
+### Simulate an action the bot doesn’t need
+
+Now test an action such as **bedrock:DeleteGuardrail** or **bedrock:CreateModelCustomizationJob**. Both are denied. If the bot's credentials ever leaked, they couldn't be used to delete safety settings or start expensive training jobs.
+
+## What this shows for the exam
+
+- **IAM** decides **who** may call **which** service actions on **which** resources. Least privilege limits the damage of a mistake or a stolen credential.
+- Under the **shared responsibility model**, permissions are always **your** job, even with a fully managed service like Bedrock.
+- IAM is not the tool for filtering what the model says (that's **Guardrails**) or for recording who called what (that's **CloudTrail**). For agents, **Policy in AgentCore** controls which tool calls an agent may make.
+- See lesson [5.1](/learn/5.1).
+
+## Teardown
+
+### Delete the role
+
+Choose **Roles**, select `cairnway-support-bot`, choose **Delete**, enter the role name and confirm. When you delete a role in the console, IAM detaches its managed policies automatically.
+
+### Delete the policy
+
+Choose **Policies**, find `cairnway-support-bot-invoke`, and delete it.

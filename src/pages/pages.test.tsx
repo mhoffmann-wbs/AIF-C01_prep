@@ -275,4 +275,18 @@ describe('concept simulators', () => {
     expect(screen.getByRole('heading', { name: 'Sources' })).toBeInTheDocument()
     expect(screen.getByRole('link', { name: 'Lesson 3.1' })).toHaveAttribute('href', '/learn/3.1')
   })
+
+  it('lists the walkthroughs and keeps a ticked checklist step', async () => {
+    const user = userEvent.setup()
+    expect(await renderAt('/explore/walkthroughs')).toHaveTextContent('Console walkthroughs')
+    await user.click(screen.getByRole('link', { name: 'Least privilege for one Bedrock model' }))
+    expect(await screen.findByRole('heading', { level: 1, name: 'Least privilege for one Bedrock model' })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: 'Teardown' })).toBeInTheDocument()
+    await user.click(screen.getByRole('checkbox', { name: /Delete the role/ }))
+    expect(getProgress().walkthroughs.iam).toEqual([5])
+    expect(screen.getByText('Checklist (1 of 7)')).toBeInTheDocument()
+    cleanup()
+    await renderAt('/learn/5.1')
+    expect(screen.getByRole('link', { name: 'Walkthrough: Least privilege for one Bedrock model' })).toHaveAttribute('href', '/explore/walkthroughs/iam')
+  })
 })

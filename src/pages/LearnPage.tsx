@@ -7,6 +7,7 @@ import { DRILL_DECKS } from '../content/drills'
 import { CARDS } from '../content/flashcards'
 import { SIMS, simTasks } from '../content/sims'
 import { LESSONS } from '../content/lessons'
+import { WALKTHROUGHS } from '../content/walkthroughs'
 import { lessonComponents } from '../lessons/components'
 import { setLessonRead, useProgress } from '../progress/store'
 
@@ -157,6 +158,11 @@ function LessonView({ taskId }: { taskId: string }) {
         {DRILL_DECKS.filter((d) => d.tasks.includes(taskId)).map((d) => (
           <Link key={d.id} to={`/explore/drills/${d.id}`} className="rounded border px-4 py-2">
             Drill: {d.title}
+          </Link>
+        ))}
+        {WALKTHROUGHS.filter((w) => w.meta.tasks.includes(taskId)).map(({ meta }) => (
+          <Link key={meta.id} to={`/explore/walkthroughs/${meta.id}`} className="rounded border px-4 py-2">
+            Walkthrough: {meta.title}
           </Link>
         ))}
       </footer>

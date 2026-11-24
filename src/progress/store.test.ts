@@ -10,8 +10,10 @@ import {
   recordMockResult,
   reloadProgress,
   resetProgress,
+  resetWalkthrough,
   setExtended,
   setLessonRead,
+  setWalkthroughStep,
 } from './store'
 
 beforeEach(() => {
@@ -53,10 +55,10 @@ describe('progress store', () => {
     const v1 = { version: 1, extendedInPractice: false, extendedInMock: true, items: {}, mockResults: [], lessonsRead: ['1.1'] }
     localStorage.setItem('aifc01:progress', JSON.stringify(v1))
     reloadProgress()
-    expect(getProgress()).toMatchObject({ version: 3, extendedInPractice: false, lessonsRead: ['1.1'], drills: {}, drillMisses: [], cards: {}, myCards: [] })
+    expect(getProgress()).toMatchObject({ version: 4, extendedInPractice: false, lessonsRead: ['1.1'], drills: {}, drillMisses: [], cards: {}, myCards: [], walkthroughs: {} })
     resetProgress()
     importProgress(JSON.stringify({ app: 'aif-c01-prep', progress: v1 }))
-    expect(getProgress()).toMatchObject({ version: 3, lessonsRead: ['1.1'], drillMisses: [], decks: [] })
+    expect(getProgress()).toMatchObject({ version: 4, lessonsRead: ['1.1'], drillMisses: [], decks: [], walkthroughs: {} })
   })
 
   it('keeps the best drill round and the cards still missed', () => {
@@ -73,6 +75,17 @@ describe('progress store', () => {
     expect(getProgress().lessonsRead).toEqual(['3.1'])
   })
 
+  it('ticks walkthrough steps off and resets them', () => {
+    setWalkthroughStep('w', 2, true)
+    setWalkthroughStep('w', 0, true)
+    setWalkthroughStep('w', 2, true)
+    expect(getProgress().walkthroughs.w).toEqual([0, 2])
+    setWalkthroughStep('w', 0, false)
+    expect(getProgress().walkthroughs.w).toEqual([2])
+    resetWalkthrough('w')
+    expect(getProgress().walkthroughs.w).toBeUndefined()
+  })
+
   it('round-trips an export and rejects files that are not exports', () => {
     recordAnswer('5.1-001', true)
     recordMockResult({ at: 1, extended: true, correct: 50, total: 65, percent: 77, scaled: 792, passed: true, domains: [{ id: '1', correct: 10, total: 13 }] })
@@ -83,7 +96,7 @@ describe('progress store', () => {
     expect(getProgress().mockResults).toHaveLength(1)
     expect(() => importProgress('nope')).toThrow(/valid JSON/)
     expect(() => importProgress('{"app":"other","progress":{}}')).toThrow(/AIF-C01 Prep/)
-    expect(() => importProgress('{"app":"aif-c01-prep","progress":{"version":4}}')).toThrow(/newer version/)
+    expect(() => importProgress('{"app":"aif-c01-prep","progress":{"version":5}}')).toThrow(/newer version/)
     expect(() => importProgress('{"app":"aif-c01-prep","progress":{"version":1,"items":{"x":{"attempts":-1}}}}')).toThrow(/damaged/)
   })
 

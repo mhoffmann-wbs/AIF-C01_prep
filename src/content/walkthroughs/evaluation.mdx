@@ -1,0 +1,82 @@
+export const meta = {
+  id: 'evaluation',
+  title: 'An automatic model evaluation in Bedrock',
+  summary: 'Run an automatic evaluation job that scores a small model on summarization with a built-in dataset, then read the report card: BERTScore, robustness and toxicity.',
+  updated: '2026-11-24',
+  tasks: ['3.4'],
+  minutes: 30,
+  cost: 'A few cents. An automatic job is billed for the model inference it runs, and each built-in dataset is cut down to 100 prompts. The results in S3 cost a fraction of a cent until you delete them.',
+  stayCheap: 'Evaluate one small model (such as Amazon Nova Micro) on built-in datasets only, and don’t start a human-based job: those add a fee per completed human task.',
+  steps: [
+    'Create an S3 bucket for the results',
+    'Start an automatic evaluation',
+    'Choose the task type and the metrics',
+    'Set the results location and the service role',
+    'Read the report card',
+    'Delete the evaluation job',
+    'Empty and delete the results bucket',
+    'Delete the service role',
+  ],
+  links: [
+    { title: 'Bedrock: start an automatic model evaluation job', url: 'https://docs.aws.amazon.com/bedrock/latest/userguide/model-evaluation-jobs-management-create.html' },
+    { title: 'Bedrock: model evaluation task types', url: 'https://docs.aws.amazon.com/bedrock/latest/userguide/model-evaluation-tasks.html' },
+    { title: 'Bedrock: prompt datasets for model evaluation', url: 'https://docs.aws.amazon.com/bedrock/latest/userguide/model-evaluation-prompt-datasets.html' },
+    { title: 'Bedrock: review an automatic evaluation report', url: 'https://docs.aws.amazon.com/bedrock/latest/userguide/model-evaluation-report-programmatic.html' },
+    { title: 'Bedrock: delete a model evaluation job', url: 'https://docs.aws.amazon.com/bedrock/latest/userguide/model-evaluation-jobs-management-delete.html' },
+    { title: 'Amazon Bedrock pricing', url: 'https://aws.amazon.com/bedrock/pricing/' },
+  ],
+}
+
+## Before you start
+
+- An AWS account and an IAM user or role that may use Amazon Bedrock, Amazon S3 and IAM, in **US East (N. Virginia)**.
+- Cairnway wants short summaries of long product reviews. Before it picks a model, it wants evidence: how close are the summaries to good ones, do they hold up when the input has typos, and are they ever toxic? That's what an **automatic** evaluation measures.
+
+## Steps
+
+### Create an S3 bucket for the results
+
+Open **Amazon S3** and create a general purpose bucket in N. Virginia, for example `cairnway-eval-` followed by random digits. The job writes its results there. (Only human-based jobs need extra CORS settings on the bucket; automatic jobs don't.)
+
+### Start an automatic evaluation
+
+Open **Amazon Bedrock**, choose **Model evaluation** in the navigation pane, and in the **Build an evaluation** card, under **Automatic**, choose **Create automatic evaluation**. Name the job `cairnway-summaries` and, under **Models**, choose a small model such as **Amazon Nova Micro**.
+
+### Choose the task type and the metrics
+
+Set **Task type** to **Text summarization**. Under **Metrics and datasets**, keep the built-in datasets AWS suggests for each metric:
+
+- **Accuracy**: how close each summary is to a reference summary, measured with **BERTScore**.
+- **Robustness**: how much the output changes when each prompt is slightly changed, for example with typos, all lower case or extra spaces. A low robustness score is good.
+- **Toxicity**: whether the output contains harmful language.
+
+Each built-in dataset is based on an open-source dataset, randomly cut down to 100 prompts.
+
+### Set the results location and the service role
+
+Under **Evaluation results**, choose **Browse S3** and pick your bucket. Under **Amazon Bedrock IAM role**, choose **Create a new role**. Then choose **Create**. The job runs for a while; refresh the list until its status is **Completed**.
+
+### Read the report card
+
+Open the finished job to see its report card: one score per metric, with examples. Ask yourself: is the accuracy good enough for Cairnway, and does the output stay stable when the input is messy? To compare models, you would run the same job for a second model and compare the cards.
+
+## What this shows for the exam
+
+- **Amazon Bedrock Model Evaluation** is the managed way to compare foundation models on your task: **automatic** (built-in metrics and datasets), **human-based** (your own reviewers, for tone or brand voice), **LLM-as-a-judge**, and **RAG** evaluations of knowledge bases.
+- **BERTScore** compares meaning, so a good paraphrase still scores well. **ROUGE** (summaries) and **BLEU** (translation) count overlapping words instead.
+- **Benchmark datasets** give fast, repeatable, comparable scores; they don't tell you whether the model meets a **business** goal.
+- See lesson [3.4](/learn/3.4).
+
+## Teardown
+
+### Delete the evaluation job
+
+In **Model evaluation**, select the job in the **Model Evaluation Jobs** card and choose **Delete**. This removes the job from Bedrock, but the results stay in your S3 bucket.
+
+### Empty and delete the results bucket
+
+In **Amazon S3**, empty the `cairnway-eval-…` bucket, then delete it.
+
+### Delete the service role
+
+Open **IAM**, choose **Roles**, find the role the job created (its name is shown on the job's details page), choose **Delete**, enter the role name and confirm.

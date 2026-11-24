@@ -1,0 +1,75 @@
+export const meta = {
+  id: 'comprehend',
+  title: 'Sentiment and PII with Amazon Comprehend',
+  summary: 'Paste Cairnway product reviews and a support message into Comprehend’s real-time analysis and read the sentiment, targeted sentiment and PII it finds.',
+  updated: '2026-11-24',
+  tasks: ['1.2', '5.1'],
+  minutes: 10,
+  cost: 'Free within the Comprehend free tier (50,000 units of text per API per month for 12 months from your first request). Outside it, sentiment costs 0.0001 USD per unit of 100 characters, with a 3-unit minimum per request: a few cents at most.',
+  stayCheap: 'Use short texts and the built-in models only. Custom models and custom endpoints are billed separately, and an endpoint bills until you delete it.',
+  steps: [
+    'Open Comprehend real-time analysis',
+    'Analyze a happy review',
+    'Analyze a mixed review',
+    'Read the targeted sentiment',
+    'Find the PII in a support message',
+    'Confirm there is nothing left running',
+  ],
+  links: [
+    { title: 'Amazon Comprehend: real-time analysis with the built-in models', url: 'https://docs.aws.amazon.com/comprehend/latest/dg/realtime-console-analysis.html' },
+    { title: 'Amazon Comprehend: sentiment', url: 'https://docs.aws.amazon.com/comprehend/latest/dg/how-sentiment.html' },
+    { title: 'Amazon Comprehend pricing', url: 'https://aws.amazon.com/comprehend/pricing/' },
+  ],
+}
+
+## Before you start
+
+- An AWS account and an IAM user or role that may use Amazon Comprehend.
+- Cairnway gets hundreds of product reviews a week. Instead of training a sentiment model, it wants a ready-made service that reads them. That's the "managed AI service before a custom model" idea from lesson 1.2.
+
+## Steps
+
+### Open Comprehend real-time analysis
+
+Sign in to the AWS console, choose **US East (N. Virginia)**, and open **Amazon Comprehend**. In the left menu choose **Real-time analysis**. Under **Input type**, choose **Built-in** as the analysis type.
+
+### Analyze a happy review
+
+Replace the sample text with this review and choose **Analyze**:
+
+> I wore the Cairnway Ridgeline jacket through three days of rain in the Highlands and stayed completely dry. Light, packs small, worth every penny.
+
+The results appear in the **Insights** panel, one tab per insight type. Open **Sentiment**: it should be positive, with a confidence score for each of the four ratings (positive, negative, neutral, mixed).
+
+### Analyze a mixed review
+
+Now try:
+
+> The tent is roomy and the poles feel solid, but the zip broke on the second night and customer service took a week to answer.
+
+Look at the **Sentiment** tab again. A review that praises one thing and criticises another is usually rated **mixed**, or the scores are split between positive and negative.
+
+### Read the targeted sentiment
+
+Open **Targeted sentiment** for the same text. It rates the sentiment about each thing mentioned (the tent, the poles, the zip, customer service) instead of the whole review. That's what Cairnway needs to know which part of a product to fix.
+
+### Find the PII in a support message
+
+Analyze an invented support message:
+
+> Hi, this is Jamie Doe. My order hasn't arrived. You can reach me at jamie.doe@example.com or 555-0142, and the delivery address is 12 Example Lane.
+
+Open the **PII** tab. **Offsets** shows where each piece of personal data sits in the text; **Labels** lists which types of PII it contains.
+
+## What this shows for the exam
+
+- **Amazon Comprehend** is the managed NLP service for text: sentiment, entities, key phrases, language and **PII detection**. No training and no ML expertise needed.
+- Don't confuse it with **Textract** (text out of scanned documents), **Transcribe** (speech to text) or **Bedrock Guardrails** (filtering PII in a generative AI app's prompts and answers).
+- To find PII in files stored in **S3**, the exam answer is **Amazon Macie**, not Comprehend.
+- See lessons [1.2](/learn/1.2) and [5.1](/learn/5.1).
+
+## Teardown
+
+### Confirm there is nothing left running
+
+Real-time analysis with the built-in models doesn't create anything that keeps running. If you explored further and created a **custom model** or an **endpoint**, delete them: a custom endpoint is billed from the moment it starts until you delete it.

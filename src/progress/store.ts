@@ -5,7 +5,7 @@ import { z } from 'zod'
 // migration in `load()` and `importProgress()` whenever the shape changes, and
 // keep ProgressSchema in step; never read localStorage elsewhere.
 const STORAGE_KEY = 'aifc01:progress'
-const VERSION = 3
+const VERSION = 4
 
 export interface ItemStat {
   attempts: number
@@ -100,10 +100,12 @@ export interface Progress {
   cards: Record<string, CardStat>
   decks: UserDeck[]
   myCards: UserCard[]
+  /** Per walkthrough id: the indices of the steps the learner ticked off. */
+  walkthroughs: Record<string, number[]>
 }
 
 function empty(): Progress {
-  return { version: VERSION, extendedInPractice: true, extendedInMock: true, items: {}, mockResults: [], lessonsRead: [], drills: {}, drillMisses: [], cards: {}, decks: [], myCards: [] }
+  return { version: VERSION, extendedInPractice: true, extendedInMock: true, items: {}, mockResults: [], lessonsRead: [], drills: {}, drillMisses: [], cards: {}, decks: [], myCards: [], walkthroughs: {} }
 }
 
 function load(): Progress {
@@ -111,7 +113,7 @@ function load(): Progress {
     const raw = localStorage.getItem(STORAGE_KEY)
     if (!raw) return empty()
     const parsed = JSON.parse(raw) as { version?: number }
-    // Version 1 had no drills and version 2 no flashcards; the defaults from empty() fill them in.
+    // Version 1 had no drills, version 2 no flashcards and version 3 no walkthroughs; the defaults from empty() fill them in.
     if (typeof parsed.version !== 'number' || parsed.version < 1 || parsed.version > VERSION) return empty()
     return { ...empty(), ...parsed, version: VERSION } as Progress
   } catch {
@@ -195,6 +197,17 @@ export function recordDrillRound(deckId: string, round: DrillRound, at: number =
   })
 }
 
+export function setWalkthroughStep(walkthroughId: string, step: number, done: boolean) {
+  const others = (state.walkthroughs[walkthroughId] ?? []).filter((i) => i !== step)
+  const steps = done ? [...others, step].sort((a, b) => a - b) : others
+  commit({ ...state, walkthroughs: { ...state.walkthroughs, [walkthroughId]: steps } })
+}
+
+export function resetWalkthrough(walkthroughId: string) {
+  const { [walkthroughId]: _, ...walkthroughs } = state.walkthroughs
+  commit({ ...state, walkthroughs })
+}
+
 export function recordCardReview(cardId: string, stat: CardStat) {
   commit({ ...state, cards: { ...state.cards, [cardId]: stat } })
 }
@@ -273,6 +286,7 @@ const ProgressSchema = z.object({
   myCards: z.array(
     z.object({ id: z.string(), deckId: z.string(), front: z.string(), back: z.string(), createdAt: z.number(), updatedAt: z.number() }),
   ),
+  walkthroughs: z.record(z.string(), z.array(count)),
 })
 
 const EXPORT_APP = 'aif-c01-prep'
