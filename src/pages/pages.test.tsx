@@ -78,6 +78,8 @@ describe('pages', () => {
       await user.selectOptions(screen.getByRole('combobox', { name: prompt }), answer)
     await user.click(screen.getByRole('button', { name: 'Check answer' }))
     expect(screen.getByRole('status')).toHaveTextContent('Correct')
+    // Right and wrong are said in text, not only by the border colour.
+    expect(screen.getAllByText('Right:')).toHaveLength(3)
   })
 
   it('grades each part of a case study', async () => {
@@ -101,6 +103,9 @@ describe('pages', () => {
     const down = within(first).getByRole('button', { name: /down$/ })
     await user.click(down)
     expect(within(list).getAllByRole('listitem')[1]).toBe(first)
+    await user.click(screen.getByRole('button', { name: 'Check answer' }))
+    const marks = within(list).getAllByText(/^(Right|Wrong):$/)
+    expect(marks).toHaveLength(within(list).getAllByRole('listitem').length)
   })
 
   it('runs a mock exam to its score report', async () => {

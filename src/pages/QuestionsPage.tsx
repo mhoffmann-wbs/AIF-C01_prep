@@ -80,9 +80,9 @@ function ItemIndex() {
 
       <div className="space-y-3 rounded-lg border border-slate-200 bg-white p-4">
         <div className="flex flex-wrap gap-4">
-          <label className="flex flex-wrap items-center gap-2 text-sm">
+          <label className="flex min-w-0 max-w-full flex-wrap items-center gap-2 text-sm">
             Topic
-            <select value={topic} onChange={(e) => setTopic(e.target.value)} className="max-w-full rounded border border-slate-300 bg-white px-2 py-1">
+            <select value={topic} onChange={(e) => setTopic(e.target.value)} className="w-full min-w-0 rounded border border-slate-300 bg-white px-2 py-1 sm:w-auto sm:max-w-md">
               <option value="">All topics ({all.length})</option>
               {DOMAINS.map((d) => (
                 <optgroup key={d.id} label={`Domain ${d.id}: ${d.title}`}>

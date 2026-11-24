@@ -13,7 +13,7 @@ export const meta = {
     'Add a denied topic',
     'Add word filters',
     'Mask email addresses and phone numbers',
-    'Create the guardrail and test it',
+    'Test the guardrail',
     'Delete the guardrail',
   ],
   links: [
@@ -63,7 +63,7 @@ On the **Add word filters** page, select **Filter profanity**, and add one custo
 
 On the sensitive information page, add the PII types **Email** and **Phone** with the action **Mask**. A masked value is replaced by its type, such as `{EMAIL}`, instead of blocking the whole message. Choose **Next** through the remaining pages (contextual grounding and Automated Reasoning checks aren't needed here), then **Create**.
 
-### Create the guardrail and test it
+### Test the guardrail
 
 Open the new guardrail. A test window appears on the right, using the **working draft**. Choose **Select model**, pick **Amazon Nova Micro** and **Apply**. Then run each prompt below with **Run**, and select **View trace** to see which filter acted:
 
