@@ -69,7 +69,7 @@ export default function FlashcardReviewPage() {
 
   const header = (
     <div>
-      <Link to="/explore/flashcards" className="text-sm text-brand-dark underline">
+      <Link to="/flashcards" className="text-sm text-brand-dark underline">
         ← All decks
       </Link>
       <h1 className="mt-1 text-2xl font-semibold">Flashcards: {title}</h1>
@@ -77,7 +77,7 @@ export default function FlashcardReviewPage() {
   )
 
   if (session.queue.length === 0) {
-    const allLink = `/explore/flashcards/review?${new URLSearchParams({ ...(query.deck ? { deck: query.deck } : {}), all: '1' })}`
+    const allLink = `/flashcards/review?${new URLSearchParams({ ...(query.deck ? { deck: query.deck } : {}), all: '1' })}`
     return (
       <section className="space-y-4">
         {header}
@@ -105,7 +105,7 @@ export default function FlashcardReviewPage() {
           You went through {session.queue.length} card{session.queue.length === 1 ? '' : 's'} with {reviewed} ratings: {tally.good} Good,{' '}
           {tally.easy} Easy and {tally.again} Again.
         </p>
-        <Link to="/explore/flashcards" className="inline-block rounded bg-brand px-4 py-2 text-chalk">
+        <Link to="/flashcards" className="inline-block rounded bg-brand px-4 py-2 text-chalk">
           Back to the decks
         </Link>
       </section>

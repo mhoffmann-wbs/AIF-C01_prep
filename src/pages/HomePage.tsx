@@ -2,8 +2,8 @@ import { DOMAINS, EXAM_FORMAT, GUIDE, MOCK, allocateItems, tasksOf } from '../co
 
 const PILLARS = [
   { title: 'Learn', text: 'One plain-language lesson per exam task, built around one online retailer adopting AI on AWS.' },
-  { title: 'Check', text: 'Practice questions in the exam’s formats with full explanations, and a timed 65-question mock exam.' },
-  { title: 'Explore', text: 'Concept simulators, “which service?” drills, flashcards and optional walkthroughs in the AWS console.' },
+  { title: 'Check', text: 'Practice questions in the exam’s formats with full explanations, and a timed 65-question mock exam, plus spaced-review flashcards.' },
+  { title: 'Explore', text: 'Concept simulators, “which service?” drills and optional walkthroughs in the AWS console.' },
 ]
 
 export default function HomePage() {

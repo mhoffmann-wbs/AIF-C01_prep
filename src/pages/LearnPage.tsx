@@ -146,7 +146,7 @@ function LessonView({ taskId }: { taskId: string }) {
           </Link>
         )}
         {CARDS.some((c) => c.id.startsWith(`${taskId}-`)) && (
-          <Link to={`/explore/flashcards/review?task=${taskId}`} className="rounded border px-4 py-2">
+          <Link to={`/flashcards/review?task=${taskId}`} className="rounded border px-4 py-2">
             Flashcards for this task
           </Link>
         )}

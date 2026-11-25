@@ -20,6 +20,7 @@ const NAV_GROUPS: { id: string; label: string; links: NavEntry[] }[] = [
     links: [
       { to: '/practice', label: 'Practice' },
       { to: '/questions', label: 'Questions' },
+      { to: '/flashcards', label: 'Flashcards' },
       { to: '/mock', label: 'Mock exam' },
     ],
   },
@@ -30,7 +31,6 @@ const NAV_GROUPS: { id: string; label: string; links: NavEntry[] }[] = [
       { to: '/explore', label: 'Overview', end: true },
       { to: '/explore/sims', label: 'Simulators' },
       { to: '/explore/drills', label: 'Service drills' },
-      { to: '/explore/flashcards', label: 'Flashcards' },
       { to: '/explore/walkthroughs', label: 'Walkthroughs' },
     ],
   },
@@ -97,7 +97,7 @@ export function Layout() {
           >
             {NAV_GROUPS.map((group) => {
               const open = openGroup === group.id
-              const active = group.links.some((l) => isUnder(pathname, l.to))
+              const active = group.links.some((l) => (l.end ? pathname === l.to : isUnder(pathname, l.to)))
               return (
                 <li key={group.id} className="sm:relative">
                   <span className="text-xs font-semibold uppercase tracking-wide text-chalk/60 sm:hidden">{group.label}</span>

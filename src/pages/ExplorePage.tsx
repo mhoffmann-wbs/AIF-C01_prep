@@ -13,11 +13,6 @@ const TOOLS = [
     text: 'Quick rounds that match Cairnway tasks to AWS services, and sorters for shared responsibility, learning types, customization and exam scope.',
   },
   {
-    to: '/explore/flashcards',
-    title: 'Flashcards',
-    text: 'Spaced review of key terms and every in-scope AWS service. Write your own decks and share them as files.',
-  },
-  {
     to: '/explore/walkthroughs',
     title: 'Console walkthroughs',
     text: 'Optional checklists for trying Bedrock, Guardrails, Knowledge Bases, Comprehend and IAM in your own AWS account, with costs and teardown steps.',

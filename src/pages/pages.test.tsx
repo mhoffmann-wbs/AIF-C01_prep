@@ -181,7 +181,7 @@ describe('pages', () => {
 describe('flashcards', () => {
   it('reviews a deck: answer hidden until shown, ratings scheduled, misses come back', async () => {
     const user = userEvent.setup()
-    await renderAt('/explore/flashcards/review?deck=services')
+    await renderAt('/flashcards/review?deck=services')
     expect(screen.getByText(/^Card 1 of 10/)).toBeInTheDocument()
     expect(screen.queryByRole('region', { name: 'Answer' })).not.toBeInTheDocument()
     const first = document.querySelector('[data-card-id]')!.getAttribute('data-card-id')!
@@ -198,7 +198,7 @@ describe('flashcards', () => {
   it('creates a deck, adds a card, downloads and re-uploads it', async () => {
     const user = userEvent.setup()
     const deckId = createDeck('Metrics')
-    await renderAt(`/explore/flashcards/deck/${deckId}`)
+    await renderAt(`/flashcards/deck/${deckId}`)
     await user.type(screen.getByRole('textbox', { name: 'Front (the question)' }), 'What does recall measure?')
     await user.type(screen.getByRole('textbox', { name: 'Back (the answer)' }), 'The share of real positives found.')
     await user.click(screen.getByRole('button', { name: 'Add card' }))
@@ -209,7 +209,7 @@ describe('flashcards', () => {
     const blobs: Blob[] = []
     const createObjectURL = vi.fn<(b: Blob) => string>((b) => (blobs.push(b), 'blob:x'))
     Object.assign(URL, { createObjectURL, revokeObjectURL: vi.fn<() => void>() })
-    await renderAt('/explore/flashcards')
+    await renderAt('/flashcards')
     await user.click(screen.getByRole('button', { name: 'Download' }))
     const file = await blobs[0]!.text()
     expect(JSON.parse(file).decks[0]).toMatchObject({ name: 'Metrics', cards: [{ front: 'What does recall measure?' }] })
@@ -222,7 +222,7 @@ describe('flashcards', () => {
 
   it('links a lesson to its flashcards', async () => {
     await renderAt('/learn/3.1')
-    expect(screen.getByRole('link', { name: 'Flashcards for this task' })).toHaveAttribute('href', '/explore/flashcards/review?task=3.1')
+    expect(screen.getByRole('link', { name: 'Flashcards for this task' })).toHaveAttribute('href', '/flashcards/review?task=3.1')
   })
 })
 

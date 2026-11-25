@@ -27,7 +27,7 @@ function DeckRow({ deck, now }: { deck: Deck; now: number }) {
   return (
     <li className="flex flex-wrap items-center gap-x-4 gap-y-2 py-3">
       <div className="min-w-48 flex-1">
-        <Link to={`/explore/flashcards/deck/${deck.id}`} className="font-medium text-brand-dark hover:underline">
+        <Link to={`/flashcards/deck/${deck.id}`} className="font-medium text-brand-dark hover:underline">
           {deck.name}
         </Link>
         <p className="text-sm text-slate-600">
@@ -36,7 +36,7 @@ function DeckRow({ deck, now }: { deck: Deck; now: number }) {
       </div>
       <div className="flex flex-wrap gap-2">
         {toReview > 0 ? (
-          <Link to={`/explore/flashcards/review?deck=${deck.id}`} className="rounded bg-brand px-3 py-1.5 text-sm text-chalk">
+          <Link to={`/flashcards/review?deck=${deck.id}`} className="rounded bg-brand px-3 py-1.5 text-sm text-chalk">
             Review {toReview}
           </Link>
         ) : (
@@ -109,7 +109,7 @@ export default function FlashcardsPage() {
       </p>
       <div className="flex flex-wrap items-center gap-3">
         {toReview > 0 ? (
-          <Link to="/explore/flashcards/review" className="rounded bg-brand px-4 py-2 font-medium text-chalk">
+          <Link to="/flashcards/review" className="rounded bg-brand px-4 py-2 font-medium text-chalk">
             Review all decks ({toReview})
           </Link>
         ) : (

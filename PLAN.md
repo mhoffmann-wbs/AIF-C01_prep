@@ -127,7 +127,7 @@ Fast, timed rounds built from the service catalog and from `drills/<deckId>.json
 - **Sorters**: drag items into buckets, for example the shared responsibility model (AWS vs. customer), in scope vs. out of scope, supervised vs. unsupervised vs. reinforcement learning, governance service → purpose.
 - Per-deck best score and streak are kept in progress. Missed cards feed the weak-spot drill.
 
-### 6c. Flashcards (`/explore/flashcards`)
+### 6c. Flashcards (`/flashcards`; moved from Explore to the Quiz nav on 2026-11-25)
 Leitner boxes 0–5 rated Again/Good/Easy, with intervals 0/1/3/7/16/35 days. A session shows the due cards first, then new ones. There are about 300 built-in cards (`flashcards/<taskId>.json`), with service cards generated from the catalog. Learners can make their own decks and share them as validated JSON files. Review state is never shared.
 
 ### 6d. Console walkthroughs (`/explore/walkthroughs/:id`, optional)

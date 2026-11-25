@@ -64,7 +64,7 @@ export default function FlashcardDeckPage() {
         <h1 className="text-2xl font-semibold">Deck not found</h1>
         <p>
           It may have been deleted.{' '}
-          <Link to="/explore/flashcards" className="text-brand-dark underline">
+          <Link to="/flashcards" className="text-brand-dark underline">
             All decks
           </Link>
         </p>
@@ -82,7 +82,7 @@ export default function FlashcardDeckPage() {
   return (
     <section className="space-y-5">
       <div>
-        <Link to="/explore/flashcards" className="text-sm text-brand-dark underline">
+        <Link to="/flashcards" className="text-sm text-brand-dark underline">
           ← All decks
         </Link>
         {renaming ? (
@@ -108,10 +108,10 @@ export default function FlashcardDeckPage() {
       </div>
       {deck.cards.length > 0 && (
         <div className="flex flex-wrap gap-2">
-          <Link to={`/explore/flashcards/review?deck=${deck.id}`} className="rounded bg-brand px-4 py-2 text-chalk">
+          <Link to={`/flashcards/review?deck=${deck.id}`} className="rounded bg-brand px-4 py-2 text-chalk">
             Review due cards
           </Link>
-          <Link to={`/explore/flashcards/review?deck=${deck.id}&all=1`} className="rounded border border-brand px-4 py-2 text-brand-dark">
+          <Link to={`/flashcards/review?deck=${deck.id}&all=1`} className="rounded border border-brand px-4 py-2 text-brand-dark">
             Go through all {deck.cards.length}
           </Link>
         </div>
