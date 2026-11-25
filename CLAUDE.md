@@ -25,7 +25,7 @@ Every scenario uses one invented company, **Cairnway Outfitters**, an online out
 
 - **Stack**: Vite 8, React 19, TypeScript 7, Tailwind v4, React Router 8 (imported from `react-router`), Zod 4, MDX (`@mdx-js/rollup` with `remark-gfm`; wired up but not used yet), Vitest 5 with RTL, and oxlint. The app is a static SPA.
 - **Deploy**: `.github/workflows/deploy.yml` lints, tests, builds with `BASE_PATH=/AIF-C01_prep/`, copies `index.html` to `404.html` for deep links, and publishes to GitHub Pages on every push to `main`. The router takes `basename={import.meta.env.BASE_URL}`, so use router `Link`s and never root-relative `<a href="/…">`.
-- **Pages** are lazy-loaded in `src/app/routes.tsx`. Keep content imports out of `routes.tsx`, `Layout.tsx` and `main.tsx`. Add a pillar's nav entry to `NAV` in `Layout.tsx` when its pages exist.
+- **Pages** are lazy-loaded in `src/app/routes.tsx`. Keep content imports out of `routes.tsx`, `Layout.tsx` and `main.tsx`. The main nav is `NAV_GROUPS` in `Layout.tsx`: dropdowns for Learn (lessons, guides), Quiz and Explore, plus a standalone Progress link; phones get a Menu button that lists every group. Add a page's link to its group when the page exists (`end: true` for an overview whose sub-pages have their own links).
 - **Theme**: colour tokens (`brand`, `brand-dark`, `accent`, `chalk`, `page`, `header`, `code`) are set in `src/index.css` via `@theme`. Dark mode follows the OS by remapping the tokens and the slate scale once, so components don't use `dark:` variants.
 - **`src/content/blueprint.ts`**:
   - The verbatim domains, 14 tasks and 69 objectives. Objective ids are `<taskId>.<n>` in guide order.

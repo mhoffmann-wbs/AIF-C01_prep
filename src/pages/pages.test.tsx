@@ -35,6 +35,35 @@ describe('pages', () => {
     expect(await renderAt('/nope')).toHaveTextContent('Page not found')
   })
 
+  it('opens the phone menu and closes it after following a link', async () => {
+    const user = userEvent.setup()
+    await renderAt('/')
+    const menu = screen.getByRole('button', { name: 'Menu' })
+    await user.click(menu)
+    expect(menu).toHaveAttribute('aria-expanded', 'true')
+    await user.click(screen.getByRole('link', { name: 'Service drills' }))
+    expect(await screen.findByRole('heading', { level: 1, name: /drills/i })).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: 'Menu' })).toHaveAttribute('aria-expanded', 'false')
+  })
+
+  it('opens one nav group at a time and closes it with Escape or a link', async () => {
+    const user = userEvent.setup()
+    await renderAt('/')
+    const quiz = screen.getByRole('button', { name: /^Quiz/ })
+    const explore = screen.getByRole('button', { name: /^Explore/ })
+    await user.click(quiz)
+    expect(quiz).toHaveAttribute('aria-expanded', 'true')
+    await user.click(explore)
+    expect(quiz).toHaveAttribute('aria-expanded', 'false')
+    expect(explore).toHaveAttribute('aria-expanded', 'true')
+    await user.keyboard('{Escape}')
+    expect(explore).toHaveAttribute('aria-expanded', 'false')
+    expect(explore).toHaveFocus()
+    await user.click(quiz)
+    await user.click(within(document.getElementById('nav-quiz')!).getByRole('link', { name: 'Mock exam' }))
+    expect(screen.getByRole('button', { name: /^Quiz/ })).toHaveAttribute('aria-expanded', 'false')
+  })
+
   it('renders a lesson with its service cards and marks it read', async () => {
     const user = userEvent.setup()
     expect(await renderAt('/learn/3.1')).toHaveTextContent('3.1')
