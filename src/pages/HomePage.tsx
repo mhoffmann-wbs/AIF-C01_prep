@@ -1,9 +1,10 @@
+import { Link } from 'react-router'
 import { DOMAINS, EXAM_FORMAT, GUIDE, MOCK, allocateItems, tasksOf } from '../content/blueprint'
 
 const PILLARS = [
-  { title: 'Learn', text: 'One plain-language lesson per exam task, built around one online retailer adopting AI on AWS.' },
-  { title: 'Check', text: 'Practice questions in the exam’s formats with full explanations, and a timed 65-question mock exam, plus spaced-review flashcards.' },
-  { title: 'Explore', text: 'Concept simulators, “which service?” drills and optional walkthroughs in the AWS console.' },
+  { to: '/learn', title: 'Learn', text: 'One plain-language lesson per exam task, built around one online retailer adopting AI on AWS.' },
+  { to: '/practice', title: 'Check', text: 'Practice questions in the exam’s formats with full explanations, and a timed 65-question mock exam, plus spaced-review flashcards.' },
+  { to: '/explore', title: 'Explore', text: 'Concept simulators, “which service?” drills and optional walkthroughs in the AWS console.' },
 ]
 
 export default function HomePage() {
@@ -20,10 +21,10 @@ export default function HomePage() {
       </section>
       <section className="grid gap-4 sm:grid-cols-3">
         {PILLARS.map((p) => (
-          <div key={p.title} className="rounded-lg border border-slate-200 bg-white p-4">
+          <Link key={p.to} to={p.to} className="rounded-lg border border-slate-200 bg-white p-4 hover:border-brand">
             <h2 className="text-lg font-semibold text-brand-dark">{p.title}</h2>
             <p className="mt-1 text-sm text-slate-600">{p.text}</p>
-          </div>
+          </Link>
         ))}
       </section>
       <section className="space-y-3">
@@ -47,7 +48,9 @@ export default function HomePage() {
             <ul className="mt-2 space-y-1 text-sm">
               {tasksOf(d.id).map((t) => (
                 <li key={t.id}>
-                  <span className="font-medium">Task {t.id}</span> {t.title}
+                  <Link to={`/learn/${t.id}`} className="text-brand-dark hover:underline">
+                    <span className="font-medium">Task {t.id}</span> {t.title}
+                  </Link>
                 </li>
               ))}
             </ul>
